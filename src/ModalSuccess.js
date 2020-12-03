@@ -21,7 +21,7 @@ class ModalSuccess extends React.Component {
                         <h5 className="modal-title"><p>Success!</p></h5>
                       </div>
                       <div className="modal-body">
-                        <p>Expense registered. </p>
+                        <p>{this.props.Message[1]} </p>
                         <p>(id: {this.props.Message[0]})</p>
                       </div>
                       <div className="modal-footer">

@@ -1,11 +1,13 @@
 const Expense = require('../models/Expense.js');
+const Type = require('../models/Type.js');
 
 const {validationResult} = require('express-validator');
 
 ////gets and array of all expenses
 exports.getAllExpenses = (req,res)=>{
-
-    Expense.find({}).exec()
+    Expense.find({})
+    .populate('type')//populate type which holds references to type collection
+    .exec()
     .then(results=>{
         res.send(results);
         
@@ -30,6 +32,8 @@ exports.getExpenseById = (req,res)=>{
 exports.getExpense = (req,res)=>{
     
     Expense.find({})
+    .populate('type')
+    .exec()
     .then(results=>{
     
     //gets array of expenses and performs filter according to user inputs
@@ -43,7 +47,7 @@ exports.getExpense = (req,res)=>{
         results = results.filter(expense => expense.year == req.query.year)
     }
     if(req.query.type != "") {
-        results = results.filter(expense => expense.type == req.query.type)
+        results = results.filter(expense => expense.type.name == req.query.type)
     }
     if(req.query.amount != 0) {
         results = results.filter(expense => expense.amount == req.query.amount)
@@ -57,36 +61,52 @@ exports.getExpense = (req,res)=>{
 //post new expenses
 exports.postExpense = (req,res)=>{
 
-//validate fields
-const errors = (validationResult(req)).array();
+    //validate fields
+    const errors = (validationResult(req)).array();
 
-//if there are not validation errors, create new expense and save it to database
-if(errors.length < 1){
-        let expense = new Expense({
-        month:req.body.month,
-        day:req.body.day,
-        year:req.body.year,
-        type:req.body.type,
-        description:req.body.desc,
-        amount:req.body.amount,
-    });
-    
-    expense.save()
-    .then(savedExpense=>{
-        res.send(savedExpense);
-    })
-    .catch(error=>{
-        res.send(error)
+    //if there are not validation errors, create new expense and save it to database
+    if(errors.length < 1){
         
-    });
-    
+        Type.findOne({"name": req.body.type}).exec()//search for a type with the value passed
+        .then(chosenType=>{//after finding a type with the name in the type schema, proceed to create
+            let expense = new Expense({
+            month:req.body.month,
+            day:req.body.day,
+            year:req.body.year,
+            type:chosenType,//reference to type schema
+            description:req.body.desc,
+            amount:req.body.amount,
+            });
+            
+            expense.save()
+            
+            .then(savedExpense=>{
+                res.status(201).send(savedExpense);//status 201
+            })
+            .catch(error=>{
+                res.send(error)
+            });
+        })
+        .catch(error=>{
+            res.send(error)
+          });
+
     } else { // if there are errors, extracts messages from validation errors array and send to frontend
         let errorMessages = [];
         for(let i of errors) {
             errorMessages.push(i.msg)
         }
+        
+        class customError extends Error {
+          constructor(errorMessages, status, message) {
+            super(message);
+            this.data = errorMessages;
+            this.status = status;
+          }
+        }
+        let errorObject = new customError(errorMessages,422);
 
-        res.send(errorMessages);
+        res.status(errorObject.status).send(errorObject);
         
     }
 

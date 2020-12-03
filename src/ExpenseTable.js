@@ -47,7 +47,7 @@ class ExpenseTable extends React.Component {
                       {this.props.expenses.map((expense,index)=>
                       <tr key={index}> 
                         <td>{expense.month}/{expense.day}/{expense.year}</td> 
-                        <td>{expense.type}</td>  
+                        <td>{expense.type.name}</td>  
                         <td>{expense.description}</td>
                         <td>${expense.amount}</td>
                         <td><button onClick={this.props.handleDelete.bind(this,expense._id)} className="btn h-50 mx-1 btn-danger">

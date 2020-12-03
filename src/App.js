@@ -18,8 +18,10 @@ class App extends React.Component {
             day: current.getDate(),
             year: current.getFullYear(),
             type: "",
+            typeDropDown: [],
             desc: "",
             amount: "",
+            newType: "",
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
             Message: [] //messages to be passed to success or error modal according to validation obtained
@@ -32,6 +34,7 @@ class App extends React.Component {
         this.searchAll = this.searchAll.bind(this);
         this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
         this.handleCloseError = this.handleCloseError.bind(this);
+        this.handleCreateType = this.handleCreateType.bind(this);
         this.clearFields = this.clearFields.bind(this);
         
     }
@@ -41,8 +44,17 @@ class App extends React.Component {
         axios.get("/api/v1.0/expense/all")
         .then(results=>{
             let arrayOfExpenses = results.data
+            console.log(results.data)
+            this.setState({ expenses:arrayOfExpenses.reverse() });
             
-            this.setState({ expenses:arrayOfExpenses });
+        })
+        .catch(error=>console.log(error)); 
+        
+        axios.get("/api/v1.0/type/all")
+        .then(results=>{
+            let arrayOfTypes = results.data
+            
+            this.setState({ typeDropDown:arrayOfTypes });
             
         })
         .catch(error=>console.log(error)); 
@@ -58,31 +70,59 @@ class App extends React.Component {
                                     desc:this.state.desc,
                                     amount:this.state.amount})
             .then(results=>{
-                if(results.data[0] === undefined){//if no errors, it will return an object with recordedExpense, this condition will be true
-                    this.setState({ showModalSuccess:true, Message: [results.data._id] }); //success message sends expense id to success modal and displays it
+                    console.log(results.data)
+                    this.setState({ showModalSuccess:true, Message: [results.data._id, "Expense registered!"] }); //success message sends expense id to success modal and displays it
                     let arrayOfExpenses = []
                     
                     if(this.state.expenses.length > 0) {//updates state with new expense, this will remount the ExpenseTable component with new expense in the table
                         for(let i of this.state.expenses){
                             arrayOfExpenses.push(i)
                         }
-                        arrayOfExpenses.push(results.data);
+                        arrayOfExpenses.unshift(results.data);
                         this.setState({ expenses:arrayOfExpenses });
+                        
                     } 
-                }else {//if there are errors, update Message state with error messages and display Error modal
-                        this.setState({ 
-                            Message: results.data,
-                            showModalError:true
-                        });
-                    }
-                
                 
                     
+    
             })
             .catch(error=>{
-                console.log(error)
+                console.log(error.response.data)
+                //if there are errors, update Message state with error messages and display Error modal
+                        this.setState({ 
+                            Message: error.response.data.data,
+                            showModalError:true
+                        });
             });
         }
+        
+    handleCreateType(){
+        event.preventDefault();
+        axios.post("/api/v1.0/type", {name: this.state.newType})
+            .then(results=>{
+               
+                    this.setState({ showModalSuccess:true, Message: [results.data._id,"Type created successfully"] }); //success message sends expense id to success modal and displays it
+                    let arrayOfTypes = []
+                    
+                    //updates type state with new one, this will remount the form  with new type in the dropdown menu
+                        for(let i of this.state.typeDropDown){
+                            arrayOfTypes.push(i)
+                        }
+                        arrayOfTypes.push(results.data);
+                        this.setState({ typeDropDown:arrayOfTypes });
+                     
+                console.log(this.state.typeDropDown)
+                    
+    
+            })
+            .catch(error=>{
+                //if there are errors, update Message state with error messages and display Error modal
+                        this.setState({ 
+                            Message: error.response.data.data,
+                            showModalError:true
+                        });
+            });
+    }  
     
     //search expenses based on user input. Send values from inputs using query
     handleExpenseSearch(event){
@@ -123,6 +163,10 @@ class App extends React.Component {
             this.setState({
             type: e.target.value
             }) 
+        } else if(field == 'newType'){
+            this.setState({
+            newType: e.target.value
+            }) 
         }
             
         
@@ -158,7 +202,7 @@ class App extends React.Component {
         .then(results=>{
             let arrayOfExpenses = results.data
             
-            this.setState({ expenses:arrayOfExpenses });
+            this.setState({ expenses:arrayOfExpenses.reverse() });
             
         })
         .catch(error=>console.log(error)); 
@@ -181,6 +225,7 @@ class App extends React.Component {
                         desc: "",
                         type: "",
                         amount: "",
+                        newType: "",
         });
 
     }
@@ -192,14 +237,17 @@ class App extends React.Component {
             clearFields:this.clearFields,
             handleExpenseSubmit:this.handleExpenseSubmit,
             handleExpenseSearch:this.handleExpenseSearch,
+            handleCreateType:this.handleCreateType,
             handleChange:this.handleChange,
             month:this.state.month,
             day:this.state.day,
             year:this.state.year,
             desc:this.state.desc,
             type:this.state.type,
+            typeDropDown:this.state.typeDropDown,
+            newType:this.state.newType,
             amount:this.state.amount,
-            searchAll:this.searchAll
+            searchAll:this.searchAll 
         }
         
         return <>

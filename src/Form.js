@@ -50,15 +50,20 @@ class Form extends React.Component {
                 Type
                   <select className="form-control" value={this.props.type} onChange={this.props.handleChange.bind(this,'type')}>
                     <option value={this.props.type}>{this.props.type}</option>
-                    <option value="Groceries">Groceries</option>
-                    <option value="Food and Restaurants">Food and restaurants</option>
-                    <option value="Education">Education</option>
-                    <option value="Leisure">Leisure</option>
-                    <option value="Health and Wellness">Health & Wellness</option>
-                    <option value="Transportation">Transportation</option>
-        			      <option value="Others">Others</option>
+                    {this.props.typeDropDown.map((type,index)=><option key={index} value={type.name}>{type.name}</option>)}
                   </select>
                 </label>
+                </div>
+                
+                <div className="col-md-2 m-1">
+                <label>
+                New type
+                  <input type="text" value={this.props.newType} className="form-control" onChange={this.props.handleChange.bind(this,'newType')}/>
+                </label>
+                <button onClick={this.props.handleCreateType}className="btn btn-success">
+                    <span className="mx-1">Add type</span>
+                    <i className="fas fa-plus"></i>
+                  </button>
                 </div>
               </div>
               
@@ -79,7 +84,7 @@ class Form extends React.Component {
         
                 <div className="col-md-2 d-flex align-items-center">
                   <button type="submit" className="btn btn-success">
-                    <span className="mx-1">Add</span>
+                    <span className="mx-1">Add expense</span>
                     <i className="fas fa-plus"></i>
                   </button>
                   <button onClick={this.props.handleExpenseSearch} className="btn mx-1 btn-primary">
