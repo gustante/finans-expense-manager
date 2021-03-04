@@ -26,10 +26,12 @@ Finally, each expense record in the table has a delete button which will remove 
 
 --
 Installation:
-Install NPM packages: npm install
-Other dependencies at package.json
+Install dependencies: npm install
 
 --
+
+Run with:
+npm start
 
 
 Developed by:
