@@ -13,4 +13,4 @@ build:
 deploy:
     stage: deploy
     script:
-        - gcloud run deploy cpsc-2650-project --image gcr.io/$GOOGLE_CLOUD_PROJECT/cpsc-2650-project --platform managed --region us-west1 --allow-unauthenticated --memory=512Mi 
+        - gcloud run deploy cpsc-2650-project --image gcr.io/$GOOGLE_CLOUD_PROJECT/cpsc-2650-project --platform managed --region us-west1 --allow-unauthenticated --memory=512Mi --update-env-vars=[DB_CONNECTION=mongodb+srv://myadmin:F6Neiu7tj7vj5i0n@mycluster.48e9m.mongodb.net/Expenses?retryWrites=true&w=majority] 

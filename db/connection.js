@@ -1,4 +1,3 @@
-require('dotenv').config();
 
 let mongoose = require('mongoose');
 let mongoDB = process.env.DB_CONNECTION;
