@@ -5,12 +5,12 @@ FROM node:12-alpine
 # Create and change to the app directory.
 WORKDIR /usr/src/app
 
-# Copy local code to the container image.
-COPY . ./
 
 # Install dependencies.
-RUN npm install 
+RUN npm install --only=production
 
+# Copy local code to the container image.
+COPY . ./
 
 
 # Run the web service on container startup.
