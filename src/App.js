@@ -4,6 +4,15 @@ import Form from './Form';
 import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
 import axios from 'axios';
+import ReactGA from 'react-ga';
+
+//Google analytics tracking ID
+const trackingId = "UA-191727658-1"; 
+
+ReactGA.initialize(trackingId);
+
+
+
 
 const current = new Date();//get current date to set defaut date to today in the App states for quicker expense creation
 
@@ -82,6 +91,12 @@ class App extends React.Component {
                         this.setState({ expenses:arrayOfExpenses });
                         
                     } 
+
+                    //Records expense creation event
+                    ReactGA.event({
+                        category: "Expense",
+                        action: "Created",
+                    });                    
                 
                     
     
@@ -94,6 +109,10 @@ class App extends React.Component {
                             showModalError:true
                         });
             });
+
+
+
+            
         }
         
     handleCreateType(){
@@ -113,6 +132,11 @@ class App extends React.Component {
                      
                 console.log(this.state.typeDropDown)
                     
+                //Records type creation event
+                ReactGA.event({
+                    category: "Type",
+                    action: "Created",
+                });
     
             })
             .catch(error=>{
@@ -133,6 +157,12 @@ class App extends React.Component {
                 let arrayOfExpenses = results.data
             
                 this.setState({ expenses:arrayOfExpenses });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
+
+                //Records expense filter event
+                ReactGA.event({
+                    category: "Expense",
+                    action: "Filter",
+                });
             })
             .catch(error=>console.log(error));
         }
@@ -190,6 +220,12 @@ class App extends React.Component {
         }
       
         this.setState({ expenses:arrayOfExpenses }); //This will remount the ExpenseTable component without the deletes expense
+
+        //Records expense deletion event
+            ReactGA.event({
+                category: "Expense",
+                action: "Deleted",
+            });
       
       })
       .catch(error=>console.log(error));
