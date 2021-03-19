@@ -16,7 +16,7 @@ connection.once('open', ()=>{
     console.log('connected to db');
 
     const server = app.listen(port, ()=>{
-        console.log('listening on 8080');
+        console.log('listening' + port);
     });
 
     const router = require("./routes/index.js")
