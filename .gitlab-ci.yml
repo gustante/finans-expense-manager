@@ -1,0 +1,16 @@
+default:
+    image: google/cloud-sdk:alpine
+    before_script:
+        - gcloud config set project $GOOGLE_CLOUD_PROJECT
+        - gcloud auth activate-service-account --key-file $GOOGLE_CLOUD_CREDENTIALS
+
+build:
+    stage: build
+    script:
+        - gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT/cpsc-2650-project
+
+
+deploy:
+    stage: deploy
+    script:
+        - gcloud run deploy cpsc-2650-project --image gcr.io/$GOOGLE_CLOUD_PROJECT/cpsc-2650-project --platform managed --region us-west1 --allow-unauthenticated --memory=512Mi 
