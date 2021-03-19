@@ -1,7 +1,7 @@
 
 let mongoose = require('mongoose');
-let mongoDB = process.env.DB_CONNECTION
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology:true });
+
+mongoose.connect(process.env.MONGODBURI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology:true });
 let connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
