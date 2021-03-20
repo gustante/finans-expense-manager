@@ -7,5 +7,7 @@ import './style-sample.css';
 import App from "./App.js";
 
 
+grecaptcha.ready(function() {
+    ReactDOM.render(<App />, document.getElementById('react-container') );  
+});
 
-ReactDOM.render(<App />, document.getElementById('react-container') );

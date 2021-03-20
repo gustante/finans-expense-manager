@@ -25,6 +25,7 @@
     "express-validator": "^6.7.0",
     "mongoose": "^5.10.11",
     "nodemon": "^2.0.6",
+    "querystring": "^0.2.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-ga": "^3.3.0",
