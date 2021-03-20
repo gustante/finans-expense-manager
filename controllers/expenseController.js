@@ -4,6 +4,8 @@ const Type = require('../models/Type.js');
 const {validationResult} = require('express-validator');
 const axios = require('axios');
 const querystring = require('querystring');
+var twilio = require('twilio');
+
 
 ////gets and array of all expenses
 exports.getAllExpenses = (req,res)=>{
@@ -79,7 +81,7 @@ exports.postExpense = (req,res)=>{
         //If validation fails or score is too low, push an error inside Error's array
         if ( !response.data.success || response.data.score < 0.80 ) {
             console.log('reCAPTCHA failed');
-            errors.push({msg:'reCAPTCHA failed'})
+            errors.push({msg:'reCAPTCHA failed. Score: '+ response.data.score + ", Success: " + response.data.success})
         }
     })    
     .then(()=>{
@@ -99,19 +101,35 @@ exports.postExpense = (req,res)=>{
                 });
                     
                 expense.save()
+
+                
                     
                 .then(savedExpense=>{
                         res.status(201).send(savedExpense);//status 201
+
+                        //send SMS using twilio confirming expense creation
+                        var accountSid = process.env.ACCOUNT_SID; // Your Account SID from www.twilio.com/console
+                        var authToken = process.env.AUTH_TOKEN;   // Your Auth Token from www.twilio.com/console
+                        
+                        var client = new twilio(accountSid, authToken);
+
+                        client.messages.create({
+                            body: 'A new expense \"'+savedExpense.description+'\" was created',
+                            to: '+12368636833',  // Text this number
+                            from: '+19197523572' // From a valid Twilio number
+                        })
+                        .then(message=>{ 
+                            console.log('message sent succesfully')
+                        })
+                        
                 })
                 .catch(error=>{
-                        es.send(error)
+                    console.log(error);
                 });
-                
 
-                
             })
             .catch(error=>{
-                res.send(error)
+                console.log(error);
             });
 
         } else { // if there are errors, extracts messages from validation errors array and send to frontend

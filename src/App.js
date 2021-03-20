@@ -7,12 +7,10 @@ import axios from 'axios';
 import ReactGA from 'react-ga';
 import querystring from 'querystring';
 
+
 //Google analytics tracking ID
 const trackingId = "UA-191727658-1";
-
 ReactGA.initialize(trackingId);
-
-
 
 
 const current = new Date();//get current date to set defaut date to today in the App states for quicker expense creation
