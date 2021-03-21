@@ -1,10 +1,11 @@
 const router = require('express').Router();
 
-const {postType, getAllTypes} = require("../controllers/typeController.js");
+const {postType, getAllTypes, deleteType} = require("../controllers/typeController.js");
 
 const {typeValidator} = require('../validator.js');
 
-router.post('/', typeValidator, postType) //posts new type
+router.post('/', typeValidator, postType) 
 .get('/all', getAllTypes)
+.delete('/', typeValidator, deleteType)
 
 module.exports = router;

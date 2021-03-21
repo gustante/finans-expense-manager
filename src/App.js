@@ -29,7 +29,7 @@ class App extends React.Component {
             typeDropDown: [],
             desc: "",
             amount: "",
-            newType: "",
+            typeName: "",
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
             Message: [] //messages to be passed to success or error modal according to validation obtained
@@ -44,6 +44,7 @@ class App extends React.Component {
         this.handleCloseError = this.handleCloseError.bind(this);
         this.handleCreateType = this.handleCreateType.bind(this);
         this.clearFields = this.clearFields.bind(this);
+        this.handleDeleteType = this.handleDeleteType.bind(this);
 
     }
 
@@ -53,6 +54,14 @@ class App extends React.Component {
             .then(results => {
                 let arrayOfExpenses = results.data
                 console.log(results.data)
+                
+
+                for(let i of arrayOfExpenses){
+                    if(i.type == null){
+                        i.type = {name:'Other'}
+                    }
+                }
+                console.log(arrayOfExpenses)
                 this.setState({ expenses: arrayOfExpenses.reverse() });
 
             })
@@ -93,7 +102,7 @@ class App extends React.Component {
                 })
                     .then(results => {
                         console.log(results.data)//expense created
-                        this.setState({ showModalSuccess: true, Message: [results.data._id, "Expense registered!"] }); //success message sends expense id to success modal and displays it
+                        this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Expense registered!"] }); //success message sends expense id to success modal and displays it
                         let arrayOfExpenses = []
 
                         if (this.state.expenses.length > 0) {//updates state with new expense, this will remount the ExpenseTable component with new expense in the table
@@ -148,9 +157,9 @@ class App extends React.Component {
                 console.log("reCAPTCHA executed");
             })
             .then(() => {
-                axios.post("/api/v1.0/type", { name: this.state.newType,token:captchaToken })
+                axios.post("/api/v1.0/type", { name: this.state.typeName,token:captchaToken })
                 .then(results => {
-                    this.setState({ showModalSuccess: true, Message: [results.data._id, "Type created successfully"] }); //success message sends expense id to success modal and displays it
+                    this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Type created successfully"] }); //success message sends expense id to success modal and displays it
                     let arrayOfTypes = []
 
                     //updates type state with new one, this will remount the form  with new type in the dropdown menu
@@ -181,6 +190,46 @@ class App extends React.Component {
 
     }
 
+    handleDeleteType(event){
+        console.log("delete type")
+        event.preventDefault();
+
+        axios.delete(`/api/v1.0/type?type=${this.state.typeName}`)
+            .then(deletedType => {
+                console.log(deletedType)
+                this.setState({ showModalSuccess: true, Message: [ this.state.typeName + " type deleted successfully"] }); 
+                    let arrayOfTypes = []
+
+                //clones array with expenses in the current state
+                for (let i of this.state.typeDropDown) {
+                    arrayOfTypes.push(i)
+                }
+
+                for (let i in arrayOfTypes) {
+                    if (arrayOfTypes[i].name == this.state.typeName) {
+                        arrayOfTypes.splice(i, 1);
+                    }
+                }
+
+                this.setState({ typeDropDown: arrayOfTypes });
+
+                //Records expense deletion event
+                ReactGA.event({
+                    category: "Tye",
+                    action: "Deleted",
+                });
+
+            })
+            .catch(error => {
+                console.log(error)
+                //if there are errors, update Message state with error messages and display Error modal
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+            });
+    }
+
     //search expenses based on user input. Send values from inputs using query
     handleExpenseSearch(event) {
         event.preventDefault();
@@ -189,7 +238,12 @@ class App extends React.Component {
 
                 let arrayOfExpenses = results.data
 
-                this.setState({ expenses: arrayOfExpenses });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
+                for(let i of arrayOfExpenses){
+                    if(i.type == null){
+                        i.type = {name:'Other'}
+                    }
+                }
+                this.setState({ expenses: arrayOfExpenses.reverse() });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
                 //Records expense filter event
                 ReactGA.event({
                     category: "Expense",
@@ -225,9 +279,9 @@ class App extends React.Component {
             this.setState({
                 type: e.target.value
             })
-        } else if (field == 'newType') {
+        } else if (field == 'typeName') {
             this.setState({
-                newType: e.target.value
+                typeName: e.target.value
             })
         }
 
@@ -270,6 +324,12 @@ class App extends React.Component {
             .then(results => {
                 let arrayOfExpenses = results.data
 
+                for(let i of arrayOfExpenses){
+                    if(i.type == null){
+                        i.type = {name:'Other'}
+                    }
+                }
+
                 this.setState({ expenses: arrayOfExpenses.reverse() });
 
             })
@@ -294,7 +354,7 @@ class App extends React.Component {
             desc: "",
             type: "",
             amount: "",
-            newType: "",
+            typeName: "",
         });
 
     }
@@ -314,9 +374,10 @@ class App extends React.Component {
             desc: this.state.desc,
             type: this.state.type,
             typeDropDown: this.state.typeDropDown,
-            newType: this.state.newType,
+            typeName: this.state.typeName,
             amount: this.state.amount,
-            searchAll: this.searchAll
+            searchAll: this.searchAll,
+            handleDeleteType:this.handleDeleteType
         }
 
         return <>

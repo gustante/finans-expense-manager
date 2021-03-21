@@ -21,6 +21,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
   \************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -210,6 +211,7 @@ module.exports = function xhrAdapter(config) {
   \*****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 49:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -273,6 +275,7 @@ module.exports.default = axios;
   \*************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 18:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -303,6 +306,7 @@ module.exports = Cancel;
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 59:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -374,6 +378,7 @@ module.exports = CancelToken;
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -391,6 +396,7 @@ module.exports = function isCancel(value) {
   \**********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 95:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -498,6 +504,7 @@ module.exports = Axios;
   \***********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 55:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -565,6 +572,7 @@ module.exports = InterceptorManager;
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -600,6 +608,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 16:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -631,6 +640,7 @@ module.exports = function createError(message, config, code, request, response) 
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 28:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -699,6 +709,7 @@ module.exports = function dispatchRequest(config) {
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 13:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -755,6 +766,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -823,6 +835,7 @@ module.exports = function mergeConfig(config1, config2) {
   \***********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 13:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -856,6 +869,7 @@ module.exports = function settle(resolve, reject, response) {
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -888,6 +902,7 @@ module.exports = function transformData(data, headers, fns) {
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 93:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -993,6 +1008,7 @@ module.exports = defaults;
   \************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1018,6 +1034,7 @@ module.exports = function bind(fn, thisArg) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1096,6 +1113,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   \*******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 10:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1120,6 +1138,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1179,6 +1198,7 @@ function nonStandardBrowserEnv() {
   \*********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1205,6 +1225,7 @@ module.exports = function isAbsoluteURL(url) {
   \***********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1275,6 +1296,7 @@ function nonStandardBrowserEnv() {
   \***************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1299,6 +1321,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 22:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1361,6 +1384,7 @@ module.exports = function parseHeaders(headers) {
   \**************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 23:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1400,6 +1424,7 @@ module.exports = function spread(callback) {
   \*****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 348:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1782,6 +1807,7 @@ module.exports = {
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1888,6 +1914,7 @@ function toComment(sourceMap) {
   \*********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 69:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1995,6 +2022,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 97:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -2104,6 +2132,7 @@ module.exports = checkPropTypes;
   \************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 44:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -2761,6 +2790,7 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
   \******************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 13:2-16 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /**
@@ -2786,6 +2816,7 @@ if (true) {
   \*************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 10:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -2808,6 +2839,7 @@ module.exports = ReactPropTypesSecret;
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 29:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -2901,6 +2933,7 @@ module.exports = function (qs, sep, eq, options) {
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 41:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -11405,6 +11438,16 @@ if (true) {
 /*! export unstable_wrapCallback [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_exports__ */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 39:30-50 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 132:17-37 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 156:28-48 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 201:19-39 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 564:32-52 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 580:29-49 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 606:24-44 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 730:24-44 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 815:28-48 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 831:24-44 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -12422,7 +12465,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       typeDropDown: [],
       desc: "",
       amount: "",
-      newType: "",
+      typeName: "",
       showModalSuccess: false,
       //controls display modal with success message
       showModalError: false,
@@ -12439,6 +12482,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     _this.handleCloseError = _this.handleCloseError.bind(_assertThisInitialized(_this));
     _this.handleCreateType = _this.handleCreateType.bind(_assertThisInitialized(_this));
     _this.clearFields = _this.clearFields.bind(_assertThisInitialized(_this));
+    _this.handleDeleteType = _this.handleDeleteType.bind(_assertThisInitialized(_this));
     return _this;
   } //mounts App component and obtain all expenses in database, adding it to expense state
 
@@ -12451,6 +12495,27 @@ var App = /*#__PURE__*/function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense/all").then(function (results) {
         var arrayOfExpenses = results.data;
         console.log(results.data);
+
+        var _iterator = _createForOfIteratorHelper(arrayOfExpenses),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var i = _step.value;
+
+            if (i.type == null) {
+              i.type = {
+                name: 'Other'
+              };
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+
+        console.log(arrayOfExpenses);
 
         _this2.setState({
           expenses: arrayOfExpenses.reverse()
@@ -12497,7 +12562,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 
           _this3.setState({
             showModalSuccess: true,
-            Message: [results.data._id, "Expense registered!"]
+            Message: ["ID: " + results.data._id, "Expense registered!"]
           }); //success message sends expense id to success modal and displays it
 
 
@@ -12505,18 +12570,18 @@ var App = /*#__PURE__*/function (_React$Component) {
 
           if (_this3.state.expenses.length > 0) {
             //updates state with new expense, this will remount the ExpenseTable component with new expense in the table
-            var _iterator = _createForOfIteratorHelper(_this3.state.expenses),
-                _step;
+            var _iterator2 = _createForOfIteratorHelper(_this3.state.expenses),
+                _step2;
 
             try {
-              for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                var i = _step.value;
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var i = _step2.value;
                 arrayOfExpenses.push(i);
               }
             } catch (err) {
-              _iterator.e(err);
+              _iterator2.e(err);
             } finally {
-              _iterator.f();
+              _iterator2.f();
             }
 
             arrayOfExpenses.unshift(results.data);
@@ -12557,29 +12622,29 @@ var App = /*#__PURE__*/function (_React$Component) {
         console.log("reCAPTCHA executed");
       }).then(function () {
         axios__WEBPACK_IMPORTED_MODULE_5___default().post("/api/v1.0/type", {
-          name: _this4.state.newType,
+          name: _this4.state.typeName,
           token: captchaToken
         }).then(function (results) {
           _this4.setState({
             showModalSuccess: true,
-            Message: [results.data._id, "Type created successfully"]
+            Message: ["ID: " + results.data._id, "Type created successfully"]
           }); //success message sends expense id to success modal and displays it
 
 
           var arrayOfTypes = []; //updates type state with new one, this will remount the form  with new type in the dropdown menu
 
-          var _iterator2 = _createForOfIteratorHelper(_this4.state.typeDropDown),
-              _step2;
+          var _iterator3 = _createForOfIteratorHelper(_this4.state.typeDropDown),
+              _step3;
 
           try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var i = _step2.value;
+            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+              var i = _step3.value;
               arrayOfTypes.push(i);
             }
           } catch (err) {
-            _iterator2.e(err);
+            _iterator3.e(err);
           } finally {
-            _iterator2.f();
+            _iterator3.f();
           }
 
           arrayOfTypes.push(results.data);
@@ -12602,19 +12667,93 @@ var App = /*#__PURE__*/function (_React$Component) {
           });
         });
       });
+    }
+  }, {
+    key: "handleDeleteType",
+    value: function handleDeleteType(event) {
+      var _this5 = this;
+
+      console.log("delete type");
+      event.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/type?type=".concat(this.state.typeName)).then(function (deletedType) {
+        console.log(deletedType);
+
+        _this5.setState({
+          showModalSuccess: true,
+          Message: [_this5.state.typeName + " type deleted successfully"]
+        });
+
+        var arrayOfTypes = []; //clones array with expenses in the current state
+
+        var _iterator4 = _createForOfIteratorHelper(_this5.state.typeDropDown),
+            _step4;
+
+        try {
+          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+            var _i = _step4.value;
+            arrayOfTypes.push(_i);
+          }
+        } catch (err) {
+          _iterator4.e(err);
+        } finally {
+          _iterator4.f();
+        }
+
+        for (var i in arrayOfTypes) {
+          if (arrayOfTypes[i].name == _this5.state.typeName) {
+            arrayOfTypes.splice(i, 1);
+          }
+        }
+
+        _this5.setState({
+          typeDropDown: arrayOfTypes
+        }); //Records expense deletion event
+
+
+        react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
+          category: "Tye",
+          action: "Deleted"
+        });
+      })["catch"](function (error) {
+        console.log(error); //if there are errors, update Message state with error messages and display Error modal
+
+        _this5.setState({
+          Message: error.response.data.data,
+          showModalError: true
+        });
+      });
     } //search expenses based on user input. Send values from inputs using query
 
   }, {
     key: "handleExpenseSearch",
     value: function handleExpenseSearch(event) {
-      var _this5 = this;
+      var _this6 = this;
 
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount)).then(function (results) {
         var arrayOfExpenses = results.data;
 
-        _this5.setState({
-          expenses: arrayOfExpenses
+        var _iterator5 = _createForOfIteratorHelper(arrayOfExpenses),
+            _step5;
+
+        try {
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var i = _step5.value;
+
+            if (i.type == null) {
+              i.type = {
+                name: 'Other'
+              };
+            }
+          }
+        } catch (err) {
+          _iterator5.e(err);
+        } finally {
+          _iterator5.f();
+        }
+
+        _this6.setState({
+          expenses: arrayOfExpenses.reverse()
         }); //update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
         //Records expense filter event
 
@@ -12655,9 +12794,9 @@ var App = /*#__PURE__*/function (_React$Component) {
         this.setState({
           type: e.target.value
         });
-      } else if (field == 'newType') {
+      } else if (field == 'typeName') {
         this.setState({
-          newType: e.target.value
+          typeName: e.target.value
         });
       }
     } //deletes an expense based on id of the expense clicked
@@ -12665,24 +12804,24 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleDelete",
     value: function handleDelete(expenseId, event) {
-      var _this6 = this;
+      var _this7 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/expense?expense=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
       .then(function (deletedExpense) {
         var arrayOfExpenses = []; //clones array with expenses in the current state
 
-        var _iterator3 = _createForOfIteratorHelper(_this6.state.expenses),
-            _step3;
+        var _iterator6 = _createForOfIteratorHelper(_this7.state.expenses),
+            _step6;
 
         try {
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-            var _i = _step3.value;
-            arrayOfExpenses.push(_i);
+          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+            var _i2 = _step6.value;
+            arrayOfExpenses.push(_i2);
           }
         } catch (err) {
-          _iterator3.e(err);
+          _iterator6.e(err);
         } finally {
-          _iterator3.f();
+          _iterator6.f();
         }
 
         for (var i in arrayOfExpenses) {
@@ -12691,7 +12830,7 @@ var App = /*#__PURE__*/function (_React$Component) {
           }
         }
 
-        _this6.setState({
+        _this7.setState({
           expenses: arrayOfExpenses
         }); //This will remount the ExpenseTable component without the deletes expense
         //Records expense deletion event
@@ -12709,13 +12848,32 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "searchAll",
     value: function searchAll(e) {
-      var _this7 = this;
+      var _this8 = this;
 
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense/all").then(function (results) {
         var arrayOfExpenses = results.data;
 
-        _this7.setState({
+        var _iterator7 = _createForOfIteratorHelper(arrayOfExpenses),
+            _step7;
+
+        try {
+          for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+            var i = _step7.value;
+
+            if (i.type == null) {
+              i.type = {
+                name: 'Other'
+              };
+            }
+          }
+        } catch (err) {
+          _iterator7.e(err);
+        } finally {
+          _iterator7.f();
+        }
+
+        _this8.setState({
           expenses: arrayOfExpenses.reverse()
         });
       })["catch"](function (error) {
@@ -12749,7 +12907,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         desc: "",
         type: "",
         amount: "",
-        newType: ""
+        typeName: ""
       });
     }
   }, {
@@ -12767,9 +12925,10 @@ var App = /*#__PURE__*/function (_React$Component) {
         desc: this.state.desc,
         type: this.state.type,
         typeDropDown: this.state.typeDropDown,
-        newType: this.state.newType,
+        typeName: this.state.typeName,
         amount: this.state.amount,
-        searchAll: this.searchAll
+        searchAll: this.searchAll,
+        handleDeleteType: this.handleDeleteType
       };
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row"
@@ -13089,27 +13248,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
           key: index,
           value: type.name
         }, type.name);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "col-lg-3 col-md-3 col-sm-12"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        htmlFor: "newType",
-        className: "form-label"
-      }, "New type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        value: this.props.newType,
-        className: "form-control",
-        onChange: this.props.handleChange.bind(this, 'newType')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: this.props.handleCreateType,
-        className: "btn m-1 btn-warning d-inline-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "mx-1"
-      }, "Add type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "row"
+        className: "row mt-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "col-lg-8 col-md-12 col-sm-12 d-flex flex-wrap"
+        className: "col-lg-12 col-md-12 col-sm-12 d-flex flex-wrap"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: " m-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -13121,15 +13263,6 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: ""
       }, "expense")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-plus"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: " m-1"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: this.props.clearFields,
-        className: "btn btn-secondary"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "mx-1"
-      }, "Clear fields"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "fas fa-backspace"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: " m-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -13148,7 +13281,52 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "mx-1"
       }, "Search all"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-search"
-      })))))))));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: " m-1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.clearFields,
+        className: "btn btn-secondary"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "mx-1"
+      }, "Clear fields"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-backspace"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: " m-1 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "btn btn-warning d-inline-block",
+        type: "button",
+        "data-toggle": "collapse",
+        "data-target": "#collapseExample",
+        "aria-expanded": "false",
+        "aria-controls": "collapseExample"
+      }, "Manage Types"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "collapse m-2",
+        id: "collapseExample"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "card card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        htmlFor: "typeName",
+        className: "form-label"
+      }, "New type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.props.typeName,
+        className: "form-control",
+        onChange: this.props.handleChange.bind(this, 'typeName')
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.handleCreateType,
+        className: "btn m-1 btn-success d-inline-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "mx-1"
+      }, "Add type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-plus"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.handleDeleteType,
+        className: "btn m-1 btn-danger d-inline-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "mx-1"
+      }, "Delete type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-trash-alt"
+      })))))))))));
     }
   }]);
 
@@ -13357,7 +13535,7 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
         className: "modal-title"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Success!"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.Message[1], " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "(id: ", this.props.Message[0], ")")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.Message[1], " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.Message[0])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-footer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.props.handleClose,
@@ -13407,6 +13585,10 @@ grecaptcha.ready(function () {
   \********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__, module.id */
+/*! CommonJS bailout: exports is used directly at 3:0-7 */
+/*! CommonJS bailout: exports.push(...) prevents optimization as exports is passed as call context at 5:0-12 */
+/*! CommonJS bailout: exports is used directly at 7:17-24 */
+/*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports
@@ -13426,6 +13608,7 @@ module.exports = exports;
   \******************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__, module.id */
+/*! CommonJS bailout: module.exports is used directly at 19:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var api = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
@@ -13456,6 +13639,7 @@ module.exports = content.locals || {};
   \****************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__.nc, __webpack_require__.* */
+/*! CommonJS bailout: module.exports is used directly at 230:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";

@@ -22,7 +22,7 @@ class ModalSuccess extends React.Component {
                       </div>
                       <div className="modal-body">
                         <p>{this.props.Message[1]} </p>
-                        <p>(id: {this.props.Message[0]})</p>
+                        <p>{this.props.Message[0]}</p>
                       </div>
                       <div className="modal-footer">
                         <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-success">Close</button>

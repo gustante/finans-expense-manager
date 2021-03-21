@@ -79,25 +79,15 @@ class Form extends React.Component {
                                     <option value={this.props.type}>{this.props.type}</option>
                                     {this.props.typeDropDown.map((type, index) => <option key={index} value={type.name}>{type.name}</option>)}
                                 </select>
+
                             </div>
 
-                            <div className="col-lg-3 col-md-3 col-sm-12">
-                                <label htmlFor="newType" className="form-label">
-                                    New type
-
-                                </label>
-                                <input type="text" value={this.props.newType} className="form-control" onChange={this.props.handleChange.bind(this, 'newType')} />
-                                <button onClick={this.props.handleCreateType} className="btn m-1 btn-warning d-inline-block">
-                                    <span className="mx-1">Add type</span>
-                                    <i className="fas fa-plus"></i>
-                                </button>
-                            </div>
 
                         </div>
 
 
-                        <div className="row">
-                            <div className="col-lg-8 col-md-12 col-sm-12 d-flex flex-wrap">
+                        <div className="row mt-3">
+                            <div className="col-lg-12 col-md-12 col-sm-12 d-flex flex-wrap">
 
                                 <div className=" m-1">
                                     <button type="submit" className="btn btn-success">
@@ -107,14 +97,6 @@ class Form extends React.Component {
 
                                 </div>
 
-                                <div className=" m-1">
-
-                                    <button onClick={this.props.clearFields} className="btn btn-secondary">
-                                        <span className="mx-1">Clear fields</span>
-                                        <i className="fas fa-backspace"></i>
-                                    </button>
-
-                                </div>
 
                                 <div className=" m-1">
 
@@ -133,8 +115,41 @@ class Form extends React.Component {
 
                                 </div>
 
+                                
 
+                                <div className=" m-1">
 
+                                    <button onClick={this.props.clearFields} className="btn btn-secondary">
+                                        <span className="mx-1">Clear fields</span>
+                                        <i className="fas fa-backspace"></i>
+                                    </button>
+
+                                </div>
+
+                                <div className=" m-1 ">
+                                    <button className="btn btn-warning d-inline-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        Manage Types
+                                    </button>
+
+                                    <div className="collapse m-2" id="collapseExample">
+                                        <div className="card card-body">
+                                            <label htmlFor="typeName" className="form-label">
+                                                New type
+
+                                            </label>
+                                            <input type="text" value={this.props.typeName} className="form-control" onChange={this.props.handleChange.bind(this, 'typeName')} />
+                                            <button onClick={this.props.handleCreateType} className="btn m-1 btn-success d-inline-block" >
+                                                <span className="mx-1">Add type</span>
+                                                <i className="fas fa-plus"></i>
+                                            </button>
+                                            <button onClick={this.props.handleDeleteType} className="btn m-1 btn-danger d-inline-block">
+                                                <span className="mx-1">Delete type</span>
+                                                <i className="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
 
 
 
