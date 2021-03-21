@@ -321,7 +321,7 @@ class App extends React.Component {
 
         return <>
             <div className="row">
-                <div className="col mb-5">
+                <div className="col mb-5 ml-1">
                     <h1 className="display-4">Expense tracker</h1>
                 </div>
             </div>

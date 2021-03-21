@@ -36,7 +36,7 @@ class ExpenseTable extends React.Component {
                     <thead>
                       <tr>
                         <th>Date</th>
-                        <th>Type</th>
+                        <th className="d-sm-table-cell d-none">Type</th>
                         <th>Description</th>
                         <th>Amount</th>
                         <th></th>
@@ -47,7 +47,7 @@ class ExpenseTable extends React.Component {
                       {this.props.expenses.map((expense,index)=>
                       <tr key={index}> 
                         <td>{expense.month}/{expense.day}/{expense.year}</td> 
-                        <td>{expense.type.name}</td>  
+                        <td className="d-sm-table-cell d-none">{expense.type.name}</td>  
                         <td>{expense.description}</td>
                         <td>${expense.amount}</td>
                         <td><button onClick={this.props.handleDelete.bind(this,expense._id)} className="btn h-50 mx-1 btn-danger">
@@ -59,7 +59,7 @@ class ExpenseTable extends React.Component {
                       
                       <tr> 
                         <td></td> 
-                        <td></td>  
+                        <td className="d-sm-table-cell d-none"></td>  
                         <td></td>
                         <td><span className="p-2 btn btn-warning">Total: ${this.state.total}</span></td>
                         <td></td>
