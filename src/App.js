@@ -221,7 +221,11 @@ class App extends React.Component {
                     }
                 }
 
-                this.setState({ typeDropDown: arrayOfTypes });
+                this.setState({ typeDropDown: arrayOfTypes,
+                                type: ""
+                
+                });
+                
 
                 //Records expense deletion event
                 ReactGA.event({
