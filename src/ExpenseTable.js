@@ -22,7 +22,7 @@ class ExpenseTable extends React.Component {
                   for(let i of this.props.expenses){
                     sumOfExpenses += i.amount;
                   }
-                  this.setState({ total:sumOfExpenses });
+                  this.setState({ total:sumOfExpenses.toFixed(2) });
               }
           }
     
@@ -50,7 +50,7 @@ class ExpenseTable extends React.Component {
                         <td className="d-sm-table-cell d-none">{expense.type.name}</td>  
                         <td>{expense.description}</td>
                         <td>${expense.amount}</td>
-                        <td><button onClick={this.props.handleDelete.bind(this,expense._id)} className="btn h-50 mx-1 btn-danger">
+                        <td><button aria-label="delete this expense" onClick={this.props.handleDelete.bind(this,expense._id)} className="btn h-50 mx-1 btn-danger">
                               <i className="fas fa-trash-alt"></i>
                             </button>
                         </td>

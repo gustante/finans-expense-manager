@@ -54,11 +54,11 @@ class App extends React.Component {
             .then(results => {
                 let arrayOfExpenses = results.data
                 console.log(results.data)
-                
 
-                for(let i of arrayOfExpenses){
-                    if(i.type == null){
-                        i.type = {name:'Other'}
+
+                for (let i of arrayOfExpenses) {
+                    if (i.type == null) {
+                        i.type = { name: 'Other' }
                     }
                 }
                 console.log(arrayOfExpenses)
@@ -75,6 +75,16 @@ class App extends React.Component {
 
             })
             .catch(error => console.log(error));
+
+            window.addEventListener("keydown", e => {
+            let target = $(this).parent();
+            if (e.which == 27) {
+                console.log('closes modal');
+                this.setState({ showModalSuccess: false });
+                this.setState({ showModalError: false });
+            }
+        });
+
     }
 
     //activated after submitting the form, sends the data from fields to backend to record expense in database
@@ -157,28 +167,28 @@ class App extends React.Component {
                 console.log("reCAPTCHA executed");
             })
             .then(() => {
-                axios.post("/api/v1.0/type", { name: this.state.typeName,token:captchaToken })
-                .then(results => {
-                    this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Type created successfully"] }); //success message sends expense id to success modal and displays it
-                    let arrayOfTypes = []
+                axios.post("/api/v1.0/type", { name: this.state.typeName, token: captchaToken })
+                    .then(results => {
+                        this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Type created successfully"] }); //success message sends expense id to success modal and displays it
+                        let arrayOfTypes = []
 
-                    //updates type state with new one, this will remount the form  with new type in the dropdown menu
-                    for (let i of this.state.typeDropDown) {
-                        arrayOfTypes.push(i)
-                    }
-                    arrayOfTypes.push(results.data);
-                    this.setState({ typeDropDown: arrayOfTypes });
+                        //updates type state with new one, this will remount the form  with new type in the dropdown menu
+                        for (let i of this.state.typeDropDown) {
+                            arrayOfTypes.push(i)
+                        }
+                        arrayOfTypes.push(results.data);
+                        this.setState({ typeDropDown: arrayOfTypes });
 
-                    console.log(this.state.typeDropDown)
+                        console.log(this.state.typeDropDown)
 
-                    //Records type creation event
-                    ReactGA.event({
-                        category: "Type",
-                        action: "Created",
-                    });
+                        //Records type creation event
+                        ReactGA.event({
+                            category: "Type",
+                            action: "Created",
+                        });
 
 
-                })
+                    })
                     .catch(error => {
                         //if there are errors, update Message state with error messages and display Error modal
                         this.setState({
@@ -190,15 +200,15 @@ class App extends React.Component {
 
     }
 
-    handleDeleteType(event){
+    handleDeleteType(event) {
         console.log("delete type")
         event.preventDefault();
 
         axios.delete(`/api/v1.0/type?type=${this.state.typeName}`)
             .then(deletedType => {
                 console.log(deletedType)
-                this.setState({ showModalSuccess: true, Message: [ this.state.typeName + " type deleted successfully"] }); 
-                    let arrayOfTypes = []
+                this.setState({ showModalSuccess: true, Message: [this.state.typeName + " type deleted successfully"] });
+                let arrayOfTypes = []
 
                 //clones array with expenses in the current state
                 for (let i of this.state.typeDropDown) {
@@ -223,10 +233,10 @@ class App extends React.Component {
             .catch(error => {
                 console.log(error)
                 //if there are errors, update Message state with error messages and display Error modal
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
+                this.setState({
+                    Message: error.response.data.data,
+                    showModalError: true
+                });
             });
     }
 
@@ -238,9 +248,9 @@ class App extends React.Component {
 
                 let arrayOfExpenses = results.data
 
-                for(let i of arrayOfExpenses){
-                    if(i.type == null){
-                        i.type = {name:'Other'}
+                for (let i of arrayOfExpenses) {
+                    if (i.type == null) {
+                        i.type = { name: 'Other' }
                     }
                 }
                 this.setState({ expenses: arrayOfExpenses.reverse() });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
@@ -324,9 +334,9 @@ class App extends React.Component {
             .then(results => {
                 let arrayOfExpenses = results.data
 
-                for(let i of arrayOfExpenses){
-                    if(i.type == null){
-                        i.type = {name:'Other'}
+                for (let i of arrayOfExpenses) {
+                    if (i.type == null) {
+                        i.type = { name: 'Other' }
                     }
                 }
 
@@ -377,7 +387,7 @@ class App extends React.Component {
             typeName: this.state.typeName,
             amount: this.state.amount,
             searchAll: this.searchAll,
-            handleDeleteType:this.handleDeleteType
+            handleDeleteType: this.handleDeleteType
         }
 
         return <>
