@@ -12952,10 +12952,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         className: "col mb-5 ml-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: "display-4"
-      }, "Expense tracker"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, {
-        expenses: this.state.expenses,
-        handleDelete: this.handleDelete
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalSuccess__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }, "Expense tracker"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalSuccess__WEBPACK_IMPORTED_MODULE_3__.default, {
         handleClose: this.handleCloseSuccess,
         showModalSuccess: this.state.showModalSuccess,
         Message: this.state.Message
@@ -12963,6 +12960,9 @@ var App = /*#__PURE__*/function (_React$Component) {
         handleClose: this.handleCloseError,
         showModalError: this.state.showModalError,
         errorMessages: this.state.Message
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, {
+        expenses: this.state.expenses,
+        handleDelete: this.handleDelete
       }));
     }
   }]);
@@ -13420,6 +13420,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }, "Manage Types"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-cog"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        style: {
+          position: "absolute",
+          zIndex: "1"
+        },
         className: "collapse m-2",
         id: "collapseExample"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -13533,13 +13537,15 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
       //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "col-lg-6 col-md-8 col-10"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: showHideClassName,
         style: {
-          position: "fixed",
-          zIndex: "1",
-          left: "35%",
-          top: "40",
-          width: "350px"
+          position: "absolute",
+          zIndex: "2",
+          width: "100%"
         },
         role: "dialog"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -13564,7 +13570,7 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
         type: "button",
         "data-dismiss": "modal",
         className: "btn btn-danger"
-      }, "Go back"))))));
+      }, "Go back"))))))));
     }
   }]);
 
@@ -13643,13 +13649,15 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
       //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "col-lg-6 col-md-8 col-10"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: showHideClassName,
         style: {
-          position: "fixed",
-          zIndex: "1",
-          left: "35%",
-          top: "40",
-          width: "350px"
+          position: "absolute",
+          zIndex: "2",
+          width: "100%"
         },
         role: "dialog"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -13670,7 +13678,7 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
         type: "button",
         "data-dismiss": "modal",
         className: "btn btn-success"
-      }, "Close"))))));
+      }, "Close"))))))));
     }
   }]);
 

@@ -401,10 +401,11 @@ class App extends React.Component {
                 </div>
             </div>
 
-            <Form {...formProps} />
-            <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete} />
             <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
             <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
+            <Form {...formProps} />
+            <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete} />
+            
 
 
         </>;

@@ -224,7 +224,7 @@ class Form extends React.Component {
                                         <i className="fas fa-cog"></i>
                                     </button>
 
-                                    <div className="collapse m-2" id="collapseExample">
+                                    <div style={{position: "absolute", zIndex: "1"}} className="collapse m-2" id="collapseExample">
                                         <div className="card card-body">
                                             <label htmlFor="typeName" className="form-label">
                                                 New type
