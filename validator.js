@@ -11,9 +11,9 @@ exports.expenseValidator = [
     
     check("year").escape().trim().isLength({ min: 4, max: 4 }).withMessage("Invalid value for year").isInt().withMessage("Please enter a valid year"),
     
-    check("type").escape().trim().isLength({min: 2}).withMessage("Please choose a type"),
+    check("type").escape().unescape().trim().isLength({min: 2}).withMessage("Please choose a type"),
     
-    check("desc").escape().trim().isLength({min: 1}).withMessage("Please enter a description"),
+    check("desc").escape().unescape().trim().isLength({min: 1}).withMessage("Please enter a description"),
     
     check("amount").escape().isNumeric().withMessage("Please enter a valid amount. Must be a number. Must not be empty"),
     
