@@ -6,7 +6,6 @@ const axios = require('axios');
 const querystring = require('querystring');
 var twilio = require('twilio');
 
-
 ////gets and array of all expenses
 exports.getAllExpenses = (req,res)=>{
     Expense.find({})
@@ -39,7 +38,7 @@ exports.getExpense = (req,res)=>{
     .populate('type')
     .exec()
     .then(results=>{
-    
+
     //gets array of expenses and performs filter according to user inputs
     if(req.query.month != "") {
         results = results.filter(expense => expense.month == req.query.month)
@@ -64,8 +63,6 @@ exports.getExpense = (req,res)=>{
 
 //post new expenses
 exports.postExpense = (req,res)=>{
-
-    //validate fields
     const errors = (validationResult(req)).array();
 
 
@@ -87,7 +84,6 @@ exports.postExpense = (req,res)=>{
     .then(()=>{
         //if there are not validation errors, create new expense and save it to database
         if(errors.length < 1){
-            
             Type.findOne({"name": req.body.type}).exec()//search for a type with the value passed
             .then(chosenType=>{//after finding a type with the name in the type schema, proceed to create
                 
@@ -161,6 +157,16 @@ exports.deleteExpense = (req,res)=>{
     .then(results=>{
         res.send(results);
         
+    })
+    .catch(error=>res.send(error));
+}
+
+exports.updateExpense = (req,res)=>{
+    Expense.findOneAndUpdate({"_id":req.body.expenseId}, {type:req.body.newTypeId}, {new: true})
+    .exec()
+    .then(results=>{
+        console.log(results);
+        res.send(results);
     })
     .catch(error=>res.send(error));
 }

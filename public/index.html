@@ -34,28 +34,28 @@
 <body style="overflow-x: hidden">
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-warning mb-5">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-search-dollar"></i>
-            </a>
-            <a class="nav-link text-light" href="">Finances Manager</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <header> <!-- header -->
+        <nav class="navbar navbar-expand-sm navbar-light bg-warning">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+          <a href="" class="navbar-brand ml-5"><img src="img/logo.png" width="142"></a> <!-- logo -->
 
-                    </li>
-                </ul>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal"> <!-- hamburguer button -->
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-            </div>
-        </div>
-    </nav>
+          <div class="collapse navbar-collapse" id="nav-principal"> <!-- hides hamburguer button -->
+            <ul class="navbar-nav ml-auto mx-5">
+              <li class="nav-item"><a class="nav-link" href="">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="">Resources</a></li>
+              <li class="nav-item"><a class="nav-link" href="">Plans</a></li>
+              <li class="nav-item"><a class="nav-link btn px-4 ml-4 btn-outline-light text-light" href="">Log In</a></li>
+            </ul>
+          </div>
+        </nav>
+    </header>  <!-- header ends -->
 
+     <!-- react components -->
     <div id="react-container">
 
     </div>
@@ -63,7 +63,7 @@
 
 
     <footer class="py-5 text-muted text-center text-small bg-light">
-      <p class="mb-1">&copy; Copyright 2019-2021 Expense Manager</p>
+      <p class="mb-1">&copy; Copyright 2019-2022 Expense Manager</p>
     </footer>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,5 +1,4 @@
 const Type = require('../models/Type.js');
-const Expense = require('../models/Expense.js');
 
 const { validationResult } = require('express-validator');
 const axios = require('axios');
@@ -76,19 +75,29 @@ exports.postType = (req, res) => {
 
 ////delete expense by id which is passed by thery
 exports.deleteType = (req,res)=>{
-    
-    
 
     Type.findOne({"name": req.query.type}).exec()//search for a type with the value passed
     .then(chosenType=>{//if finds, delete
         if(chosenType != null){
-            Type.deleteOne({name: chosenType.name}).exec()
-            .then(deletedType=>{
-                res.send(deletedType);
-                
-            })
-            
-        } else {//if not type is found, send error message
+            if (chosenType.name != "Other"){
+                Type.deleteOne({name: chosenType.name}).exec()
+                .then(deletedType=>{
+                    res.send(deletedType);
+                })
+            } else {
+                let errorMessages = [];
+                errorMessages.push(['"Other" type cannot be deleted'])
+                class customError extends Error {
+                        constructor(errorMessages, status, message) {
+                            super(message);
+                            this.data = errorMessages;
+                            this.status = status;
+                        }
+                    }
+                let errorObject = new customError(errorMessages, 422);
+                res.status(errorObject.status).send(errorObject);
+            }            
+        } else {//if no type is found, or if user tried to delete "Other", send error message
             let errorMessages = [];
             errorMessages.push(['Please input correct type you wish to delete from the list'])
             class customError extends Error {

@@ -2833,201 +2833,6 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-/***/ "./node_modules/querystring/decode.js":
-/*!********************************************!*\
-  !*** ./node_modules/querystring/decode.js ***!
-  \********************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 29:0-14 */
-/***/ ((module) => {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
- // If obj.hasOwnProperty has been overridden, then calling
-// obj.hasOwnProperty(prop) will break.
-// See: https://github.com/joyent/node/issues/1707
-
-function hasOwnProperty(obj, prop) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-
-module.exports = function (qs, sep, eq, options) {
-  sep = sep || '&';
-  eq = eq || '=';
-  var obj = {};
-
-  if (typeof qs !== 'string' || qs.length === 0) {
-    return obj;
-  }
-
-  var regexp = /\+/g;
-  qs = qs.split(sep);
-  var maxKeys = 1000;
-
-  if (options && typeof options.maxKeys === 'number') {
-    maxKeys = options.maxKeys;
-  }
-
-  var len = qs.length; // maxKeys <= 0 means that we should not limit keys count
-
-  if (maxKeys > 0 && len > maxKeys) {
-    len = maxKeys;
-  }
-
-  for (var i = 0; i < len; ++i) {
-    var x = qs[i].replace(regexp, '%20'),
-        idx = x.indexOf(eq),
-        kstr,
-        vstr,
-        k,
-        v;
-
-    if (idx >= 0) {
-      kstr = x.substr(0, idx);
-      vstr = x.substr(idx + 1);
-    } else {
-      kstr = x;
-      vstr = '';
-    }
-
-    k = decodeURIComponent(kstr);
-    v = decodeURIComponent(vstr);
-
-    if (!hasOwnProperty(obj, k)) {
-      obj[k] = v;
-    } else if (Array.isArray(obj[k])) {
-      obj[k].push(v);
-    } else {
-      obj[k] = [obj[k], v];
-    }
-  }
-
-  return obj;
-};
-
-/***/ }),
-
-/***/ "./node_modules/querystring/encode.js":
-/*!********************************************!*\
-  !*** ./node_modules/querystring/encode.js ***!
-  \********************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 41:0-14 */
-/***/ ((module) => {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-var stringifyPrimitive = function stringifyPrimitive(v) {
-  switch (_typeof(v)) {
-    case 'string':
-      return v;
-
-    case 'boolean':
-      return v ? 'true' : 'false';
-
-    case 'number':
-      return isFinite(v) ? v : '';
-
-    default:
-      return '';
-  }
-};
-
-module.exports = function (obj, sep, eq, name) {
-  sep = sep || '&';
-  eq = eq || '=';
-
-  if (obj === null) {
-    obj = undefined;
-  }
-
-  if (_typeof(obj) === 'object') {
-    return Object.keys(obj).map(function (k) {
-      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-
-      if (Array.isArray(obj[k])) {
-        return obj[k].map(function (v) {
-          return ks + encodeURIComponent(stringifyPrimitive(v));
-        }).join(sep);
-      } else {
-        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-      }
-    }).filter(Boolean).join(sep);
-  }
-
-  if (!name) return '';
-  return encodeURIComponent(stringifyPrimitive(name)) + eq + encodeURIComponent(stringifyPrimitive(obj));
-};
-
-/***/ }),
-
-/***/ "./node_modules/querystring/index.js":
-/*!*******************************************!*\
-  !*** ./node_modules/querystring/index.js ***!
-  \*******************************************/
-/*! default exports */
-/*! export decode [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export encode [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export parse [provided] [no usage info] [provision prevents renaming (no use info)] -> ./node_modules/querystring/decode.js */
-/*!   exports [maybe provided (runtime-defined)] [no usage info] */
-/*! export stringify [provided] [no usage info] [provision prevents renaming (no use info)] -> ./node_modules/querystring/encode.js */
-/*!   exports [maybe provided (runtime-defined)] [no usage info] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_exports__, __webpack_require__ */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-exports.decode = exports.parse = __webpack_require__(/*! ./decode */ "./node_modules/querystring/decode.js");
-exports.encode = exports.stringify = __webpack_require__(/*! ./encode */ "./node_modules/querystring/encode.js");
-
-/***/ }),
-
 /***/ "./node_modules/react-dom/cjs/react-dom.development.js":
 /*!*************************************************************!*\
   !*** ./node_modules/react-dom/cjs/react-dom.development.js ***!
@@ -12402,7 +12207,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
-/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! querystring */ "./node_modules/querystring/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -12430,7 +12234,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 
 
 
@@ -12494,28 +12297,6 @@ var App = /*#__PURE__*/function (_React$Component) {
 
       axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense/all").then(function (results) {
         var arrayOfExpenses = results.data;
-        console.log(results.data);
-
-        var _iterator = _createForOfIteratorHelper(arrayOfExpenses),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var i = _step.value;
-
-            if (i.type == null) {
-              i.type = {
-                name: 'Other'
-              };
-            }
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-
-        console.log(arrayOfExpenses);
 
         _this2.setState({
           expenses: arrayOfExpenses.reverse()
@@ -12573,8 +12354,6 @@ var App = /*#__PURE__*/function (_React$Component) {
           amount: _this3.state.amount,
           token: captchaToken
         }).then(function (results) {
-          console.log(results.data); //expense created
-
           _this3.setState({
             showModalSuccess: true,
             Message: ["ID: " + results.data._id, "Expense registered!"]
@@ -12585,18 +12364,18 @@ var App = /*#__PURE__*/function (_React$Component) {
 
           if (_this3.state.expenses.length > 0) {
             //updates state with new expense, this will remount the ExpenseTable component with new expense in the table
-            var _iterator2 = _createForOfIteratorHelper(_this3.state.expenses),
-                _step2;
+            var _iterator = _createForOfIteratorHelper(_this3.state.expenses),
+                _step;
 
             try {
-              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                var i = _step2.value;
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var i = _step.value;
                 arrayOfExpenses.push(i);
               }
             } catch (err) {
-              _iterator2.e(err);
+              _iterator.e(err);
             } finally {
-              _iterator2.f();
+              _iterator.f();
             }
 
             arrayOfExpenses.unshift(results.data);
@@ -12648,18 +12427,18 @@ var App = /*#__PURE__*/function (_React$Component) {
 
           var arrayOfTypes = []; //updates type state with new one, this will remount the form  with new type in the dropdown menu
 
-          var _iterator3 = _createForOfIteratorHelper(_this4.state.typeDropDown),
-              _step3;
+          var _iterator2 = _createForOfIteratorHelper(_this4.state.typeDropDown),
+              _step2;
 
           try {
-            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-              var i = _step3.value;
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var i = _step2.value;
               arrayOfTypes.push(i);
             }
           } catch (err) {
-            _iterator3.e(err);
+            _iterator2.e(err);
           } finally {
-            _iterator3.f();
+            _iterator2.f();
           }
 
           arrayOfTypes.push(results.data);
@@ -12688,17 +12467,47 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function handleDeleteType(event) {
       var _this5 = this;
 
-      console.log("delete type");
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/type?type=".concat(this.state.typeName)).then(function (deletedType) {
-        console.log(deletedType);
-
         _this5.setState({
           showModalSuccess: true,
           Message: [_this5.state.typeName + " type deleted successfully"]
         });
 
-        var arrayOfTypes = []; //clones array with expenses in the current state
+        var arrayOfTypes = [];
+
+        var typeOther = _this5.state.typeDropDown.find(function (type) {
+          return type.name == "Other";
+        });
+
+        var _iterator3 = _createForOfIteratorHelper(_this5.state.expenses),
+            _step3;
+
+        try {
+          var _loop = function _loop() {
+            var expense = _step3.value;
+
+            if (expense.type.name == _this5.state.typeName) {
+              //update expense whose type got deleted. it will become Other
+              axios__WEBPACK_IMPORTED_MODULE_5___default().put('/api/v1.0/expense', {
+                expenseId: expense._id,
+                newTypeId: typeOther._id
+              }).then(function (results) {
+                console.log("expenses updated");
+                expense.type.name = "Other";
+              });
+            }
+          };
+
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            _loop();
+          } //clones array with expenses in the current state
+
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
 
         var _iterator4 = _createForOfIteratorHelper(_this5.state.typeDropDown),
             _step4;
@@ -12716,18 +12525,18 @@ var App = /*#__PURE__*/function (_React$Component) {
 
         for (var i in arrayOfTypes) {
           if (arrayOfTypes[i].name == _this5.state.typeName) {
-            arrayOfTypes.splice(i, 1);
+            arrayOfTypes.splice(i, 1); //delete the one that's been removed so we update the state.
           }
         }
 
         _this5.setState({
           typeDropDown: arrayOfTypes,
-          type: ""
+          type: _this5.state.typeName
         }); //Records expense deletion event
 
 
         react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
-          category: "Tye",
+          category: "Type",
           action: "Deleted"
         });
       })["catch"](function (error) {
@@ -12747,26 +12556,9 @@ var App = /*#__PURE__*/function (_React$Component) {
 
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount)).then(function (results) {
+        console.log("received response from server");
         var arrayOfExpenses = results.data;
-
-        var _iterator5 = _createForOfIteratorHelper(arrayOfExpenses),
-            _step5;
-
-        try {
-          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-            var i = _step5.value;
-
-            if (i.type == null) {
-              i.type = {
-                name: 'Other'
-              };
-            }
-          }
-        } catch (err) {
-          _iterator5.e(err);
-        } finally {
-          _iterator5.f();
-        }
+        console.log(results.data);
 
         _this6.setState({
           expenses: arrayOfExpenses.reverse()
@@ -12826,18 +12618,18 @@ var App = /*#__PURE__*/function (_React$Component) {
       .then(function (deletedExpense) {
         var arrayOfExpenses = []; //clones array with expenses in the current state
 
-        var _iterator6 = _createForOfIteratorHelper(_this7.state.expenses),
-            _step6;
+        var _iterator5 = _createForOfIteratorHelper(_this7.state.expenses),
+            _step5;
 
         try {
-          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-            var _i2 = _step6.value;
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var _i2 = _step5.value;
             arrayOfExpenses.push(_i2);
           }
         } catch (err) {
-          _iterator6.e(err);
+          _iterator5.e(err);
         } finally {
-          _iterator6.f();
+          _iterator5.f();
         }
 
         for (var i in arrayOfExpenses) {
@@ -12869,25 +12661,6 @@ var App = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense/all").then(function (results) {
         var arrayOfExpenses = results.data;
-
-        var _iterator7 = _createForOfIteratorHelper(arrayOfExpenses),
-            _step7;
-
-        try {
-          for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-            var i = _step7.value;
-
-            if (i.type == null) {
-              i.type = {
-                name: 'Other'
-              };
-            }
-          }
-        } catch (err) {
-          _iterator7.e(err);
-        } finally {
-          _iterator7.f();
-        }
 
         _this8.setState({
           expenses: arrayOfExpenses.reverse()
@@ -12981,7 +12754,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 /*! namespace exports */
 /*! export default [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -12990,8 +12763,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -13019,7 +12790,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 
 
 
