@@ -25,12 +25,12 @@ class Home extends React.Component {
                             </div>
                         </form>
 
-                        <p>Disponível para
-                            <a href="" class="btn btn-outline-light">
-                            <i class="fab fa-android fa-lg"></i>
+                        <p>Available on
+                            <a href="" class="btn btn-outline-light mx-1">
+                            <i class="fab fa-google-play"></i>
                             </a>
-                            <a href="" class="btn btn-outline-light">
-                            <i class="fab fa-apple"></i>
+                            <a href="" class="btn btn-outline-light mx-1 ">
+                            <i class="fab fa-app-store-ios"></i>
                             </a>
                         </p>
 

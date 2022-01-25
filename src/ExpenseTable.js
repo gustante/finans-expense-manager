@@ -16,7 +16,7 @@ class ExpenseTable extends React.Component {
     componentDidUpdate(prevProps, prevState) {
               if(prevProps.expenses != this.props.expenses){
                   
-                  //get total amount of expenses whenever expense state from App updates which generates a new table
+                  //get total amount of expenses whenever expense state from Main updates which generates a new table
                   let sumOfExpenses = 0;
                   for(let i of this.props.expenses){
                     sumOfExpenses += i.amount;
