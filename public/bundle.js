@@ -15271,20 +15271,20 @@ var Home = /*#__PURE__*/function (_React$Component) {
         "class": "align-self-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         "class": "display-4"
-      }, "Suas contas, descomplicadas"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Usado por mais de 1 milh\xE3o de pessoas, o Finans \xE9 uma ferramenta online que vai facilitar sua vida financeira."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      }, "Your finances made simple"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Used by over 2 million people, Finans is an online tool that will make it easier for you to manage your finances."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         "class": "mt-4 mb-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         "class": "input-group input-group-lg"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        placeholder: "Seu e-mail",
+        placeholder: "Your best email",
         "class": "form-control"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         "class": "input-group-append"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
         "class": "btn btn-primary"
-      }, "Cadastre-se")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Available on", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+      }, "Sign Up")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Available on", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         href: "",
         "class": "btn btn-outline-light mx-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
@@ -15308,10 +15308,10 @@ var Home = /*#__PURE__*/function (_React$Component) {
         "class": "col-md-6 d-flex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         "class": "align-self-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Saiba para onde vai o seu dinheiro"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Com o Finans, voc\xEA categoriza todos os seus lan\xE7amentos. Com gr\xE1ficos simples, voc\xEA sabe de onde vem e para onde vai o seu dinheiro."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Know where your money is going"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "With Finans, you can categorize each payment you make. Graphs and charts make it simple to visualize where your money is being spent on."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         href: "",
         "class": "btn btn-primary"
-      }, "Veja mais"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "Keep reading"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         "class": "col-md-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: "img/saiba.png",
@@ -15331,10 +15331,10 @@ var Home = /*#__PURE__*/function (_React$Component) {
         "class": "col-md-6 d-flex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         "class": "align-self-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Pare de pagar juros e economize"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Manter as contas em dia \xE9 sempre um problema? O Finans avisa voc\xEA: receba alertas de contas a pagar e a receber!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Stop paying interest and save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Keeping your bills up to date is a problem for you? Finans is here to help, we will alert you when a payment due date is approaching or if you are about to exceed your budget."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         href: "",
         "class": "btn btn-primary"
-      }, "Veja mais")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+      }, "Keep reading")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
         "class": "caixa"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         "class": "container"
@@ -15345,17 +15345,17 @@ var Home = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: "img/facil.png",
         "class": "img-fluid"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "F\xE1cil de usar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "O Finans vai al\xE9m do b\xE1sico e permite que voc\xEA fa\xE7a controles incr\xEDveis, essenciais para suas finan\xE7as. Simples como tem que ser!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Easy to use"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Finans goes above the basic and allows you to manage essencial details of your spendings. As simple as it can be!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         "class": "col-md-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: "img/economize.png",
         "class": "img-fluid"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Economize seu tempo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Tempo \xE9 dinheiro! Em segundos, voc\xEA tem tudo sob controle e aproveite seu tempo com o que realmente importa pra voc\xEA!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Save time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Time is money! In seconds, you can keep track of everything you need and spend your time with what really matters.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         "class": "col-md-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: "img/suporte.png",
         "class": "img-fluid"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Suporte amigo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "D\xFAvidas? Perguntas? Nosso suporte super legal ajuda voc\xEA! A gente t\xE1 aqui pra resolver seus problemas e deixar sua vida bem mais f\xE1cil!"))))));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Friendly support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Questions? Concerns? Suggestions? Our support team is here to help making your life easier! Fill out our contact form or talk to an agent whenever you need to."))))));
     }
   }]);
 

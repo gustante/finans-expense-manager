@@ -11,16 +11,16 @@ class Home extends React.Component {
                     <div class="row">
                     <div class="col-md-6 d-flex">
                         <div class="align-self-center">
-                        <h1 class="display-4">Suas contas, descomplicadas</h1>
+                        <h1 class="display-4">Your finances made simple</h1>
                         <p>
-                            Usado por mais de 1 milhão de pessoas, o Finans é uma ferramenta online que vai facilitar sua vida financeira.
+                            Used by over 2 million people, Finans is an online tool that will make it easier for you to manage your finances.
                         </p>
 
                         <form class="mt-4 mb-4">
                             <div class="input-group input-group-lg">
-                            <input type="text" placeholder="Seu e-mail" class="form-control"/>
+                            <input type="text" placeholder="Your best email" class="form-control"/>
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-primary">Cadastre-se</button>
+                                <button type="button" class="btn btn-primary">Sign Up</button>
                             </div>
                             </div>
                         </form>
@@ -48,11 +48,11 @@ class Home extends React.Component {
                         <div class="row">
                         <div class="col-md-6 d-flex">
                             <div class="align-self-center">
-                            <h2>Saiba para onde vai o seu dinheiro</h2>
+                            <h2>Know where your money is going</h2>
                             <p>
-                                Com o Finans, você categoriza todos os seus lançamentos. Com gráficos simples, você sabe de onde vem e para onde vai o seu dinheiro.
+                                With Finans, you can categorize each payment you make. Graphs and charts make it simple to visualize where your money is being spent on.
                             </p>
-                            <a href="" class="btn btn-primary">Veja mais</a>
+                            <a href="" class="btn btn-primary">Keep reading</a>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -70,11 +70,11 @@ class Home extends React.Component {
                         </div>
                         <div class="col-md-6 d-flex">
                             <div class="align-self-center">
-                            <h2>Pare de pagar juros e economize</h2>
+                            <h2>Stop paying interest and save</h2>
                             <p>
-                                Manter as contas em dia é sempre um problema? O Finans avisa você: receba alertas de contas a pagar e a receber!
+                                Keeping your bills up to date is a problem for you? Finans is here to help, we will alert you when a payment due date is approaching or if you are about to exceed your budget.
                             </p>
-                            <a href="" class="btn btn-primary">Veja mais</a>
+                            <a href="" class="btn btn-primary">Keep reading</a>
                             </div>
                         </div>
                         </div>
@@ -86,23 +86,23 @@ class Home extends React.Component {
                         <div class="row">
                         <div class="col-md-4">
                             <img src="img/facil.png" class="img-fluid"/>
-                            <h4>Fácil de usar</h4>
+                            <h4>Easy to use</h4>
                             <p>
-                            O Finans vai além do básico e permite que você faça controles incríveis, essenciais para suas finanças. Simples como tem que ser!
+                            Finans goes above the basic and allows you to manage essencial details of your spendings. As simple as it can be!
                             </p>
                         </div>
                         <div class="col-md-4">
                             <img src="img/economize.png" class="img-fluid"/>
-                            <h4>Economize seu tempo</h4>
+                            <h4>Save time</h4>
                             <p>
-                            Tempo é dinheiro! Em segundos, você tem tudo sob controle e aproveite seu tempo com o que realmente importa pra você!
+                            Time is money! In seconds, you can keep track of everything you need and spend your time with what really matters.
                             </p>
                         </div>
                         <div class="col-md-4">
                             <img src="img/suporte.png" class="img-fluid"/>
-                            <h4>Suporte amigo</h4>
+                            <h4>Friendly support</h4>
                             <p>
-                            Dúvidas? Perguntas? Nosso suporte super legal ajuda você! A gente tá aqui pra resolver seus problemas e deixar sua vida bem mais fácil!
+                            Questions? Concerns? Suggestions? Our support team is here to help making your life easier! Fill out our contact form or talk to an agent whenever you need to.
                             </p>
                         </div>
                         </div>
