@@ -165,7 +165,6 @@ exports.updateExpense = (req,res)=>{
     Expense.findOneAndUpdate({"_id":req.body.expenseId}, {type:req.body.newTypeId}, {new: true})
     .exec()
     .then(results=>{
-        console.log(results);
         res.send(results);
     })
     .catch(error=>res.send(error));

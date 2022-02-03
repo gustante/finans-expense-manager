@@ -226,7 +226,7 @@ class Main extends React.Component {
                 }
 
                 this.setState({ typeDropDown: arrayOfTypes,
-                                type: this.state.typeName
+                                type: ""
                 
                 });
 
