@@ -53,7 +53,7 @@ class Main extends React.Component {
         axios.get("/api/v1.0/expense/all")
             .then(results => {
                 let arrayOfExpenses = results.data             
-
+                console.log(results.data);
                 this.setState({ expenses: arrayOfExpenses.reverse() });
 
             })
@@ -167,7 +167,9 @@ class Main extends React.Component {
                             arrayOfTypes.push(i)
                         }
                         arrayOfTypes.push(results.data);
-                        this.setState({ typeDropDown: arrayOfTypes });
+                        this.setState({ typeDropDown: arrayOfTypes,
+                                        type: results.data.name     
+                        });
 
                         console.log(this.state.typeDropDown)
 
@@ -199,6 +201,7 @@ class Main extends React.Component {
                 let arrayOfTypes = []
 
                 let typeOther = this.state.typeDropDown.find(type => type.name == "Other");
+                
                 for(let expense of this.state.expenses){
                     if(expense.type.name == this.state.typeName){
                         //update expense whose type got deleted. it will become Other

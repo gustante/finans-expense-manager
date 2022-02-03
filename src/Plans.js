@@ -1,17 +1,13 @@
 
 import React from 'react';
 
-class Plans extends React.Component {
+function Plans() {
 
-    render(){
-        
-        return <>
+    return(
         
             <h1>This is the Plans page</h1>
-            
-        </>; 
-        
-    }
+
+    )
 }
 export default Plans;
 

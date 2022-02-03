@@ -1,12 +1,10 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-class Nav extends React.Component {
+function Nav() {
 
-    render(){
-        
-        return <>
-        
+    return(
+
             <header> 
                 <nav className="navbar sticky-top navbar-expand-md navbar-light bg-warning">
 
@@ -18,43 +16,37 @@ class Nav extends React.Component {
 
                 <div className="collapse navbar-collapse" id="nav-principal">
                     <ul className="navbar-nav ml-auto mx-2">
-                        <Link to="/">
-                            <button className="btn"><li className="nav-item" className=" nav-link" >Home</li></button>
+                        <Link to="/" className="btn">
+                        <li className="nav-item" className=" nav-link" >Home</li>
                             
                         </Link>
-                        <Link to="/about">
-                            <button className="btn"><li className="nav-item" className=" nav-link" >About</li></button>
+                        <Link to="/about" className="btn">
+                            <li className="nav-item" className=" nav-link" >About</li>
                             
                         </Link>
-                        <Link to="/faq">
-                            <button className="btn"><li className="nav-item" className=" nav-link" >F.A.Q</li></button> 
+                        <Link to="/faq" className="btn">
+                            <li className="nav-item" className=" nav-link" >F.A.Q</li>
                         </Link>
-                        <Link to="/plans">
-                            <button className="btn"><li className="nav-item" className=" nav-link" >Plans</li></button>
+                        <Link to="/plans" className="btn">
+                            <li className="nav-item" className=" nav-link" >Plans</li>
                             
                         </Link>
-                        <Link to="/dashboard">
-                            <button className="btn"><li className="nav-item" className=" nav-link" >Dashboard</li></button>
+                        <Link to="/dashboard" className="btn">
+                            <li className="nav-item" className=" nav-link" >Dashboard</li>
                             
                         </Link>
-                        <Link to="/login">
-                            <button className="btn btn-outline-light"><li className="nav-item" className="nav-link px-2 py-1 "> Log In</li></button>
+                        <Link to="/login" className="btn btn-outline-light">
+                            <li className="nav-item" className="nav-link px-2 py-1 "> Log In</li>
                             
                         </Link>
-                        
-                        
-                        
-                        
-                        
-                        
+    
                     </ul>
                 </div>
                 </nav>
             </header>  
             
-        </>; 
-        
-    }
+                 
+    )
 }
 export default Nav;
 

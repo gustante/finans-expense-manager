@@ -1,11 +1,9 @@
-
 import React from 'react';
 
-class Footer extends React.Component {
+function Footer() {
 
-    render(){
+    return(
         
-        return <>
         
         <footer className="py-5 text-muted text-center text-small bg-light">
             <div className="container">
@@ -40,10 +38,9 @@ class Footer extends React.Component {
                 </div>
             </div>
             </footer>
-            
-        </>; 
+
         
-    }
+    )
 }
 export default Footer;
 
