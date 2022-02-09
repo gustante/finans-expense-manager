@@ -77,7 +77,6 @@ exports.postExpense = (req,res)=>{
 
         //If validation fails or score is too low, push an error inside Error's array
         if ( !response.data.success || response.data.score < 0.80 ) {
-            console.log('reCAPTCHA failed');
             errors.push({msg:'reCAPTCHA failed. Score: '+ response.data.score + ", Success: " + response.data.success})
         }
     })    
