@@ -8,12 +8,10 @@ function Login() {
         
         <form className="form-signin">
             <div className="text-center mb-4">
-                <img className="mb-4" src="/docs/4.6/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
-                <h1 className="h3 mb-3 font-weight-normal">Floating labels</h1>
-                <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/css-placeholder-shown">Works in latest Chrome, Safari, Firefox, and IE 10/11 (prefixed).</a></p>
+                <h1 className="my-5 ">Sign in or create an account bellow</h1>
             </div>
 
-            <div className="form-label-group">
+            <div className="form-label-group mt-5">
                 <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required autofocus/>
                 <label for="inputEmail">Email address</label>
             </div>
@@ -28,8 +26,12 @@ function Login() {
                 <input type="checkbox" value="remember-me"/> Remember me
                 </label>
             </div>
-            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <p className="mt-5 mb-3 text-muted text-center">&copy; 2017-2021</p>
+            <div className="text-center mb-5">
+                <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <button className="btn btn-lg btn-success btn-block">Sign in with <i class="fab fa-google"></i></button>
+                <button className="btn" ><a className="text-decoration-none" href="">or create an account</a></button>
+            </div>
+            
             </form>
             
 

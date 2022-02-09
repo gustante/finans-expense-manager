@@ -16,17 +16,17 @@ function Footer() {
                         <a href="">Careers</a>
                         </p>
                     </div>
-                    <div className="col-md-4 d-flex justify-content-end">
+                    <div className="col-md-4 d-flex justify-content-end text-decoration-none">
                         <a href="" className="btn btn-outline-dark">
                         <i className="fab fa-facebook"></i>
                         </a>
-                        <a href="" className="btn btn-outline-dark ml-2">
+                        <a href="" className="btn btn-outline-dark ml-2 text-decoration-none">
                         <i className="fab fa-twitter"></i>
                         </a>
-                        <a href="" className="btn btn-outline-dark ml-2">
+                        <a href="" className="btn btn-outline-dark ml-2 text-decoration-none">
                         <i className="fab fa-instagram"></i>
                         </a>
-                        <a href="" className="btn btn-outline-dark ml-2">
+                        <a href="" className="btn btn-outline-dark ml-2 text-decoration-none">
                         <i className="fab fa-youtube"></i>
                         </a>
                     </div>

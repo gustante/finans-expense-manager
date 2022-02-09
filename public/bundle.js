@@ -14660,7 +14660,7 @@ function Footer() {
   }, "Resources"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     href: ""
   }, "Careers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "col-md-4 d-flex justify-content-end"
+    className: "col-md-4 d-flex justify-content-end text-decoration-none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     href: "",
     className: "btn btn-outline-dark"
@@ -14668,17 +14668,17 @@ function Footer() {
     className: "fab fa-facebook"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     href: "",
-    className: "btn btn-outline-dark ml-2"
+    className: "btn btn-outline-dark ml-2 text-decoration-none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "fab fa-twitter"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     href: "",
-    className: "btn btn-outline-dark ml-2"
+    className: "btn btn-outline-dark ml-2 text-decoration-none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "fab fa-instagram"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     href: "",
-    className: "btn btn-outline-dark ml-2"
+    className: "btn btn-outline-dark ml-2 text-decoration-none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "fab fa-youtube"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15239,18 +15239,10 @@ function Login() {
     className: "form-signin"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "text-center mb-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-    className: "mb-4",
-    src: "/docs/4.6/assets/brand/bootstrap-solid.svg",
-    alt: "",
-    width: "72",
-    height: "72"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    className: "h3 mb-3 font-weight-normal"
-  }, "Floating labels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Build form controls with floating labels via the ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("code", null, ":placeholder-shown"), " pseudo-element. ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "https://caniuse.com/css-placeholder-shown"
-  }, "Works in latest Chrome, Safari, Firefox, and IE 10/11 (prefixed)."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "form-label-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "my-5 "
+  }, "Sign in or create an account bellow")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "form-label-group mt-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "email",
     id: "inputEmail",
@@ -15275,12 +15267,21 @@ function Login() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "checkbox",
     value: "remember-me"
-  }), " Remember me")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }), " Remember me")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "text-center mb-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "btn btn-lg btn-primary btn-block",
     type: "submit"
-  }, "Sign in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    className: "mt-5 mb-3 text-muted text-center"
-  }, "\xA9 2017-2021"));
+  }, "Sign in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn btn-lg btn-success btn-block"
+  }, "Sign in with ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+    "class": "fab fa-google"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    className: "text-decoration-none",
+    href: ""
+  }, "or create an account"))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
@@ -16217,7 +16218,7 @@ grecaptcha.ready(function () {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, ".view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n  }\n", ""]);
+exports.push([module.id, ".view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n}\n\n\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 15px;\n  margin: auto;\n}\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0; /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text; /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n", ""]);
 // Exports
 module.exports = exports;
 
