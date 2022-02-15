@@ -49,7 +49,7 @@ class Nav extends React.Component {
                                         </Link>
                                     </>
                                 ): <Link to="/login" className="btn btn-outline-light">
-                                        <li className="nav-item" className="nav-link px-2 py-1 "> Log In</li>
+                                        <li className="nav-item" className="nav-link px-2 py-1"> Log In</li>
                                     </Link>
                             }
                                 

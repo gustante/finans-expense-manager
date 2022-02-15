@@ -1,10 +1,8 @@
 const express = require('express');
-
 const app = express();
-
 const connection = require('./db/connection');
-
 const port = process.env.PORT;
+const router = require("./routes/index.js")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -19,8 +17,6 @@ connection.once('open', () => {
     const server = app.listen(port, () => {
         console.log('listening on port ' + port);
     });
-
-    const router = require("./routes/index.js")
 
     app.use("/api/v1.0", router)
 });

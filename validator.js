@@ -1,8 +1,5 @@
 const {check} = require('express-validator');
 
-const validator = require('validator');
-
-
 exports.expenseValidator = [
 
     check("month").escape().trim().isInt().withMessage("Please select a month"),
