@@ -395,8 +395,8 @@ class Main extends React.Component {
 
         return <>
             <div className="row">
-                <div className="col mb-5 ml-1">
-                    <h1 className="display-4">Expense tracker</h1>
+                <div className="col mx-3 my-5">
+                    <h1 className="display-4">My expenses</h1>
                 </div>
             </div>
 

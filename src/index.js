@@ -5,8 +5,6 @@ import { HashRouter as Router } from "react-router-dom";
 
 import App from "./App.js";
 
-
-
 grecaptcha.ready(function () {
         ReactDOM.render(
             <Router>
@@ -15,7 +13,9 @@ grecaptcha.ready(function () {
                 ,document.getElementById('react-container')
             
         );
-    })
+})
+
+
 
 
 

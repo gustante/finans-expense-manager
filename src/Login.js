@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 
 class Login extends React.Component {
     render(){
@@ -32,7 +32,10 @@ class Login extends React.Component {
 
                 <div className="form-signin mb-5 text-center">
                     <button className="btn btn-lg btn-success btn-block" onClick={this.props.handleLogIn}>Sign in with <i className="fab fa-google"></i></button>
-                    <button className="btn" ><a className="text-decoration-none" href="">or create an account</a></button>
+                    <Link to="/register">
+                        <button className="btn" ><a className="text-decoration-none" href="">or create an account</a></button>          
+                    </Link>
+                    
                 </div>
 
             </>

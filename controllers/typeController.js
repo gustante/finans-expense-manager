@@ -1,5 +1,4 @@
 const Type = require('../models/Type.js');
-
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 const querystring = require('querystring');

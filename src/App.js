@@ -7,6 +7,8 @@ import Plans from "./Plans.js"
 import Main from "./Main.js"
 import Login from "./Login.js"
 import Footer from "./Footer.js"
+import Register from "./Register.js"
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from 'axios';
 
@@ -57,6 +59,8 @@ class App extends React.Component {
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/dashboard" element={<Main />} />
                     <Route path="/login" element={<Login handleLogIn={this.handleLogIn} />} />
+                    <Route path="/register" element={<Register/>} />
+                    
                     <Route
                         path="*"
                         element={

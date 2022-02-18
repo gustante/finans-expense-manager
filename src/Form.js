@@ -183,7 +183,7 @@ class Form extends React.Component {
 
                                 <div className=" m-1">
                                     <button type="submit" className="btn btn-success">
-                                        <span className="mx-1">Add <span className="">expense</span></span>
+                                        <span className="mx-1">Add </span>
                                         <i className="fas fa-plus"></i>
                                     </button>
 
