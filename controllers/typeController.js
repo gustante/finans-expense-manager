@@ -2,9 +2,9 @@ const Type = require('../models/Type.js');
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 const querystring = require('querystring');
+const customError = require('../customError.js')
 
 exports.getAllTypes = (req, res) => {
-    //.sort() to 
     Type.find({}).exec()
         .then(results => {
             res.send(results);
@@ -54,13 +54,6 @@ exports.postType = (req, res) => {
                     errorMessages.push(i.msg)
                 }
 
-                class customError extends Error {
-                    constructor(errorMessages, status, message) {
-                        super(message);
-                        this.data = errorMessages;
-                        this.status = status;
-                    }
-                }
                 let errorObject = new customError(errorMessages, 422);
 
                 res.status(errorObject.status).send(errorObject);
@@ -86,29 +79,15 @@ exports.deleteType = (req,res)=>{
             } else {
                 let errorMessages = [];
                 errorMessages.push(['"Other" type cannot be deleted'])
-                class customError extends Error {
-                        constructor(errorMessages, status, message) {
-                            super(message);
-                            this.data = errorMessages;
-                            this.status = status;
-                        }
-                    }
                 let errorObject = new customError(errorMessages, 422);
                 res.status(errorObject.status).send(errorObject);
             }            
         } else {//if no type is found, or if user tried to delete "Other", send error message
             let errorMessages = [];
             errorMessages.push(['Please input correct type you wish to delete from the list'])
-            class customError extends Error {
-                    constructor(errorMessages, status, message) {
-                        super(message);
-                        this.data = errorMessages;
-                        this.status = status;
-                    }
-                }
-                let errorObject = new customError(errorMessages, 422);
+            let errorObject = new customError(errorMessages, 422);
 
-                res.status(errorObject.status).send(errorObject);
+            res.status(errorObject.status).send(errorObject);
         }
        
     })

@@ -3,11 +3,6 @@ import { Link } from "react-router-dom";
 
 class Nav extends React.Component {
 
-    componentDidUpdate(prevProps, prevState) { //remounts navbar to change links depending on weather user is logged in or out
-        if (prevProps.isLoggedIn != this.props.isLoggedIn) {
-            console.log('remount')
-        }
-    }
 
     render() {
         const isLoggedIn = this.props.isLoggedIn;
@@ -51,7 +46,7 @@ class Nav extends React.Component {
                                 ): <Link to="/login" className="btn btn-outline-light">
                                         <li className="nav-item" className="nav-link px-2 py-1"> Log In</li>
                                     </Link>
-                            }
+                                }
                                 
                                 
 

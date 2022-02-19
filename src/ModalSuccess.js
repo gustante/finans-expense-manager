@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 class ModalSuccess extends React.Component {
 
@@ -10,8 +11,9 @@ class ModalSuccess extends React.Component {
 
     render() {
         //code to toggle modal taken from https://www.js-tutorials.com/react-js/how-to-create-modal-box-component-in-react/
-        const { showModalSuccess } = this.props
+        const { showModalSuccess, displayLoginButton } = this.props
         const showHideClassName = showModalSuccess ? 'view' : 'hide';//whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
+        const showLoginButton = displayLoginButton? 'view' : 'hide';
         //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
         return <>
 
@@ -29,7 +31,11 @@ class ModalSuccess extends React.Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-success">Close</button>
+                                    <Link to="/login" className={showLoginButton}>
+                                        <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-warning">Log In</button>
+                                    </Link>  
                                 </div>
+                                                              
                             </div>
                         </div>
                     </div>

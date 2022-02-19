@@ -3,10 +3,20 @@ const app = express();
 const connection = require('./db/connection');
 const port = process.env.PORT;
 const router = require("./routes/index.js")
+const session = require('express-session');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.json());
+
+app.use(
+    session({
+        secret: 'key',
+        resave: false,
+        saveUninitialized: false,
+        isAuth: false
+    })
+)
 
 
 //DB connection. Starts listening once connection is established

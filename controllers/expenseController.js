@@ -1,10 +1,10 @@
 const Expense = require('../models/Expense.js');
 const Type = require('../models/Type.js');
-
 const {validationResult} = require('express-validator');
 const axios = require('axios');
 const querystring = require('querystring');
 var twilio = require('twilio');
+const customError = require('../customError.js')
 
 ////gets and array of all expenses
 exports.getAllExpenses = (req,res)=>{
@@ -13,6 +13,7 @@ exports.getAllExpenses = (req,res)=>{
     .exec()
     .then(results=>{
         res.send(results);
+        console.log(req.session)
         
     })
     .catch(error=>res.send(error));
@@ -130,14 +131,7 @@ exports.postExpense = (req,res)=>{
             for(let i of errors) {
                 errorMessages.push(i.msg)
             }
-            
-            class customError extends Error {
-            constructor(errorMessages, status, message) {
-                super(message);
-                this.data = errorMessages;
-                this.status = status;
-            }
-            }
+
             let errorObject = new customError(errorMessages,422);
 
             res.status(errorObject.status).send(errorObject);

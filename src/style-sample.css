@@ -1,3 +1,4 @@
+/* MODAL TOGGLE CLASSES  */
 .view {
     display: block;
 }
@@ -6,28 +7,23 @@
     display: none;
 }
 
-#home {
-	background: #ffc107;
-	color: white;
+
+
+/* DASHBORD(MAIN) PAGE  */
+
+#dashboard {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
 }
 
-.caixa {
-	padding: 60px 0;
-	border-bottom: 1px solid #e5e5e5;
-}
-
-footer p a {
-	margin: 5px 15px;
-}
-
-footer .copyright {
-    font-size: 0.8em;
-}
-
-.badge {
-    font-size: 0.9em;
-}
-
+/* REGISTER PAGE  */
+.form-register {
+    width: 100%;
+    max-width: 650px;
+    padding: 5px;
+    margin: auto;
+  }
 
 /* LOG IN PAGE  */
 
@@ -38,6 +34,9 @@ footer .copyright {
   padding: 5px;
   margin: auto;
 }
+
+
+  
 
 .form-label-group {
   position: relative;
@@ -148,10 +147,25 @@ footer .copyright {
   }
 }
 
+/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */
+#home {
+	background: #ffc107;
+	color: white;
+}
 
+.caixa {
+	padding: 60px 0;
+	border-bottom: 1px solid #e5e5e5;
+}
 
+footer p a {
+	margin: 5px 15px;
+}
 
-/* REGISTER FORM */
-  
-.lh-condensed { line-height: 1.25; }
-  
+footer .copyright {
+    font-size: 0.8em;
+}
+
+.badge {
+    font-size: 0.9em;
+}
