@@ -5,7 +5,7 @@ import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
 import axios from 'axios';
 import ReactGA from 'react-ga';
-
+import { Navigate } from "react-router-dom";
 
 
 //Google analytics tracking ID
@@ -50,32 +50,38 @@ class Main extends React.Component {
 
     //mounts Main component and obtain all expenses in database, adding it to expense state
     componentDidMount() {
-        axios.get("/api/v1.0/expense/all")
-            .then(results => {
-                let arrayOfExpenses = results.data             
-                console.log(results.data);
-                this.setState({ expenses: arrayOfExpenses.reverse() });
+        if (this.props.isLoggedIn) {
+            axios.get("/api/v1.0/expense/all")
+                .then(results => {
+                    let arrayOfExpenses = results.data
+                    console.log(results.data);
+                    this.setState({ expenses: arrayOfExpenses.reverse() });
 
-            })
-            .catch(error => console.log(error));
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        
+            axios.get("/api/v1.0/type/all")
 
-        axios.get("/api/v1.0/type/all")
-            .then(results => {
-                let arrayOfTypes = results.data
+                .then(results => {
+                    let arrayOfTypes = results.data
 
-                this.setState({ typeDropDown: arrayOfTypes });
+                    this.setState({ typeDropDown: arrayOfTypes });
 
-            })
-            .catch(error => console.log(error));
+                })
+                .catch(error => console.log(error));
 
             window.addEventListener("keydown", e => {
-            let target = $(this).parent();
-            if (e.which == 27) {
-                console.log('closes modal');
-                this.setState({ showModalSuccess: false });
-                this.setState({ showModalError: false });
-            }
-        });
+                let target = $(this).parent();
+                if (e.which == 27) {
+                    console.log('closes modal');
+                    this.setState({ showModalSuccess: false });
+                    this.setState({ showModalError: false });
+                }
+            });
+        }
+
 
     }
 
@@ -167,8 +173,9 @@ class Main extends React.Component {
                             arrayOfTypes.push(i)
                         }
                         arrayOfTypes.push(results.data);
-                        this.setState({ typeDropDown: arrayOfTypes,
-                                        type: results.data.name     
+                        this.setState({
+                            typeDropDown: arrayOfTypes,
+                            type: results.data.name
                         });
 
                         console.log(this.state.typeDropDown)
@@ -195,21 +202,22 @@ class Main extends React.Component {
     handleDeleteType(event) {
         event.preventDefault();
 
-        axios.delete(`/api/v1.0/type?type=${this.state.typeName}`)
+        axios.delete(`/api/v1.0/type?type=${this.state.type}`)
             .then(deletedType => {
-                this.setState({ showModalSuccess: true, Message: [this.state.typeName + " type deleted successfully"] });
+                console.log("deleted type is: " + deletedType)
+                this.setState({ showModalSuccess: true, Message: [this.state.type + " type deleted successfully"] });
                 let arrayOfTypes = []
 
                 let typeOther = this.state.typeDropDown.find(type => type.name == "Other");
-                
-                for(let expense of this.state.expenses){
-                    if(expense.type.name == this.state.typeName){
+
+                for (let expense of this.state.expenses) {
+                    if (expense.type.name == this.state.type) {
                         //update expense whose type got deleted. it will become Other
-                        axios.put('/api/v1.0/expense', {expenseId: expense._id, newTypeId: typeOther._id })
-                        .then( results => {
-                            console.log("expenses updated")
-                            expense.type.name = "Other";
-                        })
+                        axios.put('/api/v1.0/expense', { expenseId: expense._id, newTypeId: typeOther._id })
+                            .then(results => {
+                                console.log("expenses updated")
+                                expense.type.name = "Other";
+                            })
                     }
                 }
 
@@ -217,22 +225,23 @@ class Main extends React.Component {
                 for (let i of this.state.typeDropDown) {
                     arrayOfTypes.push(i)
                 }
-                
+
 
                 for (let i in arrayOfTypes) {
-                    if (arrayOfTypes[i].name == this.state.typeName) {
+                    if (arrayOfTypes[i].name == this.state.type) {
                         arrayOfTypes.splice(i, 1);//delete the one that's been removed so we update the state.
                     }
                 }
 
-                this.setState({ typeDropDown: arrayOfTypes,
-                                type: ""
-                
+                this.setState({
+                    typeDropDown: arrayOfTypes,
+                    type: ""
+
                 });
 
-                                
-                
-                
+
+
+
 
                 //Records expense deletion event
                 ReactGA.event({
@@ -250,17 +259,17 @@ class Main extends React.Component {
                 });
             });
 
-            
+
     }
 
     //search expenses based on user input. Send values from inputs using query
     handleExpenseSearch(event) {
         event.preventDefault();
         axios.get(`/api/v1.0/expense?month=${this.state.month}&day=${this.state.day}&year=${this.state.year}&type=${this.state.type}&desc=${this.state.desc}&amount=${this.state.amount}`)
-        .then(results => {
-            console.log("received response from server")
-            let arrayOfExpenses = results.data
-            console.log(results.data)
+            .then(results => {
+                console.log("received response from server")
+                let arrayOfExpenses = results.data
+                console.log(results.data)
 
                 this.setState({ expenses: arrayOfExpenses.reverse() });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
                 //Records expense filter event
@@ -342,7 +351,7 @@ class Main extends React.Component {
         axios.get("/api/v1.0/expense/all")
             .then(results => {
                 let arrayOfExpenses = results.data
-                
+
                 this.setState({ expenses: arrayOfExpenses.reverse() });
 
             })
@@ -393,18 +402,29 @@ class Main extends React.Component {
             handleDeleteType: this.handleDeleteType
         }
 
-        return <>
-            <div className="row">
-                <div className="col mb-5 ml-1">
-                    <h1 className="display-4">Expense tracker</h1>
-                </div>
-            </div>
+        const isLoggedIn = this.props.isLoggedIn;
 
-            <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
-            <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
-            <Form {...formProps} />
-            <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete} />
-            
+        return <>
+            {isLoggedIn ? (
+                <>
+                    <div id="dashboard">
+                        <div className="row">
+                            <div className="col mx-3 my-5">
+                                <h1 className="display-4">My expenses</h1>
+                            </div>
+                        </div>
+
+                        <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
+                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
+                        <Form {...formProps} />
+                        <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete} />
+                    </div>
+
+                </>
+            ) : <Navigate to="/login" />
+            }
+
+
 
 
         </>;

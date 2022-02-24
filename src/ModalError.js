@@ -2,12 +2,6 @@ import React from 'react';
 
 class ModalSuccess extends React.Component {
 
-    componentDidUpdate(prevProps, prevState) {//remounts the modal after updating message or showModalError state in Main
-        if (prevProps.showModalError != this.props.showModalError) {
-            console.log('remount')
-        }
-    }
-
     render() {
         //code to toggle modal taken from https://www.js-tutorials.com/react-js/how-to-create-modal-box-component-in-react/
         const { showModalError } = this.props

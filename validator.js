@@ -1,8 +1,5 @@
 const {check} = require('express-validator');
 
-const validator = require('validator');
-
-
 exports.expenseValidator = [
 
     check("month").escape().trim().isInt().withMessage("Please select a month"),
@@ -22,6 +19,16 @@ exports.expenseValidator = [
 exports.typeValidator = [
     
     check("name").escape().trim().isLength({min: 2}).withMessage("Please enter a type"),
+    
+]
+
+exports.userValidator = [
+    
+    check("firstName").escape().trim().isLength({min: 2}).withMessage("Please enter a valid first name"),
+    check("lastName").escape().trim().isLength({min: 2}).withMessage("Please enter a valid last name"),
+    check("password").escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters"),
+    check("email").escape().trim().isEmail().withMessage("Please enter a valid email"),
+    check("phoneNumber").escape().trim().isMobilePhone(['en-CA','en-US']).withMessage("Please enter a valid phone number (US or CANADIAN)"),
     
 ]
     

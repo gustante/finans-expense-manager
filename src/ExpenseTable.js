@@ -60,7 +60,7 @@ class ExpenseTable extends React.Component {
                         <td></td> 
                         <td className="d-sm-table-cell d-none"></td>  
                         <td></td>
-                        <td><span className="p-2 btn btn-warning">Total: ${this.state.total}</span></td>
+                        <td><span className="p-3 badge badge-warning">Total: ${this.state.total}</span></td>
                         <td></td>
                       </tr>
                     </tbody>

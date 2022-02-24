@@ -1,14 +1,28 @@
 const express = require('express');
-
 const app = express();
-
 const connection = require('./db/connection');
-
 const port = process.env.PORT;
+const router = require("./routes/index.js")
+const session = require('express-session');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.json());
+
+app.use(
+    session({
+        secret: 'key',
+        resave: false,
+        saveUninitialized: false,
+        isAuth: false
+    })
+    
+)
+
+app.use(function(req,res,next){
+    console.log(req.session);
+    next();
+})
 
 
 //DB connection. Starts listening once connection is established
@@ -19,8 +33,6 @@ connection.once('open', () => {
     const server = app.listen(port, () => {
         console.log('listening on port ' + port);
     });
-
-    const router = require("./routes/index.js")
 
     app.use("/api/v1.0", router)
 });
