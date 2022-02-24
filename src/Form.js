@@ -231,6 +231,11 @@ class Form extends React.Component {
 
                                             </label>
                                             <input aria-label="create new type" id="typeName" type="text" value={this.props.typeName} className="form-control" onChange={this.props.handleChange.bind(this, 'typeName')} />
+                                            <label htmlFor="typeBudget" className="form-label">
+                                                Budget
+
+                                            </label>
+                                            <input aria-label="create new type budget" id="typeName" type="text" value={this.props.typeBudget} className="form-control" onChange={this.props.handleChange.bind(this, 'typeBudget')} />
                                             <div className=" m-1">
                                                 <button id="addType" onClick={this.props.handleCreateType} className="btn m-1 btn-success d-inline-block" >
                                                     <span className="mx-1">Add type</span>

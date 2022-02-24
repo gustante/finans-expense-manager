@@ -30,6 +30,7 @@ class Main extends React.Component {
             desc: "",
             amount: "",
             typeName: "",
+            typeBudget: "",
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
             Message: [] //messages to be passed to success or error modal according to validation obtained
@@ -163,7 +164,7 @@ class Main extends React.Component {
                 console.log("reCAPTCHA executed");
             })
             .then(() => {
-                axios.post("/api/v1.0/type", { name: this.state.typeName, token: captchaToken })
+                axios.post("/api/v1.0/type", { name: this.state.typeName, budget: this.state.typeBudget, token: captchaToken })
                     .then(results => {
                         this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Type created successfully"] }); //success message sends expense id to success modal and displays it
                         let arrayOfTypes = []
@@ -175,10 +176,11 @@ class Main extends React.Component {
                         arrayOfTypes.push(results.data);
                         this.setState({
                             typeDropDown: arrayOfTypes,
-                            type: results.data.name
+                            type: results.data.name,
+                            typeName: "",
+                            typeBudget: ""
                         });
 
-                        console.log(this.state.typeDropDown)
 
                         //Records type creation event
                         ReactGA.event({
@@ -311,6 +313,10 @@ class Main extends React.Component {
             this.setState({
                 typeName: e.target.value
             })
+        } else if (field == 'typeBudget') {
+            this.setState({
+                typeBudget: e.target.value
+            })
         }
 
 
@@ -377,6 +383,7 @@ class Main extends React.Component {
             type: "",
             amount: "",
             typeName: "",
+            typeBudget: ""            
         });
 
     }
@@ -397,6 +404,7 @@ class Main extends React.Component {
             type: this.state.type,
             typeDropDown: this.state.typeDropDown,
             typeName: this.state.typeName,
+            typeBudget: this.state.typeBudget,
             amount: this.state.amount,
             searchAll: this.searchAll,
             handleDeleteType: this.handleDeleteType

@@ -52,11 +52,13 @@ exports.postType = (req, res) => {
                         .then(user => {
                             let type = new Type({
                                 name: req.body.name,
+                                budget: req.body.budget,
                                 user: user._id
                             });
                             user.types.push(type)
                             user.save()
                             type.save()
+                            console.log(type);
                             res.status(201).send(type);
 
                         })
