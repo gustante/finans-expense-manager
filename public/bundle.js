@@ -14540,9 +14540,6 @@ var App = /*#__PURE__*/function (_React$Component) {
           //remove dashes
           token: captchaToken
         }).then(function (results) {
-          console.log(results);
-          console.log(results.data);
-
           _this3.setState({
             showModalSuccess: true,
             Message: ["ID: " + results.data._id, "Thank you for registering " + results.data.firstName + "!"],
@@ -15023,98 +15020,84 @@ var Form = /*#__PURE__*/function (_React$Component) {
 
   _createClass(Form, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      //set arrow keys accessibility with jquery
-      $(".form-control").keydown(function (e) {
-        var target = $(this).parent();
-
-        if (e.which == 39) {
-          //key right, moves through inputs
-          console.log('right key pressed');
-          event.preventDefault();
-          target.next().children(".form-control").focus();
-        } else if (e.which == 37) {
-          //key left, moves through inputs
-          console.log('left key pressed');
-          event.preventDefault();
-          target.prev().children(".form-control").focus();
-        } //goes back to first if in last item and press right
-
-
-        if (target.next().length == 0 && e.which == 39) {
-          event.preventDefault();
-          $(this).parent().parent().next().children().find(".form-control").first().focus();
-        } //goes back to bottom if in first item and press UpArrow
-
-
-        if (target.prev().length == 0 && e.which == 37) {
-          event.preventDefault();
-          target.parent().prev().children().find(".form-control").last().focus();
-        }
-      });
-      $("#typeSelector").keydown(function (e) {
-        var target = $(this).parent();
-
-        if (e.which == 39) {
-          //key right, moves through inputs
-          console.log('right key pressed on type selector');
-          event.preventDefault();
-          target.parent().next().children().find("button").first().focus();
-        }
-      });
-      $("[type=submit]").keydown(function (e) {
-        var target = $(this).parent();
-
-        if (e.which == 37) {
-          //key left, moves through inputs
-          console.log('left key pressed on submit button');
-          event.preventDefault();
-          target.parent().parent().prev().children().find(".form-control").last().focus();
-        }
-      });
-      $("form button").keydown(function (e) {
-        var target = $(this).parent();
-
-        if (e.which == 39) {
-          //key right, moves through buttons
-          console.log('right key pressed on button');
-          event.preventDefault();
-          target.next().children().focus();
-        }
-
-        if (e.which == 37) {
-          //key left, moves through buttons
-          console.log('left key pressed on button');
-          event.preventDefault();
-          target.prev().children().focus();
-        }
-      });
-      $("#typesDiv").keydown(function (e) {
-        if (e.which == 39) {
-          //key right, moves through buttons
-          console.log('right key pressed on typesDiv');
-          event.preventDefault();
-          $(this).next().children().children().first().focus();
-        }
-      });
-      $("#typeName").keydown(function (e) {
-        if (e.which == 39) {
-          console.log('right key pressed on newtype input');
-          event.preventDefault();
-          $(this).next().children().focus();
-        } else if (e.which == 37) {
-          console.log('left key pressed on newtype input');
-          event.preventDefault();
-          $(this).parent().parent().prev().focus();
-        }
-      });
-      $("#addType").keydown(function (e) {
-        if (e.which == 37) {
-          console.log('left key pressed on addType button');
-          event.preventDefault();
-          $(this).parent().prev().focus();
-        }
-      });
+    value: function componentDidMount() {//set arrow keys accessibility with jquery
+      // $(".form-control").keydown(function (e) {
+      //     let target = $(this).parent();
+      //     if (e.which == 39) {//key right, moves through inputs
+      //         console.log('right key pressed')
+      //         event.preventDefault();
+      //         target.next().children(".form-control").focus();
+      //     } else if (e.which == 37) {//key left, moves through inputs
+      //         console.log('left key pressed')
+      //         event.preventDefault();
+      //         target.prev().children(".form-control").focus();
+      //     }
+      //     //goes back to first if in last item and press right
+      //     if (target.next().length == 0 && e.which == 39) {
+      //         event.preventDefault();
+      //         $(this).parent().parent().next().children().find(".form-control").first().focus();
+      //     }
+      //     //goes back to bottom if in first item and press UpArrow
+      //     if (target.prev().length == 0 && e.which == 37) {
+      //         event.preventDefault();
+      //         target.parent().prev().children().find(".form-control").last().focus();
+      //     }
+      // })
+      // $("#typeSelector").keydown(function (e) {
+      //     let target = $(this).parent();
+      //     if (e.which == 39) {//key right, moves through inputs
+      //         console.log('right key pressed on type selector')
+      //         event.preventDefault();
+      //         target.parent().next().children().find("button").first().focus();
+      //     }
+      // })
+      // $("[type=submit]").keydown(function (e) {
+      //     let target = $(this).parent();
+      //     if (e.which == 37) {//key left, moves through inputs
+      //         console.log('left key pressed on submit button')
+      //         event.preventDefault();
+      //         target.parent().parent().prev().children().find(".form-control").last().focus();
+      //     }
+      // })
+      // $("form button").keydown(function (e) {
+      //     let target = $(this).parent();
+      //     if (e.which == 39) {//key right, moves through buttons
+      //         console.log('right key pressed on button')
+      //         event.preventDefault();
+      //         target.next().children().focus();
+      //     }
+      //     if (e.which == 37) {//key left, moves through buttons
+      //         console.log('left key pressed on button')
+      //         event.preventDefault();
+      //         target.prev().children().focus();
+      //     }
+      // })
+      // $("#typesDiv").keydown(function (e) {
+      //     if (e.which == 39) {//key right, moves through buttons
+      //         console.log('right key pressed on typesDiv')
+      //         event.preventDefault();
+      //         $(this).next().children().children().first().focus();
+      //     }
+      // })
+      // $("#typeName").keydown(function (e) {
+      //     if (e.which == 39) {
+      //         console.log('right key pressed on newtype input')
+      //         event.preventDefault();
+      //         $(this).next().children().focus();
+      //     }
+      //     else if (e.which == 37) {
+      //         console.log('left key pressed on newtype input')
+      //         event.preventDefault();
+      //         $(this).parent().parent().prev().focus();
+      //     }
+      // })
+      // $("#addType").keydown(function (e) {
+      //     if (e.which == 37) {
+      //         console.log('left key pressed on addType button');
+      //         event.preventDefault();
+      //         $(this).parent().prev().focus();
+      //     }
+      // })
     }
   }, {
     key: "render",
@@ -15736,9 +15719,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
             expenses: arrayOfExpenses.reverse()
           });
         })["catch"](function (error) {
-          return console.log(error);
+          console.log(error);
         });
-        console.log("user requesting the expense list is: " + this.props.userId + "is the user logged in? :" + this.props.isLoggedIn);
         axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/type/all").then(function (results) {
           var arrayOfTypes = results.data;
 
@@ -15905,10 +15887,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this5 = this;
 
       event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/type?type=".concat(this.state.typeName)).then(function (deletedType) {
+      axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/type?type=".concat(this.state.type)).then(function (deletedType) {
+        console.log("deleted type is: " + deletedType);
+
         _this5.setState({
           showModalSuccess: true,
-          Message: [_this5.state.typeName + " type deleted successfully"]
+          Message: [_this5.state.type + " type deleted successfully"]
         });
 
         var arrayOfTypes = [];
@@ -15924,7 +15908,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           var _loop = function _loop() {
             var expense = _step3.value;
 
-            if (expense.type.name == _this5.state.typeName) {
+            if (expense.type.name == _this5.state.type) {
               //update expense whose type got deleted. it will become Other
               axios__WEBPACK_IMPORTED_MODULE_5___default().put('/api/v1.0/expense', {
                 expenseId: expense._id,
@@ -15961,7 +15945,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         }
 
         for (var i in arrayOfTypes) {
-          if (arrayOfTypes[i].name == _this5.state.typeName) {
+          if (arrayOfTypes[i].name == _this5.state.type) {
             arrayOfTypes.splice(i, 1); //delete the one that's been removed so we update the state.
           }
         }
@@ -16746,10 +16730,6 @@ grecaptcha.ready(function () {
   \********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__, module.id */
-/*! CommonJS bailout: exports is used directly at 3:0-7 */
-/*! CommonJS bailout: exports.push(...) prevents optimization as exports is passed as call context at 5:0-12 */
-/*! CommonJS bailout: exports is used directly at 7:17-24 */
-/*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports

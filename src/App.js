@@ -76,10 +76,7 @@ class App extends React.Component {
                     token: captchaToken
                 })
                     .then(results => {
-                        console.log(results)
-                        console.log(results.data)
                         this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Thank you for registering " + results.data.firstName + "!"], displayLoginButton: true }); //success message sends expense id to success modal and displays it
-
 
                     })
                     .catch(error => {

@@ -58,8 +58,10 @@ class Main extends React.Component {
                     this.setState({ expenses: arrayOfExpenses.reverse() });
 
                 })
-                .catch(error => console.log(error));
-            console.log("user requesting the expense list is: " + this.props.userId + "is the user logged in? :" + this.props.isLoggedIn)
+                .catch(error => {
+                    console.log(error)
+                });
+        
             axios.get("/api/v1.0/type/all")
 
                 .then(results => {
@@ -200,15 +202,16 @@ class Main extends React.Component {
     handleDeleteType(event) {
         event.preventDefault();
 
-        axios.delete(`/api/v1.0/type?type=${this.state.typeName}`)
+        axios.delete(`/api/v1.0/type?type=${this.state.type}`)
             .then(deletedType => {
-                this.setState({ showModalSuccess: true, Message: [this.state.typeName + " type deleted successfully"] });
+                console.log("deleted type is: " + deletedType)
+                this.setState({ showModalSuccess: true, Message: [this.state.type + " type deleted successfully"] });
                 let arrayOfTypes = []
 
                 let typeOther = this.state.typeDropDown.find(type => type.name == "Other");
 
                 for (let expense of this.state.expenses) {
-                    if (expense.type.name == this.state.typeName) {
+                    if (expense.type.name == this.state.type) {
                         //update expense whose type got deleted. it will become Other
                         axios.put('/api/v1.0/expense', { expenseId: expense._id, newTypeId: typeOther._id })
                             .then(results => {
@@ -225,7 +228,7 @@ class Main extends React.Component {
 
 
                 for (let i in arrayOfTypes) {
-                    if (arrayOfTypes[i].name == this.state.typeName) {
+                    if (arrayOfTypes[i].name == this.state.type) {
                         arrayOfTypes.splice(i, 1);//delete the one that's been removed so we update the state.
                     }
                 }

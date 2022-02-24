@@ -5,93 +5,93 @@ class Form extends React.Component {
     componentDidMount() {
         //set arrow keys accessibility with jquery
 
-        $(".form-control").keydown(function (e) {
-            let target = $(this).parent();
-            if (e.which == 39) {//key right, moves through inputs
-                console.log('right key pressed')
-                event.preventDefault();
-                target.next().children(".form-control").focus();
-            } else if (e.which == 37) {//key left, moves through inputs
-                console.log('left key pressed')
-                event.preventDefault();
-                target.prev().children(".form-control").focus();
-            }
+        // $(".form-control").keydown(function (e) {
+        //     let target = $(this).parent();
+        //     if (e.which == 39) {//key right, moves through inputs
+        //         console.log('right key pressed')
+        //         event.preventDefault();
+        //         target.next().children(".form-control").focus();
+        //     } else if (e.which == 37) {//key left, moves through inputs
+        //         console.log('left key pressed')
+        //         event.preventDefault();
+        //         target.prev().children(".form-control").focus();
+        //     }
 
-            //goes back to first if in last item and press right
-            if (target.next().length == 0 && e.which == 39) {
-                event.preventDefault();
-                $(this).parent().parent().next().children().find(".form-control").first().focus();
-            }
+        //     //goes back to first if in last item and press right
+        //     if (target.next().length == 0 && e.which == 39) {
+        //         event.preventDefault();
+        //         $(this).parent().parent().next().children().find(".form-control").first().focus();
+        //     }
 
-            //goes back to bottom if in first item and press UpArrow
-            if (target.prev().length == 0 && e.which == 37) {
-                event.preventDefault();
-                target.parent().prev().children().find(".form-control").last().focus();
-            }
+        //     //goes back to bottom if in first item and press UpArrow
+        //     if (target.prev().length == 0 && e.which == 37) {
+        //         event.preventDefault();
+        //         target.parent().prev().children().find(".form-control").last().focus();
+        //     }
 
-        })
+        // })
 
-        $("#typeSelector").keydown(function (e) {
-            let target = $(this).parent();
-            if (e.which == 39) {//key right, moves through inputs
-                console.log('right key pressed on type selector')
-                event.preventDefault();
-                target.parent().next().children().find("button").first().focus();
-            }
+        // $("#typeSelector").keydown(function (e) {
+        //     let target = $(this).parent();
+        //     if (e.which == 39) {//key right, moves through inputs
+        //         console.log('right key pressed on type selector')
+        //         event.preventDefault();
+        //         target.parent().next().children().find("button").first().focus();
+        //     }
 
-        })
-        $("[type=submit]").keydown(function (e) {
-            let target = $(this).parent();
-            if (e.which == 37) {//key left, moves through inputs
-                console.log('left key pressed on submit button')
-                event.preventDefault();
-                target.parent().parent().prev().children().find(".form-control").last().focus();
-            }
+        // })
+        // $("[type=submit]").keydown(function (e) {
+        //     let target = $(this).parent();
+        //     if (e.which == 37) {//key left, moves through inputs
+        //         console.log('left key pressed on submit button')
+        //         event.preventDefault();
+        //         target.parent().parent().prev().children().find(".form-control").last().focus();
+        //     }
 
-        })
+        // })
 
-        $("form button").keydown(function (e) {
-            let target = $(this).parent();
-            if (e.which == 39) {//key right, moves through buttons
-                console.log('right key pressed on button')
-                event.preventDefault();
-                target.next().children().focus();
-            }
-            if (e.which == 37) {//key left, moves through buttons
-                console.log('left key pressed on button')
-                event.preventDefault();
-                target.prev().children().focus();
-            }
-        })
-        $("#typesDiv").keydown(function (e) {
-            if (e.which == 39) {//key right, moves through buttons
-                console.log('right key pressed on typesDiv')
-                event.preventDefault();
-                $(this).next().children().children().first().focus();
-            }
+        // $("form button").keydown(function (e) {
+        //     let target = $(this).parent();
+        //     if (e.which == 39) {//key right, moves through buttons
+        //         console.log('right key pressed on button')
+        //         event.preventDefault();
+        //         target.next().children().focus();
+        //     }
+        //     if (e.which == 37) {//key left, moves through buttons
+        //         console.log('left key pressed on button')
+        //         event.preventDefault();
+        //         target.prev().children().focus();
+        //     }
+        // })
+        // $("#typesDiv").keydown(function (e) {
+        //     if (e.which == 39) {//key right, moves through buttons
+        //         console.log('right key pressed on typesDiv')
+        //         event.preventDefault();
+        //         $(this).next().children().children().first().focus();
+        //     }
 
-        })
-        $("#typeName").keydown(function (e) {
-            if (e.which == 39) {
-                console.log('right key pressed on newtype input')
-                event.preventDefault();
-                $(this).next().children().focus();
-            }
-            else if (e.which == 37) {
-                console.log('left key pressed on newtype input')
-                event.preventDefault();
-                $(this).parent().parent().prev().focus();
-            }
+        // })
+        // $("#typeName").keydown(function (e) {
+        //     if (e.which == 39) {
+        //         console.log('right key pressed on newtype input')
+        //         event.preventDefault();
+        //         $(this).next().children().focus();
+        //     }
+        //     else if (e.which == 37) {
+        //         console.log('left key pressed on newtype input')
+        //         event.preventDefault();
+        //         $(this).parent().parent().prev().focus();
+        //     }
 
-        })
-        $("#addType").keydown(function (e) {
-            if (e.which == 37) {
-                console.log('left key pressed on addType button');
-                event.preventDefault();
-                $(this).parent().prev().focus();
-            }
+        // })
+        // $("#addType").keydown(function (e) {
+        //     if (e.which == 37) {
+        //         console.log('left key pressed on addType button');
+        //         event.preventDefault();
+        //         $(this).parent().prev().focus();
+        //     }
 
-        })
+        // })
     }    
 
 

@@ -16,7 +16,13 @@ app.use(
         saveUninitialized: false,
         isAuth: false
     })
+    
 )
+
+app.use(function(req,res,next){
+    console.log(req.session);
+    next();
+})
 
 
 //DB connection. Starts listening once connection is established

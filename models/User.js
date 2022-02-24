@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     password: {type: String, required: true},
     phoneNumber:{type: Number, require: false},
     expenses:[{type: Schema.Types.ObjectId, ref: 'Expense'}], //every user document holds an array of references to 'Expense' documents
+    types:[{type: Schema.Types.ObjectId, ref: 'Type'}], //each user will also have their own types
 });
 
 module.exports = mongoose.model('User', UserSchema);

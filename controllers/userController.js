@@ -1,5 +1,7 @@
 const session = require('express-session');
 const User = require('../models/User.js');
+const Type = require('../models/Type.js');
+const Expense = require('../models/Expense.js');
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 const querystring = require('querystring');
@@ -34,6 +36,13 @@ exports.createUser = (req, res) => {
                     phoneNumber: req.body.phoneNumber,
                 });
 
+                let type = new Type({
+                    name: 'Other',
+                    user: user._id
+                });
+                
+                user.types.push(type)//every new user starts with a "Other" type.
+                type.save()
                 user.save()
                     .then(() => {
                         console.log("user created succesfully")
@@ -81,6 +90,7 @@ exports.login = (req, res) => {
                 req.session.userId = user._id;
                 req.session.isAuth = true;
                 res.send({ _id: user._id });
+                
             }
 
         })
