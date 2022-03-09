@@ -10,7 +10,7 @@ import Footer from "./Footer.js"
 import Register from "./Register.js"
 import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
-import axios from 'axios';
+import axios from 'axios';UserAccount
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 class App extends React.Component {
@@ -45,8 +45,9 @@ class App extends React.Component {
     componentDidMount() {
         axios.get("/api/v1.0/user/verifyAuth")
             .then(results => {
-                this.setState({ isLoggedIn: true, 
-                                userId: results.data._id
+                this.setState({
+                    isLoggedIn: true,
+                    userId: results.data._id
                 });
 
             })
@@ -111,32 +112,33 @@ class App extends React.Component {
 
             })
             .then(() => {
+                axios.post("/api/v1.0/user/login", {
+                    email: this.state.email,
+                    password: this.state.password,
+                    token: captchaToken
+                })
+                    .then(results => {
+                        console.log(results.data);
+                        this.setState({
+                            isLoggedIn: true,
+                            userId: results.data._id
+                        });
+                        console.log(this.state.isLoggedIn)
 
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        console.log(error.response.data);
+
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+
+
+                    });
             })
-        axios.post("/api/v1.0/user/login", {
-            email: this.state.email,
-            password: this.state.password,
-            token: captchaToken
-        })
-            .then(results => {
-                console.log(results.data);
-                this.setState({ isLoggedIn: true,
-                                userId: results.data._id
-                });
-                console.log(this.state.isLoggedIn)
 
-            })
-            .catch(error => {
-                console.log(error)
-                console.log(error.response.data);
-
-                this.setState({
-                    Message: error.response.data.data,
-                    showModalError: true
-                });
-
-
-            });
 
 
 
@@ -160,8 +162,8 @@ class App extends React.Component {
     }
 
     handleLogOut() {
-        console.log('logging out')   
-        console.log(this.state.userId)        
+        console.log('logging out')
+        console.log(this.state.userId)
 
         if (this.state.isLoggedIn == true) {
             axios.get("/api/v1.0/user/logout")
@@ -193,10 +195,17 @@ class App extends React.Component {
 
     //controls display of modals
     handleCloseSuccess() {
-        this.setState({ showModalSuccess: false });
+        this.setState({
+            showModalSuccess: false,
+            displayLoginButton: false
+        });
     }
     handleCloseError() {
-        this.setState({ showModalError: false });
+        this.setState({
+            showModalError: false,
+            displayLoginButton: false,
+
+        });
     }
 
 
@@ -223,9 +232,10 @@ class App extends React.Component {
                     <Route path="/about" element={<About />} />
                     <Route path="/plans" element={<Plans />} />
                     <Route path="/faq" element={<FAQ />} />
-                    <Route path="/dashboard" element={<Main isLoggedIn={this.state.isLoggedIn} userId={this.state.userId}/>} />
+                    <Route path="/dashboard" element={<Main isLoggedIn={this.state.isLoggedIn} userId={this.state.userId} />} />
                     <Route path="/login" element={<Login handleLogIn={this.handleLogIn} handleGoogleLogIn={this.handleGoogleLogIn} handleChange={this.handleChange} isLoggedIn={this.state.isLoggedIn} />} />
                     <Route path="/register" element={<Register {...registerFormProps} />} />
+                    
 
                     <Route
                         path="*"

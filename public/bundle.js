@@ -14580,27 +14580,28 @@ var App = /*#__PURE__*/function (_React$Component) {
       }).then(function (token) {
         captchaToken = token;
         console.log("reCAPTCHA executed");
-      }).then(function () {});
-      axios__WEBPACK_IMPORTED_MODULE_12___default().post("/api/v1.0/user/login", {
-        email: this.state.email,
-        password: this.state.password,
-        token: captchaToken
-      }).then(function (results) {
-        console.log(results.data);
+      }).then(function () {
+        axios__WEBPACK_IMPORTED_MODULE_12___default().post("/api/v1.0/user/login", {
+          email: _this4.state.email,
+          password: _this4.state.password,
+          token: captchaToken
+        }).then(function (results) {
+          console.log(results.data);
 
-        _this4.setState({
-          isLoggedIn: true,
-          userId: results.data._id
-        });
+          _this4.setState({
+            isLoggedIn: true,
+            userId: results.data._id
+          });
 
-        console.log(_this4.state.isLoggedIn);
-      })["catch"](function (error) {
-        console.log(error);
-        console.log(error.response.data);
+          console.log(_this4.state.isLoggedIn);
+        })["catch"](function (error) {
+          console.log(error);
+          console.log(error.response.data);
 
-        _this4.setState({
-          Message: error.response.data.data,
-          showModalError: true
+          _this4.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
         });
       });
     }
@@ -14654,14 +14655,16 @@ var App = /*#__PURE__*/function (_React$Component) {
     key: "handleCloseSuccess",
     value: function handleCloseSuccess() {
       this.setState({
-        showModalSuccess: false
+        showModalSuccess: false,
+        displayLoginButton: false
       });
     }
   }, {
     key: "handleCloseError",
     value: function handleCloseError() {
       this.setState({
-        showModalError: false
+        showModalError: false,
+        displayLoginButton: false
       });
     }
   }, {
@@ -14840,7 +14843,7 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
         className: "table"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
         className: "d-sm-table-cell d-none"
-      }, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.props.expenses.map(function (expense, index) {
+      }, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.props.expenses.map(function (expense, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
           key: index
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, expense.month, "/", expense.day, "/", expense.year), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
@@ -14852,11 +14855,11 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-trash-alt"
         }))));
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
-        className: "d-sm-table-cell d-none"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "text-center mb-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "p-3 badge badge-warning"
-      }, "Total: $", this.state.total)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null)))))));
+      }, "Total: $", this.state.total)))));
     }
   }]);
 
@@ -15118,9 +15121,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Month:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
         "aria-required": "true",
+        name: "month",
         className: "form-control",
         value: this.props.month,
-        onChange: this.props.handleChange.bind(this, 'month')
+        onChange: this.props.handleChange
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: this.props.month
       }, this.props.month), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
@@ -15156,9 +15160,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Day:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        name: "day",
         className: "form-control",
         value: this.props.day,
-        onChange: this.props.handleChange.bind(this, 'day')
+        onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-md-2 col-sm-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -15166,9 +15171,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Year:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        name: "year",
         className: "form-control",
         value: this.props.year,
-        onChange: this.props.handleChange.bind(this, 'year')
+        onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-md-2 col-sm-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -15176,9 +15182,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Amount:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        name: "amount",
         className: "form-control",
         value: this.props.amount,
-        onChange: this.props.handleChange.bind(this, 'amount')
+        onChange: this.props.handleChange
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row justify-content-start"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15188,9 +15195,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        name: "desc",
         value: this.props.desc,
         className: "form-control",
-        onChange: this.props.handleChange.bind(this, 'desc')
+        onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-lg-3 col-md-3 col-sm-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -15198,9 +15206,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
         id: "typeSelector",
+        name: "type",
         className: "form-control",
         value: this.props.type,
-        onChange: this.props.handleChange.bind(this, 'type')
+        onChange: this.props.handleChange
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: this.props.type
       }, this.props.type), this.props.typeDropDown.map(function (type, index) {
@@ -15277,20 +15286,22 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }, "New type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         "aria-label": "create new type",
         id: "typeName",
+        name: "typeName",
         type: "text",
         value: this.props.typeName,
         className: "form-control",
-        onChange: this.props.handleChange.bind(this, 'typeName')
+        onChange: this.props.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         htmlFor: "typeBudget",
         className: "form-label"
       }, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         "aria-label": "create new type budget",
         id: "typeName",
+        name: "typeBudget",
         type: "text",
         value: this.props.typeBudget,
         className: "form-control",
-        onChange: this.props.handleChange.bind(this, 'typeBudget')
+        onChange: this.props.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: " m-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -15633,9 +15644,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -15698,7 +15719,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
       showModalSuccess: false,
       //controls display modal with success message
       showModalError: false,
-      //controls display of modal with error message
+      //controls display of modal with error message,
+      displayLoginButton: false,
       Message: [] //messages to be passed to success or error modal according to validation obtained
 
     };
@@ -15727,10 +15749,22 @@ var Main = /*#__PURE__*/function (_React$Component) {
           console.log(results.data);
 
           _this2.setState({
-            expenses: arrayOfExpenses.reverse()
+            expenses: arrayOfExpenses
           });
         })["catch"](function (error) {
           console.log(error);
+          console.log(error.response);
+
+          if (error.response.data.status == 401) {
+            _this2.setState({
+              displayLoginButton: true
+            });
+          }
+
+          _this2.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
         });
         axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/type/all").then(function (results) {
           var arrayOfTypes = results.data;
@@ -15739,7 +15773,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
             typeDropDown: arrayOfTypes
           });
         })["catch"](function (error) {
-          return console.log(error);
+          console.log(error);
+          console.log(error.response); //if there are errors, update Message state with error messages and display Error modal
+
+          _this2.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
         });
         window.addEventListener("keydown", function (e) {
           var target = $(_this2).parent();
@@ -15787,32 +15827,17 @@ var Main = /*#__PURE__*/function (_React$Component) {
             showModalSuccess: true,
             Message: ["ID: " + results.data._id, "Expense registered!"]
           }); //success message sends expense id to success modal and displays it
+          // Create a new array based on current state:
 
 
-          var arrayOfExpenses = [];
+          var arrayOfExpenses = _toConsumableArray(_this3.state.expenses); // Add item to it
 
-          if (_this3.state.expenses.length > 0) {
-            //updates state with new expense, this will remount the ExpenseTable component with new expense in the table
-            var _iterator = _createForOfIteratorHelper(_this3.state.expenses),
-                _step;
 
-            try {
-              for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                var i = _step.value;
-                arrayOfExpenses.push(i);
-              }
-            } catch (err) {
-              _iterator.e(err);
-            } finally {
-              _iterator.f();
-            }
+          arrayOfExpenses.unshift(results.data); // Set state
 
-            arrayOfExpenses.unshift(results.data);
-
-            _this3.setState({
-              expenses: arrayOfExpenses
-            });
-          } //Records expense creation event
+          _this3.setState({
+            expenses: arrayOfExpenses
+          }); //Records expense creation event
 
 
           react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
@@ -15822,6 +15847,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
         })["catch"](function (error) {
           console.log(error.response.data); //all the error messages!
           //if there are errors, update Message state with error messages and display Error modal
+          //also display button to redirect to log in page if error is due to user unauthenticated
+
+          if (error.response.data.status == 401) {
+            _this3.setState({
+              displayLoginButton: true
+            });
+          }
 
           _this3.setState({
             Message: error.response.data.data,
@@ -15855,21 +15887,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
           }); //success message sends expense id to success modal and displays it
 
 
-          var arrayOfTypes = []; //updates type state with new one, this will remount the form  with new type in the dropdown menu
+          var arrayOfTypes = _toConsumableArray(_this4.state.typeDropDown); //updates type state with new one, this will remount the form  with new type in the dropdown menu
 
-          var _iterator2 = _createForOfIteratorHelper(_this4.state.typeDropDown),
-              _step2;
-
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var i = _step2.value;
-              arrayOfTypes.push(i);
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
 
           arrayOfTypes.push(results.data);
 
@@ -15886,7 +15905,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             action: "Created"
           });
         })["catch"](function (error) {
-          //if there are errors, update Message state with error messages and display Error modal
+          console.log(error.response); //if there are errors, update Message state with error messages and display Error modal
+
+          if (error.response.data.status == 401) {
+            _this4.setState({
+              displayLoginButton: true
+            });
+          }
+
           _this4.setState({
             Message: error.response.data.data,
             showModalError: true
@@ -15908,18 +15934,16 @@ var Main = /*#__PURE__*/function (_React$Component) {
           Message: [_this5.state.type + " type deleted successfully"]
         });
 
-        var arrayOfTypes = [];
-
         var typeOther = _this5.state.typeDropDown.find(function (type) {
           return type.name == "Other";
         });
 
-        var _iterator3 = _createForOfIteratorHelper(_this5.state.expenses),
-            _step3;
+        var _iterator = _createForOfIteratorHelper(_this5.state.expenses),
+            _step;
 
         try {
           var _loop = function _loop() {
-            var expense = _step3.value;
+            var expense = _step.value;
 
             if (expense.type.name == _this5.state.type) {
               //update expense whose type got deleted. it will become Other
@@ -15933,35 +15957,21 @@ var Main = /*#__PURE__*/function (_React$Component) {
             }
           };
 
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             _loop();
-          } //clones array with expenses in the current state
-
-        } catch (err) {
-          _iterator3.e(err);
-        } finally {
-          _iterator3.f();
-        }
-
-        var _iterator4 = _createForOfIteratorHelper(_this5.state.typeDropDown),
-            _step4;
-
-        try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var _i = _step4.value;
-            arrayOfTypes.push(_i);
           }
         } catch (err) {
-          _iterator4.e(err);
+          _iterator.e(err);
         } finally {
-          _iterator4.f();
+          _iterator.f();
         }
 
-        for (var i in arrayOfTypes) {
-          if (arrayOfTypes[i].name == _this5.state.type) {
-            arrayOfTypes.splice(i, 1); //delete the one that's been removed so we update the state.
-          }
-        }
+        var arrayOfTypes = _toConsumableArray(_this5.state.typeDropDown);
+
+        var targetTypeIndex = arrayOfTypes.findIndex(function (type) {
+          return type.name == this.state.type;
+        });
+        arrayOfTypes.splice(targetTypeIndex, 1);
 
         _this5.setState({
           typeDropDown: arrayOfTypes,
@@ -15974,7 +15984,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
           action: "Deleted"
         });
       })["catch"](function (error) {
-        console.log(error); //if there are errors, update Message state with error messages and display Error modal
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this5.setState({
+            displayLoginButton: true
+          });
+        }
 
         _this5.setState({
           Message: error.response.data.data,
@@ -15995,7 +16011,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         console.log(results.data);
 
         _this6.setState({
-          expenses: arrayOfExpenses.reverse()
+          expenses: arrayOfExpenses
         }); //update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
         //Records expense filter event
 
@@ -16005,46 +16021,24 @@ var Main = /*#__PURE__*/function (_React$Component) {
           action: "Filter"
         });
       })["catch"](function (error) {
-        return console.log(error);
-      });
-    } //changes the states dinamically as user interacts with form fields
+        console.log(error.response);
 
+        if (error.response.data.status == 401) {
+          _this6.setState({
+            displayLoginButton: true
+          });
+        }
+
+        _this6.setState({
+          Message: error.response.data.data,
+          showModalError: true
+        });
+      });
+    }
   }, {
     key: "handleChange",
-    value: function handleChange(field, e) {
-      if (field == 'desc') {
-        this.setState({
-          desc: e.target.value
-        });
-      } else if (field == 'day') {
-        this.setState({
-          day: e.target.value
-        });
-      } else if (field == 'month') {
-        this.setState({
-          month: e.target.value
-        });
-      } else if (field == 'year') {
-        this.setState({
-          year: e.target.value
-        });
-      } else if (field == 'amount') {
-        this.setState({
-          amount: e.target.value
-        });
-      } else if (field == 'type') {
-        this.setState({
-          type: e.target.value
-        });
-      } else if (field == 'typeName') {
-        this.setState({
-          typeName: e.target.value
-        });
-      } else if (field == 'typeBudget') {
-        this.setState({
-          typeBudget: e.target.value
-        });
-      }
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
     } //deletes an expense based on id of the expense clicked
 
   }, {
@@ -16052,29 +16046,15 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function handleDelete(expenseId, event) {
       var _this7 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/expense?expense=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
+      axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
       .then(function (deletedExpense) {
-        var arrayOfExpenses = []; //clones array with expenses in the current state
+        // Create a new array based on current state:
+        var arrayOfExpenses = _toConsumableArray(_this7.state.expenses);
 
-        var _iterator5 = _createForOfIteratorHelper(_this7.state.expenses),
-            _step5;
-
-        try {
-          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-            var _i2 = _step5.value;
-            arrayOfExpenses.push(_i2);
-          }
-        } catch (err) {
-          _iterator5.e(err);
-        } finally {
-          _iterator5.f();
-        }
-
-        for (var i in arrayOfExpenses) {
-          if (arrayOfExpenses[i]._id == expenseId) {
-            arrayOfExpenses.splice(i, 1); //delete from expense state array the expense the user clicked by comparing the ids. 
-          }
-        }
+        var targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
+          return expense._id == expenseId;
+        });
+        arrayOfExpenses.splice(targetedExpenseIndex, 1);
 
         _this7.setState({
           expenses: arrayOfExpenses
@@ -16087,7 +16067,18 @@ var Main = /*#__PURE__*/function (_React$Component) {
           action: "Deleted"
         });
       })["catch"](function (error) {
-        return console.log(error);
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this7.setState({
+            displayLoginButton: true
+          });
+        }
+
+        _this7.setState({
+          Message: error.response.data.data,
+          showModalError: true
+        });
       });
     } //obtains all expenses when user clicks search all button. Useful for getting the whole list again without refreshing the page
 
@@ -16101,10 +16092,21 @@ var Main = /*#__PURE__*/function (_React$Component) {
         var arrayOfExpenses = results.data;
 
         _this8.setState({
-          expenses: arrayOfExpenses.reverse()
+          expenses: arrayOfExpenses
         });
       })["catch"](function (error) {
-        return console.log(error);
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this8.setState({
+            displayLoginButton: true
+          });
+        }
+
+        _this8.setState({
+          Message: error.response.data.data,
+          showModalError: true
+        });
       });
     } //controls display of modals
 
@@ -16112,14 +16114,16 @@ var Main = /*#__PURE__*/function (_React$Component) {
     key: "handleCloseSuccess",
     value: function handleCloseSuccess() {
       this.setState({
-        showModalSuccess: false
+        showModalSuccess: false,
+        displayLoginButton: false
       });
     }
   }, {
     key: "handleCloseError",
     value: function handleCloseError() {
       this.setState({
-        showModalError: false
+        showModalError: false,
+        displayLoginButton: false
       });
     } //clears all fiels in the form
 
@@ -16175,7 +16179,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalError__WEBPACK_IMPORTED_MODULE_4__.default, {
         handleClose: this.handleCloseError,
         showModalError: this.state.showModalError,
-        errorMessages: this.state.Message
+        errorMessages: this.state.Message,
+        displayLoginButton: this.state.displayLoginButton
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, {
         expenses: this.state.expenses,
         handleDelete: this.handleDelete
@@ -16210,6 +16215,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -16232,24 +16239,39 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ModalSuccess = /*#__PURE__*/function (_React$Component) {
   _inherits(ModalSuccess, _React$Component);
 
   var _super = _createSuper(ModalSuccess);
 
-  function ModalSuccess() {
+  function ModalSuccess(props) {
+    var _this;
+
     _classCallCheck(this, ModalSuccess);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.refresh = _this.refresh.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ModalSuccess, [{
+    key: "refresh",
+    value: function refresh() {
+      window.location.reload(true);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _React$createElement;
+
       //code to toggle modal taken from https://www.js-tutorials.com/react-js/how-to-create-modal-box-component-in-react/
-      var showModalError = this.props.showModalError;
-      var showHideClassName = showModalError ? 'view' : 'hide'; ////whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
-      //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
+      var _this$props = this.props,
+          showModalError = _this$props.showModalError,
+          displayLoginButton = _this$props.displayLoginButton;
+      var showHideClassName = showModalError ? 'view' : 'hide'; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
+
+      var showLoginButton = displayLoginButton ? 'view' : 'hide'; //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row justify-content-center"
@@ -16285,7 +16307,11 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
         type: "button",
         "data-dismiss": "modal",
         className: "btn btn-danger"
-      }, "Go back"))))))));
+      }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: showLoginButton
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", (_React$createElement = {
+        onClick: this.props.handleClose
+      }, _defineProperty(_React$createElement, "onClick", this.refresh), _defineProperty(_React$createElement, "type", "button"), _defineProperty(_React$createElement, "data-dismiss", "modal"), _defineProperty(_React$createElement, "className", "btn btn-warning"), _React$createElement), "Log in")))))))));
     }
   }]);
 
@@ -16692,14 +16718,13 @@ var Register = /*#__PURE__*/function (_React$Component) {
         htmlFor: "phoneNumber"
       }, "Phone number ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "text-muted"
-      }, " US or CANADIAN)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, " Optional. US or CANADIAN)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "tel",
         name: "phoneNumber",
         className: "form-control",
         id: "phoneNumber",
         pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
         placeholder: "xxx-xxx-xxxx",
-        required: true,
         onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "btn btn-primary btn-lg btn-block",
@@ -16755,7 +16780,7 @@ grecaptcha.ready(function () {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n\n\n/* DASHBORD(MAIN) PAGE  */\n\n#dashboard {\n    width: 100%;\n    max-width: 800px;\n    margin: auto;\n}\n\n/* REGISTER PAGE  */\n.form-register {\n    width: 100%;\n    max-width: 650px;\n    padding: 5px;\n    margin: auto;\n  }\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n  \n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0; /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text; /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n}\n\n.badge {\n    font-size: 0.9em;\n}", ""]);
+exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n\n\n\n/* DASHBORD(MAIN) PAGE  */\n\n#dashboard {\n    width: 100%;\n    max-width: 800px;\n    margin: auto;\n}\n\n/* REGISTER PAGE  */\n.form-register {\n    width: 100%;\n    max-width: 650px;\n    padding: 5px;\n    margin: auto;\n  }\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n  \n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0; /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text; /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n}\n\n.badge {\n    font-size: 0.9em;\n}", ""]);
 // Exports
 module.exports = exports;
 

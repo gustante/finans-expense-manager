@@ -38,7 +38,7 @@ class ExpenseTable extends React.Component {
                         <th className="d-sm-table-cell d-none">Type</th>
                         <th>Description</th>
                         <th>Amount</th>
-                        <th></th>
+                        <th>Edit</th>
                       </tr>
                     </thead>
                     
@@ -56,18 +56,14 @@ class ExpenseTable extends React.Component {
                         
                       </tr>)}
                       
-                      <tr> 
-                        <td></td> 
-                        <td className="d-sm-table-cell d-none"></td>  
-                        <td></td>
-                        <td><span className="p-3 badge badge-warning">Total: ${this.state.total}</span></td>
-                        <td></td>
-                      </tr>
+                      
                     </tbody>
-        
+                    
                     
                   </table>
-
+                  <div className="text-center mb-5"> 
+                        <span className="p-3 badge badge-warning">Total: ${this.state.total}</span>
+                      </div>
         
                 </div>
         </div>

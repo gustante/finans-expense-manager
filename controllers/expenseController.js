@@ -4,7 +4,7 @@ const User = require('../models/User.js');
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 const querystring = require('querystring');
-var twilio = require('twilio');
+const {smsAlert} = require('../twilioSMS.js');
 const customError = require('../customError.js')
 
 ////gets and array of all expenses
@@ -25,19 +25,48 @@ exports.getAllExpenses = (req, res) => {
     //             })
 
 
+    //to update sumOfExpenses of types
+    // for(type of user.types){
+    //     console.log(type)
+    //     for(expense of user.expenses){
+    //         if(expense.month == 3 && expense.type.name == type.name){
+    //             type.sumOfExpenses += expense.amount;
+                
+    //         }
+    //     }
+    //     type.save()
+        
+    //}
+
+
 
     if (req.session.isAuth) {
         User.findOne({ _id: req.session.userId })//find the user that's making the request
+        .populate('types')
             .populate({ //populate expenses list, then type of every expense. They hold references to other collections
                 path: 'expenses',
                 populate: { path: 'type' }
             })
+            
             .exec()
             .then(user => {
+
+                
+
+                //sort so that we have recent expenses displayed first
+                user.expenses.sort((a, b) => { //https://www.javascripttutorial.net/array/javascript-sort-an-array-of-objects/
+                    let da = new Date(a.year,a.month,a.day),
+                        db = new Date(b.year,b.month,b.day);
+                    return db - da;
+                });
                 res.send(user.expenses);
             })
-            .catch(error => res.send(error));
+            .catch(error => {
+                console.log(error)
+                res.send(error)
+            });
     } else {
+        console.log("i'm falling here")
         let errorObject = new customError(['Please log in to see this information'], 401);
         res.status(errorObject.status).send(errorObject);
     }
@@ -86,12 +115,21 @@ exports.getExpense = (req, res) => {
                     user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
                 }
 
+                user.expenses.sort((a, b) => { 
+                    let da = new Date(a.year,a.month,a.day),
+                        db = new Date(b.year,b.month,b.day);
+                    return db - da;
+                });
                 res.send(user.expenses);
             })
-            .catch(error => res.send(error));
+            .catch(error => {
+                console.log(error)
+                res.send(error)
+            });
     } else {
         let errorObject = new customError(['Please log in to see this information'], 401);
         res.status(errorObject.status).send(errorObject);
+        
     }
 
 }
@@ -134,37 +172,64 @@ exports.postExpense = (req, res) => {
                                 amount: req.body.amount,
                                 user: user._id
                             });
+
+
+                            //reset budget when we start a new month
+                            if(user.expenses.length > 0){
+                                let latestExpenseMonth = user.expenses[user.expenses.length-1].month;
+                                let newExpenseMonth = expense.month;
+                                if(newExpenseMonth > latestExpenseMonth){
+                                    for(type of user.types){
+                                        console.log(type)
+                                        type.sumOfExpenses = 0;
+                                        type.save();
+                                    }
+                                                                
+                                }
+
+                            }
+                            
+                            //include to the sum so that we can compare budget later
+                            
+                            chosenType.sumOfExpenses += expense.amount;
+
                             user.expenses.push(expense);
-
-
                             user.save()
+                            chosenType.save()
                             expense.save()
+
                                 .then(savedExpense => {
+                                    let {budget, sumOfExpenses, name} = savedExpense.type;
+                                    if(budget != null){
+                                        //send SMS using twilio if close to exceeding budget
+                                        
+                                        
+                                        if(sumOfExpenses > budget)
+                                            smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses}, your budget is ${budget}`)
+                                        else if(sumOfExpenses >= budget * 0.7)
+                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses}, your budget is ${budget}`)
+                                        else if(sumOfExpenses >= budget * 0.5)
+                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses}, your budget is ${budget}`)
+                                    }
+                                    
+
+
+
                                     res.status(201).send(savedExpense);//status 201
 
-                                    //send SMS using twilio confirming expense creation
-                                    var accountSid = process.env.ACCOUNT_SID; // Your Account SID from www.twilio.com/console
-                                    var authToken = process.env.AUTH_TOKEN;   // Your Auth Token from www.twilio.com/console
-
-                                    var client = new twilio(accountSid, authToken);
-
-                                    client.messages.create({
-                                        body: 'A new expense \"' + savedExpense.description + '\" was created',
-                                        to: '+12368636833',  // Text this number
-                                        from: '+19197523572' // From a valid Twilio number
-                                    })
-                                        .then(message => {
-                                            console.log('message sent succesfully')
-                                        })
+                                    
+                                   
 
                                 })
                                 .catch(error => {
-                                    console.log(error);
+                                    console.log(error)
+                                    res.send(error)
                                 });
 
                         })
                         .catch(error => {
-                            console.log(error);
+                            console.log(error)
+                            res.send(error)
                         });
 
                 } else { // if there are errors, extracts messages from validation errors array and send to frontend
@@ -194,36 +259,52 @@ exports.deleteExpense = (req, res) => {
 
     if (req.session.isAuth) {
         User.findOne({ _id: req.session.userId })//delete from users collection
+            .populate('types')
+            .populate({
+                path: 'expenses',
+                populate: { path: 'type' }
+            })
             .exec()
             .then(user => {
-                let targetExpense = user.expenses.find(expense => expense == req.query.expense);//compare with id in query parameter
+                let targetExpense = user.expenses.find(expense => expense._id == req.query.expenseId);//compare with id in query parameter
+
                 for (i in user.expenses) {
-                    if (user.expenses[i] == targetExpense) {
+                    if (user.expenses[i]._id == targetExpense._id) {
                         user.expenses.splice(i, 1)
                     }
                 }
-                console.log(user.expenses)
+
+                //adjust the type that got and expense delete from to reflect correct sumOfExpenses
+                let targetType = user.types.find(type => type.name == targetExpense.type.name);
+                targetType.sumOfExpenses -= targetExpense.amount;
+                if (targetType.sumOfExpenses < 0) 
+                    targetType.sumOfExpenses = 0
+
                 user.save()
+                targetType.save()
 
             })
             .then(() => { //delete from expenses collection
-                Expense.deleteOne({ _id: req.query.expense }).exec()
+                Expense.deleteOne({ _id: req.query.expenseId }).exec()
                     .then(results => {
                         res.send(results);
 
                     })
-                    .catch(error => res.send(error));
+                    .catch(error => {
+                        console.log(error)
+                        res.send(error)
+                    });
 
             })
-            .catch(error => res.send(error));
+            .catch(error => {
+                console.log(error)
+                res.send(error)
+            });
 
     } else {
         let errorObject = new customError(['Please log in to delete expense'], 401);
         res.status(errorObject.status).send(errorObject);
     }
-
-
-
 }
 
 exports.updateExpense = (req, res) => {
@@ -242,7 +323,10 @@ exports.updateExpense = (req, res) => {
                     })
 
             })
-            .catch(error => res.send(error));
+            .catch(error => {
+                console.log(error)
+                res.send(error)
+            });
     } else {
         let errorObject = new customError(['Please log in first'], 401);
         res.status(errorObject.status).send(errorObject);

@@ -40,7 +40,7 @@ exports.createUser = (req, res) => {
                     name: 'Other',
                     user: user._id
                 });
-                
+
                 user.types.push(type)//every new user starts with a "Other" type.
                 type.save()
                 user.save()
@@ -78,26 +78,48 @@ exports.createUser = (req, res) => {
 }
 
 exports.login = (req, res) => {
-    User.findOne({ email: req.body.email })
-        .exec()
-        .then(user => {
-            if (user == null) {
-                throw new customError(['User not found'], 401)
-            }
-            else if (req.body.password != user.password) {
-                throw new customError(['Password is incorrect'], 401)
-            } else {
-                req.session.userId = user._id;
-                req.session.isAuth = true;
-                res.send({ _id: user._id });
-                
-            }
 
+    //verify token agaisnt reCAPTCHA service
+    axios.post('https://www.google.com/recaptcha/api/siteverify',
+        querystring.stringify({
+            secret: process.env.RECAPTCHA_SECRET,
+            response: req.body.token
         })
-        .catch(error => {
-            console.log(error)
-            res.status(error.status).send(error);
-        });
+    )
+        .then(response => {
+            //If validation fails or score is too low, push an error inside Error's array
+            if (!response.data.success || response.data.score < 0.70) {
+                console.log('reCAPTCHA failed');
+                //errors.push({ msg: 'reCAPTCHA failed. Score: ' + response.data.score + ", Success: " + response.data.success })
+
+                let rError = new customError(['reCAPTCHA failed', 'Score: ' +  response.data.score], 401)
+                res.status(rError.status).send(rError);
+            }
+        })
+        .then(() => {
+            User.findOne({ email: req.body.email })
+                .exec()
+                .then(user => {
+                    if (user == null) {
+                        throw new customError(['User not found'], 401)
+                    }
+                    else if (req.body.password != user.password) {
+                        throw new customError(['Password is incorrect'], 401)
+                    } else {
+                        req.session.userId = user._id;
+                        req.session.isAuth = true;
+                        res.send({ _id: user._id });
+
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                    res.status(error.status).send(error);
+                });
+        })
+
+
 }
 
 exports.logout = (req, res) => {
@@ -111,6 +133,7 @@ exports.logout = (req, res) => {
             throw new customError(['Unable to log out. User not logged in'], 404)
         }
     } catch (error) {
+        console.log(error)
         res.status(error.status).send(error);
     }
 
@@ -118,13 +141,14 @@ exports.logout = (req, res) => {
 
 exports.verifyAuth = (req, res) => {
     try {
-        if(req.session.isAuth){
-            res.status(200).send({_id: req.session.userId})
+        if (req.session.isAuth) {
+            res.status(200).send({ _id: req.session.userId })
         } else {
             throw new customError(['User not logged in'], 404)
         }
     } catch (error) {
+        console.log(error)
         res.status(error.status).send(error);
     }
-    
+
 }

@@ -11,10 +11,11 @@ app.use(express.json());
 
 app.use(
     session({
-        secret: 'key',
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
-        isAuth: false
+        isAuth: false,
+        cookie: { sameSite: 'strict' },
     })
     
 )
