@@ -10,11 +10,14 @@ exports.getAllTypes = (req, res) => {
         User.findOne({ _id: req.session.userId })
             .populate('types')
             .exec()
-            .then(user => {                
+            .then(user => {
                 res.send(user.types);
 
             })
-            .catch(error => res.send(error));
+            .catch(error => {
+                console.log(error)
+                res.send(error)
+            });
     } else {
         let errorObject = new customError(['Please log in to see this information'], 401);
         res.status(errorObject.status).send(errorObject);
@@ -52,6 +55,8 @@ exports.postType = (req, res) => {
                         .then(user => {
                             let type = new Type({
                                 name: req.body.name,
+                                budget: req.body.budget,
+                                sumOfExpenses: 0,
                                 user: user._id
                             });
                             user.types.push(type)
@@ -60,7 +65,10 @@ exports.postType = (req, res) => {
                             res.status(201).send(type);
 
                         })
-                        .catch(error => res.send(error));
+                        .catch(error => {
+                            console.log(error)
+                            res.send(error)
+                        });
 
                 } else { // if there are errors, extracts messages from validation errors array and send to frontend
                     let errorMessages = [];
@@ -75,7 +83,7 @@ exports.postType = (req, res) => {
                 }
             })
     } else {
-        let errorObject = new customError(['Please log in to see this information'], 401);
+        let errorObject = new customError(['Please log in to create type'], 401);
         res.status(errorObject.status).send(errorObject);
     }
 
@@ -102,7 +110,7 @@ exports.deleteType = (req, res) => {
             user.save()
         })
 
-    Type.findOne({ "name": req.query.type, user: req.session.userId })//delete only types of user that requested
+    Type.findOne({ name: req.query.type, user: req.session.userId })//delete only types of user that requested
         .exec()//search for a type with the value passed
         .then(chosenType => {//if finds, delete
             if (chosenType != null) {
@@ -132,7 +140,7 @@ exports.deleteType = (req, res) => {
         res.status(errorObject.status).send(errorObject);
     }
 
-    
+
 
 }
 

@@ -14653,8 +14653,6 @@ var App = /*#__PURE__*/function (_React$Component) {
             email: email,
             phoneNumber: phoneNumber
           });
-
-          console.log(_this4.state);
         })["catch"](function (error) {
           console.log(error);
           console.log(error.response.data);
@@ -14665,11 +14663,6 @@ var App = /*#__PURE__*/function (_React$Component) {
               showModalError: true
             });
           }
-
-          _this4.setState({
-            Message: error.response.data.data,
-            showModalError: true
-          });
         });
       });
     }
@@ -14693,20 +14686,19 @@ var App = /*#__PURE__*/function (_React$Component) {
 
       if (this.state.isLoggedIn == true) {
         axios__WEBPACK_IMPORTED_MODULE_15___default().get("/api/v1.0/user/logout").then(function (results) {
-          console.log(results.data);
-
           _this5.setState({
             isLoggedIn: false
           });
-
-          console.log(_this5.state.isLoggedIn);
         })["catch"](function (error) {
+          console.log(error);
           console.log(error.response.data);
 
-          _this5.setState({
-            Message: error.response.data.data,
-            showModalError: true
-          });
+          if (error.response.data != undefined) {
+            _this5.setState({
+              Message: error.response.data.data,
+              showModalError: true
+            });
+          }
         });
       }
     }
@@ -14720,14 +14712,16 @@ var App = /*#__PURE__*/function (_React$Component) {
     key: "handleCloseSuccess",
     value: function handleCloseSuccess() {
       this.setState({
-        showModalSuccess: false
+        showModalSuccess: false,
+        displayLoginButton: false
       });
     }
   }, {
     key: "handleCloseError",
     value: function handleCloseError() {
       this.setState({
-        showModalError: false
+        showModalError: false,
+        displayLoginButton: false
       });
     }
   }, {
@@ -15226,6 +15220,12 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, expense.month, "/", expense.day, "/", expense.year), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
           className: "d-sm-table-cell d-none"
         }, expense.type.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, expense.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "$", expense.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          "aria-label": "edit this expense",
+          onClick: _this2.props.handleEdit.bind(_this2, expense._id),
+          className: "btn h-50 mx-1 btn-secondary"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-edit"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           "aria-label": "delete this expense",
           onClick: _this2.props.handleDelete.bind(_this2, expense._id),
           className: "btn h-50 mx-1 btn-danger"
@@ -15365,6 +15365,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -15482,6 +15484,8 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _React$createElement;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row mx-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15496,12 +15500,12 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         htmlFor: "month",
         className: "form-label"
-      }, "Month:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+      }, "Month:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", (_React$createElement = {
         "aria-required": "true",
+        name: "month",
         className: "form-control",
-        value: this.props.month,
-        onChange: this.props.handleChange.bind(this, 'month')
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: this.props.month
+      }, _defineProperty(_React$createElement, "name", "month"), _defineProperty(_React$createElement, "onChange", this.props.handleChange), _React$createElement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: this.props.month
       }, this.props.month), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: ""
@@ -15536,9 +15540,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Day:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        name: "day",
         className: "form-control",
         value: this.props.day,
-        onChange: this.props.handleChange.bind(this, 'day')
+        onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-md-2 col-sm-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -15546,9 +15551,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Year:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        name: "year",
         className: "form-control",
         value: this.props.year,
-        onChange: this.props.handleChange.bind(this, 'year')
+        onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-md-2 col-sm-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -15556,9 +15562,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Amount:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        name: "amount",
         className: "form-control",
         value: this.props.amount,
-        onChange: this.props.handleChange.bind(this, 'amount')
+        onChange: this.props.handleChange
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row justify-content-start"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15568,9 +15575,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        name: "desc",
         value: this.props.desc,
         className: "form-control",
-        onChange: this.props.handleChange.bind(this, 'desc')
+        onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-lg-3 col-md-3 col-sm-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -15579,8 +15587,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
         id: "typeSelector",
         className: "form-control",
+        name: "type",
         value: this.props.type,
-        onChange: this.props.handleChange.bind(this, 'type')
+        onChange: this.props.handleChange
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: this.props.type
       }, this.props.type), this.props.typeDropDown.map(function (type, index) {
@@ -15657,10 +15666,22 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }, "New type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         "aria-label": "create new type",
         id: "typeName",
+        name: "typeName",
         type: "text",
         value: this.props.typeName,
         className: "form-control",
-        onChange: this.props.handleChange.bind(this, 'typeName')
+        onChange: this.props.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        htmlFor: "typeBudget",
+        className: "form-label"
+      }, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        "aria-label": "create new type budget",
+        id: "typeName",
+        name: "typeBudget",
+        type: "text",
+        value: this.props.typeBudget,
+        className: "form-control",
+        onChange: this.props.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: " m-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -16003,6 +16024,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -16072,10 +16095,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
       desc: "",
       amount: "",
       typeName: "",
+      typeBudget: "",
       showModalSuccess: false,
       //controls display modal with success message
       showModalError: false,
       //controls display of modal with error message
+      displayLoginButton: false,
       Message: [] //messages to be passed to success or error modal according to validation obtained
 
     };
@@ -16083,6 +16108,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.handleExpenseSubmit = _this.handleExpenseSubmit.bind(_assertThisInitialized(_this));
     _this.handleExpenseSearch = _this.handleExpenseSearch.bind(_assertThisInitialized(_this));
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    _this.handleEdit = _this.handleEdit.bind(_assertThisInitialized(_this));
     _this.searchAll = _this.searchAll.bind(_assertThisInitialized(_this));
     _this.handleCloseSuccess = _this.handleCloseSuccess.bind(_assertThisInitialized(_this));
     _this.handleCloseError = _this.handleCloseError.bind(_assertThisInitialized(_this));
@@ -16104,7 +16130,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           console.log(results.data);
 
           _this2.setState({
-            expenses: arrayOfExpenses.reverse()
+            expenses: arrayOfExpenses
           });
         })["catch"](function (error) {
           console.log(error);
@@ -16116,10 +16142,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
             });
           }
 
-          _this2.setState({
-            Message: error.response.data.data,
-            showModalError: true
-          });
+          if (error.response.data != undefined) {
+            _this2.setState({
+              Message: error.response.data.data,
+              showModalError: true
+            });
+          }
         });
         axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/type/all").then(function (results) {
           var arrayOfTypes = results.data;
@@ -16128,7 +16156,15 @@ var Main = /*#__PURE__*/function (_React$Component) {
             typeDropDown: arrayOfTypes
           });
         })["catch"](function (error) {
-          return console.log(error);
+          console.log(error);
+          console.log(error.response); //if there are errors, update Message state with error messages and display Error modal
+
+          if (error.response.data != undefined) {
+            _this2.setState({
+              Message: error.response.data.data,
+              showModalError: true
+            });
+          }
         });
         window.addEventListener("keydown", function (e) {
           var target = $(_this2).parent();
@@ -16186,20 +16222,31 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
           _this3.setState({
             expenses: arrayOfExpenses
+          }); //Records expense creation event
+
+
+          react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
+            category: "Expense",
+            action: "Created"
           });
-        }); //Records expense creation event
+        })["catch"](function (error) {
+          console.log("we got an error");
+          console.log(error.response.data); //all the error messages!
+          //if there are errors, update Message state with error messages and display Error modal
+          //also display button to redirect to log in page if error is due to user unauthenticated
 
-        react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
-          category: "Expense",
-          action: "Created"
-        });
-      })["catch"](function (error) {
-        console.log(error.response.data); //all the error messages!
-        //if there are errors, update Message state with error messages and display Error modal
+          if (error.response.data.status == 401) {
+            _this3.setState({
+              displayLoginButton: true
+            });
+          }
 
-        _this3.setState({
-          Message: error.response.data.data,
-          showModalError: true
+          if (error.response.data != undefined) {
+            _this3.setState({
+              Message: error.response.data.data,
+              showModalError: true
+            });
+          }
         });
       });
     }
@@ -16219,6 +16266,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       }).then(function () {
         axios__WEBPACK_IMPORTED_MODULE_5___default().post("/api/v1.0/type", {
           name: _this4.state.typeName,
+          budget: _this4.state.typeBudget,
           token: captchaToken
         }).then(function (results) {
           _this4.setState({
@@ -16228,28 +16276,15 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
 
           var arrayOfTypes = _toConsumableArray(_this4.state.typeDropDown); //updates type state with new one, this will remount the form  with new type in the dropdown menu
-          //updates type state with new one, this will remount the form  with new type in the dropdown menu
 
-
-          var _iterator = _createForOfIteratorHelper(_this4.state.typeDropDown),
-              _step;
-
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var i = _step.value;
-              arrayOfTypes.push(i);
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
 
           arrayOfTypes.push(results.data);
 
           _this4.setState({
             typeDropDown: arrayOfTypes,
-            type: results.data.name
+            type: results.data.name,
+            typeName: "",
+            typeBudget: ""
           });
 
           console.log(_this4.state.typeDropDown); //Records type creation event
@@ -16266,10 +16301,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
             });
           }
 
-          _this4.setState({
-            Message: error.response.data.data,
-            showModalError: true
-          });
+          if (error.response.data != undefined) {
+            _this4.setState({
+              Message: error.response.data.data,
+              showModalError: true
+            });
+          }
         });
       });
     }
@@ -16287,18 +16324,16 @@ var Main = /*#__PURE__*/function (_React$Component) {
           Message: [_this5.state.type + " type deleted successfully"]
         });
 
-        var arrayOfTypes = [];
-
         var typeOther = _this5.state.typeDropDown.find(function (type) {
           return type.name == "Other";
         });
 
-        var _iterator2 = _createForOfIteratorHelper(_this5.state.expenses),
-            _step2;
+        var _iterator = _createForOfIteratorHelper(_this5.state.expenses),
+            _step;
 
         try {
           var _loop = function _loop() {
-            var expense = _step2.value;
+            var expense = _step.value;
 
             if (expense.type.name == _this5.state.type) {
               //update expense whose type got deleted. it will become Other
@@ -16312,35 +16347,21 @@ var Main = /*#__PURE__*/function (_React$Component) {
             }
           };
 
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             _loop();
-          } //clones array with expenses in the current state
-
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
-
-        var _iterator3 = _createForOfIteratorHelper(_this5.state.typeDropDown),
-            _step3;
-
-        try {
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-            var _i = _step3.value;
-            arrayOfTypes.push(_i);
           }
         } catch (err) {
-          _iterator3.e(err);
+          _iterator.e(err);
         } finally {
-          _iterator3.f();
+          _iterator.f();
         }
 
-        for (var i in arrayOfTypes) {
-          if (arrayOfTypes[i].name == _this5.state.type) {
-            arrayOfTypes.splice(i, 1); //delete the one that's been removed so we update the state.
-          }
-        }
+        var arrayOfTypes = _toConsumableArray(_this5.state.typeDropDown);
+
+        var targetTypeIndex = arrayOfTypes.findIndex(function (type) {
+          return type.name == this.state.type;
+        });
+        arrayOfTypes.splice(targetTypeIndex, 1);
 
         _this5.setState({
           typeDropDown: arrayOfTypes,
@@ -16363,10 +16384,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
           });
         }
 
-        _this5.setState({
-          Message: error.response.data.data,
-          showModalError: true
-        });
+        if (error.response.data != undefined) {
+          _this5.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        }
       });
     } //search expenses based on user input. Send values from inputs using query
 
@@ -16382,7 +16405,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         console.log(results.data);
 
         _this6.setState({
-          expenses: arrayOfExpenses.reverse()
+          expenses: arrayOfExpenses
         }); //update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
         //Records expense filter event
 
@@ -16400,45 +16423,19 @@ var Main = /*#__PURE__*/function (_React$Component) {
           });
         }
 
-        _this6.setState({
-          Message: error.response.data.data,
-          showModalError: true
-        });
+        if (error.response.data != undefined) {
+          _this6.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        }
       });
     } //changes the states dinamically as user interacts with form fields
 
   }, {
     key: "handleChange",
-    value: function handleChange(field, e) {
-      if (field == 'desc') {
-        this.setState({
-          desc: e.target.value
-        });
-      } else if (field == 'day') {
-        this.setState({
-          day: e.target.value
-        });
-      } else if (field == 'month') {
-        this.setState({
-          month: e.target.value
-        });
-      } else if (field == 'year') {
-        this.setState({
-          year: e.target.value
-        });
-      } else if (field == 'amount') {
-        this.setState({
-          amount: e.target.value
-        });
-      } else if (field == 'type') {
-        this.setState({
-          type: e.target.value
-        });
-      } else if (field == 'typeName') {
-        this.setState({
-          typeName: e.target.value
-        });
-      }
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
     } //deletes an expense based on id of the expense clicked
 
   }, {
@@ -16446,29 +16443,15 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function handleDelete(expenseId, event) {
       var _this7 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/expense?expense=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
+      axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
       .then(function (deletedExpense) {
-        var arrayOfExpenses = []; //clones array with expenses in the current state
+        // Create a new array based on current state:
+        var arrayOfExpenses = _toConsumableArray(_this7.state.expenses);
 
-        var _iterator4 = _createForOfIteratorHelper(_this7.state.expenses),
-            _step4;
-
-        try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var _i2 = _step4.value;
-            arrayOfExpenses.push(_i2);
-          }
-        } catch (err) {
-          _iterator4.e(err);
-        } finally {
-          _iterator4.f();
-        }
-
-        for (var i in arrayOfExpenses) {
-          if (arrayOfExpenses[i]._id == expenseId) {
-            arrayOfExpenses.splice(i, 1); //delete from expense state array the expense the user clicked by comparing the ids.
-          }
-        }
+        var targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
+          return expense._id == expenseId;
+        });
+        arrayOfExpenses.splice(targetedExpenseIndex, 1);
 
         _this7.setState({
           expenses: arrayOfExpenses
@@ -16489,10 +16472,24 @@ var Main = /*#__PURE__*/function (_React$Component) {
           });
         }
 
-        _this7.setState({
-          Message: error.response.data.data,
-          showModalError: true
-        });
+        if (error.response.data != undefined) {
+          _this7.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        }
+      });
+    }
+  }, {
+    key: "handleEdit",
+    value: function handleEdit(expenseId) {
+      console.log("editing expense");
+      axios__WEBPACK_IMPORTED_MODULE_5___default().put('/api/v1.0/expense', {
+        expenseId: expense._id,
+        newTypeId: typeOther._id
+      }).then(function (results) {
+        console.log("expenses updated");
+        expense.type.name = "Other";
       });
     } //obtains all expenses when user clicks search all button. Useful for getting the whole list again without refreshing the page
 
@@ -16506,7 +16503,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         var arrayOfExpenses = results.data;
 
         _this8.setState({
-          expenses: arrayOfExpenses.reverse()
+          expenses: arrayOfExpenses
         });
       })["catch"](function (error) {
         console.log(error.response);
@@ -16517,10 +16514,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
           });
         }
 
-        _this8.setState({
-          Message: error.response.data.data,
-          showModalError: true
-        });
+        if (error.response.data != undefined) {
+          _this8.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        }
       });
     } //controls display of modals
 
@@ -16536,7 +16535,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
     key: "handleCloseError",
     value: function handleCloseError() {
       this.setState({
-        showModalError: false
+        showModalError: false,
+        displayLoginButton: false
       });
     } //clears all fiels in the form
 
@@ -16591,10 +16591,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalError__WEBPACK_IMPORTED_MODULE_4__.default, {
         handleClose: this.handleCloseError,
         showModalError: this.state.showModalError,
-        errorMessages: this.state.Message
+        errorMessages: this.state.Message,
+        displayLoginButton: this.state.displayLoginButton
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, {
         expenses: this.state.expenses,
-        handleDelete: this.handleDelete
+        handleDelete: this.handleDelete,
+        handleEdit: this.handleEdit
       }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Navigate, {
         to: "/login"
       }));
@@ -16626,6 +16628,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -16648,25 +16652,37 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var ModalSuccess = /*#__PURE__*/function (_React$Component) {
-  _inherits(ModalSuccess, _React$Component);
+var ModalError = /*#__PURE__*/function (_React$Component) {
+  _inherits(ModalError, _React$Component);
 
-  var _super = _createSuper(ModalSuccess);
+  var _super = _createSuper(ModalError);
 
-  function ModalSuccess() {
-    _classCallCheck(this, ModalSuccess);
+  function ModalError(props) {
+    var _this;
 
-    return _super.apply(this, arguments);
+    _classCallCheck(this, ModalError);
+
+    _this = _super.call(this, props);
+    _this.refresh = _this.refresh.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
-  _createClass(ModalSuccess, [{
+  _createClass(ModalError, [{
+    key: "refresh",
+    value: function refresh() {
+      window.location.reload(true);
+    }
+  }, {
     key: "render",
     value: function render() {
-      //code to toggle modal taken from https://www.js-tutorials.com/react-js/how-to-create-modal-box-component-in-react/
-      var showModalError = this.props.showModalError;
-      var showHideClassName = showModalError ? 'view' : 'hide'; ////whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
-      //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
+      var _React$createElement;
 
+      var _this$props = this.props,
+          showModalError = _this$props.showModalError,
+          displayLoginButton = _this$props.displayLoginButton;
+      var showHideClassName = showModalError ? 'view' : 'hide'; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
+
+      var showLoginButton = displayLoginButton ? 'view' : 'hide';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -16701,14 +16717,18 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
         type: "button",
         "data-dismiss": "modal",
         className: "btn btn-danger"
-      }, "Go back"))))))));
+      }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: showLoginButton
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", (_React$createElement = {
+        onClick: this.props.handleClose
+      }, _defineProperty(_React$createElement, "onClick", this.refresh), _defineProperty(_React$createElement, "type", "button"), _defineProperty(_React$createElement, "data-dismiss", "modal"), _defineProperty(_React$createElement, "className", "btn btn-warning"), _React$createElement), "Log in")))))))));
     }
   }]);
 
-  return ModalSuccess;
+  return ModalError;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ModalSuccess);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ModalError);
 
 /***/ }),
 
@@ -17112,7 +17132,6 @@ var Register = /*#__PURE__*/function (_React$Component) {
         id: "phoneNumber",
         pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
         placeholder: "xxx-xxx-xxxx",
-        required: true,
         onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "btn btn-primary btn-lg btn-block",
@@ -17335,11 +17354,11 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         className: "list-group-item "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "font-weight-bold"
-      }, "Name:"), " ", firstName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      }, "Name:"), " ", firstName, ",", lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "list-group-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "font-weight-bold"
-      }, "Email:"), " ", lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      }, "Email:"), " ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "list-group-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "font-weight-bold"
@@ -17403,10 +17422,6 @@ grecaptcha.ready(function () {
   \********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__, module.id */
-/*! CommonJS bailout: exports is used directly at 3:0-7 */
-/*! CommonJS bailout: exports.push(...) prevents optimization as exports is passed as call context at 5:0-12 */
-/*! CommonJS bailout: exports is used directly at 7:17-24 */
-/*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports

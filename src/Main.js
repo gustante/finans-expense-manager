@@ -30,8 +30,10 @@ class Main extends React.Component {
             desc: "",
             amount: "",
             typeName: "",
+            typeBudget: "",
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
+            displayLoginButton: false,
             Message: [] //messages to be passed to success or error modal according to validation obtained
         }
 
@@ -39,6 +41,7 @@ class Main extends React.Component {
         this.handleExpenseSubmit = this.handleExpenseSubmit.bind(this);
         this.handleExpenseSearch = this.handleExpenseSearch.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
         this.searchAll = this.searchAll.bind(this);
         this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
         this.handleCloseError = this.handleCloseError.bind(this);
@@ -55,7 +58,7 @@ class Main extends React.Component {
                 .then(results => {
                     let arrayOfExpenses = results.data
                     console.log(results.data);
-                    this.setState({ expenses: arrayOfExpenses.reverse() });
+                    this.setState({ expenses: arrayOfExpenses });
 
                 })
                 .catch(error => {
@@ -66,10 +69,12 @@ class Main extends React.Component {
                     if(error.response.data.status == 401){
                         this.setState({displayLoginButton: true});
                     }
-                    this.setState({
-                        Message: error.response.data.data,
-                        showModalError: true,
-                    });
+                    if(error.response.data != undefined){
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    }
 
                 });
 
@@ -81,7 +86,18 @@ class Main extends React.Component {
                     this.setState({ typeDropDown: arrayOfTypes });
 
                 })
-                .catch(error => console.log(error));
+                .catch(error => {
+                    console.log(error)
+                    console.log(error.response)
+                    //if there are errors, update Message state with error messages and display Error modal
+                    if(error.response.data != undefined){
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    }
+                });
+
 
             window.addEventListener("keydown", e => {
                 let target = $(this).parent();
@@ -131,34 +147,31 @@ class Main extends React.Component {
                         // Set state
                         this.setState({ expenses: arrayOfExpenses});
 
-                        })
+
                         //Records expense creation event
                         ReactGA.event({
                             category: "Expense",
                             action: "Created",
                         });
 
-
                     })
                     .catch(error => {
+                        console.log("we got an error")
                         console.log(error.response.data)//all the error messages!
 
                         //if there are errors, update Message state with error messages and display Error modal
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
+                        //also display button to redirect to log in page if error is due to user unauthenticated
+                        if(error.response.data.status == 401){
+                            this.setState({displayLoginButton: true});
+                        }
+                        if(error.response.data != undefined){
+                            this.setState({
+                                Message: error.response.data.data,
+                                showModalError: true
+                            });
+                        }
                     });
-
-
-
-
-
-
-
-
-
-
+                })
 
 
 
@@ -176,22 +189,22 @@ class Main extends React.Component {
                 console.log("reCAPTCHA executed");
             })
             .then(() => {
-                axios.post("/api/v1.0/type", { name: this.state.typeName, token: captchaToken })
+                axios.post("/api/v1.0/type", { name: this.state.typeName, budget: this.state.typeBudget, token: captchaToken })
                     .then(results => {
                         this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Type created successfully"] }); //success message sends expense id to success modal and displays it
 
                         let arrayOfTypes = [...this.state.typeDropDown];
                         //updates type state with new one, this will remount the form  with new type in the dropdown menu
 
-                        //updates type state with new one, this will remount the form  with new type in the dropdown menu
-                        for (let i of this.state.typeDropDown) {
-                            arrayOfTypes.push(i)
-                        }
                         arrayOfTypes.push(results.data);
+
                         this.setState({
                             typeDropDown: arrayOfTypes,
-                            type: results.data.name
+                            type: results.data.name,
+                            typeName: "",
+                            typeBudget: ""
                         });
+
 
                         console.log(this.state.typeDropDown)
 
@@ -209,10 +222,12 @@ class Main extends React.Component {
                             this.setState({displayLoginButton: true});
 
                         }
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
+                        if(error.response.data != undefined){
+                            this.setState({
+                                Message: error.response.data.data,
+                                showModalError: true
+                            });
+                        }
                     });
             })
 
@@ -225,7 +240,6 @@ class Main extends React.Component {
             .then(deletedType => {
                 console.log("deleted type is: " + deletedType)
                 this.setState({ showModalSuccess: true, Message: [this.state.type + " type deleted successfully"] });
-                let arrayOfTypes = []
 
                 let typeOther = this.state.typeDropDown.find(type => type.name == "Other");
 
@@ -240,27 +254,20 @@ class Main extends React.Component {
                     }
                 }
 
-                //clones array with expenses in the current state
-                for (let i of this.state.typeDropDown) {
-                    arrayOfTypes.push(i)
-                }
+                let arrayOfTypes = [...this.state.typeDropDown];
 
+                let targetTypeIndex = arrayOfTypes.findIndex(function(type){
+                    return type.name == this.state.type;
+                });
 
-                for (let i in arrayOfTypes) {
-                    if (arrayOfTypes[i].name == this.state.type) {
-                        arrayOfTypes.splice(i, 1);//delete the one that's been removed so we update the state.
-                    }
-                }
+                arrayOfTypes.splice(targetTypeIndex, 1)
+
 
                 this.setState({
                     typeDropDown: arrayOfTypes,
                     type: ""
 
                 });
-
-
-
-
 
                 //Records expense deletion event
                 ReactGA.event({
@@ -277,10 +284,12 @@ class Main extends React.Component {
                     this.setState({displayLoginButton: true});
 
                 }
-                this.setState({
-                    Message: error.response.data.data,
-                    showModalError: true
-                });
+                if(error.response.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                }
             });
 
 
@@ -295,7 +304,7 @@ class Main extends React.Component {
                 let arrayOfExpenses = results.data
                 console.log(results.data)
 
-                this.setState({ expenses: arrayOfExpenses.reverse() });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
+                this.setState({ expenses: arrayOfExpenses });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
                 //Records expense filter event
                 ReactGA.event({
                     category: "Expense",
@@ -308,64 +317,36 @@ class Main extends React.Component {
                     this.setState({displayLoginButton: true});
 
                 }
-                this.setState({
-                    Message: error.response.data.data,
-                    showModalError: true
-                });
+                if(error.response.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                }
             });
     }
 
     //changes the states dinamically as user interacts with form fields
-    handleChange(field, e) {
-        if (field == 'desc') {
-            this.setState({
-                desc: e.target.value
-            })
-        } else if (field == 'day') {
-            this.setState({
-                day: e.target.value
-            })
-        } else if (field == 'month') {
-            this.setState({
-                month: e.target.value
-            })
-        } else if (field == 'year') {
-            this.setState({
-                year: e.target.value
-            })
-        } else if (field == 'amount') {
-            this.setState({
-                amount: e.target.value
-            })
-        } else if (field == 'type') {
-            this.setState({
-                type: e.target.value
-            })
-        } else if (field == 'typeName') {
-            this.setState({
-                typeName: e.target.value
-            })
-        }
-
-
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     }
+
 
     //deletes an expense based on id of the expense clicked
     handleDelete(expenseId, event) {
-        axios.delete(`/api/v1.0/expense?expense=${expenseId}`)//send id when clicking on an expense from the table to backend so that it deletes from database
+        axios.delete(`/api/v1.0/expense?expenseId=${expenseId}`)//send id when clicking on an expense from the table to backend so that it deletes from database
             .then(deletedExpense => {
-                let arrayOfExpenses = []
+                // Create a new array based on current state:
+                let arrayOfExpenses = [...this.state.expenses];
 
-                //clones array with expenses in the current state
-                for (let i of this.state.expenses) {
-                    arrayOfExpenses.push(i)
-                }
+                let targetedExpenseIndex = arrayOfExpenses.findIndex(function(expense){
+                    return expense._id == expenseId;
+                });
 
-                for (let i in arrayOfExpenses) {
-                    if (arrayOfExpenses[i]._id == expenseId) {
-                        arrayOfExpenses.splice(i, 1);//delete from expense state array the expense the user clicked by comparing the ids.
-                    }
-                }
+                arrayOfExpenses.splice(targetedExpenseIndex, 1)
+
 
                 this.setState({ expenses: arrayOfExpenses }); //This will remount the ExpenseTable component without the deletes expense
 
@@ -382,14 +363,23 @@ class Main extends React.Component {
                     this.setState({displayLoginButton: true});
 
                 }
-                this.setState({
-                    Message: error.response.data.data,
-                    showModalError: true
-                });
+                if(error.response.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                }
             });
     }
 
-
+    handleEdit(expenseId){
+        console.log("editing expense")
+        axios.put('/api/v1.0/expense', { expenseId: expense._id, newTypeId: typeOther._id })
+                            .then(results => {
+                                console.log("expenses updated")
+                                expense.type.name = "Other";
+                            })
+    }
 
     //obtains all expenses when user clicks search all button. Useful for getting the whole list again without refreshing the page
     searchAll(e) {
@@ -398,7 +388,7 @@ class Main extends React.Component {
             .then(results => {
                 let arrayOfExpenses = results.data
 
-                this.setState({ expenses: arrayOfExpenses.reverse() });
+                this.setState({ expenses: arrayOfExpenses });
 
             })
             .catch(error => {
@@ -407,10 +397,12 @@ class Main extends React.Component {
                     this.setState({displayLoginButton: true});
 
                 }
-                this.setState({
-                    Message: error.response.data.data,
-                    showModalError: true
-                });
+                if(error.response.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                }
             });
     }
 
@@ -421,7 +413,9 @@ class Main extends React.Component {
         });
     }
     handleCloseError() {
-        this.setState({ showModalError: false });
+        this.setState({ showModalError: false,
+                    displayLoginButton: false
+        });
     }
 
     //clears all fiels in the form
@@ -475,9 +469,9 @@ class Main extends React.Component {
                         </div>
 
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
-                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
+                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} />
                         <Form {...formProps} />
-                        <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete}  />
+                        <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
                     </div>
 
                 </>

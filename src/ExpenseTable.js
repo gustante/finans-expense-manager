@@ -50,11 +50,13 @@ class ExpenseTable extends React.Component {
                                     <td>{expense.description}</td>
                                     <td>${expense.amount}</td>
                                     <td>
+                                        <button aria-label="edit this expense" onClick={this.props.handleEdit.bind(this, expense._id)} className="btn h-50 mx-1 btn-secondary">
+                                        <i className="fas fa-edit"></i>
+                                        </button>
+
                                         <button aria-label="delete this expense" onClick={this.props.handleDelete.bind(this, expense._id)} className="btn h-50 mx-1 btn-danger">
                                         <i className="fas fa-trash-alt"></i>
                                         </button>
-
-                                        
                                     </td>
 
                                 </tr>)}

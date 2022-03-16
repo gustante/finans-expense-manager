@@ -145,7 +145,6 @@ class App extends React.Component {
                             phoneNumber: phoneNumber,
 
                         });
-                        console.log(this.state)
 
                     })
 
@@ -157,15 +156,7 @@ class App extends React.Component {
                                 Message: error.response.data.data,
                                 showModalError: true
                             });
-
                         }
-
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
-
-
                     });
 
 
@@ -194,18 +185,18 @@ class App extends React.Component {
         if (this.state.isLoggedIn == true) {
             axios.get("/api/v1.0/user/logout")
                 .then(results => {
-                    console.log(results.data);
                     this.setState({ isLoggedIn: false });
-                    console.log(this.state.isLoggedIn)
-
                 })
                 .catch(error => {
+                    console.log(error)
                     console.log(error.response.data);
 
-                    this.setState({
-                        Message: error.response.data.data,
-                        showModalError: true
-                    });
+                    if(error.response.data != undefined){
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    }
 
 
                 });
@@ -221,11 +212,19 @@ class App extends React.Component {
 
     //controls display of modals
     handleCloseSuccess() {
-        this.setState({ showModalSuccess: false });
+        this.setState({
+            showModalSuccess: false,
+            displayLoginButton: false
+        });
     }
     handleCloseError() {
-        this.setState({ showModalError: false });
+        this.setState({
+            showModalError: false,
+            displayLoginButton: false,
+
+        });
     }
+
 
 
 
