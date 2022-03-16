@@ -13,16 +13,30 @@ exports.getAllExpenses = (req, res) => {
     // Expense.find({})//find the user that's making the request
     //                 .exec()
     //                 then(results => {
-                        
+
     //                     console.log(results)
     //                     console.log(user)
     //                     console.log(user.expenses)
     //                 for (expense of results){
-                        
+
     //                     user.expenses.push(expense)
     //                 }
     //                 user.save()
     //             })
+
+
+    //to update sumOfExpenses of types
+    // for(type of user.types){
+    //     console.log(type)
+    //     for(expense of user.expenses){
+    //         if(expense.month == 3 && expense.type.name == type.name){
+    //             type.sumOfExpenses += expense.amount;
+
+    //         }
+    //     }
+    //     type.save()
+
+    //}
 
 
 
@@ -32,8 +46,30 @@ exports.getAllExpenses = (req, res) => {
                 path: 'expenses',
                 populate: { path: 'type' }
             })
+
             .exec()
             .then(user => {
+
+
+    // for(type of user.types){
+
+    //     for(expense of user.expenses){
+    //         if(expense.month == 3 && expense.type.name == type.name){
+    //             type.sumOfExpenses += expense.amount;
+
+    //         }
+    //     }
+    //     type.save()
+
+    // }
+
+
+                //sort so that we have recent expenses displayed first
+                user.expenses.sort((a, b) => { //https://www.javascripttutorial.net/array/javascript-sort-an-array-of-objects/
+                    let da = new Date(a.year,a.month,a.day),
+                        db = new Date(b.year,b.month,b.day);
+                    return db - da;
+                });
                 res.send(user.expenses);
             })
             .catch(error => res.send(error));
@@ -44,7 +80,7 @@ exports.getAllExpenses = (req, res) => {
 
 }
 
-// ////search by id. 
+// ////search by id.
 // exports.getExpenseById = (req, res) => {
 
 //     Expense.findOne({ "_id": req.params.id })
@@ -85,6 +121,13 @@ exports.getExpense = (req, res) => {
                 if (req.query.amount != 0) {
                     user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
                 }
+
+                //most recent expenses will be placed first
+                user.expenses.sort((a, b) => {
+                    let da = new Date(a.year,a.month,a.day),
+                        db = new Date(b.year,b.month,b.day);
+                    return db - da;
+                });
 
                 res.send(user.expenses);
             })
@@ -137,10 +180,48 @@ exports.postExpense = (req, res) => {
                             user.expenses.push(expense);
 
 
+                            //reset budget when we start a new month
+                            // if(user.expenses.length > 0){
+                            //     let latestExpenseMonth = user.expenses[user.expenses.length-1].month;
+                            //     let newExpenseMonth = expense.month;
+                            //     if(newExpenseMonth > latestExpenseMonth){
+                            //         for(type of user.types){
+                            //             console.log(type)
+                            //             type.sumOfExpenses = 0;
+                            //             type.save();
+                            //         }
+
+                            //     }
+
+                            // }
+
+                            //include to the sum so that we can compare budget later (only if new expense is created for current month. We only keep track of current's month budgets)
+
+                            const current = new Date();
+                            const currentMonth = current.getMonth() + 1
+                            if(currentMonth == expense.month){
+                                chosenType.sumOfExpenses += expense.amount;
+                                chosenType.save()
+                            }
+
+                            user.expenses.push(expense);
                             user.save()
                             expense.save()
                                 .then(savedExpense => {
-                                    res.status(201).send(savedExpense);//status 201
+                                    let {budget, sumOfExpenses, name} = savedExpense.type;
+                                    //send SMS using twilio if close to exceeding budget
+                                    //dont send SMS if expense created is for a different month.
+                                    if(budget != null && currentMonth == savedExpense.month){
+
+                                        if(sumOfExpenses > budget)
+                                            smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`)
+                                        else if(sumOfExpenses >= budget * 0.7)
+                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses}, your budget is ${budget}`)
+                                        else if(sumOfExpenses >= budget * 0.5)
+                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses}, your budget is ${budget}`)
+                                    }
+
+
 
                                     //send SMS using twilio confirming expense creation
                                     var accountSid = process.env.ACCOUNT_SID; // Your Account SID from www.twilio.com/console
@@ -148,14 +229,8 @@ exports.postExpense = (req, res) => {
 
                                     var client = new twilio(accountSid, authToken);
 
-                                    client.messages.create({
-                                        body: 'A new expense \"' + savedExpense.description + '\" was created',
-                                        to: '+12368636833',  // Text this number
-                                        from: '+19197523572' // From a valid Twilio number
-                                    })
-                                        .then(message => {
-                                            console.log('message sent succesfully')
-                                        })
+
+
 
                                 })
                                 .catch(error => {
@@ -196,14 +271,26 @@ exports.deleteExpense = (req, res) => {
         User.findOne({ _id: req.session.userId })//delete from users collection
             .exec()
             .then(user => {
-                let targetExpense = user.expenses.find(expense => expense == req.query.expense);//compare with id in query parameter
-                for (i in user.expenses) {
-                    if (user.expenses[i] == targetExpense) {
+                let targetExpense = user.expenses.find(expense => expense._id == req.query.expenseId);//compare with id in query parameter
+
+                for (i in user.expenses) {//delete from user.expenses
+                    if (user.expenses[i]._id == targetExpense._id) {
                         user.expenses.splice(i, 1)
                     }
                 }
-                console.log(user.expenses)
+
+                //adjust the type that got and expense delete from to reflect correct sumOfExpenses (only if deletes from current month)
+                const current = new Date();
+                const currentMonth = current.getMonth() + 1
+                if(currentMonth == targetExpense.month){
+                    let targetType = user.types.find(type => type.name == targetExpense.type.name);
+                    targetType.sumOfExpenses -= targetExpense.amount;
+                    if (targetType.sumOfExpenses < 0)
+                        targetType.sumOfExpenses = 0
+                    targetType.save()
+                }
                 user.save()
+
 
             })
             .then(() => { //delete from expenses collection

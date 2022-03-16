@@ -19,33 +19,24 @@ class Nav extends React.Component {
 
                         <div className="collapse navbar-collapse" id="nav-principal">
                             <ul className="navbar-nav ml-auto mx-2">
-                                <Link to="/" className="btn">
-                                    <li className="nav-item" className=" nav-link" >Home</li>
-
-                                </Link>
-                                <Link to="/about" className="btn">
-                                    <li className="nav-item" className=" nav-link" >About</li>
-
-                                </Link>
-                                <Link to="/faq" className="btn">
-                                    <li className="nav-item" className=" nav-link" >F.A.Q</li>
-                                </Link>
-                                <Link to="/plans" className="btn">
-                                    <li className="nav-item" className=" nav-link" >Plans</li>
-
-                                </Link>
+                            <li className="nav-item btn"> <Link to="/" className="nav-link" >Home</Link>
+                                        </li>
+                                <li className="nav-item btn"> <Link to="/about" className="nav-link" >About</Link>
+                                        </li>
+                                
+                                <li className="nav-item btn"> <Link to="/plans" className="nav-link" >Plans</Link>
+                                        </li>
                                 {isLoggedIn ? (
                                     <>
-                                        <Link to="/dashboard" className="btn">
-                                            <li className="nav-item" className=" nav-link" >Dashboard</li>
-                                        </Link>
-                                        <Link to="/" className="btn btn-outline-light">
-                                            <li className="nav-item" className="nav-link px-2 py-1" onClick={this.props.handleLogOut}> Log Out</li>
-                                        </Link>
+                                        <li className="nav-item btn"> <Link to="/dashboard" className="nav-link" >Dashboard</Link>
+                                        </li>
+                                        <li className="nav-item btn"> <Link to="/userAccount" className="nav-link" >My Account</Link>
+                                        </li>
+                                        <li className="nav-item btn btn-outline-light"> <Link to="/" className="nav-link" onClick={this.props.handleLogOut}>Log out</Link>
+                                        </li>
+                                        
                                     </>
-                                ): <Link to="/login" className="btn btn-outline-light">
-                                        <li className="nav-item" className="nav-link px-2 py-1"> Log In</li>
-                                    </Link>
+                                ): <li className="nav-item btn btn-outline-light"> <Link to="/login" className="nav-link" >Log In</Link></li>
                                 }
                                 
                                 

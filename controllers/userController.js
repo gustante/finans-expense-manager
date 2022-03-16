@@ -34,13 +34,15 @@ exports.createUser = (req, res) => {
                     email: req.body.email,
                     password: req.body.password,
                     phoneNumber: req.body.phoneNumber,
+                    lastLoginMonth: req.body.currentMonth,
+                    lastLoginYear: req.body.currentYear
                 });
 
                 let type = new Type({
                     name: 'Other',
                     user: user._id
                 });
-                
+
                 user.types.push(type)//every new user starts with a "Other" type.
                 type.save()
                 user.save()
@@ -78,26 +80,46 @@ exports.createUser = (req, res) => {
 }
 
 exports.login = (req, res) => {
-    User.findOne({ email: req.body.email })
-        .exec()
-        .then(user => {
-            if (user == null) {
-                throw new customError(['User not found'], 401)
-            }
-            else if (req.body.password != user.password) {
-                throw new customError(['Password is incorrect'], 401)
-            } else {
-                req.session.userId = user._id;
-                req.session.isAuth = true;
-                res.send({ _id: user._id });
-                
-            }
+            User.findOne({ email: req.body.email })
+                .populate('types')
+                .exec()
+                .then(user => {
+                    if (user == null) {
+                        throw new customError(['User not found'], 401)
+                    }
+                    else if (req.body.password != user.password) {
+                        throw new customError(['Password is incorrect'], 401)
+                    } else {
+                        //reset budget if detects new month
+                        if (req.body.currentMonth > user.lastLoginMonth || req.body.currentYear > user.lastLoginYear) {
+                            console.log("reset budget")
+                            for (type of user.types) {
+                                type.sumOfExpenses = 0;
+                                type.save();
+                            }
+                            user.lastLoginMonth = req.body.lastLoginMonth;//update last login
+                            user.lastLoginYear = req.body.lastLoginYear
+                            user.save()
 
-        })
-        .catch(error => {
-            console.log(error)
-            res.status(error.status).send(error);
-        });
+                        }
+                        user.password = "";
+                        req.session.userId = user._id;
+                        req.session.isAuth = true;
+
+                        console.log("saved user")
+                        console.log(user)
+                        res.send(user);
+
+
+
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                    res.status(error.status).send(error);
+                });
+
 }
 
 exports.logout = (req, res) => {
@@ -118,13 +140,57 @@ exports.logout = (req, res) => {
 
 exports.verifyAuth = (req, res) => {
     try {
-        if(req.session.isAuth){
-            res.status(200).send({_id: req.session.userId})
+        if (req.session.isAuth) {
+            res.status(200).send({ _id: req.session.userId })
         } else {
             throw new customError(['User not logged in'], 404)
         }
     } catch (error) {
         res.status(error.status).send(error);
     }
-    
+
+}
+
+exports.getNoOfExpenses = (req, res) => {
+    if (req.session.isAuth) {
+        User.findOne({ _id: req.session.userId })
+            .select('expenses')//don't send user password
+            .exec()
+            .then(user => {
+                res.send(user);
+            })
+            .catch(error => {
+                console.log(error)
+                res.send(error)
+            });
+    } else {
+        let errorObject = new customError(['Please log in to see this information'], 401);
+        res.status(errorObject.status).send(errorObject);
+    }
+
+
+
+}
+
+
+exports.getBudgetInfo = (req, res) => {
+    if (req.session.isAuth) {
+        User.findOne({ _id: req.session.userId })
+            .select('types')//don't send user password
+            .populate('types')
+            .exec()
+            .then(user => {
+                res.send(user);
+            })
+            .catch(error => {
+                console.log(error)
+                res.send(error)
+            });
+    } else {
+        let errorObject = new customError(['Please log in to see this information'], 401);
+        res.status(errorObject.status).send(errorObject);
+    }
+
+
+
 }

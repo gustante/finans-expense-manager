@@ -60,8 +60,19 @@ class Main extends React.Component {
                 })
                 .catch(error => {
                     console.log(error)
+                    console.log(error.response)
+
+
+                    if(error.response.data.status == 401){
+                        this.setState({displayLoginButton: true});
+                    }
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true,
+                    });
+
                 });
-        
+
             axios.get("/api/v1.0/type/all")
 
                 .then(results => {
@@ -110,15 +121,17 @@ class Main extends React.Component {
                 })
                     .then(results => {
                         this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Expense registered!"] }); //success message sends expense id to success modal and displays it
-                        let arrayOfExpenses = []
-                        if (this.state.expenses.length > 0) {//updates state with new expense, this will remount the ExpenseTable component with new expense in the table
-                            for (let i of this.state.expenses) {
-                                arrayOfExpenses.push(i)
-                            }
-                            arrayOfExpenses.unshift(results.data);
-                            this.setState({ expenses: arrayOfExpenses });
 
-                        }
+                        // Create a new array based on current state:
+                        let arrayOfExpenses = [...this.state.expenses];
+
+                        // Add item to it
+                        arrayOfExpenses.unshift(results.data);
+
+                        // Set state
+                        this.setState({ expenses: arrayOfExpenses});
+
+                        })
                         //Records expense creation event
                         ReactGA.event({
                             category: "Expense",
@@ -138,7 +151,7 @@ class Main extends React.Component {
                     });
 
 
-            })
+
 
 
 
@@ -166,7 +179,9 @@ class Main extends React.Component {
                 axios.post("/api/v1.0/type", { name: this.state.typeName, token: captchaToken })
                     .then(results => {
                         this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Type created successfully"] }); //success message sends expense id to success modal and displays it
-                        let arrayOfTypes = []
+
+                        let arrayOfTypes = [...this.state.typeDropDown];
+                        //updates type state with new one, this will remount the form  with new type in the dropdown menu
 
                         //updates type state with new one, this will remount the form  with new type in the dropdown menu
                         for (let i of this.state.typeDropDown) {
@@ -190,6 +205,10 @@ class Main extends React.Component {
                     })
                     .catch(error => {
                         //if there are errors, update Message state with error messages and display Error modal
+                        if(error.response.data.status == 401){
+                            this.setState({displayLoginButton: true});
+
+                        }
                         this.setState({
                             Message: error.response.data.data,
                             showModalError: true
@@ -253,6 +272,11 @@ class Main extends React.Component {
             .catch(error => {
                 console.log(error)
                 //if there are errors, update Message state with error messages and display Error modal
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+
+                }
                 this.setState({
                     Message: error.response.data.data,
                     showModalError: true
@@ -278,7 +302,17 @@ class Main extends React.Component {
                     action: "Filter",
                 });
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+
+                }
+                this.setState({
+                    Message: error.response.data.data,
+                    showModalError: true
+                });
+            });
     }
 
     //changes the states dinamically as user interacts with form fields
@@ -329,7 +363,7 @@ class Main extends React.Component {
 
                 for (let i in arrayOfExpenses) {
                     if (arrayOfExpenses[i]._id == expenseId) {
-                        arrayOfExpenses.splice(i, 1);//delete from expense state array the expense the user clicked by comparing the ids. 
+                        arrayOfExpenses.splice(i, 1);//delete from expense state array the expense the user clicked by comparing the ids.
                     }
                 }
 
@@ -342,8 +376,20 @@ class Main extends React.Component {
                 });
 
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+
+                }
+                this.setState({
+                    Message: error.response.data.data,
+                    showModalError: true
+                });
+            });
     }
+
+
 
     //obtains all expenses when user clicks search all button. Useful for getting the whole list again without refreshing the page
     searchAll(e) {
@@ -355,12 +401,24 @@ class Main extends React.Component {
                 this.setState({ expenses: arrayOfExpenses.reverse() });
 
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+
+                }
+                this.setState({
+                    Message: error.response.data.data,
+                    showModalError: true
+                });
+            });
     }
 
     //controls display of modals
     handleCloseSuccess() {
-        this.setState({ showModalSuccess: false });
+        this.setState({ showModalSuccess: false,
+                        displayLoginButton: false
+        });
     }
     handleCloseError() {
         this.setState({ showModalError: false });
@@ -377,6 +435,7 @@ class Main extends React.Component {
             type: "",
             amount: "",
             typeName: "",
+            typeBudget: ""
         });
 
     }
@@ -399,15 +458,16 @@ class Main extends React.Component {
             typeName: this.state.typeName,
             amount: this.state.amount,
             searchAll: this.searchAll,
-            handleDeleteType: this.handleDeleteType
+            handleDeleteType: this.handleDeleteType,
         }
+
 
         const isLoggedIn = this.props.isLoggedIn;
 
         return <>
             {isLoggedIn ? (
                 <>
-                    <div id="dashboard">
+                    <div className="dashboard">
                         <div className="row">
                             <div className="col mx-3 my-5">
                                 <h1 className="display-4">My expenses</h1>
@@ -417,7 +477,7 @@ class Main extends React.Component {
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
                         <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
                         <Form {...formProps} />
-                        <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete} />
+                        <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete}  />
                     </div>
 
                 </>
