@@ -40,7 +40,7 @@ class UserInfo extends React.Component {
 
                             <ul className="list-group ">
 
-                                <li className="list-group-item "><span className="font-weight-bold">Name:</span> {firstName},{lastName}</li>
+                                <li className="list-group-item "><span className="font-weight-bold">Name:</span> {firstName} {lastName}</li>
                                 <li className="list-group-item"><span className="font-weight-bold">Email:</span> {email}</li>
                                 <li className="list-group-item"><span className="font-weight-bold">Phone number:</span> {phoneNumber}</li>
                                 <li className="list-group-item"><span className="font-weight-bold">Password:</span> ******</li>
