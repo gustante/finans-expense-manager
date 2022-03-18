@@ -56,6 +56,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
   \************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -245,6 +246,7 @@ module.exports = function xhrAdapter(config) {
   \*****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 49:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -308,6 +310,7 @@ module.exports.default = axios;
   \*************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 18:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -338,6 +341,7 @@ module.exports = Cancel;
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 59:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -409,6 +413,7 @@ module.exports = CancelToken;
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -426,6 +431,7 @@ module.exports = function isCancel(value) {
   \**********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 95:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -533,6 +539,7 @@ module.exports = Axios;
   \***********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 55:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -600,6 +607,7 @@ module.exports = InterceptorManager;
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -635,6 +643,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 16:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -666,6 +675,7 @@ module.exports = function createError(message, config, code, request, response) 
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 28:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -734,6 +744,7 @@ module.exports = function dispatchRequest(config) {
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 13:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -790,6 +801,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -858,6 +870,7 @@ module.exports = function mergeConfig(config1, config2) {
   \***********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 13:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -891,6 +904,7 @@ module.exports = function settle(resolve, reject, response) {
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -923,6 +937,7 @@ module.exports = function transformData(data, headers, fns) {
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 93:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1028,6 +1043,7 @@ module.exports = defaults;
   \************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1053,6 +1069,7 @@ module.exports = function bind(fn, thisArg) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1131,6 +1148,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   \*******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 10:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1155,6 +1173,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1214,6 +1233,7 @@ function nonStandardBrowserEnv() {
   \*********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1240,6 +1260,7 @@ module.exports = function isAbsoluteURL(url) {
   \***********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1310,6 +1331,7 @@ function nonStandardBrowserEnv() {
   \***************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1334,6 +1356,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 22:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1396,6 +1419,7 @@ module.exports = function parseHeaders(headers) {
   \**************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 23:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1435,6 +1459,7 @@ module.exports = function spread(callback) {
   \*****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 348:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1817,6 +1842,7 @@ module.exports = {
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -2481,6 +2507,7 @@ function createMemoryHistory(b) {
   \*********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 69:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -2588,6 +2615,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 100:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -2700,6 +2728,7 @@ module.exports = checkPropTypes;
   \************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 44:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -3376,6 +3405,7 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
   \******************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 13:2-16 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /**
@@ -3401,6 +3431,7 @@ if (true) {
   \*************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 10:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -3423,6 +3454,7 @@ module.exports = ReactPropTypesSecret;
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 1:0-14 */
 /***/ ((module) => {
 
 module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
@@ -13474,6 +13506,16 @@ if (true) {
 /*! export unstable_wrapCallback [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_exports__ */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 39:30-50 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 132:17-37 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 156:28-48 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 201:19-39 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 564:32-52 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 580:29-49 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 606:24-44 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 730:24-44 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 815:28-48 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 831:24-44 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -15117,7 +15159,7 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
 /*! namespace exports */
 /*! export default [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -15126,6 +15168,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -15156,6 +15200,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ExpenseTable = /*#__PURE__*/function (_React$Component) {
   _inherits(ExpenseTable, _React$Component);
 
@@ -15171,15 +15216,15 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
       total: 0 //sum of all expenses displayed at the moment is shown at the end of the table, below amount
 
     };
-    _this.componentDidUpdate = _this.componentDidUpdate.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ExpenseTable, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
-      if (prevProps.expenses != this.props.expenses) {
-        //get total amount of expenses whenever expense state from Main updates which generates a new table
+      if (prevProps != this.props) {
+        console.log("remount"); //get total amount of expenses whenever expense state from Main updates which generates a new table
+
         var sumOfExpenses = 0;
 
         var _iterator = _createForOfIteratorHelper(this.props.expenses),
@@ -15206,29 +15251,100 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      console.log(this.props.newAmount);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
         className: "table"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
-        className: "d-sm-table-cell d-none"
-      }, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.props.expenses.map(function (expense, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
+        className: "d-none d-sm-block"
+      }, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.props.expenses.map(function (expense, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
+          className: expense._id,
           key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, expense.month, "/", expense.day, "/", expense.year), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
-          className: "d-sm-table-cell d-none"
-        }, expense.type.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, expense.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "$", expense.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-          "aria-label": "edit this expense",
-          onClick: _this2.props.handleEdit.bind(_this2, expense._id),
-          className: "btn h-50 mx-1 btn-secondary"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "date",
+          name: "newDate",
+          className: "hide form-control",
+          onChange: _this2.props.handleChange
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "view"
+        }, expense.year, "/", expense.month, "/", expense.day)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          className: "hide form-control",
+          name: "newType",
+          value: _this2.props.newType,
+          onChange: _this2.props.handleChange
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: expense.type.name
+        }, expense.type.name), ")", _this2.props.typeDropDown.map(function (type, index) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            key: index,
+            value: type.name
+          }, type.name);
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "view"
+        }, expense.type.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "text",
+          name: "newDesc",
+          value: _this2.props.newDesc,
+          className: "hide form-control",
+          placeholder: expense.description,
+          onChange: _this2.props.handleChange
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "view"
+        }, expense.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "text",
+          name: "newAmount",
+          value: _this2.props.newAmount,
+          className: "hide form-control",
+          placeholder: expense.amount,
+          onChange: _this2.props.handleChange
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "view"
+        }, "$", expense.amount)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
+          className: "d-none d-sm-flex d-sm-flex-row"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleSaveEditChanges.bind(_this2, expense._id),
+          className: "editButtons hide btn h-50 m-1 btn-success"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-check"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleStopEditing.bind(_this2, expense._id),
+          className: "editButtons hide btn h-50 m-1 btn-secondary"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-times"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleStartEditing.bind(_this2, expense._id),
+          className: "defaultButtons view btn h-50 m-1 btn-secondary"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-edit"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-          "aria-label": "delete this expense",
           onClick: _this2.props.handleDelete.bind(_this2, expense._id),
-          className: "btn h-50 mx-1 btn-danger"
+          className: "defaultButtons view btn h-50 m-1 btn-danger"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-trash-alt"
+        })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "".concat(expense._id, " d-flex  d-sm-none")
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleSaveEditChanges.bind(_this2, expense._id),
+          className: "editButtons hide btn h-50 m-1 btn-success"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-check"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleStopEditing.bind(_this2, expense._id),
+          className: "editButtons hide btn h-50 m-1 btn-secondary"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-times"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleStartEditing.bind(_this2, expense._id),
+          className: "defaultButtons view btn h-50 m-1 btn-secondary"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-edit"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleDelete.bind(_this2, expense._id),
+          className: "defaultButtons view btn h-50 m-1 btn-danger"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-trash-alt"
         }))));
@@ -15501,6 +15617,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         htmlFor: "month",
         className: "form-label"
       }, "Month:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", (_React$createElement = {
+        id: "month",
         "aria-required": "true",
         name: "month",
         className: "form-control",
@@ -15540,6 +15657,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Day:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        id: "day",
         name: "day",
         className: "form-control",
         value: this.props.day,
@@ -15551,6 +15669,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Year:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        id: "year",
         name: "year",
         className: "form-control",
         value: this.props.year,
@@ -15562,6 +15681,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Amount:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        id: "amount",
         name: "amount",
         className: "form-control",
         value: this.props.amount,
@@ -15571,10 +15691,11 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-lg-4 col-md-4 col-sm-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        htmlFor: "description",
+        htmlFor: "desc",
         className: "form-label"
       }, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        id: "desc",
         name: "desc",
         value: this.props.desc,
         className: "form-control",
@@ -15585,7 +15706,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         htmlFor: "type",
         className: "form-label"
       }, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-        id: "typeSelector",
+        id: "type",
         className: "form-control",
         name: "type",
         value: this.props.type,
@@ -15676,7 +15797,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-label"
       }, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         "aria-label": "create new type budget",
-        id: "typeName",
+        id: "typeBudget",
         name: "typeBudget",
         type: "text",
         value: this.props.typeBudget,
@@ -16096,6 +16217,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
       amount: "",
       typeName: "",
       typeBudget: "",
+      newDate: "",
+      newType: "",
+      newDesc: "",
+      newAmount: "",
       showModalSuccess: false,
       //controls display modal with success message
       showModalError: false,
@@ -16108,13 +16233,15 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.handleExpenseSubmit = _this.handleExpenseSubmit.bind(_assertThisInitialized(_this));
     _this.handleExpenseSearch = _this.handleExpenseSearch.bind(_assertThisInitialized(_this));
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
-    _this.handleEdit = _this.handleEdit.bind(_assertThisInitialized(_this));
+    _this.handleDeleteType = _this.handleDeleteType.bind(_assertThisInitialized(_this));
     _this.searchAll = _this.searchAll.bind(_assertThisInitialized(_this));
     _this.handleCloseSuccess = _this.handleCloseSuccess.bind(_assertThisInitialized(_this));
     _this.handleCloseError = _this.handleCloseError.bind(_assertThisInitialized(_this));
     _this.handleCreateType = _this.handleCreateType.bind(_assertThisInitialized(_this));
     _this.clearFields = _this.clearFields.bind(_assertThisInitialized(_this));
-    _this.handleDeleteType = _this.handleDeleteType.bind(_assertThisInitialized(_this));
+    _this.handleStopEditing = _this.handleStopEditing.bind(_assertThisInitialized(_this));
+    _this.handleStartEditing = _this.handleStartEditing.bind(_assertThisInitialized(_this));
+    _this.handleSaveEditChanges = _this.handleSaveEditChanges.bind(_assertThisInitialized(_this));
     return _this;
   } //mounts Main component and obtain all expenses in database, adding it to expense state
 
@@ -16316,6 +16443,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this5 = this;
 
       event.preventDefault();
+      console.log(this.state.type);
       axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/type?type=".concat(this.state.type)).then(function (deletedType) {
         console.log("deleted type is: " + deletedType);
 
@@ -16339,7 +16467,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
               //update expense whose type got deleted. it will become Other
               axios__WEBPACK_IMPORTED_MODULE_5___default().put('/api/v1.0/expense', {
                 expenseId: expense._id,
-                newTypeId: typeOther._id
+                newTypeId: typeOther
               }).then(function (results) {
                 console.log("expenses updated");
                 expense.type.name = "Other";
@@ -16479,18 +16607,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
           });
         }
       });
-    }
-  }, {
-    key: "handleEdit",
-    value: function handleEdit(expenseId) {
-      console.log("editing expense");
-      axios__WEBPACK_IMPORTED_MODULE_5___default().put('/api/v1.0/expense', {
-        expenseId: expense._id,
-        newTypeId: typeOther._id
-      }).then(function (results) {
-        console.log("expenses updated");
-        expense.type.name = "Other";
-      });
     } //obtains all expenses when user clicks search all button. Useful for getting the whole list again without refreshing the page
 
   }, {
@@ -16538,6 +16654,95 @@ var Main = /*#__PURE__*/function (_React$Component) {
         showModalError: false,
         displayLoginButton: false
       });
+    }
+  }, {
+    key: "handleStartEditing",
+    value: function handleStartEditing(expenseId) {
+      //show inputs and buttons for editing
+      $(".".concat(expenseId, " select")).removeClass("hide");
+      $(".".concat(expenseId, " select")).addClass("view");
+      $(".".concat(expenseId, " input")).removeClass("hide");
+      $(".".concat(expenseId, " input")).addClass("view");
+      $(".".concat(expenseId, " td div")).removeClass("view");
+      $(".".concat(expenseId, " td div")).addClass("hide");
+      $(".".concat(expenseId, " .editButtons")).removeClass("hide");
+      $(".".concat(expenseId, " .editButtons")).addClass("view");
+      $(".".concat(expenseId, " .defaultButtons")).removeClass("view");
+      $(".".concat(expenseId, " .defaultButtons")).addClass("hide");
+    }
+  }, {
+    key: "handleStopEditing",
+    value: function handleStopEditing(expenseId) {
+      //hide info and other buttons
+      $(".".concat(expenseId, " td div")).removeClass("hide");
+      $(".".concat(expenseId, " td div")).addClass("view");
+      $(".".concat(expenseId, " select")).removeClass("show");
+      $(".".concat(expenseId, " select")).addClass("hide");
+      $(".".concat(expenseId, " input")).removeClass("view");
+      $(".".concat(expenseId, " input")).addClass("hide");
+      $(".".concat(expenseId, " .defaultButtons")).removeClass("hide");
+      $(".".concat(expenseId, " .defaultButtons")).addClass("view");
+      $(".".concat(expenseId, " .editButtons")).removeClass("view");
+      $(".".concat(expenseId, " .editButtons")).addClass("hide");
+      this.setState({
+        newDate: "",
+        newType: "",
+        newDesc: "",
+        newAmount: ""
+      });
+    }
+  }, {
+    key: "handleSaveEditChanges",
+    value: function handleSaveEditChanges(expenseId) {
+      var _this9 = this;
+
+      var splitDate = this.state.newDate.split("-");
+      var newType = this.state.typeDropDown.find(function (type) {
+        return type.name == _this9.state.newType;
+      });
+      axios__WEBPACK_IMPORTED_MODULE_5___default().put('/api/v1.0/expense', {
+        expenseId: expenseId,
+        newYear: splitDate[0],
+        newMonth: splitDate[1],
+        newDay: splitDate[2],
+        newTypeId: newType,
+        newDesc: this.state.newDesc,
+        newAmount: this.state.newAmount
+      }).then(function (results) {
+        console.log("expense updated : ");
+        var updatedExpense = results.data;
+        console.log(updatedExpense);
+
+        var arrayOfExpenses = _toConsumableArray(_this9.state.expenses);
+
+        var targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
+          return expense._id == updatedExpense._id;
+        }); //replace edited expense on the table.
+
+        arrayOfExpenses[targetedExpenseIndex] = updatedExpense;
+
+        _this9.setState({
+          expenses: arrayOfExpenses
+        });
+
+        _this9.handleStopEditing(expenseId);
+      })["catch"](function (error) {
+        console.log(error);
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this9.setState({
+            displayLoginButton: true
+          });
+        }
+
+        if (error.response.data != undefined) {
+          _this9.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        }
+      });
     } //clears all fiels in the form
 
   }, {
@@ -16575,6 +16780,22 @@ var Main = /*#__PURE__*/function (_React$Component) {
         searchAll: this.searchAll,
         handleDeleteType: this.handleDeleteType
       };
+      var expenseTableProps = {
+        clearFields: this.clearFields,
+        expenses: this.state.expenses,
+        handleDelete: this.handleDelete,
+        typeDropDown: this.state.typeDropDown,
+        handleSaveEditChanges: this.handleSaveEditChanges,
+        handleStartEditing: this.handleStartEditing,
+        handleStopEditing: this.handleStopEditing,
+        handleChange: this.handleChange,
+        newYear: this.state.newYear,
+        newDay: this.state.newDay,
+        newType: this.state.newType,
+        newDesc: this.state.newDesc,
+        newMonth: this.state.newMonth,
+        newAmount: this.state.newAmount
+      };
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "dashboard"
@@ -16593,11 +16814,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         showModalError: this.state.showModalError,
         errorMessages: this.state.Message,
         displayLoginButton: this.state.displayLoginButton
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, {
-        expenses: this.state.expenses,
-        handleDelete: this.handleDelete,
-        handleEdit: this.handleEdit
-      }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Navigate, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, expenseTableProps))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Navigate, {
         to: "/login"
       }));
     }
@@ -17422,13 +17639,17 @@ grecaptcha.ready(function () {
   \********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__, module.id */
+/*! CommonJS bailout: exports is used directly at 3:0-7 */
+/*! CommonJS bailout: exports.push(...) prevents optimization as exports is passed as call context at 5:0-12 */
+/*! CommonJS bailout: exports is used directly at 7:17-24 */
+/*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n    width: 100%;\n    max-width: 800px;\n    margin: auto;\n}\n\n/* REGISTER PAGE  */\n.form-register {\n    width: 100%;\n    max-width: 650px;\n    padding: 5px;\n    margin: auto;\n  }\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0; /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text; /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n}\n\n.badge {\n    font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n    font-size: .875rem;\n  }\n\n  .feather {\n    width: 16px;\n    height: 16px;\n    vertical-align: text-bottom;\n  }\n\n  /*\n   * Sidebar\n   */\n\n  .sidebar {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 100; /* Behind the navbar */\n    padding: 48px 0 0; /* Height of navbar */\n    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n  }\n\n  @media (max-width: 767.98px) {\n    .sidebar {\n      top: 5rem;\n    }\n  }\n\n  .sidebar-sticky {\n    position: relative;\n    top: 0;\n    height: calc(100vh - 48px);\n    padding-top: .5rem;\n    overflow-x: hidden;\n    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */\n  }\n\n  @supports ((position: -webkit-sticky) or (position: sticky)) {\n    .sidebar-sticky {\n      position: -webkit-sticky;\n      position: sticky;\n    }\n  }\n\n  .sidebar .nav-link {\n    font-weight: 500;\n    color: #333;\n  }\n\n  .sidebar .nav-link .feather {\n    margin-right: 4px;\n    color: #999;\n  }\n\n  .sidebar .nav-link.active {\n    color: #007bff;\n  }\n\n  .sidebar .nav-link:hover .feather,\n  .sidebar .nav-link.active .feather {\n    color: inherit;\n  }\n\n  .sidebar-heading {\n    font-size: .75rem;\n    text-transform: uppercase;\n  }\n\n  /*\n   * Navbar\n   */\n\n  .navbar-brand {\n    padding-top: .75rem;\n    padding-bottom: .75rem;\n    font-size: 1rem;\n  }\n\n  .navbar .navbar-toggler {\n    top: .25rem;\n    right: 1rem;\n  }\n\n  .navbar .form-control {\n    padding: .75rem 1rem;\n    border-width: 0;\n    border-radius: 0;\n  }\n\n  .form-control-dark {\n    color: #fff;\n    background-color: rgba(255, 255, 255, .1);\n    border-color: rgba(255, 255, 255, .1);\n  }\n\n  .form-control-dark:focus {\n    border-color: transparent;\n    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n  }\n\n", ""]);
+exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n.testing {\n    color:blue\n}\n\n\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n    width: 100%;\n    max-width: 1000px;\n    margin: auto;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n    width: 100%;\n    max-width: 650px;\n    padding: 5px;\n    margin: auto;\n  }\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0; /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text; /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n}\n\n.badge {\n    font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n    font-size: .875rem;\n  }\n\n  .feather {\n    width: 16px;\n    height: 16px;\n    vertical-align: text-bottom;\n  }\n\n  /*\n   * Sidebar\n   */\n\n  .sidebar {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 100; /* Behind the navbar */\n    padding: 48px 0 0; /* Height of navbar */\n    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n  }\n\n\n\n  .sidebar-sticky {\n    position: relative;\n    top: 0;\n    height: calc(100vh - 48px);\n    padding-top: .5rem;\n    overflow-x: hidden;\n    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */\n  }\n\n  @supports ((position: -webkit-sticky) or (position: sticky)) {\n    .sidebar-sticky {\n      position: -webkit-sticky;\n      position: sticky;\n    }\n  }\n\n  .sidebar .nav-link {\n    font-weight: 500;\n    color: #333;\n  }\n\n  .sidebar .nav-link .feather {\n    margin-right: 4px;\n    color: #999;\n  }\n\n  .sidebar .nav-link.active {\n    color: #007bff;\n  }\n\n  .sidebar .nav-link:hover .feather,\n  .sidebar .nav-link.active .feather {\n    color: inherit;\n  }\n\n  .sidebar-heading {\n    font-size: .75rem;\n    text-transform: uppercase;\n  }\n\n  /*\n   * Navbar\n   */\n\n  .navbar-brand {\n    padding-top: .75rem;\n    padding-bottom: .75rem;\n    font-size: 1rem;\n  }\n\n  .navbar .navbar-toggler {\n    top: .25rem;\n    right: 1rem;\n  }\n\n  .navbar .form-control {\n    padding: .75rem 1rem;\n    border-width: 0;\n    border-radius: 0;\n  }\n\n  .form-control-dark {\n    color: #fff;\n    background-color: rgba(255, 255, 255, .1);\n    border-color: rgba(255, 255, 255, .1);\n  }\n\n  .form-control-dark:focus {\n    border-color: transparent;\n    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n  }\n\n\n@media (max-width: 544px) {\n  table {font-size:0.9rem;}\n}\n@media (min-width: 544px) {\n  table {font-size:0.9rem;}\n}\n\n@media (min-width: 768px) {\n  table {font-size:1rem;}\n}\n\n@media (min-width: 992px) {\n  table {font-size:1rem;}\n}\n\n@media (min-width: 1200px) {\n  table {font-size:1.1rem;}\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -17441,6 +17662,7 @@ module.exports = exports;
   \******************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__, module.id */
+/*! CommonJS bailout: module.exports is used directly at 19:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var api = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
@@ -17471,6 +17693,7 @@ module.exports = content.locals || {};
   \****************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__.nc, __webpack_require__.* */
+/*! CommonJS bailout: module.exports is used directly at 230:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";

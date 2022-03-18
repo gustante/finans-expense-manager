@@ -6,7 +6,7 @@ exports.expenseValidator = [
 
     check("day").escape().trim().isInt({ min: 1, max: 31 }).withMessage("Please enter a valid day"),
 
-    check("year").escape().trim().isLength({ min: 4, max: 4 }).withMessage("Invalid value for year").isInt().withMessage("Please enter a valid year"),
+    check("year").escape().trim().isLength({ min: 4, max: 4 }).withMessage("Please enter a valid year").isInt().withMessage("Please enter a valid year"),
 
     check("type").escape().unescape().trim().isLength({min: 2}).withMessage("Please choose a type"),
 
@@ -39,5 +39,14 @@ exports.userLoginValidator = [
     check("password").escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters"),
     check("email").escape().trim().isEmail().withMessage("Please enter a valid email"),
 
+]
+
+exports.editExpenseValidator = [
+    check("newMonth").optional({checkFalsy: true}).escape().trim().isInt({ min: 1, max: 12 }).withMessage("Please select a valid month"),
+    check("newDay").optional({checkFalsy: true}).escape().trim().isInt({ min: 1, max: 31 }).withMessage("Please enter a valid day"),
+    check("newYear").optional({checkFalsy: true}).escape().trim().isLength({ min: 4, max: 4 }).withMessage("Please enter a valid year").isInt().withMessage("Please enter a valid year"),
+    check("newType").optional({checkFalsy: true}).escape().unescape().trim().isLength({min: 2}).withMessage("Please choose a type"),
+    check("newDesc").optional({checkFalsy: true}).escape().unescape().trim().isLength({min: 1}).withMessage("Please enter a description"),
+    check("newAmount").optional({checkFalsy: true}).escape().isNumeric().withMessage("Please enter a valid amount"),
 ]
 

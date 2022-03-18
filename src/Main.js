@@ -31,6 +31,10 @@ class Main extends React.Component {
             amount: "",
             typeName: "",
             typeBudget: "",
+            newDate: "",
+            newType: "",
+            newDesc: "",
+            newAmount: "",
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
             displayLoginButton: false,
@@ -41,13 +45,15 @@ class Main extends React.Component {
         this.handleExpenseSubmit = this.handleExpenseSubmit.bind(this);
         this.handleExpenseSearch = this.handleExpenseSearch.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
+        this.handleDeleteType = this.handleDeleteType.bind(this);
         this.searchAll = this.searchAll.bind(this);
         this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
         this.handleCloseError = this.handleCloseError.bind(this);
         this.handleCreateType = this.handleCreateType.bind(this);
         this.clearFields = this.clearFields.bind(this);
-        this.handleDeleteType = this.handleDeleteType.bind(this);
+        this.handleStopEditing = this.handleStopEditing.bind(this);
+        this.handleStartEditing = this.handleStartEditing.bind(this);
+        this.handleSaveEditChanges = this.handleSaveEditChanges.bind(this);
 
     }
 
@@ -235,7 +241,7 @@ class Main extends React.Component {
 
     handleDeleteType(event) {
         event.preventDefault();
-
+        console.log(this.state.type)
         axios.delete(`/api/v1.0/type?type=${this.state.type}`)
             .then(deletedType => {
                 console.log("deleted type is: " + deletedType)
@@ -246,7 +252,7 @@ class Main extends React.Component {
                 for (let expense of this.state.expenses) {
                     if (expense.type.name == this.state.type) {
                         //update expense whose type got deleted. it will become Other
-                        axios.put('/api/v1.0/expense', { expenseId: expense._id, newTypeId: typeOther._id })
+                        axios.put('/api/v1.0/expense', { expenseId: expense._id, newTypeId: typeOther })
                             .then(results => {
                                 console.log("expenses updated")
                                 expense.type.name = "Other";
@@ -372,14 +378,6 @@ class Main extends React.Component {
             });
     }
 
-    handleEdit(expenseId){
-        console.log("editing expense")
-        axios.put('/api/v1.0/expense', { expenseId: expense._id, newTypeId: typeOther._id })
-                            .then(results => {
-                                console.log("expenses updated")
-                                expense.type.name = "Other";
-                            })
-    }
 
     //obtains all expenses when user clicks search all button. Useful for getting the whole list again without refreshing the page
     searchAll(e) {
@@ -416,6 +414,86 @@ class Main extends React.Component {
         this.setState({ showModalError: false,
                     displayLoginButton: false
         });
+    }
+
+    handleStartEditing(expenseId) {
+        //show inputs and buttons for editing
+        $(`.${expenseId} select`).removeClass("hide")
+        $(`.${expenseId} select`).addClass("view")
+        $(`.${expenseId} input`).removeClass("hide")
+        $(`.${expenseId} input`).addClass("view")
+        $(`.${expenseId} td div`).removeClass("view")
+        $(`.${expenseId} td div`).addClass("hide")
+        $(`.${expenseId} .editButtons`).removeClass("hide")
+        $(`.${expenseId} .editButtons`).addClass("view")
+        $(`.${expenseId} .defaultButtons`).removeClass("view")
+        $(`.${expenseId} .defaultButtons`).addClass("hide")
+
+    }
+
+    handleStopEditing(expenseId) {
+        //hide info and other buttons
+        $(`.${expenseId} td div`).removeClass("hide")
+        $(`.${expenseId} td div`).addClass("view")
+        $(`.${expenseId} select`).removeClass("show")
+        $(`.${expenseId} select`).addClass("hide")
+        $(`.${expenseId} input`).removeClass("view")
+        $(`.${expenseId} input`).addClass("hide")
+        $(`.${expenseId} .defaultButtons`).removeClass("hide")
+        $(`.${expenseId} .defaultButtons`).addClass("view")
+        $(`.${expenseId} .editButtons`).removeClass("view")
+        $(`.${expenseId} .editButtons`).addClass("hide")
+
+        this.setState({
+                    newDate:"",
+                    newType: "",
+                    newDesc: "",
+                    newAmount: "",
+        });
+    }
+
+    handleSaveEditChanges(expenseId) {
+        let splitDate = this.state.newDate.split("-")
+        let newType = this.state.typeDropDown.find(type => type.name == this.state.newType);
+
+        axios.put('/api/v1.0/expense', { expenseId: expenseId, newYear:splitDate[0], newMonth:splitDate[1], newDay:splitDate[2], newTypeId: newType, newDesc: this.state.newDesc, newAmount: this.state.newAmount })
+            .then(results => {
+                console.log("expense updated : ")
+
+                let updatedExpense = results.data;
+                console.log(updatedExpense)
+
+                let arrayOfExpenses = [...this.state.expenses];
+
+                let targetedExpenseIndex = arrayOfExpenses.findIndex(function(expense){
+                    return expense._id == updatedExpense._id;
+                });
+
+                //replace edited expense on the table.
+                arrayOfExpenses[targetedExpenseIndex] = updatedExpense
+
+                this.setState({ expenses: arrayOfExpenses });
+
+                this.handleStopEditing(expenseId)
+
+
+            })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+
+                }
+                if(error.response.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                }
+            });
+
     }
 
     //clears all fiels in the form
@@ -455,6 +533,23 @@ class Main extends React.Component {
             handleDeleteType: this.handleDeleteType,
         }
 
+        let expenseTableProps = {
+            clearFields: this.clearFields,
+            expenses:this.state.expenses,
+            handleDelete:this.handleDelete,
+            typeDropDown:this.state.typeDropDown,
+            handleSaveEditChanges:this.handleSaveEditChanges,
+            handleStartEditing:this.handleStartEditing,
+            handleStopEditing:this.handleStopEditing,
+            handleChange:this.handleChange,
+            newYear:this.state.newYear,
+            newDay:this.state.newDay,
+            newType:this.state.newType,
+            newDesc:this.state.newDesc,
+            newMonth:this.state.newMonth,
+            newAmount:this.state.newAmount,
+        }
+
 
         const isLoggedIn = this.props.isLoggedIn;
 
@@ -471,7 +566,7 @@ class Main extends React.Component {
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
                         <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} />
                         <Form {...formProps} />
-                        <ExpenseTable expenses={this.state.expenses} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
+                        <ExpenseTable {...expenseTableProps} />
                     </div>
 
                 </>

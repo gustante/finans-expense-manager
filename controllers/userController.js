@@ -20,7 +20,7 @@ exports.createUser = (req, res) => {
     )
         .then(response => {
             //If validation fails or score is too low, push an error inside Error's array
-            if (!response.data.success || response.data.score < 0.80) {
+            if (!response.data.success || response.data.score < 0.2) {
                 console.log('reCAPTCHA failed');
                 errors.push({ msg: 'reCAPTCHA failed. Score: ' + response.data.score + ", Success: " + response.data.success })
             }
@@ -40,7 +40,9 @@ exports.createUser = (req, res) => {
 
                 let type = new Type({
                     name: 'Other',
-                    user: user._id
+                    user: user._id,
+                    budget: null,
+                    sumOfExpenses: 0,
                 });
 
                 user.types.push(type)//every new user starts with a "Other" type.
@@ -91,7 +93,7 @@ exports.login = (req, res) => {
         )
     .then(response => {
         //If validation fails or score is too low, push an error inside Error's array
-        if (!response.data.success || response.data.score < 0.70) {
+        if (!response.data.success || response.data.score < 0.2) {
             console.log('reCAPTCHA failed');
             //errors.push({ msg: 'reCAPTCHA failed. Score: ' + response.data.score + ", Success: " + response.data.success })
 
@@ -100,7 +102,7 @@ exports.login = (req, res) => {
         }
     })
     .then(() => {
-        if (errors.length < 1) {        
+        if (errors.length < 1) {
             User.findOne({ email: req.body.email })
                 .populate('types')
                 .exec()

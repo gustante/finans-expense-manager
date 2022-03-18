@@ -109,7 +109,7 @@ class Form extends React.Component {
                                     Month:
 
                                 </label>
-                                <select aria-required="true" name="month" className="form-control" value={this.props.month} name="month" onChange={this.props.handleChange}>
+                                <select id="month" aria-required="true" name="month" className="form-control" value={this.props.month} name="month" onChange={this.props.handleChange}>
                                     <option value={this.props.month}>{this.props.month}</option>
                                     <option value=""></option>
                                     <option value="1">1</option>
@@ -131,7 +131,7 @@ class Form extends React.Component {
                                 <label htmlFor="day" className="form-label">
                                     Day:
                                 </label>
-                                <input type="text" name="day" className="form-control" value={this.props.day} onChange={this.props.handleChange} />
+                                <input type="text" id="day" name="day" className="form-control" value={this.props.day} onChange={this.props.handleChange} />
 
                             </div>
 
@@ -140,7 +140,7 @@ class Form extends React.Component {
                                     Year:
 
                                 </label>
-                                <input type="text" name="year" className="form-control" value={this.props.year} onChange={this.props.handleChange} />
+                                <input type="text" id="year" name="year" className="form-control" value={this.props.year} onChange={this.props.handleChange} />
                             </div>
 
                             <div className="col-md-2 col-sm-3">
@@ -148,18 +148,18 @@ class Form extends React.Component {
                                     Amount:
 
                                 </label>
-                                <input type="text" name="amount" className="form-control" value={this.props.amount} onChange={this.props.handleChange} />
+                                <input type="text" id="amount" name="amount" className="form-control" value={this.props.amount} onChange={this.props.handleChange} />
                             </div>
                         </div>
 
 
                         <div className="row justify-content-start">
                             <div className="col-lg-4 col-md-4 col-sm-6">
-                                <label htmlFor="description" className="form-label">
+                                <label htmlFor="desc" className="form-label">
                                     Description:
 
                                 </label>
-                                <input type="text" name="desc" value={this.props.desc} className="form-control" onChange={this.props.handleChange} />
+                                <input type="text" id="desc" name="desc" value={this.props.desc} className="form-control" onChange={this.props.handleChange} />
                             </div>
 
                             <div className="col-lg-3 col-md-3 col-sm-6">
@@ -167,7 +167,7 @@ class Form extends React.Component {
                                     Type
 
                                 </label>
-                                <select id="typeSelector" className="form-control" name="type" value={this.props.type} onChange={this.props.handleChange}>
+                                <select id="type" className="form-control" name="type" value={this.props.type} onChange={this.props.handleChange}>
                                     <option value={this.props.type}>{this.props.type}</option>
                                     {this.props.typeDropDown.map((type, index) => <option key={index} value={type.name}>{type.name}</option>)}
                                 </select>
@@ -224,7 +224,7 @@ class Form extends React.Component {
                                         <i className="fas fa-cog"></i>
                                     </button>
 
-                                    <div style={{position: "absolute", zIndex: "1"}} className="collapse m-2" id="collapseExample">
+                                    <div style={{ position: "absolute", zIndex: "1" }} className="collapse m-2" id="collapseExample">
                                         <div className="card card-body">
                                             <label htmlFor="typeName" className="form-label">
                                                 New type
@@ -236,7 +236,7 @@ class Form extends React.Component {
                                                 Budget
 
                                             </label>
-                                            <input aria-label="create new type budget" id="typeName" name="typeBudget" type="text" value={this.props.typeBudget} className="form-control" onChange={this.props.handleChange} />
+                                            <input aria-label="create new type budget" id="typeBudget" name="typeBudget" type="text" value={this.props.typeBudget} className="form-control" onChange={this.props.handleChange} />
 
 
 

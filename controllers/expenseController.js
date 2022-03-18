@@ -26,20 +26,6 @@ exports.getAllExpenses = (req, res) => {
     //             })
 
 
-    //to update sumOfExpenses of types
-    // for(type of user.types){
-    //     console.log(type)
-    //     for(expense of user.expenses){
-    //         if(expense.month == 3 && expense.type.name == type.name){
-    //             type.sumOfExpenses += expense.amount;
-
-    //         }
-    //     }
-    //     type.save()
-
-    //}
-
-
 
     if (req.session.isAuth) {
         User.findOne({ _id: req.session.userId })//find the user that's making the request
@@ -52,7 +38,7 @@ exports.getAllExpenses = (req, res) => {
             .exec()
             .then(user => {
 
-
+                //to update sumOfExpenses of types
                 // for(type of user.types){
 
                 //     for(expense of user.expenses){
@@ -127,6 +113,9 @@ exports.getExpense = (req, res) => {
                 if (req.query.amount != 0) {
                     user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
                 }
+                if (req.query.desc != 0) {
+                    user.expenses = user.expenses.filter(expense => expense.description == req.query.desc)
+                }
 
                 //most recent expenses will be placed first
                 user.expenses.sort((a, b) => {
@@ -165,7 +154,7 @@ exports.postExpense = (req, res) => {
             .then(response => {
 
                 //If validation fails or score is too low, push an error inside Error's array
-                if (!response.data.success || response.data.score < 0.70) {
+                if (!response.data.success || response.data.score < 0.2) {
                     errors.push({ msg: 'reCAPTCHA failed. Score: ' + response.data.score + ", Success: " + response.data.success })
 
                     let rError = new customError(['reCAPTCHA failed', 'Score: ' +  response.data.score], 401)
@@ -229,9 +218,9 @@ exports.postExpense = (req, res) => {
                                         if (sumOfExpenses > budget)
                                             smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`)
                                         else if (sumOfExpenses >= budget * 0.7)
-                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses}, your budget is ${budget}`)
+                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`)
                                         else if (sumOfExpenses >= budget * 0.5)
-                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses}, your budget is ${budget}`)
+                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`)
                                     }
 
 
@@ -336,35 +325,94 @@ exports.deleteExpense = (req, res) => {
 }
 
 exports.updateExpense = (req, res) => {
+
     if (req.session.isAuth) {
+        const errors = (validationResult(req)).array();
 
-        User.findOne({ _id: req.session.userId })//find the user that's making the request
-            .populate('expenses')
-            //Expense.findOneAndUpdate({ "_id": req.body.expenseId }, { type: req.body.newTypeId }, { new: true })
-            .exec()
-            .then(user => {
-                if (req.body.newTypeId)
-                    console.log('its a request to change type')
-                let targetExpense = user.expenses.find(expense => expense._id == req.body.expenseId);
+        if (errors.length < 1) {
 
-                if (req.body.newTypeId != "") {
-                    targetExpense.type = req.body.newTypeId
+            User.findOne({ _id: req.session.userId })
+                .populate({
+                    path: 'expenses',
+                    populate: { path: 'type' }
+                })
+                .exec()
+                .then(user => {
+                    let targetExpense = user.expenses.find(expense => expense._id == req.body.expenseId);
+                        console.log(req.body)
+                        if(req.body.newYear && req.body.newYear != ""){
+                            console.log("year will be changed")
+                            targetExpense.year = req.body.newYear
+                        } if(req.body.newMonth && req.body.newMonth != ""){
+                            console.log("month will be changed")
+                            targetExpense.month = req.body.newMonth
+                        } if(req.body.newDay && req.body.newDay != ""){
+                            console.log("day will be changed")
+                            targetExpense.day = req.body.newDay
+                        } if(req.body.newDesc && req.body.newDesc != ""){
+                            console.log("desc will be changed")
+                            targetExpense.description = req.body.newDesc
+                        } if(req.body.newAmount && req.body.newAmount != ""){
+                            console.log("amount will be changed")
+                            targetExpense.type.sumOfExpenses -= targetExpense.amount //remove the old amount from type
+                            targetExpense.type.sumOfExpenses += +req.body.newAmount//add new amount from type
+                            targetExpense.amount = req.body.newAmount//change the expense info as well
+
+                            console.log("after changing amount is: " + targetExpense.amount)
+                        } if(req.body.newTypeId && req.body.newTypeId != ""){
+                            console.log("before changing type amount is: " + targetExpense.amount)
+                            targetExpense.type.sumOfExpenses -= targetExpense.amount;//remove from the old type
+                            targetExpense.type.save() //save old type
+
+                            Type.findOne({ _id: req.body.newTypeId._id})//get new type
+                            .exec()
+                            .then(type=>{
+                                type.sumOfExpenses += targetExpense.amount//add amount to new type
+                                targetExpense.type = type //change type in the expense info
+                                type.save() //save type
+                                targetExpense.save() //save expense
+                                    .then(savedExpense=>{
+                                        console.log("sent here")
+                                        res.send(savedExpense)
+                                    })
+                                    .catch(error => {
+                                        console.log(error)
+                                        res.send(error)
+                                    });
+
+                            })
+
+                        } else {
+                            console.log("sent there")
+                            targetExpense.type.save() //save type
+                            targetExpense.save()
+                                .then(savedExpense=>{
+                                    res.send(savedExpense)
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    res.send(error)
+                                });
+                        }
+
+
+
+                })
+                .catch(error => {
+                    console.log(error)
+                    res.send(error)
+                });
+            } else {
+                    let errorMessages = [];
+                    for (let i of errors) {
+                        errorMessages.push(i.msg)
+                    }
+
+                    let errorObject = new customError(errorMessages, 422);
+                    console.log("validation error sent")
+                    res.status(errorObject.status).send(errorObject);
 
                 }
-
-
-
-
-                targetExpense.save()
-                    .then(savedExpense => {
-                        res.send(savedExpense);
-                    })
-
-            })
-            .catch(error => {
-                console.log(error)
-                res.send(error)
-            });
 
     } else {
         let errorObject = new customError(['Please log in first'], 401);
