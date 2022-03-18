@@ -173,7 +173,13 @@ exports.logout = (req, res) => {
 exports.verifyAuth = (req, res) => {
     try {
         if (req.session.isAuth) {
-            res.status(200).send({ _id: req.session.userId })
+            User.findOne({ _id: req.session.userId })
+            .exec()
+            .then(user=>{
+                user.password = ""
+                res.send(user)
+            })
+
         } else {
             throw new customError(['User not logged in'], 404)
         }

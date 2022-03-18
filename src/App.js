@@ -48,9 +48,16 @@ class App extends React.Component {
     componentDidMount() {
         axios.get("/api/v1.0/user/verifyAuth")
             .then(results => {
+                const { _id, firstName, lastName, email, phoneNumber } = results.data;
                 this.setState({
                     isLoggedIn: true,
-                    userId: results.data._id
+                    userId: _id,
+                    firstName: firstName,
+                    lastName: lastName,
+                    password: "",
+                    email: email,
+                    phoneNumber: phoneNumber,
+
                 });
 
             })
