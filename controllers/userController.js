@@ -20,7 +20,7 @@ exports.createUser = (req, res) => {
     )
         .then(response => {
             //If validation fails or score is too low, push an error inside Error's array
-            if (!response.data.success || response.data.score < 0.80) {
+            if (!response.data.success || response.data.score < 0.2) {
                 console.log('reCAPTCHA failed');
                 errors.push({ msg: 'reCAPTCHA failed. Score: ' + response.data.score + ", Success: " + response.data.success })
             }
@@ -40,7 +40,9 @@ exports.createUser = (req, res) => {
 
                 let type = new Type({
                     name: 'Other',
-                    user: user._id
+                    user: user._id,
+                    budget: null,
+                    sumOfExpenses: 0,
                 });
 
                 user.types.push(type)//every new user starts with a "Other" type.
@@ -80,6 +82,27 @@ exports.createUser = (req, res) => {
 }
 
 exports.login = (req, res) => {
+    const errors = (validationResult(req)).array();
+
+    //verify token agaisnt reCAPTCHA service
+    axios.post('https://www.google.com/recaptcha/api/siteverify',
+            querystring.stringify({
+                secret: process.env.RECAPTCHA_SECRET,
+                response: req.body.token
+            })
+        )
+    .then(response => {
+        //If validation fails or score is too low, push an error inside Error's array
+        if (!response.data.success || response.data.score < 0.2) {
+            console.log('reCAPTCHA failed');
+            //errors.push({ msg: 'reCAPTCHA failed. Score: ' + response.data.score + ", Success: " + response.data.success })
+
+            let rError = new customError(['reCAPTCHA failed', 'Score: ' +  response.data.score], 401)
+            res.status(rError.status).send(rError);
+        }
+    })
+    .then(() => {
+        if (errors.length < 1) {
             User.findOne({ email: req.body.email })
                 .populate('types')
                 .exec()
@@ -105,13 +128,7 @@ exports.login = (req, res) => {
                         user.password = "";
                         req.session.userId = user._id;
                         req.session.isAuth = true;
-
-                        console.log("saved user")
-                        console.log(user)
                         res.send(user);
-
-
-
                     }
 
                 })
@@ -119,6 +136,20 @@ exports.login = (req, res) => {
                     console.log(error)
                     res.status(error.status).send(error);
                 });
+            } else { // if there are errors, extracts messages from validation errors array and send to frontend
+                let errorMessages = [];
+                for (let i of errors) {
+                    errorMessages.push(i.msg)
+                }
+
+                let errorObject = new customError(errorMessages, 422);
+
+                res.status(errorObject.status).send(errorObject);
+
+            }
+            })
+
+
 
 }
 
@@ -133,6 +164,7 @@ exports.logout = (req, res) => {
             throw new customError(['Unable to log out. User not logged in'], 404)
         }
     } catch (error) {
+        console.log(error)
         res.status(error.status).send(error);
     }
 
@@ -146,6 +178,7 @@ exports.verifyAuth = (req, res) => {
             throw new customError(['User not logged in'], 404)
         }
     } catch (error) {
+        console.log(error)
         res.status(error.status).send(error);
     }
 
