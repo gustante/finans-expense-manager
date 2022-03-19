@@ -10,7 +10,7 @@ import Footer from "./Footer.js"
 import Register from "./Register.js"
 import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
-import UserAccount from './UserAccount';
+import MyAccount from './MyAccount';
 import Budgets from "./Budgets.js"
 import UserInfo from "./UserInfo.js"
 import axios from 'axios';
@@ -260,7 +260,7 @@ class App extends React.Component {
                     <Route path="/dashboard" element={<Main isLoggedIn={this.state.isLoggedIn} userId={this.state.userId} />} />
                     <Route path="/login" element={<Login handleLogIn={this.handleLogIn} handleGoogleLogIn={this.handleGoogleLogIn} handleChange={this.handleChange} isLoggedIn={this.state.isLoggedIn} />} />
                     <Route path="/register" element={<Register {...registerFormProps} />} />
-                    <Route path="/userAccount" element={<UserAccount />}>
+                    <Route path="/myAccount" element={<MyAccount />}>
                         <Route path="userInfo" element={<UserInfo userInfo={this.state} />} />
                         <Route path="userBudgets" element={<Budgets isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>

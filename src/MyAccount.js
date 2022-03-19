@@ -1,7 +1,7 @@
 import React from 'react';
 import Budgets from "./Budgets.js"
 import UserInfo from "./UserInfo.js"
-import { Route, Link, Outlet } from "react-router-dom";
+import { Route, Link, Outlet, Navigate } from "react-router-dom";
 
 const navLinks = [
     {
@@ -14,7 +14,7 @@ const navLinks = [
     }
 ]
 
-class UserAccount extends React.Component {
+class MyAccount extends React.Component {
 
 
     /* <nav className="navbar-light col-12 col-sm-3 bg-light px-3">
@@ -30,7 +30,7 @@ class UserAccount extends React.Component {
                         </ul>
                     </nav> */
     render() {
-        
+
         return (
             <>
 
@@ -38,12 +38,12 @@ class UserAccount extends React.Component {
                     <nav className="navbar-dark my-3 text-dark col-12 col-md-3 bg-light px-3 py-3">
                         <ul className="nav flex-column">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/userAccount/userInfo">
+                                <Link className="nav-link" to="/myAccount/userInfo">
                                     <i className="fas fa-user"></i> Account info
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/userAccount/userBudgets">
+                                <Link className="nav-link" to="/myAccount/userBudgets">
                                     <i className="fas fa-cash-register"></i> Budgets
                                 </Link>
                             </li>
@@ -51,8 +51,8 @@ class UserAccount extends React.Component {
 
                         </ul>
                     </nav>
-                                        
-                    <Outlet />                    
+
+                    <Outlet />
 
 
 
@@ -63,5 +63,5 @@ class UserAccount extends React.Component {
         )
     }
 }
-export default UserAccount;
+export default MyAccount;
 

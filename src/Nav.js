@@ -30,7 +30,7 @@ class Nav extends React.Component {
                                     <>
                                         <li className="nav-item btn"> <Link to="/dashboard" className="nav-link" >Dashboard</Link>
                                         </li>
-                                        <li className="nav-item btn"> <Link to="/userAccount" className="nav-link" >My Account</Link>
+                                        <li className="nav-item btn"> <Link to="/myAccount/userInfo" className="nav-link" >My Account</Link>
                                         </li>
                                         <li className="nav-item btn btn-outline-light"> <Link to="/" className="nav-link" onClick={this.props.handleLogOut}>Log out</Link>
                                         </li>
