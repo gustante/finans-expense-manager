@@ -104,7 +104,7 @@ class Form extends React.Component {
                     <form id="expenseForm" onSubmit={this.props.handleExpenseSubmit}>
                         <div className="row">
 
-                            <div className="col-md-2 col-sm-3">
+                            <div className="col-md-2 col-4">
                                 <label htmlFor="month" className="form-label">
                                     Month:
 
@@ -127,7 +127,7 @@ class Form extends React.Component {
                                 </select>
                             </div>
 
-                            <div className="col-md-2 col-sm-3">
+                            <div className="col-md-2 col-4">
                                 <label htmlFor="day" className="form-label">
                                     Day:
                                 </label>
@@ -135,7 +135,7 @@ class Form extends React.Component {
 
                             </div>
 
-                            <div className="col-md-2 col-sm-3">
+                            <div className="col-md-2 col-4">
                                 <label htmlFor="year" className="form-label">
                                     Year:
 
@@ -143,18 +143,11 @@ class Form extends React.Component {
                                 <input type="text" id="year" name="year" className="form-control" value={this.props.year} onChange={this.props.handleChange} />
                             </div>
 
-                            <div className="col-md-2 col-sm-3">
-                                <label htmlFor="amount" className="form-label">
-                                    Amount:
-
-                                </label>
-                                <input type="text" id="amount" name="amount" className="form-control" value={this.props.amount} onChange={this.props.handleChange} />
-                            </div>
                         </div>
 
 
                         <div className="row justify-content-start">
-                            <div className="col-lg-4 col-md-4 col-sm-6">
+                            <div className="col-md-4 col-5">
                                 <label htmlFor="desc" className="form-label">
                                     Description:
 
@@ -162,7 +155,15 @@ class Form extends React.Component {
                                 <input type="text" id="desc" name="desc" value={this.props.desc} className="form-control" onChange={this.props.handleChange} />
                             </div>
 
-                            <div className="col-lg-3 col-md-3 col-sm-6">
+                            <div className="col-lg-1 col-md-2 col-2">
+                                <label htmlFor="amount" className="form-label">
+                                    Amount:
+
+                                </label>
+                                <input type="text" id="amount" name="amount" className="form-control" value={this.props.amount} onChange={this.props.handleChange} />
+                            </div>
+
+                            <div className="col-lg-3 col-md-4 col-sm-5 col-5">
                                 <label htmlFor="type" className="form-label">
                                     Type
 
