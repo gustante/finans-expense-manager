@@ -147,7 +147,7 @@ class Form extends React.Component {
 
 
                         <div className="row justify-content-start">
-                            <div className="col-md-4 col-5">
+                            <div className="col-md-4 col-12">
                                 <label htmlFor="desc" className="form-label">
                                     Description:
 
@@ -155,7 +155,7 @@ class Form extends React.Component {
                                 <input type="text" id="desc" name="desc" value={this.props.desc} className="form-control" onChange={this.props.handleChange} />
                             </div>
 
-                            <div className="col-lg-1 col-md-2 col-2">
+                            <div className="col-lg-2 col-md-2 col-4">
                                 <label htmlFor="amount" className="form-label">
                                     Amount:
 
@@ -163,7 +163,7 @@ class Form extends React.Component {
                                 <input type="text" id="amount" name="amount" className="form-control" value={this.props.amount} onChange={this.props.handleChange} />
                             </div>
 
-                            <div className="col-lg-3 col-md-4 col-sm-5 col-5">
+                            <div className="col-lg-3 col-md-4 col-sm-5 col-8">
                                 <label htmlFor="type" className="form-label">
                                     Type
 
