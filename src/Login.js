@@ -38,8 +38,8 @@ class Login extends React.Component {
 
                     <div className="form-signin mb-5 text-center">
                         <button className="btn btn-lg btn-success btn-block" onClick={this.props.handleGoogleLogIn}>Sign in with <i className="fab fa-google"></i></button>
-                        <Link to="/register">
-                            <button className="btn" ><a className="text-decoration-none" href="">or create an account</a></button>
+                        <Link className="btn text-primary" to="/register">
+                            or create an account
                         </Link>
 
                     </div>

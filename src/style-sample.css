@@ -277,8 +277,25 @@ body {
   }
 
 
+
+
 @media (max-width: 544px) {
-  table {font-size:0.9rem;}
+  table {font-size:0.8rem;
+
+        }
+table td, table th {
+    padding: 5px !important;
+    margin: 5px
+}
+.d-flex-row{
+    flex-direction: column;
+}
+input, select {
+    font-size: 80% !important;
+}
+
+
+
 }
 @media (min-width: 544px) {
   table {font-size:0.9rem;}

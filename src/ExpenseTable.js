@@ -15,7 +15,6 @@ class ExpenseTable extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps != this.props) {
-            console.log("remount")
             //get total amount of expenses whenever expense state from Main updates which generates a new table
             let sumOfExpenses = 0;
             for (let i of this.props.expenses) {
@@ -27,25 +26,24 @@ class ExpenseTable extends React.Component {
     }
 
     render() {
-        console.log(this.props.newAmount)
         return <>
             <div className="row">
                 <div className="col">
-                    <table className="table" >
+                    <table className="table table-responsive-sm" >
                         <thead>
                             <tr>
                                 <th>Date</th>
                                 <th>Type</th>
                                 <th>Description</th>
                                 <th>Amount</th>
-                                <th className="d-none d-sm-block">Edit</th>
+                                <th className="">Edit</th>
                             </tr>
                         </thead>
 
-                        <tbody>
                             {this.props.expenses.map((expense, index) =>
                                 <>
-                                    <tr className={expense._id} key={index}>
+                                    <tbody>
+                                    <tr key={index} className={expense._id} >
 
 
                                         <td>
@@ -90,7 +88,7 @@ class ExpenseTable extends React.Component {
                                         </td>
 
 
-                                        <td className="d-none d-sm-flex d-sm-flex-row">
+                                        <td className=" d-flex d-flex-row">
 
                                             <button onClick={this.props.handleSaveEditChanges.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-success" >
                                                 <i className="fas fa-check"></i>
@@ -118,33 +116,13 @@ class ExpenseTable extends React.Component {
 
 
                                     </tr>
-                                    <div className={`${expense._id} d-flex  d-sm-none`}>
-                                        <button onClick={this.props.handleSaveEditChanges.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-success" >
-                                            <i className="fas fa-check"></i>
-                                        </button>
 
+                                    </tbody>
 
-
-                                        <button onClick={this.props.handleStopEditing.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-secondary">
-                                            <i className="fas fa-times"></i>
-                                        </button>
-
-
-
-                                        <button onClick={this.props.handleStartEditing.bind(this, expense._id)} className="defaultButtons view btn h-50 m-1 btn-secondary"  >
-                                            <i className="fas fa-edit"></i>
-                                        </button>
-
-
-                                        <button onClick={this.props.handleDelete.bind(this, expense._id)} className="defaultButtons view btn h-50 m-1 btn-danger">
-                                            <i className="fas fa-trash-alt"></i>
-                                        </button>
-                                    </div>
                                 </>
                             )}
 
 
-                        </tbody>
 
 
                     </table>
