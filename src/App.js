@@ -29,6 +29,9 @@ class App extends React.Component {
             email: "",
             password: "",
             phoneNumber: "",
+            oldPassword: "",
+            newPassword: "",
+            repeatNewPassword: "",
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
             Message: [], //messages to be passed to success or error modal according to validation obtained
@@ -42,7 +45,9 @@ class App extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
         this.handleCloseError = this.handleCloseError.bind(this);
-
+        this.handleStopEditingUser = this.handleStopEditingUser.bind(this);
+        this.handleStartEditingUser = this.handleStartEditingUser.bind(this);
+        this.handleSaveEditingUser = this.handleSaveEditingUser.bind(this);
     }
 
     componentDidMount() {
@@ -232,7 +237,46 @@ class App extends React.Component {
         });
     }
 
+    handleStartEditingUser(expenseId) {
+        //show inputs and buttons for editing
+        $('#user-info input').removeClass("hide")
+        $('#user-info input').addClass("view d-inline")
 
+        $('.userInfo').removeClass("view")
+        $('.userInfo').addClass("hide")
+
+        $('.editInfo').removeClass("hide")
+        $('.editInfo').addClass("view")
+
+    }
+
+    handleStopEditingUser(expenseId) {
+        console.log("stop editing")
+
+        $('#user-info input').removeClass("view d-inline")
+        $('#user-info input').addClass("hide")
+
+        $('.userInfo').removeClass("hide")
+        $('.userInfo').addClass("view")
+
+        $('.editInfo').removeClass("view")
+        $('.editInfo').addClass("hide")
+
+        this.setState({
+                firstName:"",
+                lastName: "",
+                email: "",
+                phoneNumber: "",
+                oldPassword: "",
+                newPassword: "",
+                repeatNewPassword: ""
+        });
+    }
+
+    handleSaveEditingUser(){
+        console.log("save editing")
+        this.handleStopEditingUser()
+    }
 
 
     render() {
@@ -261,7 +305,7 @@ class App extends React.Component {
                     <Route path="/login" element={<Login handleLogIn={this.handleLogIn} handleGoogleLogIn={this.handleGoogleLogIn} handleChange={this.handleChange} isLoggedIn={this.state.isLoggedIn} />} />
                     <Route path="/register" element={<Register {...registerFormProps} />} />
                     <Route path="/myAccount" element={<MyAccount />}>
-                        <Route path="userInfo" element={<UserInfo userInfo={this.state} />} />
+                        <Route path="userInfo" element={<UserInfo userInfo={this.state} handleChange={this.handleChange} handleStartEditingUser={this.handleStartEditingUser} handleStopEditingUser={this.handleStopEditingUser} handleSaveEditingUser={this.handleSaveEditingUser} />} />
                         <Route path="userBudgets" element={<Budgets isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>
 
