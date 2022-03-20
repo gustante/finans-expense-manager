@@ -275,6 +275,8 @@ class App extends React.Component {
 
     handleSaveEditingUser(){
         console.log("save editing")
+        console.log("d cpsend to backend: ")
+        console.log(this.state)
         this.handleStopEditingUser()
     }
 

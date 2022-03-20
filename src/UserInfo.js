@@ -36,7 +36,8 @@ class UserInfo extends React.Component {
             <>
                 {isLoggedIn ? (
                     <>
-                        <div className="px-3 py-3 col-md-9">
+                        <form className="px-3 py-3 col-md-9">
+
 
                             <ul id="user-info" className="list-group">
 
@@ -66,9 +67,9 @@ class UserInfo extends React.Component {
                                 </li>
 
                                 <li className="list-group-item">
-                                    <input type="text" name="oldPassword" className="hide form-control col-3 m-1" value={this.props.userInfo.oldPassword} placeholder="Old password" onChange={this.props.handleChange}/>
-                                    <input type="text" name="newPassword" className="hide form-control col-3 m-1 " value={this.props.userInfo.newPassword} placeholder="New Password" onChange={this.props.handleChange}/>
-                                    <input type="text" name="repeatNewPassword" className="hide form-control col-4 m-1" value={this.props.userInfo.repeatNewPassword} placeholder="Repeat new password" onChange={this.props.handleChange}/>
+                                    <input type="password" name="oldPassword" className="hide form-control col-3 m-1" value={this.props.userInfo.oldPassword} placeholder="Old password" onChange={this.props.handleChange} readonly="" onfocus="this.removeAttribute('readonly');"/>
+                                    <input type="password" name="newPassword" className="hide form-control col-3 m-1 " value={this.props.userInfo.newPassword} placeholder="New Password" onChange={this.props.handleChange} readonly="" onfocus="this.removeAttribute('readonly');"/>
+                                    <input type="password" name="repeatNewPassword" className="hide form-control col-4 m-1" value={this.props.userInfo.repeatNewPassword} placeholder="Repeat new password" onChange={this.props.handleChange} readonly="" onfocus="this.removeAttribute('readonly');"/>
 
                                     <div className="view userInfo">
                                         <span className="font-weight-bold">Password:</span> ******
@@ -86,7 +87,7 @@ class UserInfo extends React.Component {
                                 <button type="button" className="btn btn-primary hide editInfo m-1" onClick={this.props.handleSaveEditingUser}>Save</button>
                                 <button type="button" className="btn btn-secondary hide editInfo m-1" onClick={this.props.handleStopEditingUser}>Cancel</button>
                             </div>
-                        </div>
+                        </form>
 
                     </>
                 ) : <Navigate to="/login" />

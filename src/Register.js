@@ -30,12 +30,12 @@ class Register extends React.Component {
 
                                 <div className="mb-3">
                                     <label htmlFor="password">Password</label>
-                                    <input type="password" name="password" minLength="6" maxLength="20" className="form-control" id="password" required onChange={this.props.handleChange}/>
+                                    <input type="password" name="password" minLength="6" maxLength="20" className="form-control" id="password" required onChange={this.props.handleChange} readonly="" onfocus="this.removeAttribute('readonly');"/>
                                 </div>
 
                                 <div className="mb-3">
                                     <label htmlFor="phoneNumber">Phone number <span className="text-muted"> US or CANADIAN)</span></label>
-                                    <input type="tel" name="phoneNumber" className="form-control" id="phoneNumber"                                                               onChange={this.props.handleChange}/>
+                                    <input type="tel" name="phoneNumber" className="form-control" id="phoneNumber"                                                               onChange={this.props.handleChange} readonly="" onfocus="this.removeAttribute('readonly');"/>
                                 </div>
                                 <button className="btn btn-primary btn-lg btn-block" type="submit">Register</button>
                             </form>

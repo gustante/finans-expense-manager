@@ -11,6 +11,9 @@
     color:blue
 }
 
+input[readonly]{
+    background-color: white !important;
+}
 
 
 /* DASHBORD(MAIN) PAGE  */
