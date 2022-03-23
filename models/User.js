@@ -7,7 +7,7 @@ const UserSchema = new Schema({
     lastName:{type: String, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    phoneNumber:{type: Number, require: false},
+    phoneNumber:{type: String, require: false},
     expenses:[{type: Schema.Types.ObjectId, ref: 'Expense'}], //every user document holds an array of references to 'Expense' documents
     types:[{type: Schema.Types.ObjectId, ref: 'Type'}], //each user will also have their own types,
     lastLoginMonth:{type: Number, require: false},

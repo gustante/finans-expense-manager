@@ -1,4 +1,4 @@
-const {check} = require('express-validator');
+const {check, body} = require('express-validator');
 
 exports.expenseValidator = [
 
@@ -38,6 +38,18 @@ exports.userLoginValidator = [
 
     check("password").escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters"),
     check("email").escape().trim().isEmail().withMessage("Please enter a valid email"),
+
+]
+
+exports.userUpdateValidator = [
+
+    check("firstName").optional({checkFalsy: true}).escape().trim().isLength({min: 2}).withMessage("Please enter a valid first name"),
+    check("lastName").optional({checkFalsy: true}).escape().trim().isLength({min: 2}).withMessage("Please enter a valid last name"),
+    check("email").optional({checkFalsy: true}).escape().trim().isEmail().withMessage("Please enter a valid email"),
+    check("phoneNumber").optional({checkFalsy: true}).escape().trim().isMobilePhone(['en-CA','en-US']).withMessage("Please enter a valid phone number (US or CANADIAN)"),
+    check("oldPassword").optional({checkFalsy: true}).escape().trim(),
+    check("newPassword").optional({checkFalsy: true}).escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters"),
+    check("repeatNewPassword").optional({checkFalsy: true}).escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters")
 
 ]
 

@@ -2,8 +2,7 @@ const router = require('express').Router();
 
 const {getAllExpenses, getExpense, postExpense, deleteExpense, updateExpense} = require("../controllers/expenseController.js");
 
-const {expenseValidator} = require('../validator.js');
-const {editExpenseValidator} = require('../validator.js');
+const {expenseValidator, editExpenseValidator} = require('../validator.js');
 
 router.get('/all', getAllExpenses) ////gets and array of all expenses
 //.get('/:id', getExpenseById) //search by id

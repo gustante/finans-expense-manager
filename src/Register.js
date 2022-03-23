@@ -40,7 +40,7 @@ class Register extends React.Component {
 
                                 <div className="mb-3">
                                     <label htmlFor="phoneNumber">Phone number <span className="text-muted"> US or CANADIAN)</span></label>
-                                    <input type="tel" name="phoneNumber" className="form-control" id="phoneNumber"                                                               onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
+                                    <input type="tel" name="phoneNumber" className="form-control" id="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"                                                               onChange={this.props.handleChange} placeholder="xxx-xxx-xxxx" readonly="" onFocus={this.removeReadonly}/>
                                 </div>
                                 <button className="btn btn-primary btn-lg btn-block" type="submit">Register</button>
                             </form>

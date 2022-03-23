@@ -210,7 +210,6 @@ class App extends React.Component {
                         });
                     }
 
-
                 });
         }
 
@@ -250,7 +249,7 @@ class App extends React.Component {
 
     }
 
-    handleStopEditingUser(expenseId) {
+    handleStopEditingUser() {
         console.log("stop editing")
 
         $('#user-info input').removeClass("view d-inline")
@@ -263,21 +262,53 @@ class App extends React.Component {
         $('.editInfo').addClass("hide")
 
         this.setState({
-                firstName:"",
-                lastName: "",
-                email: "",
-                phoneNumber: "",
                 oldPassword: "",
                 newPassword: "",
-                repeatNewPassword: ""
+                repeatNewPassword: "",
         });
     }
 
-    handleSaveEditingUser(){
+    handleSaveEditingUser(e){
+        e.preventDefault()
         console.log("save editing")
-        console.log("d cpsend to backend: ")
+        console.log("send to backend: ")
         console.log(this.state)
-        this.handleStopEditingUser()
+        axios.put('/api/v1.0/user/updateUser', {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            phoneNumber:this.state.phoneNumber.replaceAll('-', ''),
+            oldPassword: this.state.oldPassword,
+            newPassword: this.state.newPassword,
+            repeatNewPassword: this.state.repeatNewPassword })
+            .then(results => {
+
+                console.log(results.data)
+                this.setState({
+                    firstName: results.data.firstName,
+                    lastName: results.data.lastName,
+                    email: results.data.email,
+                    phoneNumber: results.data.phoneNumber
+            });
+                this.handleStopEditingUser()
+
+            })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+
+                }
+                if(error.response.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                }
+            });
+
     }
 
 
