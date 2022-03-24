@@ -45,7 +45,6 @@ class Main extends React.Component {
         this.handleExpenseSubmit = this.handleExpenseSubmit.bind(this);
         this.handleExpenseSearch = this.handleExpenseSearch.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleDeleteType = this.handleDeleteType.bind(this);
         this.searchAll = this.searchAll.bind(this);
         this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
         this.handleCloseError = this.handleCloseError.bind(this);
@@ -239,67 +238,6 @@ class Main extends React.Component {
 
     }
 
-    handleDeleteType(event) {
-        event.preventDefault();
-        console.log(this.state.type)
-        axios.delete(`/api/v1.0/type?type=${this.state.type}`)
-            .then(deletedType => {
-                console.log("deleted type is: " + deletedType)
-                this.setState({ showModalSuccess: true, Message: [this.state.type + " type deleted successfully"] });
-
-                let typeOther = this.state.typeDropDown.find(type => type.name == "Other");
-
-                for (let expense of this.state.expenses) {
-                    if (expense.type.name == this.state.type) {
-                        //update expense whose type got deleted. it will become Other
-                        axios.put('/api/v1.0/expense', { expenseId: expense._id, newTypeId: typeOther })
-                            .then(results => {
-                                console.log("expenses updated")
-                                expense.type.name = "Other";
-                            })
-                    }
-                }
-
-                let arrayOfTypes = [...this.state.typeDropDown];
-
-                let targetTypeIndex = arrayOfTypes.findIndex(function(type){
-                    return type.name == this.state.type;
-                });
-
-                arrayOfTypes.splice(targetTypeIndex, 1)
-
-
-                this.setState({
-                    typeDropDown: arrayOfTypes,
-                    type: ""
-
-                });
-
-                //Records expense deletion event
-                ReactGA.event({
-                    category: "Type",
-                    action: "Deleted",
-                });
-
-            })
-            .catch(error => {
-                console.log(error)
-                //if there are errors, update Message state with error messages and display Error modal
-                console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
-
-                }
-                if(error.response.data != undefined){
-                    this.setState({
-                        Message: error.response.data.data,
-                        showModalError: true
-                    });
-                }
-            });
-
-
-    }
 
     //search expenses based on user input. Send values from inputs using query
     handleExpenseSearch(event) {
@@ -530,7 +468,6 @@ class Main extends React.Component {
             typeName: this.state.typeName,
             amount: this.state.amount,
             searchAll: this.searchAll,
-            handleDeleteType: this.handleDeleteType,
         }
 
         let expenseTableProps = {

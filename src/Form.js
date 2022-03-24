@@ -221,20 +221,20 @@ class Form extends React.Component {
 
                                 <div className=" m-1 ">
                                     <button id="typesDiv" className="btn btn-warning d-inline-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                        <span className="mx-1">Manage Types</span>
-                                        <i className="fas fa-cog"></i>
+                                        <span className="mx-1">New type</span>
+                                        <i className="fas fa-plus"></i>
                                     </button>
 
                                     <div style={{ position: "absolute", zIndex: "1" }} className="collapse m-2" id="collapseExample">
                                         <div className="card card-body">
                                             <label htmlFor="typeName" className="form-label">
-                                                New type
+                                                Name
 
                                             </label>
                                             <input aria-label="create new type" id="typeName" name="typeName" type="text" value={this.props.typeName} className="form-control" onChange={this.props.handleChange} />
 
                                             <label htmlFor="typeBudget" className="form-label">
-                                                Budget
+                                                Budget (Optional)
 
                                             </label>
                                             <input aria-label="create new type budget" id="typeBudget" name="typeBudget" type="text" value={this.props.typeBudget} className="form-control" onChange={this.props.handleChange} />
@@ -243,18 +243,10 @@ class Form extends React.Component {
 
                                             <div className=" m-1">
                                                 <button id="addType" onClick={this.props.handleCreateType} className="btn m-1 btn-success d-inline-block" >
-                                                    <span className="mx-1">Add type</span>
+                                                    <span className="mx-1">Create new type</span>
                                                     <i className="fas fa-plus"></i>
                                                 </button>
                                             </div>
-                                            <div className=" m-1">
-                                                <button aria-label="delete a type" onClick={this.props.handleDeleteType} className="btn m-1 btn-danger d-inline-block">
-                                                    <span className="mx-1">Delete type</span>
-                                                    <i className="fas fa-trash-alt"></i>
-                                                </button>
-                                            </div>
-
-
                                         </div>
                                     </div>
 
