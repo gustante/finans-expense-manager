@@ -217,28 +217,6 @@ exports.getNoOfExpenses = (req, res) => {
 }
 
 
-exports.getBudgetInfo = (req, res) => {
-    if (req.session.isAuth) {
-        User.findOne({ _id: req.session.userId })
-            .select('types')//don't send user password
-            .populate('types')
-            .exec()
-            .then(user => {
-                res.send(user);
-            })
-            .catch(error => {
-                console.log(error)
-                res.send(error)
-            });
-    } else {
-        let errorObject = new customError(['Please log in to see this information'], 401);
-        res.status(errorObject.status).send(errorObject);
-    }
-
-
-
-}
-
 exports.updateUser = (req, res) => {
 
     console.log(req.body)

@@ -23,18 +23,18 @@ class Budgets extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/api/v1.0/user/budgetInfo")
+        axios.get("/api/v1.0/type/all")
             .then(results => {
                 let totalSpent = 0;
                 let totalBudget = 0;
-                for (let type of results.data.types) {
+                for (let type of results.data) {
                     totalSpent += type.sumOfExpenses;
                     totalBudget += type.budget;
 
 
                 }
                 this.setState({
-                    types: results.data.types,
+                    types: results.data,
                     totalSpent: totalSpent.toFixed(2),
                     totalBudget: totalBudget
                 });
