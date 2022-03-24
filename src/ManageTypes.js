@@ -298,12 +298,13 @@ class ManageTypes extends React.Component {
                                                 <i className="fas fa-edit"></i>
                                                 </button>
 
-                                                <button onClick={this.handleStopEditingType.bind(this, type._id)} className="editButtons hide btn h-50 m-1 btn-secondary">
-                                                <i className="fas fa-times"></i>
-                                                </button>
 
                                                 <button onClick={this.handleDeleteType.bind(this, type.name, type._id )} className="editButtons hide btn h-50 m-1 btn-danger">
                                                 <i className="fas fa-trash-alt"></i>
+                                                </button>
+
+                                                <button onClick={this.handleStopEditingType.bind(this, type._id)} className="editButtons hide btn h-50 m-1 btn-secondary">
+                                                <i className="fas fa-times"></i>
                                                 </button>
                                             </td>
 
