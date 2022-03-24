@@ -210,6 +210,8 @@ class Main extends React.Component {
                             typeBudget: ""
                         });
 
+                        $("div .collapse").removeClass("show")
+
 
                         console.log(this.state.typeDropDown)
 
