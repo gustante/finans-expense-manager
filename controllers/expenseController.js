@@ -210,17 +210,19 @@ exports.postExpense = (req, res) => {
                                 .then(savedExpense => {
                                     res.status(201).send(savedExpense);//status 201
 
+                                    console.log("will send text to " + user.phoneNumber)
+
                                     let { budget, sumOfExpenses, name } = savedExpense.type;
                                     //send SMS using twilio if close to exceeding budget
                                     //dont send SMS if expense created is for a different month.
                                     if (budget != null && currentMonth == savedExpense.month) {
 
                                         if (sumOfExpenses > budget)
-                                            smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`)
+                                            smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`,user.phoneNumber)
                                         else if (sumOfExpenses >= budget * 0.7)
-                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`)
+                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`,user.phoneNumber)
                                         else if (sumOfExpenses >= budget * 0.5)
-                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`)
+                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`,user.phoneNumber)
                                     }
 
 
