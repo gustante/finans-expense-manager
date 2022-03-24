@@ -95,6 +95,9 @@ class ExpenseTable extends React.Component {
                                             </button>
 
 
+                                            <button onClick={this.props.handleDelete.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-danger">
+                                                <i className="fas fa-trash-alt"></i>
+                                            </button>
 
                                             <button onClick={this.props.handleStopEditing.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-secondary">
                                                 <i className="fas fa-times"></i>
@@ -107,9 +110,6 @@ class ExpenseTable extends React.Component {
                                             </button>
 
 
-                                            <button onClick={this.props.handleDelete.bind(this, expense._id)} className="defaultButtons view btn h-50 m-1 btn-danger">
-                                                <i className="fas fa-trash-alt"></i>
-                                            </button>
 
                                         </td>
 
