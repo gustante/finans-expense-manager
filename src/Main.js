@@ -293,8 +293,10 @@ class Main extends React.Component {
 
                 arrayOfExpenses.splice(targetedExpenseIndex, 1)
 
+                this.handleStopEditing(expenseId)
 
                 this.setState({ expenses: arrayOfExpenses }); //This will remount the ExpenseTable component without the deletes expense
+
 
                 //Records expense deletion event
                 ReactGA.event({
