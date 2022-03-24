@@ -18,10 +18,15 @@ exports.expenseValidator = [
 
 exports.typeValidator = [
 
-    check("name").escape().trim().isLength({min: 2}).withMessage("Please enter a type"),
+    check("name").escape().trim().isLength({min: 1}).withMessage("Please enter a valid type"),
     check("budget").optional({checkFalsy: true}).trim().escape().isNumeric().withMessage("Please enter a number for budget")
 
 
+]
+
+exports.typeUpdateValidator = [
+    check("newName").optional({checkFalsy: true}).escape().trim().isLength({min: 1}).withMessage("Please enter a valid type"),
+    check("newBudget").optional({checkFalsy: true}).trim().escape().isNumeric().withMessage("Please enter a number for budget")
 ]
 
 exports.userRegisterValidator = [

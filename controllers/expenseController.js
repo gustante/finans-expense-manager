@@ -339,6 +339,27 @@ exports.updateExpense = (req, res) => {
                 .exec()
                 .then(user => {
                     let targetExpense = user.expenses.find(expense => expense._id == req.body.expenseId);
+
+                    //if expense to be updated has Null type it means we're dealing with a type that has been deleted. It's a special case. We are not updating from the ExpenseTable component. We need to change their type to "Other"
+                    if(targetExpense.type == null){
+                        let typeOther = user.expenses.find(expense => expense.type.name == "Other");
+                        typeOther.sumOfExpenses += targetExpense.amount//correct sumOfExpenses for Other
+                        targetExpense.type = typeOther //correct expense that needs to be updated
+                        typeOther.save()
+                            .then(()=>{
+                                targetExpense.save()
+                                    .then(savedExpense=>{
+                                        res.send(savedExpense)
+                                    })
+                            })
+                    }
+
+                    console.log("expense that will be updated is: ")
+                    console.log(targetExpense)
+                    console.log("its type is: ")
+                    console.log(targetExpense.type)
+                    console.log("new type is gonna be: ")
+                    console.log(req.body.newTypeId)
                         console.log(req.body)
                         if(req.body.newYear && req.body.newYear != ""){
                             console.log("year will be changed")

@@ -1,6 +1,4 @@
 import React from 'react';
-import Budgets from "./Budgets.js"
-import UserInfo from "./UserInfo.js"
 import { Route, Link, Outlet, Navigate } from "react-router-dom";
 
 const navLinks = [
@@ -45,6 +43,11 @@ class MyAccount extends React.Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/myAccount/userBudgets">
                                     <i className="fas fa-cash-register"></i> Budgets
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/myAccount/manageTypes">
+                                    <i className="fas fa-cog"></i> Manage Types
                                 </Link>
                             </li>
 

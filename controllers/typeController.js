@@ -8,6 +8,7 @@ const customError = require('../customError.js')
 exports.getAllTypes = (req, res) => {
     if (req.session.isAuth) {
         User.findOne({ _id: req.session.userId })
+            .select('types')
             .populate('types')
             .exec()
             .then(user => {
@@ -107,6 +108,7 @@ exports.deleteType = (req, res) => {
                     user.types.splice(i, 1)
                 }
             }
+            console.log("deleted type from user")
             user.save()
         })
 
@@ -118,6 +120,7 @@ exports.deleteType = (req, res) => {
                     Type.deleteOne({ name: chosenType.name })
                         .exec()
                         .then(deletedType => {
+                            console.log("deleted type from types collection")
                             res.send(deletedType);
                         })
                 } else {
@@ -137,6 +140,52 @@ exports.deleteType = (req, res) => {
         })
     } else {
         let errorObject = new customError(['Please log in to delete type'], 401);
+        res.status(errorObject.status).send(errorObject);
+    }
+
+
+
+}
+exports.updateType = (req, res) => {
+
+    if (req.session.isAuth) {
+        const errors = (validationResult(req)).array();
+
+        if (errors.length < 1) {
+            User.findOne({ _id: req.session.userId })
+                .populate('types')
+                .exec()
+            .then(user => {
+                let targetType = user.types.find(type => type._id == req.body.typeId);
+
+                if(req.body.newName && req.body.newName != ""){
+                    console.log(" name will be changed")
+                    targetType.name = req.body.newName
+                }
+
+                if(req.body.newBudget && req.body.newBudget != ""){
+                    console.log(" budget will be changed")
+                    targetType.budget = req.body.newBudget
+                }
+
+                targetType.save()
+                    .then(savedType=>{
+                        res.send(savedType)
+                    })
+            })
+        } else {
+            let errorMessages = [];
+            for (let i of errors) {
+                errorMessages.push(i.msg)
+            }
+
+            let errorObject = new customError(errorMessages, 422);
+            console.log("validation error sent")
+            res.status(errorObject.status).send(errorObject);
+
+        }
+    } else {
+        let errorObject = new customError(['Please log in to update type'], 401);
         res.status(errorObject.status).send(errorObject);
     }
 
