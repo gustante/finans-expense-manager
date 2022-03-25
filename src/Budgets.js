@@ -50,7 +50,7 @@ class Budgets extends React.Component {
                 console.log(error.response)
                 if(error.response.data.status == 401){
                     this.setState({displayLoginButton: true});
-        
+
                 }
                 if(error.response.data.data != undefined){
                     this.setState({
@@ -203,7 +203,11 @@ class Budgets extends React.Component {
                                 <tbody>
                                     {this.state.types.map((type, index) =>
                                         <tr key={index}>
-                                            <td>{type.name}</td>
+                                            <td>{type.name}
+                                            <div className="progress mt-1">
+                                                <div className={`progress-bar ${ Math.round((type.sumOfExpenses * 100) / type.budget) > 100 ? 'bg-danger' : 'bg-success' }`} role="progressbar" style={{width: `${Math.round((type.sumOfExpenses * 100) / type.budget) }%`}}  aria-valuenow={Math.round((type.sumOfExpenses * 100) / type.budget)} aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            </td>
                                             <td>{type.budget}</td>
                                             <td>{type.sumOfExpenses.toFixed(2)}</td>
                                         </tr>)
