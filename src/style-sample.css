@@ -297,13 +297,7 @@ table td, table th {
 .d-flex-row{
     flex-direction: column;
 }
-input, select {
-    font-size: 80% !important;
-}
 
-
-
-}
 @media (min-width: 544px) {
   table {font-size:0.9rem;}
 }
