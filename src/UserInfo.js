@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import ModalSuccess from './ModalSuccess';
+import ModalError from './ModalError';
 import { Navigate } from "react-router-dom";
 
 class UserInfo extends React.Component {
@@ -9,9 +11,15 @@ class UserInfo extends React.Component {
 
         this.state = {
             noOfExpenses: "",
+            showModalSuccess: false,
+            showModalError: false,
+            Message: [],
+            displayLoginButton: false
 
 
         }
+        this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
+        this.handleCloseError = this.handleCloseError.bind(this);
 
     }
 
@@ -30,8 +38,31 @@ class UserInfo extends React.Component {
 
             })
             .catch(error => {
-                console.log(error.response.data)
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+
+                }
+                if(error.response.data.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                        
+                    });
+                }
             });
+    }
+
+    //controls display of modals
+    handleCloseSuccess() {
+        this.setState({ showModalSuccess: false,
+                        displayLoginButton: false
+        });
+    }
+    handleCloseError() {
+        this.setState({ showModalError: false,
+                    displayLoginButton: false
+        });
     }
 
     render() {
@@ -41,8 +72,10 @@ class UserInfo extends React.Component {
             <>
                 {isLoggedIn ? (
                     <>
-                        <form className="px-3 py-3 col-md-9" onSubmit={this.props.handleSaveEditingUser}>
 
+                        <form className="px-3 py-3 col-md-9" onSubmit={this.props.handleSaveEditingUser}>
+                        <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message} />
+                        <ModalError handleClose={this.handleCloseError} displayLoginButton={this.state.displayLoginButton} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
 
                             <ul id="user-info" className="list-group">
 

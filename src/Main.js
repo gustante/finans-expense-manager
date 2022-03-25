@@ -311,7 +311,7 @@ class Main extends React.Component {
                     this.setState({displayLoginButton: true});
 
                 }
-                if(error.response.data != undefined){
+                if(error.response.data.data != undefined){
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true

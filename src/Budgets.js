@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import ModalSuccess from './ModalSuccess';
+import ModalError from './ModalError';
 import { Navigate } from "react-router-dom";
 
 const today = new Date();
@@ -13,11 +15,15 @@ class Budgets extends React.Component {
             currentMonth: today.getMonth() + 1,
             totalBudget: "",
             totalSpent: "",
-
-
+            showModalSuccess: false,
+            showModalError: false,
+            Message: [],
+            displayLoginButton: false
 
         }
         this.handleEditMonth = this.handleEditMonth.bind(this);
+        this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
+        this.handleCloseError = this.handleCloseError.bind(this);
 
 
     }
@@ -41,7 +47,17 @@ class Budgets extends React.Component {
 
             })
             .catch(error => {
-                console.log(error.response.data)
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+
+                }
+                if(error.response.data.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                }
             });
     }
 
@@ -110,6 +126,18 @@ class Budgets extends React.Component {
 
     }
 
+    //controls display of modals
+    handleCloseSuccess() {
+        this.setState({ showModalSuccess: false,
+                        displayLoginButton: false
+        });
+    }
+    handleCloseError() {
+        this.setState({ showModalError: false,
+                    displayLoginButton: false
+        });
+    }
+
     render() {
         const isLoggedIn = this.props.isLoggedIn;
         let monthString = ""
@@ -145,6 +173,8 @@ class Budgets extends React.Component {
                 {isLoggedIn ? (
                     <>
                         <main className="px-3 py-3 col-12 col-md-9">
+                            <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message} />
+                            <ModalError handleClose={this.handleCloseError} displayLoginButton={this.state.displayLoginButton} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
 
 
                             <table className="table ">
