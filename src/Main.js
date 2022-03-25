@@ -67,20 +67,22 @@ class Main extends React.Component {
 
                 })
                 .catch(error => {
-                    console.log(error)
                     console.log(error.response)
-
-
                     if(error.response.data.status == 401){
                         this.setState({displayLoginButton: true});
+
                     }
-                    if(error.response.data != undefined){
+                    if(error.response.data.data != undefined){
                         this.setState({
                             Message: error.response.data.data,
                             showModalError: true
                         });
+                    } else {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
                     }
-
                 });
 
             axios.get("/api/v1.0/type/all")
@@ -92,12 +94,19 @@ class Main extends React.Component {
 
                 })
                 .catch(error => {
-                    console.log(error)
                     console.log(error.response)
-                    //if there are errors, update Message state with error messages and display Error modal
-                    if(error.response.data != undefined){
+                    if(error.response.data.status == 401){
+                        this.setState({displayLoginButton: true});
+
+                    }
+                    if(error.response.data.data != undefined){
                         this.setState({
                             Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: error.response.data,
                             showModalError: true
                         });
                     }
@@ -161,17 +170,19 @@ class Main extends React.Component {
 
                     })
                     .catch(error => {
-                        console.log("we got an error")
-                        console.log(error.response.data)//all the error messages!
-
-                        //if there are errors, update Message state with error messages and display Error modal
-                        //also display button to redirect to log in page if error is due to user unauthenticated
+                        console.log(error.response)
                         if(error.response.data.status == 401){
                             this.setState({displayLoginButton: true});
+
                         }
-                        if(error.response.data != undefined){
+                        if(error.response.data.data != undefined){
                             this.setState({
                                 Message: error.response.data.data,
+                                showModalError: true
+                            });
+                        } else {
+                            this.setState({
+                                Message: error.response.data,
                                 showModalError: true
                             });
                         }
@@ -224,14 +235,19 @@ class Main extends React.Component {
 
                     })
                     .catch(error => {
-                        //if there are errors, update Message state with error messages and display Error modal
+                        console.log(error.response)
                         if(error.response.data.status == 401){
                             this.setState({displayLoginButton: true});
 
                         }
-                        if(error.response.data != undefined){
+                        if(error.response.data.data != undefined){
                             this.setState({
                                 Message: error.response.data.data,
+                                showModalError: true
+                            });
+                        } else {
+                            this.setState({
+                                Message: error.response.data,
                                 showModalError: true
                             });
                         }
@@ -263,9 +279,14 @@ class Main extends React.Component {
                     this.setState({displayLoginButton: true});
 
                 }
-                if(error.response.data != undefined){
+                if(error.response.data.data != undefined){
                     this.setState({
                         Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
                         showModalError: true
                     });
                 }
@@ -316,6 +337,11 @@ class Main extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
                 }
             });
     }
@@ -337,9 +363,14 @@ class Main extends React.Component {
                     this.setState({displayLoginButton: true});
 
                 }
-                if(error.response.data != undefined){
+                if(error.response.data.data != undefined){
                     this.setState({
                         Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
                         showModalError: true
                     });
                 }
@@ -421,16 +452,19 @@ class Main extends React.Component {
 
             })
             .catch(error => {
-                console.log(error)
                 console.log(error.response)
-
                 if(error.response.data.status == 401){
                     this.setState({displayLoginButton: true});
 
                 }
-                if(error.response.data != undefined){
+                if(error.response.data.data != undefined){
                     this.setState({
                         Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
                         showModalError: true
                     });
                 }

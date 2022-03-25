@@ -37,20 +37,22 @@ class ManageTypes extends React.Component {
 
                 })
                 .catch(error => {
-                    console.log(error)
                     console.log(error.response)
-
-
                     if(error.response.data.status == 401){
                         this.setState({displayLoginButton: true});
+
                     }
-                    if(error.response.data != undefined){
+                    if(error.response.data.data != undefined){
                         this.setState({
                             Message: error.response.data.data,
                             showModalError: true
                         });
+                    } else {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
                     }
-
                 });
 
         axios.get("/api/v1.0/type/all")
@@ -62,16 +64,19 @@ class ManageTypes extends React.Component {
 
                 })
                 .catch(error => {
-                    console.log(error)
                     console.log(error.response)
-                    //if there are errors, update Message state with error messages and display Error modal
                     if(error.response.data.status == 401){
                         this.setState({displayLoginButton: true});
-
+    
                     }
                     if(error.response.data.data != undefined){
                         this.setState({
                             Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: error.response.data,
                             showModalError: true
                         });
                     }
@@ -142,16 +147,19 @@ class ManageTypes extends React.Component {
 
             })
             .catch(error => {
-                console.log(error)
                 console.log(error.response)
-
                 if(error.response.data.status == 401){
                     this.setState({displayLoginButton: true});
 
                 }
-                if(error.response.data != undefined){
+                if(error.response.data.data != undefined){
                     this.setState({
                         Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
                         showModalError: true
                     });
                 }
@@ -210,16 +218,19 @@ class ManageTypes extends React.Component {
 
             })
             .catch(error => {
-                console.log(error)
-                //if there are errors, update Message state with error messages and display Error modal
                 console.log(error.response)
                 if(error.response.data.status == 401){
                     this.setState({displayLoginButton: true});
 
                 }
-                if(error.response.data != undefined){
+                if(error.response.data.data != undefined){
                     this.setState({
                         Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
                         showModalError: true
                     });
                 }

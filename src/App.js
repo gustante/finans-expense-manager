@@ -105,15 +105,19 @@ class App extends React.Component {
                         let errorCode = error.response.data.code;
 
                         if (errorCode == 11000) {//email already associated with an user
-                            console.log("user already existss")
                             this.setState({
                                 Message: ["The email entered is already associated with an user"],
                                 showModalError: true
                             });
                         } else {
-                            if (error.response.data != undefined) {
+                            if (error.response.data.data != undefined) {
                                 this.setState({
                                     Message: error.response.data.data,
+                                    showModalError: true
+                                });
+                            } else {
+                                this.setState({
+                                    Message: error.response.data,
                                     showModalError: true
                                 });
                             }
@@ -123,6 +127,8 @@ class App extends React.Component {
                     });
             })
     }
+
+    
 
     handleLogIn() {
         let captchaToken = ''
@@ -162,11 +168,19 @@ class App extends React.Component {
                     })
 
                     .catch(error => {
-                        console.log(error)
-                        console.log(error.response.data);
-                        if (error.response.data != undefined) {
+                        console.log(error.response)
+                        if(error.response.data.status == 401){
+                            this.setState({displayLoginButton: true});
+                
+                        }
+                        if(error.response.data.data != undefined){
                             this.setState({
                                 Message: error.response.data.data,
+                                showModalError: true
+                            });
+                        } else {
+                            this.setState({
+                                Message: error.response.data,
                                 showModalError: true
                             });
                         }
@@ -188,7 +202,24 @@ class App extends React.Component {
 
 
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+        
+                }
+                if(error.response.data.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
+            });
 
 
         this.setState({ isLoggedIn: true });
@@ -201,16 +232,22 @@ class App extends React.Component {
                     this.setState({ isLoggedIn: false });
                 })
                 .catch(error => {
-                    console.log(error)
-                    console.log(error.response.data);
-
-                    if(error.response.data != undefined){
+                    console.log(error.response)
+                    if(error.response.data.status == 401){
+                        this.setState({displayLoginButton: true});
+            
+                    }
+                    if(error.response.data.data != undefined){
                         this.setState({
                             Message: error.response.data.data,
                             showModalError: true
                         });
+                    } else {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
                     }
-
                 });
         }
 
@@ -295,16 +332,19 @@ class App extends React.Component {
 
             })
             .catch(error => {
-                console.log(error)
                 console.log(error.response)
-
                 if(error.response.data.status == 401){
                     this.setState({displayLoginButton: true});
-
+        
                 }
-                if(error.response.data != undefined){
+                if(error.response.data.data != undefined){
                     this.setState({
                         Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
                         showModalError: true
                     });
                 }

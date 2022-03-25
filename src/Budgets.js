@@ -50,11 +50,16 @@ class Budgets extends React.Component {
                 console.log(error.response)
                 if(error.response.data.status == 401){
                     this.setState({displayLoginButton: true});
-
+        
                 }
                 if(error.response.data.data != undefined){
                     this.setState({
                         Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
                         showModalError: true
                     });
                 }
@@ -113,12 +118,22 @@ class Budgets extends React.Component {
 
             })
             .catch(error => {
-                console.log(error)
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
 
-                this.setState({
-                    Message: error.response.data.data,
-                    showModalError: true
-                });
+                }
+                if(error.response.data.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
             });
 
         ////////////////////////////

@@ -47,7 +47,11 @@ class UserInfo extends React.Component {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
-                        
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
                     });
                 }
             });
