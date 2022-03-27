@@ -13,6 +13,7 @@ class Budgets extends React.Component {
         this.state = {
             types: [],
             currentMonth: today.getMonth() + 1,
+            currentYear: today.getFullYear(),
             totalBudget: "",
             totalInsideBudget: "",
             totalSpent: "",
@@ -78,21 +79,32 @@ class Budgets extends React.Component {
 
     handleEditMonth(option) {
         let currentMonth = this.state.currentMonth;
+        let currentYear = this.state.currentYear
         if (option == 'next') {
             console.log('increase month')
             currentMonth++;
+            if(currentMonth == 13){
+                currentMonth = 1; //resets if it goes past december
+                currentYear++
+            }
             this.setState({
-                currentMonth: currentMonth
+                currentMonth: currentMonth,
+                currentYear: currentYear
             });
         } else if (option == 'prev') {
             console.log('decrease month')
             currentMonth--;
+            if(currentMonth == 0){
+                currentMonth = 12 // resets if goes back before january
+                currentYear--
+            }
             this.setState({
-                currentMonth: currentMonth
+                currentMonth: currentMonth,
+                currentYear: currentYear
             });
         }
 
-        axios.get(`/api/v1.0/expense?month=${currentMonth}&day=&year=&type=&desc=&amount=`)
+        axios.get(`/api/v1.0/expense?month=${currentMonth}&day=&year=${currentYear}&type=&desc=&amount=`)
             .then(results => {
                 let arrayOfExpenses = results.data
 
@@ -212,7 +224,7 @@ class Budgets extends React.Component {
                                     <tr>
                                         <th>Type</th>
                                         <th>Budget</th>
-                                        <th>Total in {monthString}</th>
+                                        <th>Total in {monthString} {this.state.currentYear}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
