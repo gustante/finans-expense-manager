@@ -208,8 +208,9 @@ class Budgets extends React.Component {
                                                 <div className={`progress-bar ${ Math.round((type.sumOfExpenses * 100) / type.budget) > 100 ? 'bg-danger' : 'bg-success' }`} role="progressbar" style={{width: `${Math.round((type.sumOfExpenses * 100) / type.budget) }%`}}  aria-valuenow={Math.round((type.sumOfExpenses * 100) / type.budget)} aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             </td>
-                                            <td>{type.budget}</td>
-                                            <td>{type.sumOfExpenses.toFixed(2)}</td>
+                                            <td className="font-weight-bold">{`${type.budget ? type.budget : ' --'}`}</td>
+                                            {type.budget ? <td className={`${ type.sumOfExpenses > type.budget ? 'text-danger font-weight-bold' : 'text-dark' }`}>{type.sumOfExpenses.toFixed(2)}</td> : <td>{type.sumOfExpenses.toFixed(2)}</td>}
+
                                         </tr>)
                                     }
                                     <tr>
@@ -220,7 +221,7 @@ class Budgets extends React.Component {
                                 </tbody>
 
                             </table>
-                            <div className="text-center mb-5">
+                            <div className="text-center mb-3">
                                 <span className="p-3 m-1 badge badge-warning">Total Budget: ${this.state.totalBudget}</span>
                                 <span className="p-3 badge badge-warning">Total Spent: ${this.state.totalSpent}</span>
                             </div>
