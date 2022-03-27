@@ -14,6 +14,7 @@ class Budgets extends React.Component {
             types: [],
             currentMonth: today.getMonth() + 1,
             totalBudget: "",
+            totalInsideBudget: "",
             totalSpent: "",
             showModalSuccess: false,
             showModalError: false,
@@ -33,16 +34,23 @@ class Budgets extends React.Component {
             .then(results => {
                 let totalSpent = 0;
                 let totalBudget = 0;
+                let totalInsideBudget = 0;
                 for (let type of results.data) {
-                    totalSpent += type.sumOfExpenses;
-                    totalBudget += type.budget;
+                    if(type.budget){
+                        totalBudget += type.budget;
+                        totalInsideBudget += type.sumOfExpenses;
+                        totalSpent += type.sumOfExpenses;
+                    } else {
+                        totalSpent += type.sumOfExpenses;
+                    }
 
 
                 }
                 this.setState({
                     types: results.data,
                     totalSpent: totalSpent.toFixed(2),
-                    totalBudget: totalBudget
+                    totalBudget: totalBudget,
+                    totalInsideBudget: totalInsideBudget.toFixed(2)
                 });
 
             })
@@ -89,17 +97,23 @@ class Budgets extends React.Component {
                 let arrayOfExpenses = results.data
 
                 let arrayOfTypes = [...this.state.types];
-                console.log(arrayOfExpenses)
-                console.log(arrayOfTypes)
 
+                let totalInsideBudget = 0;
+                let totalSpent = 0;
 
-                let totalOfAllExpenses = 0;
-
+                //reset sum of expenses of all types in state
                 for (let type of arrayOfTypes) {
                     type.sumOfExpenses = 0
                 }
+                //adjust sumOfExpenses to selected month
                 for (let expense of arrayOfExpenses) {
-                    totalOfAllExpenses += expense.amount;
+                    if(expense.type.budget){
+                        totalInsideBudget += expense.amount;
+                        totalSpent += expense.amount
+
+                    } else {
+                        totalSpent += expense.amount
+                    }
                     for (let type of arrayOfTypes) {
                         if (expense.type.name == type.name) {
                             type.sumOfExpenses += expense.amount
@@ -110,7 +124,8 @@ class Budgets extends React.Component {
 
                 this.setState({
                     types: arrayOfTypes,
-                    totalSpent: totalOfAllExpenses.toFixed(2)
+                    totalSpent: totalSpent.toFixed(2),
+                    totalInsideBudget: totalInsideBudget.toFixed(2)
                 });
 
 
@@ -223,6 +238,7 @@ class Budgets extends React.Component {
                             </table>
                             <div className="text-center mb-3">
                                 <span className="p-3 m-1 badge badge-warning">Total Budget: ${this.state.totalBudget}</span>
+                                <span className="p-3 m-1 badge badge-warning">Total inside Budget: ${this.state.totalInsideBudget}</span>
                                 <span className="p-3 badge badge-warning">Total Spent: ${this.state.totalSpent}</span>
                             </div>
 
