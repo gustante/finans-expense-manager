@@ -110,6 +110,10 @@ exports.login = (req, res) => {
         if (errors.length < 1) {
             User.findOne({ email: req.body.email })
                 .populate('types')
+                .populate({
+                    path: 'expenses',
+                    populate: { path: 'type' }
+                })
                 .exec()
                 .then(user => {
                     if (user == null) {
@@ -120,20 +124,38 @@ exports.login = (req, res) => {
                     } else {
                         //reset budget if detects new month
                         if (req.body.currentMonth > user.lastLoginMonth || req.body.currentYear > user.lastLoginYear) {
-                            console.log("reset budget")
+
                             for (type of user.types) {
                                 type.sumOfExpenses = 0;
+                                //adjusts sumOfExpenses
+                                for(expense of user.expenses){
+                                    if(expense.month == req.body.currentMonth && expense.type.name == type.name){
+                                        type.sumOfExpenses += expense.amount;
+
+                                    }
+                                }
                                 type.save();
                             }
-                            user.lastLoginMonth = req.body.lastLoginMonth;//update last login
-                            user.lastLoginYear = req.body.lastLoginYear
+                            user.lastLoginMonth = req.body.currentMonth;//update last login
+                            user.lastLoginYear = req.body.currentYear
                             user.save()
+                                .then(savedUser=>{
+                                    savedUser.password = "shhhh";
+                                    req.session.userId = user._id;
+                                    req.session.isAuth = true;
+                                    res.send(savedUser)
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    res.status(error.status).send(error);
+                                });
 
+                        } else {
+                            user.password = "shhhh";
+                            req.session.userId = user._id;
+                            req.session.isAuth = true;
+                            res.send(user);
                         }
-                        user.password = "";
-                        req.session.userId = user._id;
-                        req.session.isAuth = true;
-                        res.send(user);
                     }
 
                 })
