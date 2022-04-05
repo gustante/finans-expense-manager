@@ -41,7 +41,7 @@ exports.userRegisterValidator = [
 
 exports.userLoginValidator = [
 
-    check("password").escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters"),
+    check("password").escape().trim().withMessage("Please enter a password"),
     check("email").escape().trim().isEmail().withMessage("Please enter a valid email"),
 
 ]
