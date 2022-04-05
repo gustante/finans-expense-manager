@@ -40,8 +40,7 @@ exports.userRegisterValidator = [
 ]
 
 exports.userLoginValidator = [
-
-    check("password").escape().trim().withMessage("Please enter a password"),
+    check("password").escape().trim(),
     check("email").escape().trim().isEmail().withMessage("Please enter a valid email"),
 
 ]
