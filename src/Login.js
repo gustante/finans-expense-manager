@@ -37,7 +37,10 @@ class Login extends React.Component {
                     </form>
 
                     <div className="form-signin mb-5 text-center">
-                        <button className="btn btn-lg btn-success btn-block" onClick={this.props.handleGoogleLogIn}>Sign in with <i className="fab fa-google"></i></button>
+                        <a href="/api/v1.0/oauth/google"  className="btn btn-lg btn-success btn-block" onClick={this.props.handleGoogleLogIn}>Sign in with <i className="fab fa-google"></i>
+
+                        </a>
+
                         <Link className="btn text-primary" to="/register">
                             or create an account
                         </Link>
