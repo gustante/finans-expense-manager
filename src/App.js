@@ -128,7 +128,7 @@ class App extends React.Component {
             })
     }
 
-
+    
 
     handleLogIn() {
         let captchaToken = ''
@@ -171,7 +171,7 @@ class App extends React.Component {
                         console.log(error.response)
                         if(error.response.data.status == 401){
                             this.setState({displayLoginButton: true});
-
+                
                         }
                         if(error.response.data.data != undefined){
                             this.setState({
@@ -192,35 +192,37 @@ class App extends React.Component {
     }
 
     handleGoogleLogIn() {
-        console.log("google login")
-        //axios.get("/api/v1.0/oauth/google")
-            // .then(results => {
-            //     console.log(results);
-            //     console.log(results.data);
+
+        axios.post("/api/v1.0/oauth/google", {
+
+        })
+            .then(results => {
+                console.log(results);
+                console.log(results.data);
 
 
-            // })
-            // .catch(error => {
-            //     console.log(error.response)
-            //     if(error.response.data.status == 401){
-            //         this.setState({displayLoginButton: true});
+            })
+            .catch(error => {
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
+        
+                }
+                if(error.response.data.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
+            });
 
-            //     }
-            //     if(error.response.data.data != undefined){
-            //         this.setState({
-            //             Message: error.response.data.data,
-            //             showModalError: true
-            //         });
-            //     } else {
-            //         this.setState({
-            //             Message: error.response.data,
-            //             showModalError: true
-            //         });
-            //     }
-            // });
 
-
-
+        this.setState({ isLoggedIn: true });
     }
 
     handleLogOut() {
@@ -233,7 +235,7 @@ class App extends React.Component {
                     console.log(error.response)
                     if(error.response.data.status == 401){
                         this.setState({displayLoginButton: true});
-
+            
                     }
                     if(error.response.data.data != undefined){
                         this.setState({
@@ -333,7 +335,7 @@ class App extends React.Component {
                 console.log(error.response)
                 if(error.response.data.status == 401){
                     this.setState({displayLoginButton: true});
-
+        
                 }
                 if(error.response.data.data != undefined){
                     this.setState({
