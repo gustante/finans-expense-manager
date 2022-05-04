@@ -362,13 +362,22 @@ exports.updateExpense = (req, res) => {
                     console.log(targetExpense.type)
                     console.log("new type is gonna be: ")
                     console.log(req.body.newTypeId)
-                        console.log(req.body)
+                    console.log(req.body)
+
                         if(req.body.newYear && req.body.newYear != ""){
                             console.log("year will be changed")
                             targetExpense.year = req.body.newYear
                         } if(req.body.newMonth && req.body.newMonth != ""){
                             console.log("month will be changed")
                             targetExpense.month = req.body.newMonth
+                            const current = new Date();
+                            const currentMonth = current.getMonth() + 1
+
+                            if(req.body.newMonth != currentMonth){//if changing to a different month. Remove amount from sumOfExpenses of the current month
+                                targetExpense.type.sumOfExpenses -= targetExpense.amount
+                            } else if(req.body.newMonth == currentMonth) { //if changing from other month to current month, add it's amount to sumOfExpenses of the current month
+                                targetExpense.type.sumOfExpenses += targetExpense.amount                            
+                            }
                         } if(req.body.newDay && req.body.newDay != ""){
                             console.log("day will be changed")
                             targetExpense.day = req.body.newDay
