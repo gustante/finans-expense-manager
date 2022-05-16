@@ -1,31 +1,33 @@
-const passport = require('passport');
 const session = require('express-session');
 const axios = require('axios');
 
 
-// exports.oauth = (req,res)=>{
-//     console.log("route working.")
-
-//     //res.send("working")
-// }
-
-// exports.callback = (req,res)=>{
-//     passport.authenticate( 'google', {
-//         successRedirect: '/api/v1.0/auth/google/login',
-//         failureRedirect: '/api/v1.0/auth/google/authFail'
-//     })
-// }
-
 exports.login = (req,res)=>{
-    res.send(`Hello ${req.user.given_name}! You have succesfully logged in with Google. But this feature isn't ready yet :(  Please go back and create an account manually. <p> <a href="/api/v1.0/oauth/google/logout">Logout</a> </p>`);
+    console.log("made request to backend to get name from google")
+
+    // let user = {
+    //     firstName: req.user.given_name,
+    //     lastName: req.user.family_name,
+    //     email: req.user.email
+
+    // }
+
+
+    //search for user in database. If not found, send axios request to create a new one. If found, send axios request to log them in.
+    //In any case. Send below a response to frontend so we can change isLoggedIn over there. Then once we have it set to true, trigger a page refresh then redirect to dashboard... A page refresh will remount App.js which will send a new request to the back end to obtain the info on the user, then we will obtain their expenses.
+
+
+    res.send(req.user.given_name);
+
 }
 
 exports.authFail = (req,res)=>{
     res.send("something went wrong")
+    res.redirect('/#/')
 }
 
 exports.logout = (req,res)=>{
     req.logout();
     req.session.destroy();
-    res.redirect('/#/login')
+    res.redirect('/#/')
 }

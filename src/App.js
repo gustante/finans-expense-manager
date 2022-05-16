@@ -14,6 +14,7 @@ import MyAccount from './MyAccount';
 import Budgets from "./Budgets.js"
 import UserInfo from "./UserInfo.js"
 import ManageTypes from "./ManageTypes.js"
+import Authenticated from "./Authenticated.js"
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
@@ -381,6 +382,7 @@ class App extends React.Component {
                         <Route path="userBudgets" element={<Budgets isLoggedIn={this.state.isLoggedIn} />} />
                         <Route path="manageTypes" element={<ManageTypes isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>
+                    <Route path="/authenticated" element={<Authenticated isLoggedIn={this.state.isLoggedIn}/>} />
 
 
                     <Route

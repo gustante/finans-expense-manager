@@ -12,9 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.json());
 
+
 app.use(
     session({
-        secret: 'key',
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
@@ -33,7 +33,7 @@ app.get('/api/v1.0/oauth/google',
 
 app.get( '/api/v1.0/oauth/google/callback',
   passport.authenticate( 'google', {
-    successRedirect: '/api/v1.0/oauth/google/login',
+    successRedirect: '/#/authenticated',
     failureRedirect: '/api/v1.0/oauth/google/authFail'
   })
 );
