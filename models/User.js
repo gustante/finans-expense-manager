@@ -12,6 +12,7 @@ const UserSchema = new Schema({
     types:[{type: Schema.Types.ObjectId, ref: 'Type'}], //each user will also have their own types,
     lastLoginMonth:{type: Number, require: false},
     lastLoginYear:{type: Number, require: false},
+    googleUser: {type: Boolean, require: true},
 
 
 });

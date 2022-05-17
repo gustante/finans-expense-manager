@@ -9,7 +9,7 @@ exports.login = (req, res) => {
         lastName: req.user.family_name,
         email: req.user.email,
         phoneNumber: "",
-        password: req.user.id
+        googleUser: true
     }
 
 
@@ -23,14 +23,11 @@ exports.login = (req, res) => {
 
             if (user == null) {//if user doesn't exist, send it to front end to be created/logged in
                 googleUser.exists = false;
-                console.log("sending to frontend this:")
-                console.log(googleUser)
                 res.send(googleUser);
 
             } else {//if user exists, send it to front end to be logged in
                 googleUser.exists = true;
-                console.log("sending to frontend this:")
-                console.log(googleUser)
+                googleUser.password = "shhhh";
                 res.send(googleUser);
             }
         })

@@ -14539,8 +14539,9 @@ var App = /*#__PURE__*/function (_React$Component) {
       Message: [],
       //messages to be passed to success or error modal according to validation obtained
       displayLoginButton: false,
-      exists: "" //controls google login
-
+      exists: "",
+      //controls google login,
+      googleUser: false
     };
     _this.handleLogOut = _this.handleLogOut.bind(_assertThisInitialized(_this));
     _this.handleLogIn = _this.handleLogIn.bind(_assertThisInitialized(_this));
@@ -14566,7 +14567,8 @@ var App = /*#__PURE__*/function (_React$Component) {
             firstName = _results$data.firstName,
             lastName = _results$data.lastName,
             email = _results$data.email,
-            phoneNumber = _results$data.phoneNumber;
+            phoneNumber = _results$data.phoneNumber,
+            googleUser = _results$data.googleUser;
 
         _this2.setState({
           isLoggedIn: true,
@@ -14575,7 +14577,8 @@ var App = /*#__PURE__*/function (_React$Component) {
           lastName: lastName,
           password: "",
           email: email,
-          phoneNumber: phoneNumber
+          phoneNumber: phoneNumber,
+          googleUser: googleUser
         });
       })["catch"](function (error) {
         console.log(error.response.data);
@@ -14605,7 +14608,8 @@ var App = /*#__PURE__*/function (_React$Component) {
           //remove dashes
           token: captchaToken,
           currentMonth: current.getMonth() + 1,
-          currentYear: current.getFullYear()
+          currentYear: current.getFullYear(),
+          googleUser: false
         }).then(function (results) {
           _this3.setState({
             showModalSuccess: true,
@@ -14660,7 +14664,8 @@ var App = /*#__PURE__*/function (_React$Component) {
           password: _this4.state.password,
           token: captchaToken,
           currentMonth: current.getMonth() + 1,
-          currentYear: current.getFullYear()
+          currentYear: current.getFullYear(),
+          googleUser: _this4.state.googleUser
         }).then(function (results) {
           var _results$data2 = results.data,
               _id = _results$data2._id,
@@ -14668,7 +14673,7 @@ var App = /*#__PURE__*/function (_React$Component) {
               lastName = _results$data2.lastName,
               email = _results$data2.email,
               phoneNumber = _results$data2.phoneNumber,
-              expenses = _results$data2.expenses;
+              googleUser = _results$data2.googleUser;
           console.log(results.data);
 
           _this4.setState({
@@ -14678,7 +14683,8 @@ var App = /*#__PURE__*/function (_React$Component) {
             lastName: lastName,
             password: "",
             email: email,
-            phoneNumber: phoneNumber
+            phoneNumber: phoneNumber,
+            googleUser: googleUser
           });
         })["catch"](function (error) {
           console.log(error.response);
@@ -14720,7 +14726,8 @@ var App = /*#__PURE__*/function (_React$Component) {
           password: results.data.password,
           email: results.data.email,
           phoneNumber: results.data.phoneNumber,
-          exists: results.data.exists
+          exists: results.data.exists,
+          googleUser: results.data.googleUser
         });
       }).then(function () {
         console.log("this is what i have in state:");
@@ -14740,12 +14747,13 @@ var App = /*#__PURE__*/function (_React$Component) {
               firstName: _this5.state.firstName,
               lastName: _this5.state.lastName,
               email: _this5.state.email,
-              password: _this5.state.password,
+              password: 'whatever',
               phoneNumber: _this5.state.phoneNumber.replaceAll('-', ''),
               //remove dashes
               token: captchaToken,
               currentMonth: current.getMonth() + 1,
-              currentYear: current.getFullYear()
+              currentYear: current.getFullYear(),
+              googleUser: true
             }).then(function (results) {
               console.log("user created:");
               console.log(results.data);

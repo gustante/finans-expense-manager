@@ -38,7 +38,8 @@ class App extends React.Component {
             showModalError: false,//controls display of modal with error message
             Message: [], //messages to be passed to success or error modal according to validation obtained
             displayLoginButton: false,
-            exists: "" //controls google login
+            exists: "", //controls google login,
+            googleUser: false
 
         }
         this.handleLogOut = this.handleLogOut.bind(this);
@@ -56,7 +57,7 @@ class App extends React.Component {
     componentDidMount() {
         axios.get("/api/v1.0/user/verifyAuth")
             .then(results => {
-                const { _id, firstName, lastName, email, phoneNumber } = results.data;
+                const { _id, firstName, lastName, email, phoneNumber, googleUser } = results.data;
                 this.setState({
                     isLoggedIn: true,
                     userId: _id,
@@ -65,6 +66,7 @@ class App extends React.Component {
                     password: "",
                     email: email,
                     phoneNumber: phoneNumber,
+                    googleUser: googleUser
 
                 });
 
@@ -96,6 +98,7 @@ class App extends React.Component {
                     token: captchaToken,
                     currentMonth: current.getMonth() + 1,
                     currentYear: current.getFullYear(),
+                    googleUser: false
                 })
                     .then(results => {
                         this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Thank you for registering " + results.data.firstName + "!"], displayLoginButton: true }); //success message sends expense id to success modal and displays it
@@ -150,10 +153,11 @@ class App extends React.Component {
                     token: captchaToken,
                     currentMonth: current.getMonth() + 1,
                     currentYear: current.getFullYear(),
+                    googleUser: this.state.googleUser                    
 
                 })
                     .then(results => {
-                        const { _id, firstName, lastName, email, phoneNumber, expenses } = results.data;
+                        const { _id, firstName, lastName, email, phoneNumber, googleUser } = results.data;
                         console.log(results.data)
 
                         this.setState({
@@ -164,6 +168,7 @@ class App extends React.Component {
                             password: "",
                             email: email,
                             phoneNumber: phoneNumber,
+                            googleUser: googleUser
 
                         });
 
@@ -207,13 +212,14 @@ class App extends React.Component {
                             password: results.data.password,
                             email: results.data.email,
                             phoneNumber: results.data.phoneNumber,
-                            exists: results.data.exists
+                            exists: results.data.exists,
+                            googleUser: results.data.googleUser
                         });
                 })
                 .then(()=>{
                     console.log("this is what i have in state:")
                     console.log(this.state)
-                    
+
                     if(!this.state.exists){//create new user if it doesn't exist
                         grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', { action: 'submit' })
                         .then(function (token) {
@@ -227,11 +233,12 @@ class App extends React.Component {
                                 firstName: this.state.firstName,
                                 lastName: this.state.lastName,
                                 email: this.state.email,
-                                password: this.state.password,
+                                password: 'whatever',
                                 phoneNumber: this.state.phoneNumber.replaceAll('-', ''),//remove dashes
                                 token: captchaToken,
                                 currentMonth: current.getMonth() + 1,
                                 currentYear: current.getFullYear(),
+                                googleUser: true
                             })
                             .then(results => {
                                 console.log("user created:")
