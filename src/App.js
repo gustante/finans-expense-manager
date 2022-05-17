@@ -37,7 +37,8 @@ class App extends React.Component {
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
             Message: [], //messages to be passed to success or error modal according to validation obtained
-            displayLoginButton: false
+            displayLoginButton: false,
+            exists: "" //controls google login
 
         }
         this.handleLogOut = this.handleLogOut.bind(this);
@@ -132,8 +133,8 @@ class App extends React.Component {
 
 
     handleLogIn() {
+        console.log("executed handleLogin")
         let captchaToken = ''
-        event.preventDefault()
         //Executes captcha after form is submitted, generates token and store it in a variable
         grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', { action: 'submit' })
             .then(function (token) {
@@ -193,33 +194,92 @@ class App extends React.Component {
     }
 
     handleGoogleLogIn() {
-        console.log("google login")
-        //axios.get("/api/v1.0/oauth/google")
-            // .then(results => {
-            //     console.log(results);
-            //     console.log(results.data);
+        console.log("execited handleGoogleLogin")
+        let captchaToken = ''
 
+        axios.get("/api/v1.0/oauth/google/login")
+                .then(results => {
+                    console.log("user info receives from backend:")
+                    console.log(results.data)
+                        this.setState({
+                            firstName: results.data.firstName,
+                            lastName: results.data.lastName,
+                            password: results.data.password,
+                            email: results.data.email,
+                            phoneNumber: results.data.phoneNumber,
+                            exists: results.data.exists
+                        });
+                })
+                .then(()=>{
+                    console.log("this is what i have in state:")
+                    console.log(this.state)
+                    
+                    if(!this.state.exists){//create new user if it doesn't exist
+                        grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', { action: 'submit' })
+                        .then(function (token) {
+                            captchaToken = token;
+                            console.log("reCAPTCHA executed");
+                        })
+                        .then(() => {
+                            const current = new Date();
+                            console.log("attempts to create user")
+                            axios.post("/api/v1.0/user/register", {
+                                firstName: this.state.firstName,
+                                lastName: this.state.lastName,
+                                email: this.state.email,
+                                password: this.state.password,
+                                phoneNumber: this.state.phoneNumber.replaceAll('-', ''),//remove dashes
+                                token: captchaToken,
+                                currentMonth: current.getMonth() + 1,
+                                currentYear: current.getFullYear(),
+                            })
+                            .then(results => {
+                                console.log("user created:")
+                                console.log(results.data)
+                                this.handleLogIn()
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                console.log(error.response)
+                                console.log(error.response.data);
+                                let errorCode = error.response.data.code;
 
-            // })
-            // .catch(error => {
-            //     console.log(error.response)
-            //     if(error.response.data.status == 401){
-            //         this.setState({displayLoginButton: true});
+                                if (error.response.data.data != undefined) {
+                                    this.setState({
+                                        Message: error.response.data.data,
+                                        showModalError: true
+                                    });
+                                } else {
+                                    this.setState({
+                                        Message: error.response.data,
+                                        showModalError: true
+                                    });
+                                }
+                            });
+                        })
+                    } else { //user user exists just log in
+                        this.handleLogIn()
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    console.log(error.response)
+                    if(error.response.data.status == 401){
+                        this.setState({displayLoginButton: true});
 
-            //     }
-            //     if(error.response.data.data != undefined){
-            //         this.setState({
-            //             Message: error.response.data.data,
-            //             showModalError: true
-            //         });
-            //     } else {
-            //         this.setState({
-            //             Message: error.response.data,
-            //             showModalError: true
-            //         });
-            //     }
-            // });
-
+                    }
+                    if(error.response.data.data != undefined){
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
+                    }
+                });
 
 
     }
@@ -382,7 +442,7 @@ class App extends React.Component {
                         <Route path="userBudgets" element={<Budgets isLoggedIn={this.state.isLoggedIn} />} />
                         <Route path="manageTypes" element={<ManageTypes isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>
-                    <Route path="/authenticated" element={<Authenticated isLoggedIn={this.state.isLoggedIn}/>} />
+                    <Route path="/authenticated" element={<Authenticated handleGoogleLogIn={this.handleGoogleLogIn} isLoggedIn={this.state.isLoggedIn}/>} />
 
 
                     <Route
