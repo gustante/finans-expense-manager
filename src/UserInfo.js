@@ -96,7 +96,7 @@ class UserInfo extends React.Component {
                                     <input type="email" name="email" className="hide form-control col-5 m-1" value={this.props.userInfo.email} placeholder="abc@g.com" onChange={this.props.handleChange}/>
 
                                     <div className="view userInfo">
-                                        <span className="font-weight-bold">Email:</span> {email}
+                                        <span  className="font-weight-bold">Email:</span> {email}
                                     </div>
                                 </li>
 

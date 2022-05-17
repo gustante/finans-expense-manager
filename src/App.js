@@ -153,7 +153,7 @@ class App extends React.Component {
                     token: captchaToken,
                     currentMonth: current.getMonth() + 1,
                     currentYear: current.getFullYear(),
-                    googleUser: this.state.googleUser                    
+                    googleUser: this.state.googleUser
 
                 })
                     .then(results => {
@@ -344,6 +344,11 @@ class App extends React.Component {
         //show inputs and buttons for editing
         $('#user-info input').removeClass("hide")
         $('#user-info input').addClass("view d-inline")
+        if(this.state.googleUser){
+            $('[type=email]').attr('disabled', 'true');
+            $('[type=password]').removeAttr('readonly');
+            $('[type=password]').attr('disabled', 'true');
+        }
 
         $('.userInfo').removeClass("view")
         $('.userInfo').addClass("hide")
