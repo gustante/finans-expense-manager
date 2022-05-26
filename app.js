@@ -5,7 +5,11 @@ const port = process.env.PORT;
 const router = require("./routes/index.js")
 const session = require('express-session');
 const passport = require('passport');
-require('./passport.js')
+
+var fs = require('fs');
+
+// passport is included here:
+eval(fs.readFileSync('passport.js')+'');
 
 
 app.use(express.urlencoded({ extended: true }));
