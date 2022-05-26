@@ -1,9 +1,8 @@
 const router = require('express').Router();
+const {login, authFail, logout} = require("../controllers/oauthController.js");
 
-const {oauth} = require("../controllers/oauthController.js");
-
-const {oauthMiddleware} = require('../passport.js');
-
-router.get('/', oauthMiddleware, oauth) 
+router.get('/login', login),
+router.get('/authFail', authFail)
+router.get('/logout', logout),
 
 module.exports = router;

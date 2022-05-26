@@ -4,16 +4,17 @@ const connection = require('./db/connection');
 const port = process.env.PORT;
 const router = require("./routes/index.js")
 const session = require('express-session');
+const passport = require('passport');
+require('./passport')
+
 
 app.use(express.urlencoded({ extended: true }));
-const path = require('path')
-app.use( express.static(path.join(__dirname, 'public')))
-
+app.use(express.static('public'));
 app.use(express.json());
+
 
 app.use(
     session({
-        secret: 'key',
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
@@ -22,6 +23,20 @@ app.use(
     })
 
 )
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/api/v1.0/oauth/google',
+  passport.authenticate('google', { scope: [ 'email', 'profile' ] }
+));
+
+app.get( '/api/v1.0/oauth/google/callback',
+  passport.authenticate( 'google', {
+    successRedirect: '/#/authenticated',
+    failureRedirect: '/api/v1.0/oauth/google/authFail'
+  })
+);
 
 
 app.use(function(req,res,next){

@@ -27,15 +27,23 @@ exports.createUser = (req, res) => {
         })
         .then(() => {
             //if there are not validation errors, create new user and save it to database
+            let password;
+            if(req.body.googleUser == true){ //store id from google as password if authenticated with google
+                password = req.user.id
+            } else {
+                password = req.body.password
+            }
+
             if (errors.length < 1) {
                 let user = new User({
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     email: req.body.email,
-                    password: req.body.password,
+                    password: password,
                     phoneNumber: req.body.phoneNumber,
                     lastLoginMonth: req.body.currentMonth,
-                    lastLoginYear: req.body.currentYear
+                    lastLoginYear: req.body.currentYear,
+                    googleUser: req.body.googleUser
                 });
 
                 let type = new Type({
@@ -55,6 +63,7 @@ exports.createUser = (req, res) => {
                 user.save()
                     .then(() => {
                         console.log("user created succesfully")
+                        user.password = "shhhhhh"
                         res.status(201).send(user);//status 201
                     })
                     .catch(error => {
@@ -119,9 +128,7 @@ exports.login = (req, res) => {
                     if (user == null) {
                         throw new customError(['User not found'], 401)
                     }
-                    else if (req.body.password != user.password) {
-                        throw new customError(['Password is incorrect'], 401)
-                    } else {
+                    else if (req.body.password == user.password || req.body.googleUser == true){//no need to check password for google auth, already authenticated
                         //reset budget if detects new month
                         if (req.body.currentMonth > user.lastLoginMonth || req.body.currentYear > user.lastLoginYear) {
 
@@ -156,6 +163,8 @@ exports.login = (req, res) => {
                             req.session.isAuth = true;
                             res.send(user);
                         }
+                    } else if (req.body.password != user.password) {
+                        throw new customError(['Password is incorrect'], 401)
                     }
 
                 })

@@ -33,7 +33,7 @@ exports.userRegisterValidator = [
 
     check("firstName").escape().trim().isLength({min: 2}).withMessage("Please enter a valid first name"),
     check("lastName").escape().trim().isLength({min: 2}).withMessage("Please enter a valid last name"),
-    check("password").escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters"),
+    check("password").escape().trim().isLength({min: 6, max: 30}).withMessage("Please enter a valid password. Minimum 6 and maximum 30 characters"),
     check("email").escape().trim().isEmail().withMessage("Please enter a valid email"),
     check("phoneNumber").optional({checkFalsy: true}).escape().trim().isMobilePhone(['en-CA','en-US']).withMessage("Please enter a valid phone number (US or CANADIAN)"),
 
@@ -52,8 +52,8 @@ exports.userUpdateValidator = [
     check("email").optional({checkFalsy: true}).escape().trim().isEmail().withMessage("Please enter a valid email"),
     check("phoneNumber").optional({checkFalsy: true}).escape().trim().isMobilePhone(['en-CA','en-US']).withMessage("Please enter a valid phone number (US or CANADIAN)"),
     check("oldPassword").optional({checkFalsy: true}).escape().trim(),
-    check("newPassword").optional({checkFalsy: true}).escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters"),
-    check("repeatNewPassword").optional({checkFalsy: true}).escape().trim().isLength({min: 6, max: 20}).withMessage("Please enter a valid password. Minimum 6 and maximum 20 characters")
+    check("newPassword").optional({checkFalsy: true}).escape().trim().isLength({min: 6, max: 30}).withMessage("Please enter a valid password. Minimum 6 and maximum 30 characters"),
+    check("repeatNewPassword").optional({checkFalsy: true}).escape().trim().isLength({min: 6, max: 30}).withMessage("Please enter a valid password. Minimum 6 and maximum 30 characters")
 
 ]
 
