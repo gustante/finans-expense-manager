@@ -195,9 +195,10 @@ exports.logout = (req, res) => {
         if (req.session.isAuth) {
             req.session.userId = null;
             req.session.isAuth = false;
+            req.session.destroy()            
             res.status(200).send('logged out');
         } else {
-            throw new customError(['Unable to log out. User not logged in'], 404)
+            throw new customError(['Unable to log out. User not logged in'], 401)
         }
     } catch (error) {
         console.log(error)
@@ -217,7 +218,7 @@ exports.verifyAuth = (req, res) => {
             })
 
         } else {
-            throw new customError(['User not logged in'], 404)
+            throw new customError(['User not logged in'], 401)
         }
     } catch (error) {
         console.log(error)

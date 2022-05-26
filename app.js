@@ -5,7 +5,11 @@ const port = process.env.PORT;
 const router = require("./routes/index.js")
 const session = require('express-session');
 const passport = require('passport');
+const redis = require("ioredis")
 
+
+
+//PASSPORT GOOGLE OAUTH
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 passport.use(new GoogleStrategy({
@@ -30,9 +34,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.json());
 
+//END OF PASSPORT FOR GOOGLE OAUTH
+
+
+
+
+//UPSTASH REDIS
+
+let client = new redis(`rediss://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_ENDPOINT}:33178`);
+
+client.set('foo', 'bar');
+
+var RedisStore = require('connect-redis')(session)
+
+//END OF UPSTASH REDIS
 
 app.use(
     session({
+        store: new RedisStore({ client: client }),
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
