@@ -1,0 +1,44 @@
+
+name: finans CI/CD with Google Cloud Run
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+env:
+  GOOGLE_CLOUD_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
+  GOOGLE_CLOUD_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 'actions/checkout@v3'
+    
+      - uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}'
+          project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT}}
+        
+      - name: build
+        run: gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT/finans
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 'actions/checkout@v3'
+      
+      - uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}'
+          project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT}}
+          
+      - name: set project
+        run: gcloud config set project $GOOGLE_CLOUD_PROJECT
+      
+      - name: deploy
+        run: gcloud run deploy finans --image gcr.io/$GOOGLE_CLOUD_PROJECT/finans --platform managed --region us-west1 --allow-unauthenticated --memory=512Mi 
+        
