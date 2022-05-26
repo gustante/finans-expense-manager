@@ -50,5 +50,5 @@ exports.authFail = (req, res) => {
 exports.logout = (req, res) => {
     req.logout();
     req.session.destroy();
-    res.redirect('/#/')
+    res.send('Logged out - google')
 }

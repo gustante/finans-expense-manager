@@ -136,7 +136,9 @@ class App extends React.Component {
 
 
     handleLogIn() {
-        event.preventDefault()
+        if(event)
+            event.preventDefault()
+
         console.log("executed handleLogin")
         let captchaToken = ''
         //Executes captcha after form is submitted, generates token and store it in a variable
@@ -294,7 +296,10 @@ class App extends React.Component {
 
     handleLogOut() {
         if (this.state.isLoggedIn == true) {
-            axios.get("/api/v1.0/user/logout")
+            if(this.state.googleUser)
+                this.handleGoogleLogOut()
+
+                axios.get("/api/v1.0/user/logout")
                 .then(results => {
                     this.setState({ isLoggedIn: false });
                 })
@@ -316,9 +321,39 @@ class App extends React.Component {
                         });
                     }
                 });
+
+
         }
 
     }
+
+    handleGoogleLogOut(){
+        axios.get("/api/v1.0/oauth/google/logout")
+                .then(results => {
+                    console.log(results)
+                })
+                .catch(error => {
+                    console.log(error.response)
+                    if(error.response.data.status == 401){
+                        this.setState({displayLoginButton: true});
+
+                    }
+                    if(error.response.data.data != undefined){
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
+                    }
+                });
+
+    }
+
+
 
     handleChange(e) {
         this.setState({
