@@ -9,7 +9,7 @@ const passport = require('passport');
 var fs = require('fs');
 
 // passport is included here:
-eval(fs.readFileSync('passport.js')+'');
+eval(fs.readFileSync('./passport.js')+'');
 
 
 app.use(express.urlencoded({ extended: true }));
