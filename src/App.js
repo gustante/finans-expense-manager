@@ -136,6 +136,7 @@ class App extends React.Component {
 
 
     handleLogIn() {
+        event.preventDefault()
         console.log("executed handleLogin")
         let captchaToken = ''
         //Executes captcha after form is submitted, generates token and store it in a variable

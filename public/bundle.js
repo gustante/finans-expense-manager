@@ -14691,6 +14691,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function handleLogIn() {
       var _this4 = this;
 
+      event.preventDefault();
       console.log("executed handleLogin");
       var captchaToken = ''; //Executes captcha after form is submitted, generates token and store it in a variable
 
