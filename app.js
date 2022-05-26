@@ -6,11 +6,7 @@ const router = require("./routes/index.js")
 const session = require('express-session');
 const passport = require('passport');
 
-var fs = require('fs');
-
-// passport is included here:
-eval(fs.readFileSync('./passport.js')+'');
-
+var auth = require('./passport');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
