@@ -5,7 +5,7 @@ const port = process.env.PORT;
 const router = require("./routes/index.js")
 const session = require('express-session');
 const passport = require('passport');
-require('./passport')
+require('./passport.js')
 
 
 app.use(express.urlencoded({ extended: true }));
