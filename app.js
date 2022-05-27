@@ -41,7 +41,7 @@ app.use(express.json());
 
 //UPSTASH REDIS
 
-let client = new redis(`rediss://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_ENDPOINT}:33178`);
+let client = new redis(process.env.REDIS_PASSWORD);
 
 client.set('foo', 'bar');
 
