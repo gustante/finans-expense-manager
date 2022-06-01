@@ -56,7 +56,6 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
   \************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -246,7 +245,6 @@ module.exports = function xhrAdapter(config) {
   \*****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 49:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -310,7 +308,6 @@ module.exports.default = axios;
   \*************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 18:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -341,7 +338,6 @@ module.exports = Cancel;
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 59:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -413,7 +409,6 @@ module.exports = CancelToken;
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -431,7 +426,6 @@ module.exports = function isCancel(value) {
   \**********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 95:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -539,7 +533,6 @@ module.exports = Axios;
   \***********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 55:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -607,7 +600,6 @@ module.exports = InterceptorManager;
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -643,7 +635,6 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 16:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -675,7 +666,6 @@ module.exports = function createError(message, config, code, request, response) 
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 28:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -744,7 +734,6 @@ module.exports = function dispatchRequest(config) {
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 13:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -801,7 +790,6 @@ module.exports = function enhanceError(error, config, code, request, response) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -870,7 +858,6 @@ module.exports = function mergeConfig(config1, config2) {
   \***********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 13:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -904,7 +891,6 @@ module.exports = function settle(resolve, reject, response) {
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -937,7 +923,6 @@ module.exports = function transformData(data, headers, fns) {
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 93:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1043,7 +1028,6 @@ module.exports = defaults;
   \************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1069,7 +1053,6 @@ module.exports = function bind(fn, thisArg) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1148,7 +1131,6 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   \*******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 10:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1173,7 +1155,6 @@ module.exports = function combineURLs(baseURL, relativeURL) {
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1233,7 +1214,6 @@ function nonStandardBrowserEnv() {
   \*********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1260,7 +1240,6 @@ module.exports = function isAbsoluteURL(url) {
   \***********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1331,7 +1310,6 @@ function nonStandardBrowserEnv() {
   \***************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1356,7 +1334,6 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 22:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1419,7 +1396,6 @@ module.exports = function parseHeaders(headers) {
   \**************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 23:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1459,7 +1435,6 @@ module.exports = function spread(callback) {
   \*****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 348:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1842,7 +1817,6 @@ module.exports = {
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -2507,7 +2481,6 @@ function createMemoryHistory(b) {
   \*********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 69:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -2615,7 +2588,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 100:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -2728,7 +2700,6 @@ module.exports = checkPropTypes;
   \************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 44:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -3405,7 +3376,6 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
   \******************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 13:2-16 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /**
@@ -3431,7 +3401,6 @@ if (true) {
   \*************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 10:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -3454,7 +3423,6 @@ module.exports = ReactPropTypesSecret;
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 1:0-14 */
 /***/ ((module) => {
 
 module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
@@ -13506,16 +13474,6 @@ if (true) {
 /*! export unstable_wrapCallback [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_exports__ */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 39:30-50 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 132:17-37 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 156:28-48 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 201:19-39 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 564:32-52 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 580:29-49 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 606:24-44 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 730:24-44 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 815:28-48 */
-/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 831:24-44 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -14578,6 +14536,8 @@ var App = /*#__PURE__*/function (_React$Component) {
       //controls display modal with success message
       showModalError: false,
       //controls display of modal with error message
+      displayConfirmButton: false,
+      //controls display of modal for confirming actions
       Message: [],
       //messages to be passed to success or error modal according to validation obtained
       displayLoginButton: false,
@@ -14595,6 +14555,8 @@ var App = /*#__PURE__*/function (_React$Component) {
     _this.handleStopEditingUser = _this.handleStopEditingUser.bind(_assertThisInitialized(_this));
     _this.handleStartEditingUser = _this.handleStartEditingUser.bind(_assertThisInitialized(_this));
     _this.handleSaveEditingUser = _this.handleSaveEditingUser.bind(_assertThisInitialized(_this));
+    _this.handleDeleteUser = _this.handleDeleteUser.bind(_assertThisInitialized(_this));
+    _this.confirmDeleteUser = _this.confirmDeleteUser.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -14930,7 +14892,8 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function handleCloseError() {
       this.setState({
         showModalError: false,
-        displayLoginButton: false
+        displayLoginButton: false,
+        displayConfirmButton: false
       });
     }
   }, {
@@ -15018,6 +14981,53 @@ var App = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "confirmDeleteUser",
+    value: function confirmDeleteUser(e) {
+      e.preventDefault();
+      console.log("confirm before delete user");
+      this.setState({
+        Message: ["Are you sure you want to delete your account and all your expenses?"],
+        showModalError: true,
+        displayConfirmButton: true
+      });
+    }
+  }, {
+    key: "handleDeleteUser",
+    value: function handleDeleteUser(e) {
+      e.preventDefault();
+      console.log("deleting user");
+      this.handleCloseError(); // axios.put('/api/v1.0/user/deleteUser', {
+      //     userId: this.state.userId,
+      //     email: this.state.email
+      //     })
+      //     .then(results => {
+      //         console.log(results.data)
+      //         this.setState({
+      //             isLoggedIn: false,
+      //         });
+      //         this.handleStopEditingUser()
+      //     })
+      //     .catch(error => {
+      //         console.log(error.response)
+      //         if(error.response.data.status == 401){
+      //             this.setState({displayLoginButton: true});
+      //         }
+      //         if(error.response.data.data != undefined){
+      //             this.setState({
+      //                 Message: error.response.data.data,
+      //                 showModalError: true
+      //             });
+      //         } else {
+      //             this.setState({
+      //                 Message: error.response.data,
+      //                 showModalError: true
+      //             });
+      //         }
+      //     });
+
+      this.handleStopEditingUser();
+    }
+  }, {
     key: "render",
     value: function render() {
       var registerFormProps = {
@@ -15040,7 +15050,9 @@ var App = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalError__WEBPACK_IMPORTED_MODULE_11__.default, {
         handleClose: this.handleCloseError,
         showModalError: this.state.showModalError,
-        errorMessages: this.state.Message
+        errorMessages: this.state.Message,
+        displayConfirmButton: this.state.displayConfirmButton,
+        handleDeleteUser: this.handleDeleteUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         index: true,
         path: "/",
@@ -15081,7 +15093,9 @@ var App = /*#__PURE__*/function (_React$Component) {
           handleChange: this.handleChange,
           handleStartEditingUser: this.handleStartEditingUser,
           handleStopEditingUser: this.handleStopEditingUser,
-          handleSaveEditingUser: this.handleSaveEditingUser
+          handleSaveEditingUser: this.handleSaveEditingUser,
+          confirmDeleteUser: this.confirmDeleteUser,
+          handleDeleteUser: this.handleDeleteUser
         })
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "userBudgets",
@@ -17705,16 +17719,18 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
 
       var _this$props = this.props,
           showModalError = _this$props.showModalError,
-          displayLoginButton = _this$props.displayLoginButton;
-      var showHideClassName = showModalError ? 'view' : 'hide'; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
+          displayLoginButton = _this$props.displayLoginButton,
+          displayConfirmButton = _this$props.displayConfirmButton;
+      var showHideModal = showModalError ? 'view' : 'hide'; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
 
       var showLoginButton = displayLoginButton ? 'view' : 'hide';
+      var showConfirmButton = displayConfirmButton ? 'view' : 'hide';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-lg-6 col-md-8 col-10"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: showHideClassName,
+        className: showHideModal,
         style: {
           position: "absolute",
           zIndex: "2",
@@ -17728,7 +17744,9 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
         className: "modal-content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-header text-danger"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+      }, displayConfirmButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+        className: "modal-title"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Confirm before proceeding")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
         className: "modal-title"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Error"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-body"
@@ -17747,7 +17765,14 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
         className: showLoginButton
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", (_React$createElement = {
         onClick: this.props.handleClose
-      }, _defineProperty(_React$createElement, "onClick", this.refresh), _defineProperty(_React$createElement, "type", "button"), _defineProperty(_React$createElement, "data-dismiss", "modal"), _defineProperty(_React$createElement, "className", "btn btn-warning"), _React$createElement), "Log in")))))))));
+      }, _defineProperty(_React$createElement, "onClick", this.refresh), _defineProperty(_React$createElement, "type", "button"), _defineProperty(_React$createElement, "data-dismiss", "modal"), _defineProperty(_React$createElement, "className", "btn btn-warning"), _React$createElement), "Log in")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: showConfirmButton
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.handleDeleteUser,
+        type: "button",
+        "data-dismiss": "modal",
+        className: "btn btn-warning"
+      }, "Confirm deletion")))))))));
     }
   }]);
 
@@ -17826,7 +17851,7 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           showModalSuccess = _this$props.showModalSuccess,
           displayLoginButton = _this$props.displayLoginButton;
-      var showHideClassName = showModalSuccess ? 'view' : 'hide'; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
+      var showHideModal = showModalSuccess ? 'view' : 'hide'; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
 
       var showLoginButton = displayLoginButton ? 'view' : 'hide'; //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
 
@@ -17835,7 +17860,7 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-lg-6 col-md-8 col-10"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: showHideClassName,
+        className: showHideModal,
         style: {
           position: "absolute",
           zIndex: "2",
@@ -18564,7 +18589,11 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         type: "button",
         className: "btn btn-secondary hide editInfo m-1",
         onClick: this.props.handleStopEditingUser
-      }, "Cancel")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
+      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "btn btn-danger hide editInfo m-1",
+        onClick: this.props.confirmDeleteUser
+      }, "Delete account")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
         to: "/login"
       }));
     }
@@ -18611,10 +18640,6 @@ grecaptcha.ready(function () {
   \********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__, module.id */
-/*! CommonJS bailout: exports is used directly at 3:0-7 */
-/*! CommonJS bailout: exports.push(...) prevents optimization as exports is passed as call context at 5:0-12 */
-/*! CommonJS bailout: exports is used directly at 7:17-24 */
-/*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports
@@ -18634,7 +18659,6 @@ module.exports = exports;
   \******************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__, module.id */
-/*! CommonJS bailout: module.exports is used directly at 19:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var api = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
@@ -18665,7 +18689,6 @@ module.exports = content.locals || {};
   \****************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__.nc, __webpack_require__.* */
-/*! CommonJS bailout: module.exports is used directly at 230:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";

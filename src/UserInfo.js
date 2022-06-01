@@ -128,6 +128,7 @@ class UserInfo extends React.Component {
                                 <button type="button" className="btn btn-primary m-1 userInfo" onClick={this.props.handleStartEditingUser}>Update info</button>
                                 <button type="submit" className="btn btn-primary hide editInfo m-1" >Save</button>
                                 <button type="button" className="btn btn-secondary hide editInfo m-1" onClick={this.props.handleStopEditingUser}>Cancel</button>
+                                <button type="button" className="btn btn-danger hide editInfo m-1" onClick={this.props.confirmDeleteUser}>Delete account</button>
                             </div>
                         </form>
 

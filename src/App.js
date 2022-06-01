@@ -36,6 +36,7 @@ class App extends React.Component {
             repeatNewPassword: "",
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
+            displayConfirmButton: false,//controls display of modal for confirming actions
             Message: [], //messages to be passed to success or error modal according to validation obtained
             displayLoginButton: false,
             exists: "", //controls google login,
@@ -52,6 +53,8 @@ class App extends React.Component {
         this.handleStopEditingUser = this.handleStopEditingUser.bind(this);
         this.handleStartEditingUser = this.handleStartEditingUser.bind(this);
         this.handleSaveEditingUser = this.handleSaveEditingUser.bind(this);
+        this.handleDeleteUser = this.handleDeleteUser.bind(this);
+        this.confirmDeleteUser = this.confirmDeleteUser.bind(this);
     }
 
     componentDidMount() {
@@ -372,6 +375,7 @@ class App extends React.Component {
         this.setState({
             showModalError: false,
             displayLoginButton: false,
+            displayConfirmButton: false
 
         });
     }
@@ -459,6 +463,58 @@ class App extends React.Component {
 
     }
 
+    confirmDeleteUser(e){
+        e.preventDefault()
+        console.log("confirm before delete user")
+
+                        this.setState({
+                            Message: ["Are you sure you want to delete your account and all your expenses?"],
+                            showModalError: true,
+                            displayConfirmButton: true
+                        })
+
+
+
+    }
+
+    handleDeleteUser(e){
+        e.preventDefault()
+        console.log("deleting user")
+        this.handleCloseError()
+        // axios.put('/api/v1.0/user/deleteUser', {
+        //     userId: this.state.userId,
+        //     email: this.state.email
+        //     })
+        //     .then(results => {
+
+        //         console.log(results.data)
+        //         this.setState({
+        //             isLoggedIn: false,
+        //         });
+        //         this.handleStopEditingUser()
+
+        //     })
+        //     .catch(error => {
+        //         console.log(error.response)
+        //         if(error.response.data.status == 401){
+        //             this.setState({displayLoginButton: true});
+
+        //         }
+        //         if(error.response.data.data != undefined){
+        //             this.setState({
+        //                 Message: error.response.data.data,
+        //                 showModalError: true
+        //             });
+        //         } else {
+        //             this.setState({
+        //                 Message: error.response.data,
+        //                 showModalError: true
+        //             });
+        //         }
+        //     });
+        this.handleStopEditingUser()
+
+    }
 
     render() {
 
@@ -476,7 +532,7 @@ class App extends React.Component {
             <>
                 <Nav isLoggedIn={this.state.isLoggedIn} handleLogOut={this.handleLogOut} />
                 <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message} />
-                <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
+                <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayConfirmButton={this.state.displayConfirmButton} handleDeleteUser={this.handleDeleteUser} />
                 <Routes>
                     <Route index path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
@@ -486,7 +542,7 @@ class App extends React.Component {
                     <Route path="/login" element={<Login handleLogIn={this.handleLogIn} handleGoogleLogIn={this.handleGoogleLogIn} handleChange={this.handleChange} isLoggedIn={this.state.isLoggedIn} />} />
                     <Route path="/register" element={<Register {...registerFormProps} />} />
                     <Route path="/myAccount" element={<MyAccount />}>
-                        <Route path="userInfo" element={<UserInfo userInfo={this.state} handleChange={this.handleChange} handleStartEditingUser={this.handleStartEditingUser} handleStopEditingUser={this.handleStopEditingUser} handleSaveEditingUser={this.handleSaveEditingUser} />} />
+                        <Route path="userInfo" element={<UserInfo userInfo={this.state} handleChange={this.handleChange} handleStartEditingUser={this.handleStartEditingUser} handleStopEditingUser={this.handleStopEditingUser} handleSaveEditingUser={this.handleSaveEditingUser} confirmDeleteUser={this.confirmDeleteUser} handleDeleteUser={this.handleDeleteUser} />} />
                         <Route path="userBudgets" element={<Budgets isLoggedIn={this.state.isLoggedIn} />} />
                         <Route path="manageTypes" element={<ManageTypes isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>

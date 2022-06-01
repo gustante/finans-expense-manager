@@ -12,14 +12,14 @@ class ModalSuccess extends React.Component {
     render() {
         //code to toggle modal taken from https://www.js-tutorials.com/react-js/how-to-create-modal-box-component-in-react/
         const { showModalSuccess, displayLoginButton } = this.props
-        const showHideClassName = showModalSuccess ? 'view' : 'hide';//whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
+        const showHideModal = showModalSuccess ? 'view' : 'hide';//whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
         const showLoginButton = displayLoginButton? 'view' : 'hide';
         //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
         return <>
 
             <div className="row justify-content-center">
                 <div className="col-lg-6 col-md-8 col-10">
-                    <div className={showHideClassName} style={{ position: "absolute", zIndex: "2",width:"100%" }} role="dialog">
+                    <div className={showHideModal} style={{ position: "absolute", zIndex: "2",width:"100%" }} role="dialog">
                         <div className="modal-dialog" role="document">
                             <div className="modal-content">
                                 <div className="modal-header text-success">
@@ -33,9 +33,9 @@ class ModalSuccess extends React.Component {
                                     <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-success">Close</button>
                                     <Link to="/login" className={showLoginButton}>
                                         <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-warning">Log In</button>
-                                    </Link>  
+                                    </Link>
                                 </div>
-                                                              
+
                             </div>
                         </div>
                     </div>
