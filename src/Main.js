@@ -3,6 +3,7 @@ import ExpenseTable from './ExpenseTable';
 import Form from './Form';
 import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
+import ExpenseCreated from "./ExpenseCreatedAlert.js"
 import axios from 'axios';
 import ReactGA from 'react-ga';
 import { Navigate } from "react-router-dom";
@@ -150,7 +151,13 @@ class Main extends React.Component {
                     token: captchaToken
                 })
                     .then(results => {
-                        this.setState({ showModalSuccess: true, Message: ["ID: " + results.data._id, "Expense registered!"] }); //success message sends expense id to success modal and displays it
+                        $('.alert-success').removeClass("hide")
+                        $('.alert-success').addClass("view")
+
+                        const myTimeout = setTimeout(function(){
+                            $('.alert-success').addClass("hide")
+                        }, 5000);
+
 
                         // Create a new array based on current state:
                         let arrayOfExpenses = [...this.state.expenses];
@@ -531,7 +538,7 @@ class Main extends React.Component {
         return <>
             {isLoggedIn ? (
                 <>
-                    <div className="dashboard">
+                    <div className="dashboard" style={{ position: "relative" }}>
                         <div className="row">
                             <div className="col mx-3 my-5">
                                 <h1 className="display-4">My expenses</h1>
@@ -540,6 +547,7 @@ class Main extends React.Component {
 
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
                         <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} />
+                        <ExpenseCreated />
                         <Form {...formProps} />
                         <ExpenseTable {...expenseTableProps} />
                     </div>

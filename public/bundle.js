@@ -15655,6 +15655,41 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./src/ExpenseCreatedAlert.js":
+/*!************************************!*\
+  !*** ./src/ExpenseCreatedAlert.js ***!
+  \************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+function ExpenseCreated() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "alert alert-success hide",
+    role: "alert",
+    style: {
+      position: "absolute",
+      zIndex: "3",
+      width: "100%",
+      top: 0
+    }
+  }, "Expense registered succesfully!");
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExpenseCreated);
+
+/***/ }),
+
 /***/ "./src/ExpenseTable.js":
 /*!*****************************!*\
   !*** ./src/ExpenseTable.js ***!
@@ -16605,10 +16640,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Form */ "./src/Form.js");
 /* harmony import */ var _ModalSuccess__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ModalSuccess */ "./src/ModalSuccess.js");
 /* harmony import */ var _ModalError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ModalError */ "./src/ModalError.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var _ExpenseCreatedAlert_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ExpenseCreatedAlert.js */ "./src/ExpenseCreatedAlert.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -16652,10 +16688,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
  //Google analytics tracking ID
 
 var trackingId = "UA-191727658-1";
-react_ga__WEBPACK_IMPORTED_MODULE_6__.default.initialize(trackingId);
+react_ga__WEBPACK_IMPORTED_MODULE_7__.default.initialize(trackingId);
 var current = new Date(); //get current date to set defaut date to today in the Main states for quicker expense creation
 
 var Main = /*#__PURE__*/function (_React$Component) {
@@ -16715,7 +16752,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       if (this.props.isLoggedIn) {
-        axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense/all").then(function (results) {
+        axios__WEBPACK_IMPORTED_MODULE_6___default().get("/api/v1.0/expense/all").then(function (results) {
           var arrayOfExpenses = results.data;
           console.log(results.data);
 
@@ -16743,7 +16780,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
             });
           }
         });
-        axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/type/all").then(function (results) {
+        axios__WEBPACK_IMPORTED_MODULE_6___default().get("/api/v1.0/type/all").then(function (results) {
           var arrayOfTypes = results.data;
 
           _this2.setState({
@@ -16803,7 +16840,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         console.log("reCAPTCHA executed");
       }).then(function () {
         //creates expense and sends token to backend
-        axios__WEBPACK_IMPORTED_MODULE_5___default().post("/api/v1.0/expense", {
+        axios__WEBPACK_IMPORTED_MODULE_6___default().post("/api/v1.0/expense", {
           month: _this3.state.month,
           day: _this3.state.day,
           year: _this3.state.year,
@@ -16812,12 +16849,11 @@ var Main = /*#__PURE__*/function (_React$Component) {
           amount: _this3.state.amount,
           token: captchaToken
         }).then(function (results) {
-          _this3.setState({
-            showModalSuccess: true,
-            Message: ["ID: " + results.data._id, "Expense registered!"]
-          }); //success message sends expense id to success modal and displays it
-          // Create a new array based on current state:
-
+          $('.alert-success').removeClass("hide");
+          $('.alert-success').addClass("view");
+          var myTimeout = setTimeout(function () {
+            $('.alert-success').addClass("hide");
+          }, 5000); // Create a new array based on current state:
 
           var arrayOfExpenses = _toConsumableArray(_this3.state.expenses); // Add item to it
 
@@ -16829,7 +16865,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           }); //Records expense creation event
 
 
-          react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
+          react_ga__WEBPACK_IMPORTED_MODULE_7__.default.event({
             category: "Expense",
             action: "Created"
           });
@@ -16870,7 +16906,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         captchaToken = token;
         console.log("reCAPTCHA executed");
       }).then(function () {
-        axios__WEBPACK_IMPORTED_MODULE_5___default().post("/api/v1.0/type", {
+        axios__WEBPACK_IMPORTED_MODULE_6___default().post("/api/v1.0/type", {
           name: _this4.state.typeName,
           budget: _this4.state.typeBudget,
           token: captchaToken
@@ -16896,7 +16932,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           $("div .collapse").removeClass("show");
           console.log(_this4.state.typeDropDown); //Records type creation event
 
-          react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
+          react_ga__WEBPACK_IMPORTED_MODULE_7__.default.event({
             category: "Type",
             action: "Created"
           });
@@ -16930,7 +16966,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this5 = this;
 
       event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount)).then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_6___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount)).then(function (results) {
         console.log("received response from server");
         var arrayOfExpenses = results.data;
         console.log(results.data);
@@ -16941,7 +16977,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         //Records expense filter event
 
 
-        react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
+        react_ga__WEBPACK_IMPORTED_MODULE_7__.default.event({
           category: "Expense",
           action: "Filter"
         });
@@ -16979,7 +17015,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function handleDelete(expenseId, event) {
       var _this6 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_5___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
+      axios__WEBPACK_IMPORTED_MODULE_6___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
       .then(function (deletedExpense) {
         // Create a new array based on current state:
         var arrayOfExpenses = _toConsumableArray(_this6.state.expenses);
@@ -16997,7 +17033,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         //Records expense deletion event
 
 
-        react_ga__WEBPACK_IMPORTED_MODULE_6__.default.event({
+        react_ga__WEBPACK_IMPORTED_MODULE_7__.default.event({
           category: "Expense",
           action: "Deleted"
         });
@@ -17030,7 +17066,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this7 = this;
 
       event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_5___default().get("/api/v1.0/expense/all").then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_6___default().get("/api/v1.0/expense/all").then(function (results) {
         var arrayOfExpenses = results.data;
 
         _this7.setState({
@@ -17120,7 +17156,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var newType = this.state.typeDropDown.find(function (type) {
         return type.name == _this8.state.newType;
       });
-      axios__WEBPACK_IMPORTED_MODULE_5___default().put('/api/v1.0/expense', {
+      axios__WEBPACK_IMPORTED_MODULE_6___default().put('/api/v1.0/expense', {
         expenseId: expenseId,
         newYear: splitDate[0],
         newMonth: splitDate[1],
@@ -17221,7 +17257,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
       };
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "dashboard"
+        className: "dashboard",
+        style: {
+          position: "relative"
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -17237,7 +17276,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         showModalError: this.state.showModalError,
         errorMessages: this.state.Message,
         displayLoginButton: this.state.displayLoginButton
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, expenseTableProps))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Navigate, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseCreatedAlert_js__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, expenseTableProps))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Navigate, {
         to: "/login"
       }));
     }
