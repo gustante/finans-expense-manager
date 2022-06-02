@@ -462,7 +462,7 @@ class App extends React.Component {
                     });
                 }
             });
-t
+
     }
 
     confirmDeleteUser(e){

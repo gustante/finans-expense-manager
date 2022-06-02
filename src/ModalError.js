@@ -24,7 +24,7 @@ class ModalError extends React.Component {
                 <div className="col-lg-6 col-md-8 col-10">
                     <div className={showHideModal} style={{ position: "absolute", zIndex: "2",width:"100%" }} role="dialog">
                         <div className="modal-dialog" role="document">
-                            <div className="modal-content">
+                            <div className="modal-content shadow-lg">
                                 <div className="modal-header text-danger">
 
                                     {displayConfirmButton ? <h5 className="modal-title"><p>Confirm before proceeding</p></h5> : <h5 className="modal-title"><p>Error</p></h5>}

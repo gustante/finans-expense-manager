@@ -14981,7 +14981,6 @@ var App = /*#__PURE__*/function (_React$Component) {
           });
         }
       });
-      t;
     }
   }, {
     key: "confirmDeleteUser",
@@ -17761,7 +17760,7 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
         className: "modal-dialog",
         role: "document"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-content"
+        className: "modal-content shadow-lg"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-header text-danger"
       }, displayConfirmButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
@@ -17893,7 +17892,7 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
         className: "modal-dialog",
         role: "document"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-content"
+        className: "modal-content shadow-lg"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-header text-success"
       }, displayConfirmButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {

@@ -23,7 +23,7 @@ class ModalSuccess extends React.Component {
                 <div className="col-lg-6 col-md-8 col-10">
                     <div className={showHideModal} style={{ position: "absolute", zIndex: "2",width:"100%" }} role="dialog">
                         <div className="modal-dialog" role="document">
-                            <div className="modal-content">
+                            <div className="modal-content shadow-lg">
                                 <div className="modal-header text-success">
                                     {displayConfirmButton ? <h5 className="modal-title"><p>Account deleted succesfully</p></h5> : <h5 className="modal-title"><p>Success!</p></h5>}
 
