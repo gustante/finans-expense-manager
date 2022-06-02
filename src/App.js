@@ -55,6 +55,7 @@ class App extends React.Component {
         this.handleSaveEditingUser = this.handleSaveEditingUser.bind(this);
         this.handleDeleteUser = this.handleDeleteUser.bind(this);
         this.confirmDeleteUser = this.confirmDeleteUser.bind(this);
+        this.finalizeDeleteUser = this.finalizeDeleteUser.bind(this);
     }
 
     componentDidMount() {
@@ -368,7 +369,8 @@ class App extends React.Component {
     handleCloseSuccess() {
         this.setState({
             showModalSuccess: false,
-            displayLoginButton: false
+            displayLoginButton: false,
+            displayConfirmButton: false
         });
     }
     handleCloseError() {
@@ -472,8 +474,14 @@ class App extends React.Component {
             showModalError: true,
             displayConfirmButton: true
         })
+    }
 
-
+    finalizeDeleteUser(e){
+        e.preventDefault()
+        this.handleCloseSuccess()
+        this.setState({
+            isLoggedIn: false
+        })
 
     }
 
@@ -490,7 +498,9 @@ class App extends React.Component {
                 console.log(results.data)
                 console.log('user was deleted on backend')
                 this.handleStopEditingUser()
-                this.setState({ isLoggedIn: false });
+
+
+                this.setState({ showModalSuccess: true, Message: ["Sorry to see you go :( ", "Thank you for using Finans :)"], displayConfirmButton: true });
 
             })
             .catch(error => {
@@ -530,7 +540,7 @@ class App extends React.Component {
         return (
             <>
                 <Nav isLoggedIn={this.state.isLoggedIn} handleLogOut={this.handleLogOut} />
-                <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message} />
+                <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message } displayConfirmButton={this.state.displayConfirmButton} finalizeDeleteUser={this.finalizeDeleteUser} />
                 <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayConfirmButton={this.state.displayConfirmButton} handleDeleteUser={this.handleDeleteUser} />
                 <Routes>
                     <Route index path="/" element={<Home />} />

@@ -11,10 +11,12 @@ class ModalSuccess extends React.Component {
 
     render() {
         //code to toggle modal taken from https://www.js-tutorials.com/react-js/how-to-create-modal-box-component-in-react/
-        const { showModalSuccess, displayLoginButton } = this.props
+        const { showModalSuccess, displayLoginButton, displayConfirmButton } = this.props
         const showHideModal = showModalSuccess ? 'view' : 'hide';//whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
         const showLoginButton = displayLoginButton? 'view' : 'hide';
         //bootstrap modal templates taken from https://getbootstrap.com/docs/4.0/components/modal/
+        const showConfirmButton = displayConfirmButton? 'view' : 'hide';
+
         return <>
 
             <div className="row justify-content-center">
@@ -23,18 +25,28 @@ class ModalSuccess extends React.Component {
                         <div className="modal-dialog" role="document">
                             <div className="modal-content">
                                 <div className="modal-header text-success">
-                                    <h5 className="modal-title"><p>Success!</p></h5>
+                                    {displayConfirmButton ? <h5 className="modal-title"><p>Account deleted succesfully</p></h5> : <h5 className="modal-title"><p>Success!</p></h5>}
+
                                 </div>
                                 <div className="modal-body">
-                                    <p>{this.props.Message[1]} </p>
-                                    <p>{this.props.Message[0]}</p>
+                                    {this.props.Message.map((message, index) => <p key={index}>{message}</p>)}
                                 </div>
-                                <div className="modal-footer">
-                                    <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-success">Close</button>
-                                    <Link to="/login" className={showLoginButton}>
-                                        <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-warning">Log In</button>
-                                    </Link>
-                                </div>
+                                {displayConfirmButton ?
+                                    <div className="modal-footer"  >
+                                        <Link to="/" className={showConfirmButton}>
+                                            <button onClick={this.props.finalizeDeleteUser} type="button" data-dismiss="modal" className="btn btn-warning">Close</button>
+                                        </Link>
+                                    </div>
+                                    :
+                                    <div className="modal-footer">
+                                        <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-success">Close</button>
+                                            <Link to="/login" className={showLoginButton}>
+                                                <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-warning">Log In</button>
+                                            </Link>
+                                    </div>
+                                }
+
+
 
                             </div>
                         </div>
