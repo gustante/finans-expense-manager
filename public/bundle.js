@@ -14994,37 +14994,44 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleDeleteUser",
     value: function handleDeleteUser(e) {
+      var _this9 = this;
+
       e.preventDefault();
       console.log("deleting user");
-      this.handleCloseError(); // axios.put('/api/v1.0/user/deleteUser', {
-      //     userId: this.state.userId,
-      //     email: this.state.email
-      //     })
-      //     .then(results => {
-      //         console.log(results.data)
-      //         this.setState({
-      //             isLoggedIn: false,
-      //         });
-      //         this.handleStopEditingUser()
-      //     })
-      //     .catch(error => {
-      //         console.log(error.response)
-      //         if(error.response.data.status == 401){
-      //             this.setState({displayLoginButton: true});
-      //         }
-      //         if(error.response.data.data != undefined){
-      //             this.setState({
-      //                 Message: error.response.data.data,
-      //                 showModalError: true
-      //             });
-      //         } else {
-      //             this.setState({
-      //                 Message: error.response.data,
-      //                 showModalError: true
-      //             });
-      //         }
-      //     });
+      this.handleCloseError();
+      axios__WEBPACK_IMPORTED_MODULE_17___default().delete('/api/v1.0/user/deleteUser', {
+        userId: this.state.userId,
+        email: this.state.email
+      }).then(function (results) {
+        console.log(results.data);
+        console.log('user was deleted on backend');
 
+        _this9.handleStopEditingUser();
+
+        _this9.setState({
+          isLoggedIn: false
+        });
+      })["catch"](function (error) {
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this9.setState({
+            displayLoginButton: true
+          });
+        }
+
+        if (error.response.data.data != undefined) {
+          _this9.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        } else {
+          _this9.setState({
+            Message: error.response.data,
+            showModalError: true
+          });
+        }
+      });
       this.handleStopEditingUser();
     }
   }, {

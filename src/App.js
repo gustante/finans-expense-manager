@@ -467,11 +467,11 @@ class App extends React.Component {
         e.preventDefault()
         console.log("confirm before delete user")
 
-                        this.setState({
-                            Message: ["Are you sure you want to delete your account and all your expenses?"],
-                            showModalError: true,
-                            displayConfirmButton: true
-                        })
+        this.setState({
+            Message: ["Are you sure you want to delete your account and all your expenses?"],
+            showModalError: true,
+            displayConfirmButton: true
+        })
 
 
 
@@ -481,37 +481,36 @@ class App extends React.Component {
         e.preventDefault()
         console.log("deleting user")
         this.handleCloseError()
-        // axios.put('/api/v1.0/user/deleteUser', {
-        //     userId: this.state.userId,
-        //     email: this.state.email
-        //     })
-        //     .then(results => {
+        axios.delete('/api/v1.0/user/deleteUser', {
+            userId: this.state.userId,
+            email: this.state.email
+            })
+            .then(results => {
 
-        //         console.log(results.data)
-        //         this.setState({
-        //             isLoggedIn: false,
-        //         });
-        //         this.handleStopEditingUser()
+                console.log(results.data)
+                console.log('user was deleted on backend')
+                this.handleStopEditingUser()
+                this.setState({ isLoggedIn: false });
 
-        //     })
-        //     .catch(error => {
-        //         console.log(error.response)
-        //         if(error.response.data.status == 401){
-        //             this.setState({displayLoginButton: true});
+            })
+            .catch(error => {
+                console.log(error.response)
+                if(error.response.data.status == 401){
+                    this.setState({displayLoginButton: true});
 
-        //         }
-        //         if(error.response.data.data != undefined){
-        //             this.setState({
-        //                 Message: error.response.data.data,
-        //                 showModalError: true
-        //             });
-        //         } else {
-        //             this.setState({
-        //                 Message: error.response.data,
-        //                 showModalError: true
-        //             });
-        //         }
-        //     });
+                }
+                if(error.response.data.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
+            });
         this.handleStopEditingUser()
 
     }

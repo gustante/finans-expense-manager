@@ -195,7 +195,7 @@ exports.logout = (req, res) => {
         if (req.session.isAuth) {
             req.session.userId = null;
             req.session.isAuth = false;
-            req.session.destroy()            
+            req.session.destroy()
             res.status(200).send('logged out');
         } else {
             throw new customError(['Unable to log out. User not logged in'], 401)
@@ -322,5 +322,68 @@ exports.updateUser = (req, res) => {
         let errorObject = new customError(['Please log in first'], 401);
         res.status(errorObject.status).send(errorObject);
     }
+
+}
+
+
+exports.deleteUser = async (req, res) => {
+
+    try {
+        if (req.session.isAuth) {
+            let deleteUser = await User.findByIdAndDelete(req.session.userId).exec()
+            let deleteExpenses = await Expense.deleteMany({ user: req.session.userId}).exec()
+            let deleteTypes = await Type.deleteMany({ user: req.session.userId}).exec()
+            console.log(deleteUser)
+            console.log(deleteExpenses)
+            console.log(deleteTypes)
+            req.session.destroy()
+            res.send("ok")
+
+        } else {
+            throw new customError(['Unable to log out. User not logged in'], 401)
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(error.status).send(error);
+    }
+
+    // if (req.session.isAuth) {
+    //     User.findByIdAndDelete(req.session.userId)
+    //         .exec()
+    //         .then(results => {
+    //             console.log('deleting user:')
+    //             console.log(results)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //             res.send(error)
+    //         });
+    //     Expense.deleteMany({ user: req.session.userId})
+    //         .exec()
+    //         .then(results => {
+    //             console.log('deleting expenses:')
+    //             console.log(results)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //             res.send(error)
+    //         });
+    //     Type.deleteMany({ user: req.session.userId})
+    //         .exec()
+    //         .then(results => {
+    //             console.log('deleting types:')
+    //             console.log(results)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //             res.send(error)
+    //         });
+    //          res.send("ok. Deleted")
+    // } else {
+    //     let errorObject = new customError(['Please log in to see this information'], 401);
+    //     res.status(errorObject.status).send(errorObject);
+    // }
+
+
 
 }
