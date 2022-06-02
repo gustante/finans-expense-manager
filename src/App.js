@@ -462,7 +462,7 @@ class App extends React.Component {
                     });
                 }
             });
-
+t
     }
 
     confirmDeleteUser(e){
@@ -497,8 +497,6 @@ class App extends React.Component {
 
                 console.log(results.data)
                 console.log('user was deleted on backend')
-                this.handleStopEditingUser()
-
 
                 this.setState({ showModalSuccess: true, Message: ["Sorry to see you go :( ", "Thank you for using Finans :)"], displayConfirmButton: true });
 
@@ -521,7 +519,6 @@ class App extends React.Component {
                     });
                 }
             });
-        this.handleStopEditingUser()
 
     }
 
