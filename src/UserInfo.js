@@ -84,8 +84,8 @@ class UserInfo extends React.Component {
                             <ul id="user-info" className="list-group">
 
                                 <li className="list-group-item">
-                                    <input type="text" name="firstName" className="hide form-control col-5 m-1" value={this.props.userInfo.firstName} placeholder="First Name" onChange={this.props.handleChange}/>
-                                    <input type="text" name="lastName" className="hide form-control col-5 m-1" value={this.props.userInfo.lastName} placeholder="Last Name" onChange={this.props.handleChange}/>
+                                    <input type="text" name="firstName" className="hide form-control col-12 m-1" value={this.props.userInfo.firstName} placeholder="First Name" onChange={this.props.handleChange}/>
+                                    <input type="text" name="lastName" className="hide form-control col-12 m-1" value={this.props.userInfo.lastName} placeholder="Last Name" onChange={this.props.handleChange}/>
 
                                     <div className="view userInfo">
                                         <span className="font-weight-bold">Name:</span> {firstName} {lastName}
@@ -93,7 +93,7 @@ class UserInfo extends React.Component {
                                 </li>
 
                                 <li className="list-group-item">
-                                    <input type="email" name="email" className="hide form-control col-5 m-1" value={this.props.userInfo.email} placeholder="abc@g.com" onChange={this.props.handleChange}/>
+                                    <input type="email" name="email" className="hide form-control col-12 m-1" value={this.props.userInfo.email} placeholder="abc@g.com" onChange={this.props.handleChange}/>
 
                                     <div className="view userInfo">
                                         <span  className="font-weight-bold">Email:</span> {email}
@@ -101,7 +101,7 @@ class UserInfo extends React.Component {
                                 </li>
 
                                 <li className="list-group-item">
-                                    <input type="text" name="phoneNumber" className="hide form-control col-5 m-1" value={this.props.userInfo.phoneNumber} pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="10 digits" onChange={this.props.handleChange}/>
+                                    <input type="text" name="phoneNumber" className="hide form-control col-12 m-1" value={this.props.userInfo.phoneNumber} pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="10 digits" onChange={this.props.handleChange}/>
 
                                     <div className="view userInfo">
                                         <span className="font-weight-bold">Phone number:</span> {phoneNumber}
@@ -109,9 +109,9 @@ class UserInfo extends React.Component {
                                 </li>
 
                                 <li className="list-group-item">
-                                    <input type="password" name="oldPassword" className="hide form-control col-3 m-1" value={this.props.userInfo.oldPassword} placeholder="Old password" onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
-                                    <input type="password" name="newPassword" className="hide form-control col-3 m-1 " value={this.props.userInfo.newPassword} placeholder="New Password" onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
-                                    <input type="password" name="repeatNewPassword" className="hide form-control col-4 m-1" value={this.props.userInfo.repeatNewPassword} placeholder="Repeat new password" onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
+                                    <input type="password" name="oldPassword" className="hide form-control col-12 m-1" value={this.props.userInfo.oldPassword} placeholder="Old password" onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
+                                    <input type="password" name="newPassword" className="hide form-control col-12 m-1 " value={this.props.userInfo.newPassword} placeholder="New Password" onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
+                                    <input type="password" name="repeatNewPassword" className="hide form-control col-12 m-1" value={this.props.userInfo.repeatNewPassword} placeholder="Repeat new password" onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
 
                                     <div className="view userInfo">
                                         <span className="font-weight-bold">Password:</span> ******

@@ -18601,14 +18601,14 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         name: "firstName",
-        className: "hide form-control col-5 m-1",
+        className: "hide form-control col-12 m-1",
         value: this.props.userInfo.firstName,
         placeholder: "First Name",
         onChange: this.props.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         name: "lastName",
-        className: "hide form-control col-5 m-1",
+        className: "hide form-control col-12 m-1",
         value: this.props.userInfo.lastName,
         placeholder: "Last Name",
         onChange: this.props.handleChange
@@ -18621,7 +18621,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "email",
         name: "email",
-        className: "hide form-control col-5 m-1",
+        className: "hide form-control col-12 m-1",
         value: this.props.userInfo.email,
         placeholder: "abc@g.com",
         onChange: this.props.handleChange
@@ -18634,7 +18634,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         name: "phoneNumber",
-        className: "hide form-control col-5 m-1",
+        className: "hide form-control col-12 m-1",
         value: this.props.userInfo.phoneNumber,
         pattern: "[0-9]{3}[0-9]{3}[0-9]{4}",
         placeholder: "10 digits",
@@ -18648,7 +18648,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
         name: "oldPassword",
-        className: "hide form-control col-3 m-1",
+        className: "hide form-control col-12 m-1",
         value: this.props.userInfo.oldPassword,
         placeholder: "Old password",
         onChange: this.props.handleChange,
@@ -18657,7 +18657,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
         name: "newPassword",
-        className: "hide form-control col-3 m-1 ",
+        className: "hide form-control col-12 m-1 ",
         value: this.props.userInfo.newPassword,
         placeholder: "New Password",
         onChange: this.props.handleChange,
@@ -18666,7 +18666,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
         name: "repeatNewPassword",
-        className: "hide form-control col-4 m-1",
+        className: "hide form-control col-12 m-1",
         value: this.props.userInfo.repeatNewPassword,
         placeholder: "Repeat new password",
         onChange: this.props.handleChange,
