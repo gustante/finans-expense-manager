@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ExpenseCreated() {
+function ExpenseCreatedAlert() {
 
     return(
 
@@ -13,5 +13,5 @@ function ExpenseCreated() {
 
     )
 }
-export default ExpenseCreated;
+export default ExpenseCreatedAlert;
 

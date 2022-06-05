@@ -3,7 +3,8 @@ import ExpenseTable from './ExpenseTable';
 import Form from './Form';
 import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
-import ExpenseCreated from "./ExpenseCreatedAlert.js"
+import ExpenseCreatedAlert from "./ExpenseCreatedAlert.js"
+import ExpenseDeletedAlert from "./ExpenseDeletedAlert.js"
 import axios from 'axios';
 import ReactGA from 'react-ga';
 import { Navigate } from "react-router-dom";
@@ -325,6 +326,13 @@ class Main extends React.Component {
 
                 this.setState({ expenses: arrayOfExpenses }); //This will remount the ExpenseTable component without the deletes expense
 
+                $('.alert-danger').removeClass("hide")
+                        $('.alert-danger').addClass("view")
+
+                        const myTimeout = setTimeout(function(){
+                            $('.alert-danger').addClass("hide")
+                        }, 5000);
+
 
                 //Records expense deletion event
                 ReactGA.event({
@@ -539,7 +547,8 @@ class Main extends React.Component {
             {isLoggedIn ? (
                 <>  
                 
-                    <ExpenseCreated />
+                    <ExpenseCreatedAlert />
+                    <ExpenseDeletedAlert />
                     <div className="dashboard" style={{ position: "relative" }}>
                         <div className="row">
                             <div className="col mx-3 my-5">

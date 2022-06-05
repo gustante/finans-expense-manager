@@ -16,7 +16,7 @@ input[readonly]{
 }
 
 
-.alert-success {
+.alert-success, .alert-danger {
   position: fixed;
   bottom: 16;
   z-index: 1021;
@@ -24,11 +24,6 @@ input[readonly]{
   right: 16;
   border-radius: 8px;
 }
-
-.dashboard {
-  position: relative;
-}
-
 
 /* DASHBORD(MAIN) PAGE  */
 
