@@ -16,12 +16,30 @@ input[readonly]{
 }
 
 
+.alert-success {
+  position: fixed;
+  bottom: 16;
+  z-index: 1021;
+  left: 16;
+  right: 16;
+  border-radius: 8px;
+}
+
+.dashboard {
+  position: relative;
+}
+
+
 /* DASHBORD(MAIN) PAGE  */
 
 .dashboard {
     width: 100%;
     max-width: 1000px;
     margin: auto;
+}
+
+.grecaptcha-badge { 
+  visibility: hidden;
 }
 
 

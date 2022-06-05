@@ -537,7 +537,9 @@ class Main extends React.Component {
 
         return <>
             {isLoggedIn ? (
-                <>
+                <>  
+                
+                    <ExpenseCreated />
                     <div className="dashboard" style={{ position: "relative" }}>
                         <div className="row">
                             <div className="col mx-3 my-5">
@@ -547,7 +549,6 @@ class Main extends React.Component {
 
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
                         <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} />
-                        <ExpenseCreated />
                         <Form {...formProps} />
                         <ExpenseTable {...expenseTableProps} />
                     </div>
