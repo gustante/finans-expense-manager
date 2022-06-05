@@ -64,6 +64,7 @@ Google oAuth 2.0
 Google analytics
 Google cloud run
 Passport
+Upstash Redis
 Twilio
 FontAwesome v5.15.1
 
