@@ -5,6 +5,7 @@ import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
 import ExpenseCreatedAlert from "./ExpenseCreatedAlert.js"
 import ExpenseDeletedAlert from "./ExpenseDeletedAlert.js"
+import ExpenseEditedAlert from "./ExpenseEditedAlert.js"
 import axios from 'axios';
 import ReactGA from 'react-ga';
 import { Navigate } from "react-router-dom";
@@ -152,11 +153,11 @@ class Main extends React.Component {
                     token: captchaToken
                 })
                     .then(results => {
-                        $('.alert-success').removeClass("hide")
-                        $('.alert-success').addClass("view")
+                        $('#expense-created-alert').removeClass("hide")
+                        $('#expense-created-alert').addClass("view")
 
                         const myTimeout = setTimeout(function(){
-                            $('.alert-success').addClass("hide")
+                            $('#expense-created-alert').addClass("hide")
                         }, 5000);
 
 
@@ -326,12 +327,12 @@ class Main extends React.Component {
 
                 this.setState({ expenses: arrayOfExpenses }); //This will remount the ExpenseTable component without the deletes expense
 
-                $('.alert-danger').removeClass("hide")
-                        $('.alert-danger').addClass("view")
+                $('#expense-deleted-alert').removeClass("hide")
+                $('#expense-deleted-alert').addClass("view")
 
-                        const myTimeout = setTimeout(function(){
-                            $('.alert-danger').addClass("hide")
-                        }, 5000);
+                const myTimeout = setTimeout(function(){
+                    $('#expense-deleted-alert').addClass("hide")
+                }, 5000);
 
 
                 //Records expense deletion event
@@ -446,10 +447,15 @@ class Main extends React.Component {
 
         axios.put('/api/v1.0/expense', { expenseId: expenseId, newYear:splitDate[0], newMonth:splitDate[1], newDay:splitDate[2], newTypeId: newType, newDesc: this.state.newDesc, newAmount: this.state.newAmount })
             .then(results => {
-                console.log("expense updated : ")
 
                 let updatedExpense = results.data;
-                console.log(updatedExpense)
+                
+                $('#expense-edited-alert').removeClass("hide")
+                $('#expense-edited-alert').addClass("view")
+
+                const myTimeout = setTimeout(function(){
+                    $('#expense-edited-alert').addClass("hide")
+                }, 5000);
 
                 let arrayOfExpenses = [...this.state.expenses];
 
@@ -579,6 +585,7 @@ class Main extends React.Component {
                 
                     <ExpenseCreatedAlert />
                     <ExpenseDeletedAlert />
+                    <ExpenseEditedAlert />
                     <div className="dashboard" style={{ position: "relative" }}>
                         <div className="row">
                             <div className="col mx-3 my-5">

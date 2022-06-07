@@ -15675,7 +15675,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function ExpenseCreatedAlert() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    "class": "alert alert-success hide",
+    id: "expense-created-alert",
+    className: "alert alert-success hide",
     role: "alert"
   }, "Expense registered succesfully!");
 }
@@ -15704,12 +15705,43 @@ __webpack_require__.r(__webpack_exports__);
 
 function ExpenseDeletedAlert() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    "class": "alert alert-danger hide",
+    id: "expense-deleted-alert",
+    className: "alert alert-danger hide",
     role: "alert"
   }, "Expense deleted succesfully!");
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExpenseDeletedAlert);
+
+/***/ }),
+
+/***/ "./src/ExpenseEditedAlert.js":
+/*!***********************************!*\
+  !*** ./src/ExpenseEditedAlert.js ***!
+  \***********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+function ExpenseEditedAlert() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "expense-edited-alert",
+    className: "alert alert-primary hide",
+    role: "alert"
+  }, "Expense edited succesfully!");
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExpenseEditedAlert);
 
 /***/ }),
 
@@ -16668,10 +16700,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ModalError */ "./src/ModalError.js");
 /* harmony import */ var _ExpenseCreatedAlert_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ExpenseCreatedAlert.js */ "./src/ExpenseCreatedAlert.js");
 /* harmony import */ var _ExpenseDeletedAlert_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ExpenseDeletedAlert.js */ "./src/ExpenseDeletedAlert.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var _ExpenseEditedAlert_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ExpenseEditedAlert.js */ "./src/ExpenseEditedAlert.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -16717,10 +16750,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
  //Google analytics tracking ID
 
 var trackingId = "UA-191727658-1";
-react_ga__WEBPACK_IMPORTED_MODULE_8__.default.initialize(trackingId);
+react_ga__WEBPACK_IMPORTED_MODULE_9__.default.initialize(trackingId);
 var current = new Date(); //get current date to set defaut date to today in the Main states for quicker expense creation
 
 var Main = /*#__PURE__*/function (_React$Component) {
@@ -16783,7 +16817,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       if (this.props.isLoggedIn) {
-        axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/v1.0/expense/all").then(function (results) {
+        axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
           _this2.setState({
             expenses: results.data.splice(0, _this2.state.position)
           });
@@ -16808,7 +16842,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
             });
           }
         });
-        axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/v1.0/type/all").then(function (results) {
+        axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/type/all").then(function (results) {
           var arrayOfTypes = results.data;
 
           _this2.setState({
@@ -16868,7 +16902,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         console.log("reCAPTCHA executed");
       }).then(function () {
         //creates expense and sends token to backend
-        axios__WEBPACK_IMPORTED_MODULE_7___default().post("/api/v1.0/expense", {
+        axios__WEBPACK_IMPORTED_MODULE_8___default().post("/api/v1.0/expense", {
           month: _this3.state.month,
           day: _this3.state.day,
           year: _this3.state.year,
@@ -16877,10 +16911,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
           amount: _this3.state.amount,
           token: captchaToken
         }).then(function (results) {
-          $('.alert-success').removeClass("hide");
-          $('.alert-success').addClass("view");
+          $('#expense-created-alert').removeClass("hide");
+          $('#expense-created-alert').addClass("view");
           var myTimeout = setTimeout(function () {
-            $('.alert-success').addClass("hide");
+            $('#expense-created-alert').addClass("hide");
           }, 5000); // Create a new array based on current state:
 
           var arrayOfExpenses = _toConsumableArray(_this3.state.expenses); // Add item to it
@@ -16893,7 +16927,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           }); //Records expense creation event
 
 
-          react_ga__WEBPACK_IMPORTED_MODULE_8__.default.event({
+          react_ga__WEBPACK_IMPORTED_MODULE_9__.default.event({
             category: "Expense",
             action: "Created"
           });
@@ -16934,7 +16968,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         captchaToken = token;
         console.log("reCAPTCHA executed");
       }).then(function () {
-        axios__WEBPACK_IMPORTED_MODULE_7___default().post("/api/v1.0/type", {
+        axios__WEBPACK_IMPORTED_MODULE_8___default().post("/api/v1.0/type", {
           name: _this4.state.typeName,
           budget: _this4.state.typeBudget,
           token: captchaToken
@@ -16960,7 +16994,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           $("div .collapse").removeClass("show");
           console.log(_this4.state.typeDropDown); //Records type creation event
 
-          react_ga__WEBPACK_IMPORTED_MODULE_8__.default.event({
+          react_ga__WEBPACK_IMPORTED_MODULE_9__.default.event({
             category: "Type",
             action: "Created"
           });
@@ -16994,7 +17028,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this5 = this;
 
       event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount)).then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount)).then(function (results) {
         console.log("received response from server");
         var arrayOfExpenses = results.data;
         console.log(results.data);
@@ -17005,7 +17039,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         //Records expense filter event
 
 
-        react_ga__WEBPACK_IMPORTED_MODULE_8__.default.event({
+        react_ga__WEBPACK_IMPORTED_MODULE_9__.default.event({
           category: "Expense",
           action: "Filter"
         });
@@ -17043,7 +17077,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function handleDelete(expenseId, event) {
       var _this6 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_7___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
+      axios__WEBPACK_IMPORTED_MODULE_8___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
       .then(function (deletedExpense) {
         // Create a new array based on current state:
         var arrayOfExpenses = _toConsumableArray(_this6.state.expenses);
@@ -17060,13 +17094,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
         }); //This will remount the ExpenseTable component without the deletes expense
 
 
-        $('.alert-danger').removeClass("hide");
-        $('.alert-danger').addClass("view");
+        $('#expense-deleted-alert').removeClass("hide");
+        $('#expense-deleted-alert').addClass("view");
         var myTimeout = setTimeout(function () {
-          $('.alert-danger').addClass("hide");
+          $('#expense-deleted-alert').addClass("hide");
         }, 5000); //Records expense deletion event
 
-        react_ga__WEBPACK_IMPORTED_MODULE_8__.default.event({
+        react_ga__WEBPACK_IMPORTED_MODULE_9__.default.event({
           category: "Expense",
           action: "Deleted"
         });
@@ -17099,7 +17133,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this7 = this;
 
       event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/v1.0/expense/all").then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
         var arrayOfExpenses = results.data;
 
         _this7.setState({
@@ -17189,7 +17223,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var newType = this.state.typeDropDown.find(function (type) {
         return type.name == _this8.state.newType;
       });
-      axios__WEBPACK_IMPORTED_MODULE_7___default().put('/api/v1.0/expense', {
+      axios__WEBPACK_IMPORTED_MODULE_8___default().put('/api/v1.0/expense', {
         expenseId: expenseId,
         newYear: splitDate[0],
         newMonth: splitDate[1],
@@ -17198,9 +17232,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
         newDesc: this.state.newDesc,
         newAmount: this.state.newAmount
       }).then(function (results) {
-        console.log("expense updated : ");
         var updatedExpense = results.data;
-        console.log(updatedExpense);
+        $('#expense-edited-alert').removeClass("hide");
+        $('#expense-edited-alert').addClass("view");
+        var myTimeout = setTimeout(function () {
+          $('#expense-edited-alert').addClass("hide");
+        }, 5000);
 
         var arrayOfExpenses = _toConsumableArray(_this8.state.expenses);
 
@@ -17258,7 +17295,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function handleLoadMore(option) {
       var _this9 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/v1.0/expense/all").then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
         _this9.setState({
           expenses: results.data.splice(0, _this9.state.position + 10),
           position: _this9.state.position + 10
@@ -17322,7 +17359,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         handleLoadMore: this.handleLoadMore
       };
       var isLoggedIn = this.props.isLoggedIn;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseCreatedAlert_js__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseDeletedAlert_js__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseCreatedAlert_js__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseDeletedAlert_js__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseEditedAlert_js__WEBPACK_IMPORTED_MODULE_7__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "dashboard",
         style: {
           position: "relative"
@@ -17342,7 +17379,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         showModalError: this.state.showModalError,
         errorMessages: this.state.Message,
         displayLoginButton: this.state.displayLoginButton
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, expenseTableProps))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Navigate, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, expenseTableProps))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Navigate, {
         to: "/login"
       }));
     }
@@ -18788,7 +18825,7 @@ grecaptcha.ready(function () {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n.testing {\n    color:blue\n}\n\ninput[readonly]{\n    background-color: white !important;\n}\n\n\n.alert-success, .alert-danger {\n  position: fixed;\n  bottom: 16;\n  z-index: 1021;\n  left: 16;\n  right: 16;\n  border-radius: 8px;\n}\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n    width: 100%;\n    max-width: 1000px;\n    margin: auto;\n}\n\n.grecaptcha-badge { \n  visibility: hidden;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n    width: 100%;\n    max-width: 650px;\n    padding: 5px;\n    margin: auto;\n  }\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0; /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text; /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n}\n\n.badge {\n    font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n    font-size: .875rem;\n  }\n\n  .feather {\n    width: 16px;\n    height: 16px;\n    vertical-align: text-bottom;\n  }\n\n  /*\n   * Sidebar\n   */\n\n  .sidebar {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 100; /* Behind the navbar */\n    padding: 48px 0 0; /* Height of navbar */\n    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n  }\n\n\n\n  .sidebar-sticky {\n    position: relative;\n    top: 0;\n    height: calc(100vh - 48px);\n    padding-top: .5rem;\n    overflow-x: hidden;\n    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */\n  }\n\n  @supports ((position: -webkit-sticky) or (position: sticky)) {\n    .sidebar-sticky {\n      position: -webkit-sticky;\n      position: sticky;\n    }\n  }\n\n  .sidebar .nav-link {\n    font-weight: 500;\n    color: #333;\n  }\n\n  .sidebar .nav-link .feather {\n    margin-right: 4px;\n    color: #999;\n  }\n\n  .sidebar .nav-link.active {\n    color: #007bff;\n  }\n\n  .sidebar .nav-link:hover .feather,\n  .sidebar .nav-link.active .feather {\n    color: inherit;\n  }\n\n  .sidebar-heading {\n    font-size: .75rem;\n    text-transform: uppercase;\n  }\n\n  /*\n   * Navbar\n   */\n\n  .navbar-brand {\n    padding-top: .75rem;\n    padding-bottom: .75rem;\n    font-size: 1rem;\n  }\n\n  .navbar .navbar-toggler {\n    top: .25rem;\n    right: 1rem;\n  }\n\n  .navbar .form-control {\n    padding: .75rem 1rem;\n    border-width: 0;\n    border-radius: 0;\n  }\n\n  .form-control-dark {\n    color: #fff;\n    background-color: rgba(255, 255, 255, .1);\n    border-color: rgba(255, 255, 255, .1);\n  }\n\n  .form-control-dark:focus {\n    border-color: transparent;\n    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n  }\n\n  input[type=date]{\n      width: 90%\n  }\n\n\n\n\n@media (max-width: 544px) {\n  table {font-size:0.8rem;\n\n        }\ntable td, table th {\n    padding: 5px !important;\n    margin: 5px\n}\n.d-flex-row{\n    flex-direction: column;\n}\n}\n@media (min-width: 544px) {\n  table {font-size:0.9rem;}\n}\n\n@media (min-width: 768px) {\n  table {font-size:1rem;}\n}\n\n@media (min-width: 992px) {\n  table {font-size:1rem;}\n}\n\n@media (min-width: 1200px) {\n  table {font-size:1.1rem;}\n}\n", ""]);
+exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n.testing {\n    color:blue\n}\n\ninput[readonly]{\n    background-color: white !important;\n}\n\n\n#expense-deleted-alert, #expense-created-alert, #expense-edited-alert {\n  position: fixed;\n  bottom: 10;\n  z-index: 1021;\n  left: 10;\n  right: 10;\n  border-radius: 8px;\n}\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n    width: 100%;\n    max-width: 1000px;\n    margin: auto;\n}\n\n.grecaptcha-badge { \n  visibility: hidden;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n    width: 100%;\n    max-width: 650px;\n    padding: 5px;\n    margin: auto;\n  }\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0; /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text; /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n}\n\n.badge {\n    font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n    font-size: .875rem;\n  }\n\n  .feather {\n    width: 16px;\n    height: 16px;\n    vertical-align: text-bottom;\n  }\n\n  /*\n   * Sidebar\n   */\n\n  .sidebar {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 100; /* Behind the navbar */\n    padding: 48px 0 0; /* Height of navbar */\n    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n  }\n\n\n\n  .sidebar-sticky {\n    position: relative;\n    top: 0;\n    height: calc(100vh - 48px);\n    padding-top: .5rem;\n    overflow-x: hidden;\n    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */\n  }\n\n  @supports ((position: -webkit-sticky) or (position: sticky)) {\n    .sidebar-sticky {\n      position: -webkit-sticky;\n      position: sticky;\n    }\n  }\n\n  .sidebar .nav-link {\n    font-weight: 500;\n    color: #333;\n  }\n\n  .sidebar .nav-link .feather {\n    margin-right: 4px;\n    color: #999;\n  }\n\n  .sidebar .nav-link.active {\n    color: #007bff;\n  }\n\n  .sidebar .nav-link:hover .feather,\n  .sidebar .nav-link.active .feather {\n    color: inherit;\n  }\n\n  .sidebar-heading {\n    font-size: .75rem;\n    text-transform: uppercase;\n  }\n\n  /*\n   * Navbar\n   */\n\n  .navbar-brand {\n    padding-top: .75rem;\n    padding-bottom: .75rem;\n    font-size: 1rem;\n  }\n\n  .navbar .navbar-toggler {\n    top: .25rem;\n    right: 1rem;\n  }\n\n  .navbar .form-control {\n    padding: .75rem 1rem;\n    border-width: 0;\n    border-radius: 0;\n  }\n\n  .form-control-dark {\n    color: #fff;\n    background-color: rgba(255, 255, 255, .1);\n    border-color: rgba(255, 255, 255, .1);\n  }\n\n  .form-control-dark:focus {\n    border-color: transparent;\n    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n  }\n\n  input[type=date]{\n      width: 90%\n  }\n\n\n\n\n@media (max-width: 544px) {\n  table {font-size:0.8rem;\n\n        }\ntable td, table th {\n    padding: 5px !important;\n    margin: 5px\n}\n.d-flex-row{\n    flex-direction: column;\n}\n}\n@media (min-width: 544px) {\n  table {font-size:0.9rem;}\n}\n\n@media (min-width: 768px) {\n  table {font-size:1rem;}\n}\n\n@media (min-width: 992px) {\n  table {font-size:1rem;}\n}\n\n@media (min-width: 1200px) {\n  table {font-size:1.1rem;}\n}\n", ""]);
 // Exports
 module.exports = exports;
 

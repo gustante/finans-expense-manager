@@ -5,7 +5,7 @@ function ExpenseDeletedAlert() {
     return(
 
 
-        <div class="alert alert-danger hide" role="alert" >
+        <div id="expense-deleted-alert" className="alert alert-danger hide" role="alert" >
             Expense deleted succesfully!
         </div>
 

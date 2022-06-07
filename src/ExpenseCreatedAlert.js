@@ -5,7 +5,7 @@ function ExpenseCreatedAlert() {
     return(
 
 
-        <div class="alert alert-success hide" role="alert" >
+        <div id="expense-created-alert" className="alert alert-success hide" role="alert" >
             Expense registered succesfully!
         </div>
 
