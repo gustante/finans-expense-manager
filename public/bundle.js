@@ -17277,7 +17277,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
   }, {
     key: "clearFields",
-    value: function clearFields() {
+    value: function clearFields(e) {
       e.preventDefault();
       this.setState({
         day: "",

@@ -494,7 +494,7 @@ class Main extends React.Component {
     }
 
     //clears all fiels in the form
-    clearFields() {
+    clearFields(e) {
         e.preventDefault();
         this.setState({
             day: "",

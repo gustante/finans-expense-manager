@@ -114,7 +114,7 @@ exports.getExpense = (req, res) => {
                     user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
                 }
                 if (req.query.desc != 0) {
-                    user.expenses = user.expenses.filter(expense => expense.description == req.query.desc)
+                    user.expenses = user.expenses.filter(expense => expense.description.includes(req.query.desc))
                 }
 
                 //most recent expenses will be placed first
