@@ -15886,10 +15886,13 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
           className: "fas fa-edit"
         }))))));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "text-center mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "p-3 badge badge-warning"
-      }, "Total: $", this.state.total)))));
+        className: "d-flex mb-5 justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "btn btn-warning"
+      }, "Total: $", this.state.total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "btn btn-primary mx-3 ",
+        onClick: this.props.handleLoadMore
+      }, " Load More Expenses ")))));
     }
   }]);
 
@@ -16752,7 +16755,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
       showModalError: false,
       //controls display of modal with error message
       displayLoginButton: false,
-      Message: [] //messages to be passed to success or error modal according to validation obtained
+      Message: [],
+      //messages to be passed to success or error modal according to validation obtained
+      position: 15 //controls position to splice array of expenses and set pagination
 
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
@@ -16767,6 +16772,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.handleStopEditing = _this.handleStopEditing.bind(_assertThisInitialized(_this));
     _this.handleStartEditing = _this.handleStartEditing.bind(_assertThisInitialized(_this));
     _this.handleSaveEditChanges = _this.handleSaveEditChanges.bind(_assertThisInitialized(_this));
+    _this.handleLoadMore = _this.handleLoadMore.bind(_assertThisInitialized(_this));
     return _this;
   } //mounts Main component and obtain all expenses in database, adding it to expense state
 
@@ -16778,11 +16784,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.isLoggedIn) {
         axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/v1.0/expense/all").then(function (results) {
-          var arrayOfExpenses = results.data;
-          console.log(results.data);
-
           _this2.setState({
-            expenses: arrayOfExpenses
+            expenses: results.data.splice(0, _this2.state.position)
           });
         })["catch"](function (error) {
           console.log(error.response);
@@ -17238,7 +17241,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "clearFields",
     value: function clearFields() {
-      event.preventDefault();
+      e.preventDefault();
       this.setState({
         day: "",
         month: "",
@@ -17248,6 +17251,38 @@ var Main = /*#__PURE__*/function (_React$Component) {
         amount: "",
         typeName: "",
         typeBudget: ""
+      });
+    }
+  }, {
+    key: "handleLoadMore",
+    value: function handleLoadMore(option) {
+      var _this9 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/v1.0/expense/all").then(function (results) {
+        _this9.setState({
+          expenses: results.data.splice(0, _this9.state.position + 10),
+          position: _this9.state.position + 10
+        });
+      })["catch"](function (error) {
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this9.setState({
+            displayLoginButton: true
+          });
+        }
+
+        if (error.response.data.data != undefined) {
+          _this9.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        } else {
+          _this9.setState({
+            Message: error.response.data,
+            showModalError: true
+          });
+        }
       });
     }
   }, {
@@ -17283,7 +17318,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
         newType: this.state.newType,
         newDesc: this.state.newDesc,
         newMonth: this.state.newMonth,
-        newAmount: this.state.newAmount
+        newAmount: this.state.newAmount,
+        handleLoadMore: this.handleLoadMore
       };
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseCreatedAlert_js__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseDeletedAlert_js__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

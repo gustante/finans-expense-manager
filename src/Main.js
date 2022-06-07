@@ -40,7 +40,8 @@ class Main extends React.Component {
             showModalSuccess: false,//controls display modal with success message
             showModalError: false,//controls display of modal with error message
             displayLoginButton: false,
-            Message: [] //messages to be passed to success or error modal according to validation obtained
+            Message: [], //messages to be passed to success or error modal according to validation obtained
+            position: 15 //controls position to splice array of expenses and set pagination
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -55,6 +56,7 @@ class Main extends React.Component {
         this.handleStopEditing = this.handleStopEditing.bind(this);
         this.handleStartEditing = this.handleStartEditing.bind(this);
         this.handleSaveEditChanges = this.handleSaveEditChanges.bind(this);
+        this.handleLoadMore = this.handleLoadMore.bind(this);
 
     }
 
@@ -63,9 +65,7 @@ class Main extends React.Component {
         if (this.props.isLoggedIn) {
             axios.get("/api/v1.0/expense/all")
                 .then(results => {
-                    let arrayOfExpenses = results.data
-                    console.log(results.data);
-                    this.setState({ expenses: arrayOfExpenses });
+                    this.setState({ expenses: results.data.splice(0,this.state.position) });
 
                 })
                 .catch(error => {
@@ -489,7 +489,7 @@ class Main extends React.Component {
 
     //clears all fiels in the form
     clearFields() {
-        event.preventDefault();
+        e.preventDefault();
         this.setState({
             day: "",
             month: "",
@@ -501,6 +501,35 @@ class Main extends React.Component {
             typeBudget: ""
         });
 
+    }
+
+    handleLoadMore(option){
+        axios.get("/api/v1.0/expense/all")
+                .then(results => {
+                    this.setState({ 
+                        expenses: results.data.splice(0,(this.state.position + 10)),
+                        position: (this.state.position + 10) 
+                    });
+
+                })
+                .catch(error => {
+                    console.log(error.response)
+                    if(error.response.data.status == 401){
+                        this.setState({displayLoginButton: true});
+
+                    }
+                    if(error.response.data.data != undefined){
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
+                    }
+                });
     }
 
 
@@ -538,6 +567,7 @@ class Main extends React.Component {
             newDesc:this.state.newDesc,
             newMonth:this.state.newMonth,
             newAmount:this.state.newAmount,
+            handleLoadMore:this.handleLoadMore
         }
 
 
@@ -560,6 +590,7 @@ class Main extends React.Component {
                         <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} />
                         <Form {...formProps} />
                         <ExpenseTable {...expenseTableProps} />
+                        
                     </div>
 
                 </>

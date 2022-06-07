@@ -126,9 +126,14 @@ class ExpenseTable extends React.Component {
 
 
                     </table>
-                    <div className="text-center mb-5">
-                        <span className="p-3 badge badge-warning">Total: ${this.state.total}</span>
-                    </div>
+                                
+                        
+                        <div className="d-flex mb-5 justify-content-center">
+                            <button className="btn btn-warning">Total: ${this.state.total}</button>
+                            <button className="btn btn-primary mx-3 " onClick={this.props.handleLoadMore}> Load More Expenses </button>
+
+                        </div>
+                    
 
                 </div>
             </div>
