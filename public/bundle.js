@@ -17297,8 +17297,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
       axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
         _this9.setState({
-          expenses: results.data.splice(0, _this9.state.position + 10),
-          position: _this9.state.position + 10
+          expenses: results.data.splice(0, _this9.state.position + 15),
+          position: _this9.state.position + 15
         });
       })["catch"](function (error) {
         console.log(error.response);

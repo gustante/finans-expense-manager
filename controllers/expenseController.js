@@ -113,7 +113,7 @@ exports.getExpense = (req, res) => {
                 if (req.query.amount != 0) {
                     user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
                 }
-                if (req.query.desc != 0) {
+                if (req.query.desc != "") {
                     user.expenses = user.expenses.filter(expense => expense.description.includes(req.query.desc))
                 }
 

@@ -513,8 +513,8 @@ class Main extends React.Component {
         axios.get("/api/v1.0/expense/all")
                 .then(results => {
                     this.setState({ 
-                        expenses: results.data.splice(0,(this.state.position + 10)),
-                        position: (this.state.position + 10) 
+                        expenses: results.data.splice(0,(this.state.position + 15)),
+                        position: (this.state.position + 15) 
                     });
 
                 })
