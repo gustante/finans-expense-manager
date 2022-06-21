@@ -9,8 +9,8 @@ class Login extends React.Component {
         return (
             <>
                 {isLoggedIn ? (
-                    <Navigate to="/dashboard"/>
-                ) : (<>
+                    <Navigate to="/dashboard" />
+                ) : (<div className='mx-5 mt-4'>
 
                     <form className="form-signin" onSubmit={this.props.handleLogIn}>
                         <div className="text-center mb-4">
@@ -37,7 +37,7 @@ class Login extends React.Component {
                     </form>
 
                     <div className="form-signin mb-5 text-center">
-                        <a href="/api/v1.0/oauth/google"  className="btn btn-lg btn-success btn-block" onClick={this.props.handleGoogleLogIn}>Sign in with <i className="fab fa-google"></i>
+                        <a href="/api/v1.0/oauth/google" className="btn btn-lg btn-success btn-block" onClick={this.props.handleGoogleLogIn}>Sign in with <i className="fab fa-google"></i>
 
                         </a>
 
@@ -48,8 +48,8 @@ class Login extends React.Component {
                     </div>
 
 
-                </>
-                    )
+                </div>
+                )
                 }
 
 

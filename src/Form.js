@@ -99,7 +99,7 @@ class Form extends React.Component {
 
         return <>
 
-            <div className="row mx-1">
+            <div className="row">
                 <div className="col">
                     <form id="expenseForm" onSubmit={this.props.handleExpenseSubmit}>
                         <div className="row">

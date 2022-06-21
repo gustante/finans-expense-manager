@@ -12,7 +12,7 @@ class Register extends React.Component {
         return (
             <>
 
-                <div className="form-register">
+                <div className="form-register py-4">
                     <div className="row d-flex justify-content-center">
                         <h1 className="py-5">Create new account</h1>
                         <div className="col-md-8 order-md-1 ">

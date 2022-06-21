@@ -29,9 +29,11 @@ input[readonly]{
 
 .dashboard {
     width: 90%;
-    max-width: 9000px;
+    max-width: 900px;
     margin: auto;
 }
+
+
 
 .grecaptcha-badge { 
   visibility: hidden;
@@ -40,7 +42,7 @@ input[readonly]{
 
 /* REGISTER PAGE  */
 .form-register {
-    width: 100%;
+    width: 90%;
     max-width: 650px;
     padding: 5px;
     margin: auto;
@@ -216,6 +218,11 @@ body {
     z-index: 100; /* Behind the navbar */
     padding: 48px 0 0; /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+
+  .container {
+    max-width: 95%;
+    
   }
 
 

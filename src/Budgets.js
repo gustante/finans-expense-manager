@@ -214,7 +214,7 @@ class Budgets extends React.Component {
             <>
                 {isLoggedIn ? (
                     <>
-                        <main className="px-3 py-3 col-12 col-md-9">
+                        <main className="col-12 col-sm-8 my-3 my-sm-4">
                             <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message} />
                             <ModalError handleClose={this.handleCloseError} displayLoginButton={this.state.displayLoginButton} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
 

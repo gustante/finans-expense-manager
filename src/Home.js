@@ -6,9 +6,9 @@ class Home extends React.Component {
         
         return <>
 
-            <section id="home">
-                <div className="container">
-                    <div className="row">
+            <section id="home" className=''>
+                <div className="container ">
+                    <div className="row py-5">
                     <div className="col-md-6 d-flex">
                         <div className="align-self-center">
                         <h1 className="display-4">Your finances made simple</h1>
