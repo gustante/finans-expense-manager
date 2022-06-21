@@ -252,7 +252,7 @@ class Form extends React.Component {
 
                                             <div className=" m-1">
                                                 <button id="addType" onClick={this.props.handleCreateType} className="btn m-1 btn-success d-inline-block" >
-                                                    <span className="mx-1">Create new type</span>
+                                                    <span className="mx-1">Create</span>
                                                     <i className="fas fa-plus"></i>
                                                 </button>
                                             </div>

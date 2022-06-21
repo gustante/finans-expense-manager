@@ -598,11 +598,11 @@ class Main extends React.Component {
                     <ExpenseCreatedAlert />
                     <ExpenseDeletedAlert />
                     <ExpenseEditedAlert />
-                    <div className="dashboard" style={{ position: "relative" }}>
-                        <div className="row">
-                            <div className="col mx-3 my-5">
+                    <div className="dashboard w-sm-50" >
+                        <div className="row mx-3 my-5">
+     
                                 <h1 className="display-4">My expenses</h1>
-                            </div>
+
                         </div>
 
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />

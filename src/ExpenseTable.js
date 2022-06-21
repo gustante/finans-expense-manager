@@ -40,14 +40,14 @@ class ExpenseTable extends React.Component {
                             </tr>
                         </thead>
 
-                            {this.props.expenses.map((expense, index) =>
-                                <>
-                                    <tbody>
+                        {this.props.expenses.map((expense, index) =>
+                            <>
+                                <tbody>
                                     <tr key={index} className={expense._id} >
 
 
                                         <td>
-                                            <input type="date" name="newDate" className="hide form-control" onChange={this.props.handleChange}/>
+                                            <input type="date" name="newDate" className="hide form-control" onChange={this.props.handleChange} />
 
                                             <div className="view">
                                                 {expense.year}/{expense.month}/{expense.day}
@@ -57,8 +57,8 @@ class ExpenseTable extends React.Component {
 
                                         <td>
                                             <select className="hide form-control" name="newType" value={this.props.newType} onChange={this.props.handleChange}>
-                                            <option value={expense.type.name}>{expense.type.name}</option>)
-                                                    {this.props.typeDropDown.map((type, index) => <option key={index} value={type.name}>{type.name}</option>)}
+                                                <option value={expense.type.name}>{expense.type.name}</option>)
+                                                {this.props.typeDropDown.map((type, index) => <option key={index} value={type.name}>{type.name}</option>)}
                                             </select>
 
 
@@ -117,23 +117,28 @@ class ExpenseTable extends React.Component {
 
                                     </tr>
 
-                                    </tbody>
+                                </tbody>
 
-                                </>
-                            )}
+                            </>
+                        )}
 
 
 
 
                     </table>
-                                
-                        
-                        <div className="d-flex mb-5 justify-content-center">
-                            <button className="btn btn-warning">Total: ${this.state.total}</button>
-                            <button className="btn btn-primary mx-3 " onClick={this.props.handleLoadMore}> Load More Expenses </button>
 
-                        </div>
-                    
+
+                    <div className="d-flex mb-2 flex-wrap justify-content-center">
+
+                        <button className="btn btn-warning mx-3">Total: ${this.state.total}</button>
+
+                    </div>
+                    <div className="d-flex mb-5 flex-wrap justify-content-center">
+                        <button className="btn btn-primary mx-3 " onClick={this.props.handleLoadMore}> Load more </button>
+
+
+                    </div>
+
 
                 </div>
             </div>

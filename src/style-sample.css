@@ -28,8 +28,8 @@ input[readonly]{
 /* DASHBORD(MAIN) PAGE  */
 
 .dashboard {
-    width: 100%;
-    max-width: 1000px;
+    width: 90%;
+    max-width: 9000px;
     margin: auto;
 }
 
