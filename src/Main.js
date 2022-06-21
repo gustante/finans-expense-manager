@@ -58,6 +58,7 @@ class Main extends React.Component {
         this.handleStartEditing = this.handleStartEditing.bind(this);
         this.handleSaveEditChanges = this.handleSaveEditChanges.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
+        this.handleGetTodaysDate = this.handleGetTodaysDate.bind(this);
 
     }
 
@@ -538,6 +539,16 @@ class Main extends React.Component {
                 });
     }
 
+    handleGetTodaysDate(e){
+        e.preventDefault();
+        console.log("editing today's date")
+        this.setState({
+            month: current.getMonth() + 1,
+            day: current.getDate(),
+            year: current.getFullYear(),
+        });
+    }
+
 
     render() {
 
@@ -556,6 +567,7 @@ class Main extends React.Component {
             typeName: this.state.typeName,
             amount: this.state.amount,
             searchAll: this.searchAll,
+            handleGetTodaysDate: this.handleGetTodaysDate
         }
 
         let expenseTableProps = {

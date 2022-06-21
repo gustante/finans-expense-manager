@@ -104,12 +104,12 @@ class Form extends React.Component {
                     <form id="expenseForm" onSubmit={this.props.handleExpenseSubmit}>
                         <div className="row">
 
-                            <div className="col-md-2 col-4">
+                            <div className="col-md-2 col-3">
                                 <label htmlFor="month" className="form-label">
                                     Month:
 
                                 </label>
-                                <select id="month" aria-required="true" name="month" className="form-control" value={this.props.month} name="month" onChange={this.props.handleChange}>
+                                <select id="month" aria-required="true" name="month" className="form-control" value={this.props.month}  onChange={this.props.handleChange}>
                                     <option value={this.props.month}>{this.props.month}</option>
                                     <option value=""></option>
                                     <option value="1">1</option>
@@ -127,7 +127,7 @@ class Form extends React.Component {
                                 </select>
                             </div>
 
-                            <div className="col-md-2 col-4">
+                            <div className="col-md-2 col-3">
                                 <label htmlFor="day" className="form-label">
                                     Day:
                                 </label>
@@ -135,13 +135,22 @@ class Form extends React.Component {
 
                             </div>
 
-                            <div className="col-md-2 col-4">
+                            <div className="col-md-2 col-sm-3 col-4">
                                 <label htmlFor="year" className="form-label">
                                     Year:
 
                                 </label>
                                 <input type="text" id="year" name="year" className="form-control" value={this.props.year} onChange={this.props.handleChange} />
                             </div>
+
+                            <div className="col-2 col-sm-3 col-md-2 pt-4 ">
+
+                                    <button onClick={this.props.handleGetTodaysDate} className="btn btn-sm " >
+                                        <span className="mx-1 d-none d-sm-inline ">Today </span>
+                                        <i class="fas fa-calendar"></i>
+                                    </button>
+
+                                </div>
 
                         </div>
 
@@ -179,53 +188,53 @@ class Form extends React.Component {
                         </div>
 
 
-                        <div className="row mt-3">
-                            <div className="col-lg-12 col-md-12 col-sm-12 d-flex flex-wrap">
+                        <div className="row mt-3 p-2 d-flex flex-grow">
+                            
 
-                                <div className=" m-1">
-                                    <button type="submit" className="btn btn-success">
+                                
+                                    <button type="submit" className="btn flex-fill m-1 btn-success">
                                         <span className="mx-1">Add </span>
                                         <i className="fas fa-plus"></i>
                                     </button>
 
-                                </div>
+                                
 
 
-                                <div className=" m-1">
+                                
 
-                                    <button onClick={this.props.handleExpenseSearch} className="btn btn-primary">
+                                    <button onClick={this.props.handleExpenseSearch} className="btn m-1 flex-fill btn-primary">
                                         <span className="mx-1 ">Filter</span>
                                         <i className="fas fa-filter"></i>
                                     </button>
 
-                                </div>
+                                
 
-                                <div className=" m-1">
-                                    <button onClick={this.props.searchAll} className="btn btn-info">
+                                
+                                    <button onClick={this.props.searchAll} className="btn m-1 flex-fill btn-info">
                                         <span className="mx-1">Search all</span>
                                         <i className="fas fa-search"></i>
                                     </button>
 
-                                </div>
+                                
 
 
 
-                                <div className=" m-1">
+                                
 
-                                    <button onClick={this.props.clearFields} className="btn btn-secondary">
+                                    <button onClick={this.props.clearFields} className="btn m-1 flex-fill btn-secondary">
                                         <span className="mx-1">Clear fields</span>
                                         <i className="fas fa-backspace"></i>
                                     </button>
 
-                                </div>
+                                
 
-                                <div className=" m-1 ">
-                                    <button id="typesDiv" className="btn btn-warning d-inline-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <div className=" m-1 flex-grow-1 d-inline d-flex ">
+                                    <button id="typesDiv" className="btn btn-warning flex-fill" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                         <span className="mx-1">New type</span>
                                         <i className="fas fa-plus"></i>
                                     </button>
 
-                                    <div style={{ position: "absolute", zIndex: "1" }} className="collapse m-2" id="collapseExample">
+                                    <div style={{ position: "absolute", zIndex: "1" }} className="collapse m-2 mt-5" id="collapseExample">
                                         <div className="card card-body">
                                             <label htmlFor="typeName" className="form-label">
                                                 Name
@@ -254,7 +263,7 @@ class Form extends React.Component {
 
 
 
-                            </div>
+                            
                         </div>
                     </form>
                 </div>
