@@ -6,6 +6,7 @@ const { validationResult } = require('express-validator');
 const axios = require('axios');
 const querystring = require('querystring');
 const customError = require('../customError.js')
+require('dotenv').config();
 
 exports.createUser = (req, res) => {
     //validate fields

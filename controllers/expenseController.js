@@ -7,6 +7,7 @@ const querystring = require('querystring');
 var twilio = require('twilio');
 const { smsAlert } = require('../twilioSMS.js');
 const customError = require('../customError.js')
+require('dotenv').config();
 
 ////gets and array of all expenses
 exports.getAllExpenses = (req, res) => {
@@ -113,7 +114,7 @@ exports.getExpense = (req, res) => {
                 if (req.query.amount != 0) {
                     user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
                 }
-                if (req.query.desc != "") {
+                if (req.query.desc != 0) {
                     user.expenses = user.expenses.filter(expense => expense.description.includes(req.query.desc))
                 }
 
