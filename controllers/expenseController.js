@@ -115,11 +115,7 @@ exports.getExpense = (req, res) => {
                     user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
                 }
                 if (req.query.desc != "") {
-                    //check if user.expenses.description contains req.query.desc   
-                    
-                    
-                    
-                    user.expenses = user.expenses.filter(expense => expense.description.includes(req.query.desc))
+                    user.expenses = user.expenses.filter(expense => expense.description.toLowerCase().includes(req.query.desc.toLowerCase()))
                 }
 
                 //most recent expenses will be placed first
