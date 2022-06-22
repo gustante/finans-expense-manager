@@ -56,6 +56,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
   \************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -245,6 +246,7 @@ module.exports = function xhrAdapter(config) {
   \*****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 49:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -308,6 +310,7 @@ module.exports.default = axios;
   \*************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 18:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -338,6 +341,7 @@ module.exports = Cancel;
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 59:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -409,6 +413,7 @@ module.exports = CancelToken;
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -426,6 +431,7 @@ module.exports = function isCancel(value) {
   \**********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 95:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -533,6 +539,7 @@ module.exports = Axios;
   \***********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 55:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -600,6 +607,7 @@ module.exports = InterceptorManager;
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -635,6 +643,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 16:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -666,6 +675,7 @@ module.exports = function createError(message, config, code, request, response) 
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 28:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -734,6 +744,7 @@ module.exports = function dispatchRequest(config) {
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 13:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -790,6 +801,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -858,6 +870,7 @@ module.exports = function mergeConfig(config1, config2) {
   \***********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 13:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -891,6 +904,7 @@ module.exports = function settle(resolve, reject, response) {
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -923,6 +937,7 @@ module.exports = function transformData(data, headers, fns) {
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 93:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1028,6 +1043,7 @@ module.exports = defaults;
   \************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1053,6 +1069,7 @@ module.exports = function bind(fn, thisArg) {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1131,6 +1148,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   \*******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 10:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1155,6 +1173,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1214,6 +1233,7 @@ function nonStandardBrowserEnv() {
   \*********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1240,6 +1260,7 @@ module.exports = function isAbsoluteURL(url) {
   \***********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1310,6 +1331,7 @@ function nonStandardBrowserEnv() {
   \***************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 5:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1334,6 +1356,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 22:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1396,6 +1419,7 @@ module.exports = function parseHeaders(headers) {
   \**************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 23:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1435,6 +1459,7 @@ module.exports = function spread(callback) {
   \*****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 348:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1817,6 +1842,7 @@ module.exports = {
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -2481,6 +2507,7 @@ function createMemoryHistory(b) {
   \*********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 69:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -2588,6 +2615,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
   \***************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 100:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -2700,6 +2728,7 @@ module.exports = checkPropTypes;
   \************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 44:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -3376,6 +3405,7 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
   \******************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 13:2-16 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /**
@@ -3401,6 +3431,7 @@ if (true) {
   \*************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 10:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -3423,6 +3454,7 @@ module.exports = ReactPropTypesSecret;
   \********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 1:0-14 */
 /***/ ((module) => {
 
 module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
@@ -13474,6 +13506,16 @@ if (true) {
 /*! export unstable_wrapCallback [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_exports__ */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 39:30-50 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 132:17-37 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 156:28-48 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 201:19-39 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 564:32-52 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 580:29-49 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 606:24-44 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 730:24-44 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 815:28-48 */
+/*! CommonJS bailout: exports.unstable_now(...) prevents optimization as exports is passed as call context at 831:24-44 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -15624,11 +15666,11 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
         className: "text-center mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "p-3 m-1 badge badge-warning"
-      }, "Total Budget: $", this.state.totalBudget), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      }, "Total budget: $", this.state.totalBudget), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "p-3 m-1 badge badge-warning"
-      }, "Total inside Budget: $", this.state.totalInsideBudget), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      }, "Total inside budget: $", this.state.totalInsideBudget), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "p-3 badge badge-warning"
-      }, "Total Spent: $", this.state.totalSpent)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "Total spent: $", this.state.totalSpent)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "d-flex justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "pagination "
@@ -15676,7 +15718,7 @@ __webpack_require__.r(__webpack_exports__);
 function ExpenseCreatedAlert() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "expense-created-alert",
-    className: "alert alert-success hide",
+    className: "alert alert-success hide shadow-lg",
     role: "alert"
   }, "Expense registered succesfully!");
 }
@@ -15706,7 +15748,7 @@ __webpack_require__.r(__webpack_exports__);
 function ExpenseDeletedAlert() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "expense-deleted-alert",
-    className: "alert alert-danger hide",
+    className: "alert alert-danger hide shadow-lg",
     role: "alert"
   }, "Expense deleted succesfully!");
 }
@@ -15736,7 +15778,7 @@ __webpack_require__.r(__webpack_exports__);
 function ExpenseEditedAlert() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "expense-edited-alert",
-    className: "alert alert-primary hide",
+    className: "alert alert-primary hide shadow-lg",
     role: "alert"
   }, "Expense edited succesfully!");
 }
@@ -15985,29 +16027,39 @@ function Footer() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", {
     className: "py-5 text-mutedtext-small bg-light"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "row mx-5 my-2"
+    className: "row mx-4 mx-sm-5 my-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "d-flex flex-column"
+    className: "d-flex flex-column flex-sm-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "text-decoration-none text-dark mx-1",
     href: ""
-  }, "Contact Us"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+  }, " Contact us ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "d-none d-sm-inline"
+  }, "|")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "text-decoration-none text-dark mx-1",
     href: ""
-  }, "Plans"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+  }, " Plans ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "d-none d-sm-inline"
+  }, "|"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "text-decoration-none text-dark mx-1",
     href: ""
-  }, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+  }, " About ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "d-none d-sm-inline"
+  }, "|"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "text-decoration-none text-dark mx-1",
     href: ""
-  }, "Partners"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+  }, " Partners ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "d-none d-sm-inline"
+  }, "|"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "text-decoration-none text-dark mx-1",
     href: ""
-  }, "Resources"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+  }, " Resources ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "d-none d-sm-inline"
+  }, "|"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "text-decoration-none text-dark mx-1",
     href: ""
-  }, "Careers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "row mx-md-5 mx-5 my-2 mx-2 d-flex justify-content-end"
+  }, " Careers  "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "row mx-md-5 mx-4 my-2 mx-2 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     href: "",
     className: "btn btn-outline-dark"
@@ -16029,9 +16081,9 @@ function Footer() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "fab fa-youtube"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "row mx-5 my-2"
+    className: "row mx-4 my-2 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    className: "mt-3 copyright font-weight-lighter "
+    className: "mt-3 copyright font-weight-lighter"
   }, "\xA9 Copyright 2019-2022 Finans")));
 }
 
@@ -16619,7 +16671,7 @@ var Login = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Navigate, {
         to: "/dashboard"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "mx-5 mt-4"
+        className: "mx-4 mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "form-signin",
         onSubmit: this.props.handleLogIn
@@ -18172,9 +18224,9 @@ var MyAccount = /*#__PURE__*/function (_React$Component) {
                     </nav> */
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "row dashboard"
+        className: "row mx-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-        className: "navbar-dark my-3 mx-1 text-dark col-12 col-sm-3 px-3 py-3"
+        className: "navbar-dark my-3 text-dark col-12 col-sm-3 px-1 py-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "nav flex-column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -18667,7 +18719,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-12 my-3 col-sm-8"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        className: " py-3 col-md-9",
+        className: "px-1 py-3 col-md-9",
         onSubmit: this.props.handleSaveEditingUser
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalSuccess__WEBPACK_IMPORTED_MODULE_2__.default, {
         handleClose: this.handleCloseSuccess,
@@ -18842,7 +18894,7 @@ grecaptcha.ready(function () {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n    display: block;\n}\n\n.hide {\n    display: none;\n}\n\n.testing {\n    color:blue\n}\n\ninput[readonly]{\n    background-color: white !important;\n}\n\n\n#expense-deleted-alert, #expense-created-alert, #expense-edited-alert {\n  position: fixed;\n  bottom: 10;\n  z-index: 1021;\n  left: 10;\n  right: 10;\n  border-radius: 8px;\n}\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n    width: 90%;\n    max-width: 900px;\n    margin: auto;\n}\n\n\n\n.grecaptcha-badge { \n  visibility: hidden;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n    width: 90%;\n    max-width: 650px;\n    padding: 5px;\n    margin: auto;\n  }\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0; /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text; /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown) ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill ~ label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n\tbackground: #ffc107;\n\tcolor: white;\n}\n\n.caixa {\n\tpadding: 60px 0;\n\tborder-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n\tmargin: 5px 15px;\n}\n\nfooter .copyright {\n    font-size: 0.8em;\n}\n\n.badge {\n    font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n    font-size: .875rem;\n  }\n\n  .feather {\n    width: 16px;\n    height: 16px;\n    vertical-align: text-bottom;\n  }\n\n  /*\n   * Sidebar\n   */\n\n  .sidebar {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 100; /* Behind the navbar */\n    padding: 48px 0 0; /* Height of navbar */\n    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n  }\n\n  .container {\n    max-width: 95%;\n    \n  }\n\n\n\n  .sidebar-sticky {\n    position: relative;\n    top: 0;\n    height: calc(100vh - 48px);\n    padding-top: .5rem;\n    overflow-x: hidden;\n    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */\n  }\n\n  @supports ((position: -webkit-sticky) or (position: sticky)) {\n    .sidebar-sticky {\n      position: -webkit-sticky;\n      position: sticky;\n    }\n  }\n\n  .sidebar .nav-link {\n    font-weight: 500;\n    color: #333;\n  }\n\n  .sidebar .nav-link .feather {\n    margin-right: 4px;\n    color: #999;\n  }\n\n  .sidebar .nav-link.active {\n    color: #007bff;\n  }\n\n  .sidebar .nav-link:hover .feather,\n  .sidebar .nav-link.active .feather {\n    color: inherit;\n  }\n\n  .sidebar-heading {\n    font-size: .75rem;\n    text-transform: uppercase;\n  }\n\n  /*\n   * Navbar\n   */\n\n  .navbar-brand {\n    padding-top: .75rem;\n    padding-bottom: .75rem;\n    font-size: 1rem;\n  }\n\n  .navbar .navbar-toggler {\n    top: .25rem;\n    right: 1rem;\n  }\n\n  .navbar .form-control {\n    padding: .75rem 1rem;\n    border-width: 0;\n    border-radius: 0;\n  }\n\n  .form-control-dark {\n    color: #fff;\n    background-color: rgba(255, 255, 255, .1);\n    border-color: rgba(255, 255, 255, .1);\n  }\n\n  .form-control-dark:focus {\n    border-color: transparent;\n    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n  }\n\n  input[type=date]{\n      width: 90%\n  }\n\n\n\n\n@media (max-width: 544px) {\n  table {font-size:0.8rem;\n\n        }\ntable td, table th {\n    padding: 5px !important;\n    margin: 5px\n}\n.d-flex-row{\n    flex-direction: column;\n}\n}\n@media (min-width: 544px) {\n  table {font-size:0.9rem;}\n}\n\n@media (min-width: 768px) {\n  table {font-size:1rem;}\n}\n\n@media (min-width: 992px) {\n  table {font-size:1rem;}\n}\n\n@media (min-width: 1200px) {\n  table {font-size:1.1rem;}\n}\n", ""]);
+exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n  display: block;\n}\n\n.hide {\n  display: none;\n}\n\n.testing {\n  color: blue\n}\n\ninput[readonly] {\n  background-color: white !important;\n}\n\n\n#expense-deleted-alert,\n#expense-created-alert,\n#expense-edited-alert {\n  position: fixed;\n  bottom: 10;\n  z-index: 1021;\n  left: 10;\n  right: 10;\n  border-radius: 8px;\n}\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n  width: 90%;\n  max-width: 900px;\n  margin: auto;\n}\n\n\n\n.grecaptcha-badge {\n  visibility: hidden;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n  width: 90%;\n  max-width: 650px;\n  padding: 5px;\n  margin: auto;\n}\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0;\n  /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text;\n  /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n  background: #ffc107;\n  color: white;\n}\n\n.caixa {\n  padding: 60px 0;\n  border-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n  margin: 5px 15px;\n}\n\nfooter .copyright {\n  font-size: 0.8em;\n}\n\n.badge {\n  font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n  font-size: .875rem;\n}\n\n.feather {\n  width: 16px;\n  height: 16px;\n  vertical-align: text-bottom;\n}\n\n/*\n   * Sidebar\n   */\n\n.sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 100;\n  /* Behind the navbar */\n  padding: 48px 0 0;\n  /* Height of navbar */\n  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n}\n\n.container {\n  max-width: 95%;\n\n}\n\n\n\n.sidebar-sticky {\n  position: relative;\n  top: 0;\n  height: calc(100vh - 48px);\n  padding-top: .5rem;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* Scrollable contents if viewport is shorter than content. */\n}\n\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n  .sidebar-sticky {\n    position: -webkit-sticky;\n    position: sticky;\n  }\n}\n\n.sidebar .nav-link {\n  font-weight: 500;\n  color: #333;\n}\n\n.sidebar .nav-link .feather {\n  margin-right: 4px;\n  color: #999;\n}\n\n.sidebar .nav-link.active {\n  color: #007bff;\n}\n\n.sidebar .nav-link:hover .feather,\n.sidebar .nav-link.active .feather {\n  color: inherit;\n}\n\n.sidebar-heading {\n  font-size: .75rem;\n  text-transform: uppercase;\n}\n\n/*\n   * Navbar\n   */\n\n.navbar-brand {\n  padding-top: .75rem;\n  padding-bottom: .75rem;\n  font-size: 1rem;\n}\n\n.navbar .navbar-toggler {\n  top: .25rem;\n  right: 1rem;\n}\n\n.navbar .form-control {\n  padding: .75rem 1rem;\n  border-width: 0;\n  border-radius: 0;\n}\n\n.form-control-dark {\n  color: #fff;\n  background-color: rgba(255, 255, 255, .1);\n  border-color: rgba(255, 255, 255, .1);\n}\n\n.form-control-dark:focus {\n  border-color: transparent;\n  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n}\n\ninput[type=date] {\n  width: 90%\n}\n\n\n\n\n@media (max-width: 544px) {\n  table {\n    font-size: 0.8rem;\n\n\n  }\n\n  table td,\n  table th {\n    padding: 5px !important;\n    margin: 5px\n  }\n\n  .d-flex-row {\n    flex-direction: column;\n  }\n}\n\n@media (min-width: 544px) {\n  table {\n    font-size: 0.9rem;\n  }\n  #expense-deleted-alert, #expense-created-alert, #expense-edited-alert {\n    width: 60%;\n    max-width: 900px;\n    margin: auto;\n    margin-bottom: 8px;\n  }\n}\n\n@media (min-width: 768px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 992px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 1200px) {\n  table {\n    font-size: 1.1rem;\n  }\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -18855,6 +18907,7 @@ module.exports = exports;
   \******************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__, module.id */
+/*! CommonJS bailout: module.exports is used directly at 19:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var api = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
@@ -18885,6 +18938,7 @@ module.exports = content.locals || {};
   \****************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__.nc, __webpack_require__.* */
+/*! CommonJS bailout: module.exports is used directly at 230:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";

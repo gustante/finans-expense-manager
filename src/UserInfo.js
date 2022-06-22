@@ -77,7 +77,7 @@ class UserInfo extends React.Component {
                 {isLoggedIn ? (
                     <div className='col-12 my-3 col-sm-8'>
 
-                        <form className=" py-3 col-md-9" onSubmit={this.props.handleSaveEditingUser}>
+                        <form className="px-1 py-3 col-md-9" onSubmit={this.props.handleSaveEditingUser}>
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message} />
                         <ModalError handleClose={this.handleCloseError} displayLoginButton={this.state.displayLoginButton} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
 

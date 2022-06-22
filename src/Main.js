@@ -372,6 +372,11 @@ class Main extends React.Component {
                 let arrayOfExpenses = results.data
 
                 this.setState({ expenses: arrayOfExpenses });
+                
+            
+                
+                
+                
 
             })
             .catch(error => {

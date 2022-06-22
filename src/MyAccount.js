@@ -32,8 +32,8 @@ class MyAccount extends React.Component {
         return (
             <>
 
-                <div className="row dashboard">
-                    <nav className="navbar-dark my-3 mx-1 text-dark col-12 col-sm-3 px-3 py-3">
+                <div className="row mx-2">
+                    <nav className="navbar-dark my-3 text-dark col-12 col-sm-3 px-1 py-3">
                         <ul className="nav flex-column">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/myAccount/userInfo">

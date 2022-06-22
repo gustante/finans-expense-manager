@@ -5,7 +5,7 @@ function ExpenseEditedAlert() {
     return(
 
 
-        <div id="expense-edited-alert" className="alert alert-primary hide" role="alert" >
+        <div id="expense-edited-alert" className="alert alert-primary hide shadow-lg" role="alert" >
             Expense edited succesfully!
         </div>
 

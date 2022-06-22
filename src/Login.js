@@ -10,7 +10,7 @@ class Login extends React.Component {
             <>
                 {isLoggedIn ? (
                     <Navigate to="/dashboard" />
-                ) : (<div className='mx-5 mt-4'>
+                ) : (<div className='mx-4 mt-4'>
 
                     <form className="form-signin" onSubmit={this.props.handleLogIn}>
                         <div className="text-center mb-4">
