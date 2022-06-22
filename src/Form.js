@@ -143,7 +143,7 @@ class Form extends React.Component {
                                 <input type="text" id="year" name="year" className="form-control" value={this.props.year} onChange={this.props.handleChange} />
                             </div>
 
-                            <div className="col-2 col-sm-3 col-md-2 pt-4 ">
+                            <div className="col-2 col-sm-3 col-md-2 mt-2 mt-sm-1 pt-4">
 
                                     <button onClick={this.props.handleGetTodaysDate} className="btn btn-sm " >
                                         <span className="mx-1 d-none d-sm-inline ">Today </span>
@@ -164,7 +164,7 @@ class Form extends React.Component {
                                 <input type="text" id="desc" name="desc" value={this.props.desc} className="form-control" onChange={this.props.handleChange} />
                             </div>
 
-                            <div className="col-lg-2 col-md-2 col-4">
+                            <div className="col-lg-2 col-md-2 col-sm-5 col-4">
                                 <label htmlFor="amount" className="form-label">
                                     Amount:
 
@@ -172,7 +172,7 @@ class Form extends React.Component {
                                 <input type="text" id="amount" name="amount" className="form-control" value={this.props.amount} onChange={this.props.handleChange} />
                             </div>
 
-                            <div className="col-lg-3 col-md-4 col-sm-5 col-8">
+                            <div className="col-lg-3 col-md-4 col-sm-7 col-8">
                                 <label htmlFor="type" className="form-label">
                                     Type
 

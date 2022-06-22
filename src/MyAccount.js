@@ -32,7 +32,7 @@ class MyAccount extends React.Component {
         return (
             <>
 
-                <div className="row mx-2">
+                <div className="row mx-2 mx-md-5">
                     <nav className="navbar-dark my-3 text-dark col-12 col-sm-3 px-1 py-3">
                         <ul className="nav flex-column">
                             <li className="nav-item">
