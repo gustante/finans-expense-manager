@@ -248,10 +248,10 @@ class Budgets extends React.Component {
                                 </tbody>
 
                             </table>
-                            <div className="text-center mb-3">
-                                <span className="p-3 m-1 badge badge-warning">Total budget: ${this.state.totalBudget}</span>
-                                <span className="p-3 m-1 badge badge-warning">Total inside budget: ${this.state.totalInsideBudget}</span>
-                                <span className="p-3 badge badge-warning">Total spent: ${this.state.totalSpent}</span>
+                            <div className=" mb-3">
+                                <span className="p-3 badge">Total budget: ${this.state.totalBudget}</span>
+                                <span className="p-3 badge">Inside budget: ${this.state.totalInsideBudget}</span>
+                                <span className="p-3 badge">Total spent: ${this.state.totalSpent}</span>
                             </div>
 
                             <div className="d-flex justify-content-center">

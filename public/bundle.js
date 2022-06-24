@@ -15621,13 +15621,13 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
           className: "".concat(type.sumOfExpenses > type.budget ? 'text-danger font-weight-bold' : 'text-dark')
         }, type.sumOfExpenses.toFixed(2)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, type.sumOfExpenses.toFixed(2)));
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "text-center mb-3"
+        className: " mb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "p-3 m-1 badge badge-warning"
+        className: "p-3 badge"
       }, "Total budget: $", this.state.totalBudget), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "p-3 m-1 badge badge-warning"
-      }, "Total inside budget: $", this.state.totalInsideBudget), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "p-3 badge badge-warning"
+        className: "p-3 badge"
+      }, "Inside budget: $", this.state.totalInsideBudget), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "p-3 badge"
       }, "Total spent: $", this.state.totalSpent)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "d-flex justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
