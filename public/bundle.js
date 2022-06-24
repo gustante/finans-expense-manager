@@ -14911,7 +14911,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         $('[type=password]').attr('disabled', 'true');
       }
 
-      $('.userInfo').removeClass("view");
+      $('.userInfo').removeClass("d-inline");
       $('.userInfo').addClass("hide");
       $('.editInfo').removeClass("hide");
       $('.editInfo').addClass("view");
@@ -14923,7 +14923,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       $('#user-info input').removeClass("view d-inline");
       $('#user-info input').addClass("hide");
       $('.userInfo').removeClass("hide");
-      $('.userInfo').addClass("view");
+      $('.userInfo').addClass("d-inline");
       $('.editInfo').removeClass("view");
       $('.editInfo').addClass("hide");
       this.setState({
@@ -18694,7 +18694,13 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         className: "list-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "list-group-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "font-weight-bold"
+      }, "Name:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "d-inline userInfo"
+      }, firstName, " ", lastName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         name: "firstName",
         className: "hide form-control col-12 m-1",
@@ -18708,26 +18714,30 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         value: this.props.userInfo.lastName,
         placeholder: "Last Name",
         onChange: this.props.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "view userInfo"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "list-group-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "font-weight-bold"
-      }, "Name:"), " ", firstName, " ", lastName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        className: "list-group-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "Email:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "d-inline userInfo"
+      }, email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "email",
         name: "email",
         className: "hide form-control col-12 m-1",
         value: this.props.userInfo.email,
         placeholder: "abc@g.com",
         onChange: this.props.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "view userInfo"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "list-group-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "font-weight-bold"
-      }, "Email:"), " ", email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        className: "list-group-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "Phone number:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "d-inline userInfo"
+      }, phoneNumber)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         name: "phoneNumber",
         className: "hide form-control col-12 m-1",
@@ -18735,13 +18745,15 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         pattern: "[0-9]{3}[0-9]{3}[0-9]{4}",
         placeholder: "10 digits",
         onChange: this.props.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "view userInfo"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "list-group-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "font-weight-bold"
-      }, "Phone number:"), " ", phoneNumber)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        className: "list-group-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "Password:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "d-inline userInfo"
+      }, "******")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
         name: "oldPassword",
         className: "hide form-control col-12 m-1",
@@ -18768,11 +18780,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         onChange: this.props.handleChange,
         readonly: "",
         onFocus: this.removeReadonly
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "view userInfo"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "font-weight-bold"
-      }, "Password:"), " ******")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "list-group-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "view"

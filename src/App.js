@@ -392,7 +392,7 @@ class App extends React.Component {
             $('[type=password]').attr('disabled', 'true');
         }
 
-        $('.userInfo').removeClass("view")
+        $('.userInfo').removeClass("d-inline")
         $('.userInfo').addClass("hide")
 
         $('.editInfo').removeClass("hide")
@@ -407,7 +407,7 @@ class App extends React.Component {
         $('#user-info input').addClass("hide")
 
         $('.userInfo').removeClass("hide")
-        $('.userInfo').addClass("view")
+        $('.userInfo').addClass("d-inline")
 
         $('.editInfo').removeClass("view")
         $('.editInfo').addClass("hide")
