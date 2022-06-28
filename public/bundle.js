@@ -18146,13 +18146,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var navLinks = [{
-  to: "/profile",
-  label: "Profile"
-}, {
-  to: "/anh",
-  label: "Anh"
-}];
 
 var MyAccount = /*#__PURE__*/function (_React$Component) {
   _inherits(MyAccount, _React$Component);
@@ -18167,26 +18160,13 @@ var MyAccount = /*#__PURE__*/function (_React$Component) {
 
   _createClass(MyAccount, [{
     key: "render",
-
-    /* <nav className="navbar-light col-12 col-sm-3 bg-light px-3">
-                        <ul className="navbar-nav">
-                            {navLinks.map(({ to, label }) => (
-                                <li key={to} className="nav-item ">
-                                    <a href={to} className="nav-link active">
-                                        Link: {label}
-                                    </a>
-                                </li>
-                                )
-                            )}
-                        </ul>
-                    </nav> */
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row mx-2 mx-md-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
         className: "navbar-dark my-3 text-dark col-12 col-sm-3 px-1 py-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "nav flex-column"
+        className: "nav flex-column ml-md-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "nav-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
