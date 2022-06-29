@@ -8,7 +8,8 @@ const ExpenseSchema = new Schema({
     type:{type: Schema.Types.ObjectId, ref: 'Type', required: true},
     description:{type:String, required: true},
     amount:{type:Number, required: true},
-    user:{type: Schema.Types.ObjectId, ref: 'User', required: true}
+    user:{type: Schema.Types.ObjectId, ref: 'User', required: true},
+    recurring: {type: Boolean, default: false, required: false},
     
 });
 

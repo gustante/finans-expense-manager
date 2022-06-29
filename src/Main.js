@@ -71,16 +71,16 @@ class Main extends React.Component {
         if (this.props.isLoggedIn) {
             axios.get("/api/v1.0/expense/all")
                 .then(results => {
-                    this.setState({ expenses: results.data.splice(0,this.state.position) });
+                    this.setState({ expenses: results.data.splice(0, this.state.position) });
 
                 })
                 .catch(error => {
                     console.log(error.response)
-                    if(error.response.data.status == 401){
-                        this.setState({displayLoginButton: true});
+                    if (error.response.data.status == 401) {
+                        this.setState({ displayLoginButton: true });
 
                     }
-                    if(error.response.data.data != undefined){
+                    if (error.response.data.data != undefined) {
                         this.setState({
                             Message: error.response.data.data,
                             showModalError: true
@@ -103,11 +103,11 @@ class Main extends React.Component {
                 })
                 .catch(error => {
                     console.log(error.response)
-                    if(error.response.data.status == 401){
-                        this.setState({displayLoginButton: true});
+                    if (error.response.data.status == 401) {
+                        this.setState({ displayLoginButton: true });
 
                     }
-                    if(error.response.data.data != undefined){
+                    if (error.response.data.data != undefined) {
                         this.setState({
                             Message: error.response.data.data,
                             showModalError: true
@@ -158,13 +158,13 @@ class Main extends React.Component {
                     recurring: this.state.recurring,
                     frequency: this.state.frequency,
                     token: captchaToken,
-                    
+
                 })
                     .then(results => {
                         $('#expense-created-alert').removeClass("hide")
                         $('#expense-created-alert').addClass("view")
 
-                        const myTimeout = setTimeout(function(){
+                        const myTimeout = setTimeout(function () {
                             $('#expense-created-alert').addClass("hide")
                         }, 5000);
 
@@ -176,7 +176,7 @@ class Main extends React.Component {
                         arrayOfExpenses.unshift(results.data);
 
                         // Set state
-                        this.setState({ expenses: arrayOfExpenses});
+                        this.setState({ expenses: arrayOfExpenses });
 
 
                         //Records expense creation event
@@ -188,11 +188,11 @@ class Main extends React.Component {
                     })
                     .catch(error => {
                         console.log(error.response)
-                        if(error.response.data.status == 401){
-                            this.setState({displayLoginButton: true});
+                        if (error.response.data.status == 401) {
+                            this.setState({ displayLoginButton: true });
 
                         }
-                        if(error.response.data.data != undefined){
+                        if (error.response.data.data != undefined) {
                             this.setState({
                                 Message: error.response.data.data,
                                 showModalError: true
@@ -204,7 +204,7 @@ class Main extends React.Component {
                             });
                         }
                     });
-                })
+            })
 
 
 
@@ -253,11 +253,11 @@ class Main extends React.Component {
                     })
                     .catch(error => {
                         console.log(error.response)
-                        if(error.response.data.status == 401){
-                            this.setState({displayLoginButton: true});
+                        if (error.response.data.status == 401) {
+                            this.setState({ displayLoginButton: true });
 
                         }
-                        if(error.response.data.data != undefined){
+                        if (error.response.data.data != undefined) {
                             this.setState({
                                 Message: error.response.data.data,
                                 showModalError: true
@@ -292,11 +292,11 @@ class Main extends React.Component {
             })
             .catch(error => {
                 console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
                 }
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
@@ -321,7 +321,7 @@ class Main extends React.Component {
         this.setState({
             recurring: e.target.checked
         })
-        
+
         if (e.target.checked) {
             $(".dropdown").removeClass("d-none")
             $(".dropdown").addClass("d-inline")
@@ -332,7 +332,7 @@ class Main extends React.Component {
 
     }
 
-    handleGetFrequency(e){
+    handleGetFrequency(e) {
         e.preventDefault()
         this.setState({
             frequency: e.target.value
@@ -349,7 +349,7 @@ class Main extends React.Component {
                 // Create a new array based on current state:
                 let arrayOfExpenses = [...this.state.expenses];
 
-                let targetedExpenseIndex = arrayOfExpenses.findIndex(function(expense){
+                let targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
                     return expense._id == expenseId;
                 });
 
@@ -362,7 +362,7 @@ class Main extends React.Component {
                 $('#expense-deleted-alert').removeClass("hide")
                 $('#expense-deleted-alert').addClass("view")
 
-                const myTimeout = setTimeout(function(){
+                const myTimeout = setTimeout(function () {
                     $('#expense-deleted-alert').addClass("hide")
                 }, 5000);
 
@@ -376,11 +376,11 @@ class Main extends React.Component {
             })
             .catch(error => {
                 console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
                 }
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
@@ -403,20 +403,20 @@ class Main extends React.Component {
                 let arrayOfExpenses = results.data
 
                 this.setState({ expenses: arrayOfExpenses });
-                
-            
-                
-                
-                
+
+
+
+
+
 
             })
             .catch(error => {
                 console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
                 }
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
@@ -432,13 +432,15 @@ class Main extends React.Component {
 
     //controls display of modals
     handleCloseSuccess() {
-        this.setState({ showModalSuccess: false,
-                        displayLoginButton: false
+        this.setState({
+            showModalSuccess: false,
+            displayLoginButton: false
         });
     }
     handleCloseError() {
-        this.setState({ showModalError: false,
-                    displayLoginButton: false
+        this.setState({
+            showModalError: false,
+            displayLoginButton: false
         });
     }
 
@@ -471,10 +473,10 @@ class Main extends React.Component {
         $(`.${expenseId} .editButtons`).addClass("hide")
 
         this.setState({
-                    newDate:"",
-                    newType: "",
-                    newDesc: "",
-                    newAmount: "",
+            newDate: "",
+            newType: "",
+            newDesc: "",
+            newAmount: "",
         });
     }
 
@@ -482,21 +484,21 @@ class Main extends React.Component {
         let splitDate = this.state.newDate.split("-")
         let newType = this.state.typeDropDown.find(type => type.name == this.state.newType);
 
-        axios.put('/api/v1.0/expense', { expenseId: expenseId, newYear:splitDate[0], newMonth:splitDate[1], newDay:splitDate[2], newTypeId: newType, newDesc: this.state.newDesc, newAmount: this.state.newAmount })
+        axios.put('/api/v1.0/expense', { expenseId: expenseId, newYear: splitDate[0], newMonth: splitDate[1], newDay: splitDate[2], newTypeId: newType, newDesc: this.state.newDesc, newAmount: this.state.newAmount })
             .then(results => {
 
                 let updatedExpense = results.data;
-                
+
                 $('#expense-edited-alert').removeClass("hide")
                 $('#expense-edited-alert').addClass("view")
 
-                const myTimeout = setTimeout(function(){
+                const myTimeout = setTimeout(function () {
                     $('#expense-edited-alert').addClass("hide")
                 }, 5000);
 
                 let arrayOfExpenses = [...this.state.expenses];
 
-                let targetedExpenseIndex = arrayOfExpenses.findIndex(function(expense){
+                let targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
                     return expense._id == updatedExpense._id;
                 });
 
@@ -511,11 +513,11 @@ class Main extends React.Component {
             })
             .catch(error => {
                 console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
                 }
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
@@ -546,36 +548,36 @@ class Main extends React.Component {
 
     }
 
-    handleLoadMore(option){
+    handleLoadMore(option) {
         axios.get("/api/v1.0/expense/all")
-                .then(results => {
-                    this.setState({ 
-                        expenses: results.data.splice(0,(this.state.position + 15)),
-                        position: (this.state.position + 15) 
-                    });
-
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    if(error.response.data.status == 401){
-                        this.setState({displayLoginButton: true});
-
-                    }
-                    if(error.response.data.data != undefined){
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
-                    } else {
-                        this.setState({
-                            Message: error.response.data,
-                            showModalError: true
-                        });
-                    }
+            .then(results => {
+                this.setState({
+                    expenses: results.data.splice(0, (this.state.position + 15)),
+                    position: (this.state.position + 15)
                 });
+
+            })
+            .catch(error => {
+                console.log(error.response)
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
+
+                }
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
+            });
     }
 
-    handleGetTodaysDate(e){
+    handleGetTodaysDate(e) {
         e.preventDefault();
         console.log("editing today's date")
         this.setState({
@@ -610,20 +612,20 @@ class Main extends React.Component {
 
         let expenseTableProps = {
             clearFields: this.clearFields,
-            expenses:this.state.expenses,
-            handleDelete:this.handleDelete,
-            typeDropDown:this.state.typeDropDown,
-            handleSaveEditChanges:this.handleSaveEditChanges,
-            handleStartEditing:this.handleStartEditing,
-            handleStopEditing:this.handleStopEditing,
-            handleChange:this.handleChange,
-            newYear:this.state.newYear,
-            newDay:this.state.newDay,
-            newType:this.state.newType,
-            newDesc:this.state.newDesc,
-            newMonth:this.state.newMonth,
-            newAmount:this.state.newAmount,
-            handleLoadMore:this.handleLoadMore
+            expenses: this.state.expenses,
+            handleDelete: this.handleDelete,
+            typeDropDown: this.state.typeDropDown,
+            handleSaveEditChanges: this.handleSaveEditChanges,
+            handleStartEditing: this.handleStartEditing,
+            handleStopEditing: this.handleStopEditing,
+            handleChange: this.handleChange,
+            newYear: this.state.newYear,
+            newDay: this.state.newDay,
+            newType: this.state.newType,
+            newDesc: this.state.newDesc,
+            newMonth: this.state.newMonth,
+            newAmount: this.state.newAmount,
+            handleLoadMore: this.handleLoadMore
         }
 
 
@@ -631,15 +633,15 @@ class Main extends React.Component {
 
         return <>
             {isLoggedIn ? (
-                <>  
-                
+                <>
+
                     <ExpenseCreatedAlert />
                     <ExpenseDeletedAlert />
                     <ExpenseEditedAlert />
                     <div className="dashboard w-sm-50" >
                         <div className="row mx-3 my-5">
-     
-                                <h1 className="display-4">My expenses</h1>
+
+                            <h1 className="display-4">My expenses</h1>
 
                         </div>
 
@@ -647,7 +649,7 @@ class Main extends React.Component {
                         <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} />
                         <Form {...formProps} />
                         <ExpenseTable {...expenseTableProps} />
-                        
+
                     </div>
 
                 </>

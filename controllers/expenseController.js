@@ -210,6 +210,111 @@ exports.postExpense = (req, res) => {
                                 chosenType.save()
                             }
 
+
+
+
+                            //RECURRING EXPENSES CREATION
+                            if (req.body.recurring == true) {
+                                console.log("recurring")
+                                if (req.body.frequency == "monthly") {
+                                    console.log("monthly")
+                                    //create monthly expenses
+                                    //create date object using month and year passed
+                                    let todaysDate = new Date(req.body.year, req.body.month, req.body.day);
+                                    var todaysYear = todaysDate.getFullYear();
+                                    //count how many months until the end of the year
+                                    let numberOfExpensesToBeCreatedTillTheEndOfTheYear = 0;
+                                    //create expenses until the end of the year
+                                    while (todaysDate.getFullYear() <= todaysYear) {
+                                        numberOfExpensesToBeCreatedTillTheEndOfTheYear++;
+
+                                        let newExpense = new Expense({
+                                            month: todaysDate.getMonth() + 1,
+                                            day: todaysDate.getDate(),
+                                            year: todaysDate.getFullYear(),
+                                            type: chosenType,
+                                            description: req.body.desc,
+                                            amount: req.body.amount,
+                                            user: user._id,
+                                            recurring: true,
+                                        });
+                                        user.expenses.push(newExpense);
+                                        newExpense.save()
+                                        //add one month to todaysDate
+                                        todaysDate.setMonth(todaysDate.getMonth() + 1);
+
+                                    }
+                                    console.log(numberOfExpensesToBeCreatedTillTheEndOfTheYear + " expenses created")
+                                } else if (req.body.frequency == "weekly") {
+                                    console.log("weekly")
+                                    //create weekly expenses
+                                    //create date object using month and year passed
+                                    let todaysDate = new Date(req.body.year, req.body.month-1, req.body.day);
+                                    //add 7 days to todaysDate
+                                    todaysDate.setDate(todaysDate.getDate() + 7);
+                                    var todaysYear = todaysDate.getFullYear();
+                                    //count how many weeks until the end of the year
+                                    let numberOfExpensesToBeCreatedTillTheEndOfTheYear = 0;
+                                    //create expenses until the end of the year
+                                    while (todaysDate.getFullYear() <= todaysYear) {
+                                        numberOfExpensesToBeCreatedTillTheEndOfTheYear++;
+                                        //create expenses until the end of the year
+
+                                        let newExpense = new Expense({
+                                            month: todaysDate.getMonth() + 1,
+                                            day: todaysDate.getDate(),
+                                            year: todaysDate.getFullYear(),
+                                            type: chosenType,
+                                            description: req.body.desc,
+                                            amount: req.body.amount,
+                                            user: user._id,
+                                            recurring: true,
+                                        });
+                                        user.expenses.push(newExpense);
+                                        newExpense.save()
+                                        //add one week to todaysDate
+                                        todaysDate.setDate(todaysDate.getDate() + 7);
+
+                                    }
+                                    console.log(numberOfExpensesToBeCreatedTillTheEndOfTheYear + " expenses created")
+                                } else if (req.body.frequency == "bi-weekly") {
+                                    console.log("bi-weekly")
+                                    //create daily expenses
+                                    //create date object using month and year passed
+                                    let todaysDate = new Date(req.body.year, req.body.month-1, req.body.day);
+                                    //add 14 days to todaysDate
+                                    todaysDate.setDate(todaysDate.getDate() + 14);
+                                    var todaysYear = todaysDate.getFullYear();
+                                    //count how many expenses until the end of the year
+                                    let numberOfExpensesToBeCreatedTillTheEndOfTheYear = 0;
+                                    //create expenses until the end of the year
+                                    while (todaysDate.getFullYear() <= todaysYear) {
+                                        numberOfExpensesToBeCreatedTillTheEndOfTheYear++;
+                                        //create expenses until the end of the year
+
+                                        let newExpense = new Expense({
+                                            month: todaysDate.getMonth() + 1,
+                                            day: todaysDate.getDate(),
+                                            year: todaysDate.getFullYear(),
+                                            type: chosenType,
+                                            description: req.body.desc,
+                                            amount: req.body.amount,
+                                            user: user._id,
+                                            recurring: true,
+                                        });
+                                        user.expenses.push(newExpense);
+                                        newExpense.save()
+                                        //add one week to todaysDate
+                                        todaysDate.setDate(todaysDate.getDate() + 14);
+
+                                    }
+                                    console.log(numberOfExpensesToBeCreatedTillTheEndOfTheYear + " expenses created")
+                                }
+
+                            }
+                            //END OF RECURRING EXPENSES CREATION
+
+
                             user.expenses.push(expense);
                             user.save()
                             expense.save()
