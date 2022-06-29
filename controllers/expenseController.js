@@ -59,6 +59,12 @@ exports.getAllExpenses = (req, res) => {
                         db = new Date(b.year, b.month, b.day);
                     return db - da;
                 });
+                //filter out future expenses
+                user.expenses = user.expenses.filter(expense => {
+                    let date = new Date(expense.year, expense.month-1, expense.day);
+                    return date < new Date();
+                });
+                
                 res.send(user.expenses);
             })
             .catch(error => {
@@ -249,7 +255,7 @@ exports.postExpense = (req, res) => {
                                     console.log("weekly")
                                     //create weekly expenses
                                     //create date object using month and year passed
-                                    let todaysDate = new Date(req.body.year, req.body.month-1, req.body.day);
+                                    let todaysDate = new Date(req.body.year, req.body.month - 1, req.body.day);
                                     //add 7 days to todaysDate
                                     todaysDate.setDate(todaysDate.getDate() + 7);
                                     var todaysYear = todaysDate.getFullYear();
@@ -281,7 +287,7 @@ exports.postExpense = (req, res) => {
                                     console.log("bi-weekly")
                                     //create daily expenses
                                     //create date object using month and year passed
-                                    let todaysDate = new Date(req.body.year, req.body.month-1, req.body.day);
+                                    let todaysDate = new Date(req.body.year, req.body.month - 1, req.body.day);
                                     //add 14 days to todaysDate
                                     todaysDate.setDate(todaysDate.getDate() + 14);
                                     var todaysYear = todaysDate.getFullYear();
