@@ -40,7 +40,7 @@ class ModalError extends React.Component {
                                     <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-secondary">Close</button>
 
                                     <div className={showLoginButton} >
-                                        <button onClick={this.props.handleClose} onClick={this.refresh} type="button" data-dismiss="modal" className="btn btn-warning">Log in</button>
+                                        <button onClick={this.refresh} type="button" data-dismiss="modal" className="btn btn-warning">Log in</button>
                                     </div>
                                     <div className={showConfirmButton} >
                                         <button onClick={this.props.handleDelete} type="button" data-dismiss="modal" className="btn btn-danger">Confirm deletion</button>

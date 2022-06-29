@@ -61,10 +61,10 @@ exports.getAllExpenses = (req, res) => {
                 });
                 //filter out future expenses
                 user.expenses = user.expenses.filter(expense => {
-                    let date = new Date(expense.year, expense.month-1, expense.day);
+                    let date = new Date(expense.year, expense.month - 1, expense.day);
                     return date < new Date();
                 });
-                
+
                 res.send(user.expenses);
             })
             .catch(error => {
@@ -402,6 +402,20 @@ exports.deleteExpense = (req, res) => {
                     }
                 }
 
+                //delete all recurring expenses from user.expenses if req.query.option says so
+                if (req.query.option == "all" && targetExpense.recurring == true) {
+                    for (i in user.expenses) {
+                        if (user.expenses[i].description == targetExpense.description) {
+                            user.expenses.splice(i, 1)
+                        }
+                    }
+                }
+
+
+                user.save()
+
+
+
                 //adjust the type that got and expense delete from to reflect correct sumOfExpenses (only if deletes from current month)
                 const current = new Date();
                 const currentMonth = current.getMonth() + 1
@@ -412,33 +426,54 @@ exports.deleteExpense = (req, res) => {
                         targetType.sumOfExpenses = 0
                     targetType.save()
                 }
-                user.save()
 
-
-            })
-            .then(() => { //delete from expenses collection
+                //delete from expenses collection
                 Expense.deleteOne({ _id: req.query.expenseId }).exec()
-                    .then(results => {
-                        res.send(results);
-
+                    .then(deletedExpense => {
+                        res.send(deletedExpense);
                     })
                     .catch(error => {
                         console.log(error)
                         res.send(error)
                     });
 
-
+                //delete all recurring expenses from expenses collection if req.query.option says so
+                if (req.query.option == 'all' && targetExpense.recurring == true) {
+                    console.log("deleting many")
+                    Expense.deleteMany({ recurring: true, description: targetExpense.description, 
+                        {
+                            $or:
+                                [
+                                    { 
+                                        day: { $gt: (current.getDate()) } 
+                                    },
+                                    {
+                                        month: { $gt: (current.getMonth + 1()) }
+                                    }
+                                ]
+                        }
+                    }).exec()
+            .then(results => {
+                console.log("deleteted many")
             })
             .catch(error => {
                 console.log(error)
                 res.send(error)
             });
 
+    }
+
+})
+            .catch (error => {
+    console.log(error)
+    res.send(error)
+});
+
 
     } else {
-        let errorObject = new customError(['Please log in to delete expense'], 401);
-        res.status(errorObject.status).send(errorObject);
-    }
+    let errorObject = new customError(['Please log in to delete expense'], 401);
+    res.status(errorObject.status).send(errorObject);
+}
 
 
 
