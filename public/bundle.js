@@ -1714,9 +1714,9 @@ function forEach(obj, fn) {
  */
 
 
-function merge()
-/* obj1, obj2, obj3, ... */
-{
+function
+  /* obj1, obj2, obj3, ... */
+merge() {
   var result = {};
 
   function assignValue(val, key) {
@@ -1743,9 +1743,9 @@ function merge()
  */
 
 
-function deepMerge()
-/* obj1, obj2, obj3, ... */
-{
+function
+  /* obj1, obj2, obj3, ... */
+deepMerge() {
   var result = {};
 
   function assignValue(val, key) {
@@ -9894,15 +9894,15 @@ function useLinkClickHandler(to, _temp) {
     !target || target === "_self") && // Let browser handle "target=_blank" etc.
     !isModifiedEvent(event) // Ignore clicks with modifier keys
     ) {
-        event.preventDefault(); // If the URL hasn't changed, a regular <a> will do a replace instead of
-        // a push, so do the same here.
+      event.preventDefault(); // If the URL hasn't changed, a regular <a> will do a replace instead of
+      // a push, so do the same here.
 
-        var replace = !!replaceProp || (0,history__WEBPACK_IMPORTED_MODULE_2__.createPath)(location) === (0,history__WEBPACK_IMPORTED_MODULE_2__.createPath)(path);
-        navigate(to, {
-          replace: replace,
-          state: state
-        });
-      }
+      var replace = !!replaceProp || (0,history__WEBPACK_IMPORTED_MODULE_2__.createPath)(location) === (0,history__WEBPACK_IMPORTED_MODULE_2__.createPath)(path);
+      navigate(to, {
+        replace: replace,
+        state: state
+      });
+    }
   }, [location, navigate, path, replaceProp, state, target, to]);
 }
 /**
@@ -14911,7 +14911,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         $('[type=password]').attr('disabled', 'true');
       }
 
-      $('.userInfo').removeClass("d-inline");
+      $('.userInfo').removeClass("view");
       $('.userInfo').addClass("hide");
       $('.editInfo').removeClass("hide");
       $('.editInfo').addClass("view");
@@ -14923,7 +14923,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       $('#user-info input').removeClass("view d-inline");
       $('#user-info input').addClass("hide");
       $('.userInfo').removeClass("hide");
-      $('.userInfo').addClass("d-inline");
+      $('.userInfo').addClass("view");
       $('.editInfo').removeClass("view");
       $('.editInfo').addClass("hide");
       this.setState({
@@ -15139,7 +15139,7 @@ var App = /*#__PURE__*/function (_React$Component) {
             padding: "1rem"
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "There's nothing here!"))
-      }), "/>"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Footer_js__WEBPACK_IMPORTED_MODULE_8__.default, null));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Footer_js__WEBPACK_IMPORTED_MODULE_8__.default, null));
     }
   }]);
 
@@ -16265,7 +16265,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "mx-1 d-none d-sm-inline "
       }, "Today "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        "class": "fas fa-calendar"
+        className: "fas fa-calendar"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row justify-content-start"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -16311,7 +16311,49 @@ var Form = /*#__PURE__*/function (_React$Component) {
           value: type.name
         }, type.name);
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "row mt-3 p-2 d-flex flex-grow"
+        className: "row d-flex "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "p-3 ml-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "form-check-input",
+        type: "checkbox",
+        id: "flexCheckDefault",
+        onClick: this.props.handleCheckRecurring,
+        name: "recurring"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "form-check-label",
+        "for": "flexCheckDefault"
+      }, "Recurring")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "dropdown d-none p-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "btn btn-sm btn-secondary dropdown-toggle",
+        type: "button",
+        id: "dropdownMenuButton",
+        "data-toggle": "dropdown",
+        "aria-expanded": "false"
+      }, "Frequency"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "dropdown-menu",
+        "aria-labelledby": "dropdownMenuButton"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        onClick: this.props.handleGetFrequency,
+        value: "weekly",
+        name: "weekly",
+        className: "dropdown-item"
+      }, "Weekly"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        onClick: this.props.handleGetFrequency,
+        value: "bi-weekly",
+        name: "bi-weekly",
+        className: "dropdown-item"
+      }, "Bi-weekly"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        onClick: this.props.handleGetFrequency,
+        value: "monthly",
+        name: "monthly",
+        className: "dropdown-item"
+      }, "Monthly")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "row p-2 d-flex flex-grow"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "btn flex-fill m-1 btn-success"
@@ -16791,6 +16833,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
       typeDropDown: [],
       desc: "",
       amount: "",
+      recurring: false,
+      frequency: "",
       typeName: "",
       typeBudget: "",
       newDate: "",
@@ -16821,6 +16865,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.handleSaveEditChanges = _this.handleSaveEditChanges.bind(_assertThisInitialized(_this));
     _this.handleLoadMore = _this.handleLoadMore.bind(_assertThisInitialized(_this));
     _this.handleGetTodaysDate = _this.handleGetTodaysDate.bind(_assertThisInitialized(_this));
+    _this.handleGetFrequency = _this.handleGetFrequency.bind(_assertThisInitialized(_this));
+    _this.handleCheckRecurring = _this.handleCheckRecurring.bind(_assertThisInitialized(_this));
     return _this;
   } //mounts Main component and obtain all expenses in database, adding it to expense state
 
@@ -16923,7 +16969,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
           type: _this3.state.type,
           desc: _this3.state.desc,
           amount: _this3.state.amount,
-          token: captchaToken
+          token: captchaToken,
+          recurring: _this3.state.recurring,
+          frequency: _this3.state.frequency
         }).then(function (results) {
           $('#expense-created-alert').removeClass("hide");
           $('#expense-created-alert').addClass("view");
@@ -17084,6 +17132,30 @@ var Main = /*#__PURE__*/function (_React$Component) {
     key: "handleChange",
     value: function handleChange(e) {
       this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }
+  }, {
+    key: "handleCheckRecurring",
+    value: function handleCheckRecurring(e) {
+      this.setState({
+        recurring: e.target.checked
+      });
+
+      if (e.target.checked) {
+        $(".dropdown").removeClass("d-none");
+        $(".dropdown").addClass("d-inline");
+      } else if (!e.target.checked) {
+        $(".dropdown").removeClass("d-inline");
+        $(".dropdown").addClass("d-none");
+      }
+    }
+  }, {
+    key: "handleGetFrequency",
+    value: function handleGetFrequency(e) {
+      e.preventDefault();
+      this.setState({
+        frequency: e.target.value
+      });
+      console.log(e.target.value);
     } //deletes an expense based on id of the expense clicked
 
   }, {
@@ -17365,7 +17437,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
         typeName: this.state.typeName,
         amount: this.state.amount,
         searchAll: this.searchAll,
-        handleGetTodaysDate: this.handleGetTodaysDate
+        handleGetTodaysDate: this.handleGetTodaysDate,
+        handleGetFrequency: this.handleGetFrequency,
+        handleCheckRecurring: this.handleCheckRecurring
       };
       var expenseTableProps = {
         clearFields: this.clearFields,

@@ -32,6 +32,8 @@ class Main extends React.Component {
             typeDropDown: [],
             desc: "",
             amount: "",
+            recurring: false,
+            frequency: "",
             typeName: "",
             typeBudget: "",
             newDate: "",
@@ -59,6 +61,8 @@ class Main extends React.Component {
         this.handleSaveEditChanges = this.handleSaveEditChanges.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
         this.handleGetTodaysDate = this.handleGetTodaysDate.bind(this);
+        this.handleGetFrequency = this.handleGetFrequency.bind(this);
+        this.handleCheckRecurring = this.handleCheckRecurring.bind(this);
 
     }
 
@@ -151,7 +155,9 @@ class Main extends React.Component {
                     type: this.state.type,
                     desc: this.state.desc,
                     amount: this.state.amount,
-                    token: captchaToken
+                    token: captchaToken,
+                    recurring: this.state.recurring,
+                    frequency: this.state.frequency
                 })
                     .then(results => {
                         $('#expense-created-alert').removeClass("hide")
@@ -309,6 +315,30 @@ class Main extends React.Component {
             [e.target.name]: e.target.value
         });
     }
+
+    handleCheckRecurring(e) {
+        this.setState({
+            recurring: e.target.checked
+        })
+        
+        if (e.target.checked) {
+            $(".dropdown").removeClass("d-none")
+            $(".dropdown").addClass("d-inline")
+        } else if (!e.target.checked) {
+            $(".dropdown").removeClass("d-inline")
+            $(".dropdown").addClass("d-none")
+        }
+
+    }
+
+    handleGetFrequency(e){
+        e.preventDefault()
+        this.setState({
+            frequency: e.target.value
+        })
+        console.log(e.target.value)
+    }
+
 
 
     //deletes an expense based on id of the expense clicked
@@ -572,7 +602,9 @@ class Main extends React.Component {
             typeName: this.state.typeName,
             amount: this.state.amount,
             searchAll: this.searchAll,
-            handleGetTodaysDate: this.handleGetTodaysDate
+            handleGetTodaysDate: this.handleGetTodaysDate,
+            handleGetFrequency: this.handleGetFrequency,
+            handleCheckRecurring: this.handleCheckRecurring,
         }
 
         let expenseTableProps = {

@@ -40,9 +40,10 @@ class App extends React.Component {
             Message: [], //messages to be passed to success or error modal according to validation obtained
             displayLoginButton: false,
             exists: "", //controls google login,
-            googleUser: false
+            googleUser: false,
 
         }
+
         this.handleLogOut = this.handleLogOut.bind(this);
         this.handleLogIn = this.handleLogIn.bind(this);
         this.handleGoogleLogIn = this.handleGoogleLogIn.bind(this);
@@ -392,7 +393,7 @@ class App extends React.Component {
             $('[type=password]').attr('disabled', 'true');
         }
 
-        $('.userInfo').removeClass("d-inline")
+        $('.userInfo').removeClass("view")
         $('.userInfo').addClass("hide")
 
         $('.editInfo').removeClass("hide")
@@ -407,7 +408,7 @@ class App extends React.Component {
         $('#user-info input').addClass("hide")
 
         $('.userInfo').removeClass("hide")
-        $('.userInfo').addClass("d-inline")
+        $('.userInfo').addClass("view")
 
         $('.editInfo').removeClass("view")
         $('.editInfo').addClass("hide")
@@ -564,7 +565,7 @@ class App extends React.Component {
                             </main>
                         }
                     />
-                        />
+                        
                     </Routes>
                 <Footer />
 
