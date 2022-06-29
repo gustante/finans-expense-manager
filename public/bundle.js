@@ -15071,7 +15071,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         showModalError: this.state.showModalError,
         errorMessages: this.state.Message,
         displayConfirmButton: this.state.displayConfirmButton,
-        handleDeleteUser: this.handleDeleteUser
+        handleDelete: this.handleDeleteUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         index: true,
         path: "/",
@@ -15901,7 +15901,12 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
           className: "editButtons hide btn h-50 m-1 btn-success"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-check"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        })), expense.recurring ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleConfirmDelete.bind(_this2, expense._id),
+          className: "editButtons hide btn h-50 m-1 btn-danger"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-trash-alt"
+        })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           onClick: _this2.props.handleDelete.bind(_this2, expense._id),
           className: "editButtons hide btn h-50 m-1 btn-danger"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
@@ -16848,8 +16853,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
       displayLoginButton: false,
       Message: [],
       //messages to be passed to success or error modal according to validation obtained
-      position: 15 //controls position to splice array of expenses and set pagination
-
+      position: 15,
+      //controls position to splice array of expenses and set pagination
+      displayConfirmButton: false,
+      //controls display of confirm button in modal
+      displayDeleteJustOneButton: false,
+      //controls display of delete just one button in modal
+      expenseToBeDeleted: ""
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleExpenseSubmit = _this.handleExpenseSubmit.bind(_assertThisInitialized(_this));
@@ -16867,6 +16877,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.handleGetTodaysDate = _this.handleGetTodaysDate.bind(_assertThisInitialized(_this));
     _this.handleGetFrequency = _this.handleGetFrequency.bind(_assertThisInitialized(_this));
     _this.handleCheckRecurring = _this.handleCheckRecurring.bind(_assertThisInitialized(_this));
+    _this.handleConfirmDelete = _this.handleConfirmDelete.bind(_assertThisInitialized(_this));
+    _this.handleDeleteAllRecurring = _this.handleDeleteAllRecurring.bind(_assertThisInitialized(_this));
+    _this.handleDeleteJustOne = _this.handleDeleteJustOne.bind(_assertThisInitialized(_this));
     return _this;
   } //mounts Main component and obtain all expenses in database, adding it to expense state
 
@@ -17156,14 +17169,42 @@ var Main = /*#__PURE__*/function (_React$Component) {
         frequency: e.target.value
       });
       console.log(e.target.value);
+    }
+  }, {
+    key: "handleConfirmDelete",
+    value: function handleConfirmDelete(expenseId, e) {
+      e.preventDefault();
+      console.log("attempting to delete a recurring expense");
+      this.setState({
+        Message: ["Do you want to delete all future expenses as well?"],
+        showModalError: true,
+        displayConfirmButton: true,
+        displayDeleteJustOneButton: true,
+        expenseToBeDeleted: expenseId
+      });
+    }
+  }, {
+    key: "handleDeleteAllRecurring",
+    value: function handleDeleteAllRecurring(e) {
+      console.log("deleting all recurring expenses");
+      this.handleDelete(this.state.expenseToBeDeleted, e, "all");
+      this.handleCloseError();
+    }
+  }, {
+    key: "handleDeleteJustOne",
+    value: function handleDeleteJustOne(e) {
+      console.log("deleting just one recurring expense");
+      this.handleDelete(this.state.expenseToBeDeleted, e, "one");
+      this.handleCloseError();
     } //deletes an expense based on id of the expense clicked
 
   }, {
     key: "handleDelete",
-    value: function handleDelete(expenseId, event) {
+    value: function handleDelete(expenseId, event, option) {
       var _this6 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_8___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId)) //send id when clicking on an expense from the table to backend so that it deletes from database
+      console.log("deleting" + expenseId + " " + option);
+      axios__WEBPACK_IMPORTED_MODULE_8___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId, "&option=").concat(option)) //send id when clicking on an expense from the table to backend so that it deletes from database
       .then(function (deletedExpense) {
         // Create a new array based on current state:
         var arrayOfExpenses = _toConsumableArray(_this6.state.expenses);
@@ -17261,7 +17302,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function handleCloseError() {
       this.setState({
         showModalError: false,
-        displayLoginButton: false
+        displayLoginButton: false,
+        displayConfirmButton: false,
+        displayDeleteJustOneButton: false
       });
     }
   }, {
@@ -17456,7 +17499,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
         newDesc: this.state.newDesc,
         newMonth: this.state.newMonth,
         newAmount: this.state.newAmount,
-        handleLoadMore: this.handleLoadMore
+        handleLoadMore: this.handleLoadMore,
+        handleConfirmDelete: this.handleConfirmDelete
       };
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseCreatedAlert_js__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseDeletedAlert_js__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseEditedAlert_js__WEBPACK_IMPORTED_MODULE_7__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -17473,7 +17517,11 @@ var Main = /*#__PURE__*/function (_React$Component) {
         handleClose: this.handleCloseError,
         showModalError: this.state.showModalError,
         errorMessages: this.state.Message,
-        displayLoginButton: this.state.displayLoginButton
+        displayLoginButton: this.state.displayLoginButton,
+        displayConfirmButton: this.state.displayConfirmButton,
+        displayDeleteJustOneButton: this.state.displayDeleteJustOneButton,
+        handleDelete: this.handleDeleteAllRecurring,
+        handleDeleteOne: this.handleDeleteJustOne
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, expenseTableProps))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Navigate, {
         to: "/login"
       }));
@@ -17976,11 +18024,13 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           showModalError = _this$props.showModalError,
           displayLoginButton = _this$props.displayLoginButton,
-          displayConfirmButton = _this$props.displayConfirmButton;
-      var showHideModal = showModalError ? 'view' : 'hide'; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
+          displayConfirmButton = _this$props.displayConfirmButton,
+          displayDeleteJustOneButton = _this$props.displayDeleteJustOneButton; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide the modal
 
+      var showHideModal = showModalError ? 'view' : 'hide';
       var showLoginButton = displayLoginButton ? 'view' : 'hide';
       var showConfirmButton = displayConfirmButton ? 'view' : 'hide';
+      var showDeleteJustOneButton = displayDeleteJustOneButton ? 'view' : 'hide';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -18016,7 +18066,7 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
         onClick: this.props.handleClose,
         type: "button",
         "data-dismiss": "modal",
-        className: "btn btn-danger"
+        className: "btn btn-secondary"
       }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: showLoginButton
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", (_React$createElement = {
@@ -18024,11 +18074,18 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
       }, _defineProperty(_React$createElement, "onClick", this.refresh), _defineProperty(_React$createElement, "type", "button"), _defineProperty(_React$createElement, "data-dismiss", "modal"), _defineProperty(_React$createElement, "className", "btn btn-warning"), _React$createElement), "Log in")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: showConfirmButton
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: this.props.handleDeleteUser,
+        onClick: this.props.handleDelete,
+        type: "button",
+        "data-dismiss": "modal",
+        className: "btn btn-danger"
+      }, "Confirm deletion")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: showDeleteJustOneButton
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.handleDeleteOne,
         type: "button",
         "data-dismiss": "modal",
         className: "btn btn-warning"
-      }, "Confirm deletion")))))))));
+      }, "No, delete only this one")))))))));
     }
   }]);
 

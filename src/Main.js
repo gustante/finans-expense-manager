@@ -44,7 +44,10 @@ class Main extends React.Component {
             showModalError: false,//controls display of modal with error message
             displayLoginButton: false,
             Message: [], //messages to be passed to success or error modal according to validation obtained
-            position: 15 //controls position to splice array of expenses and set pagination
+            position: 15, //controls position to splice array of expenses and set pagination
+            displayConfirmButton: false, //controls display of confirm button in modal
+            displayDeleteJustOneButton: false, //controls display of delete just one button in modal
+            expenseToBeDeleted: ""
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -63,6 +66,9 @@ class Main extends React.Component {
         this.handleGetTodaysDate = this.handleGetTodaysDate.bind(this);
         this.handleGetFrequency = this.handleGetFrequency.bind(this);
         this.handleCheckRecurring = this.handleCheckRecurring.bind(this);
+        this.handleConfirmDelete = this.handleConfirmDelete.bind(this);
+        this.handleDeleteAllRecurring = this.handleDeleteAllRecurring.bind(this);
+        this.handleDeleteJustOne = this.handleDeleteJustOne.bind(this);
 
     }
 
@@ -340,11 +346,37 @@ class Main extends React.Component {
         console.log(e.target.value)
     }
 
+    handleConfirmDelete(expenseId,e){
+        e.preventDefault()
+        console.log("attempting to delete a recurring expense")
+        this.setState({
+            Message: ["Do you want to delete all future expenses as well?"],
+            showModalError: true,
+            displayConfirmButton: true,
+            displayDeleteJustOneButton: true,
+            expenseToBeDeleted: expenseId
+        })
+
+    }
+
+    handleDeleteAllRecurring(e){
+        console.log("deleting all recurring expenses")
+        this.handleDelete(this.state.expenseToBeDeleted,e,"all")
+        this.handleCloseError()
+    }
+    
+    handleDeleteJustOne(e){
+        console.log("deleting just one recurring expense")
+        this.handleDelete(this.state.expenseToBeDeleted,e,"one")
+        this.handleCloseError()
+    }
+
 
 
     //deletes an expense based on id of the expense clicked
-    handleDelete(expenseId, event) {
-        axios.delete(`/api/v1.0/expense?expenseId=${expenseId}`)//send id when clicking on an expense from the table to backend so that it deletes from database
+    handleDelete(expenseId, event, option) {
+        console.log("deleting" + expenseId + " " + option)
+        axios.delete(`/api/v1.0/expense?expenseId=${expenseId}&option=${option}`)//send id when clicking on an expense from the table to backend so that it deletes from database
             .then(deletedExpense => {
                 // Create a new array based on current state:
                 let arrayOfExpenses = [...this.state.expenses];
@@ -440,7 +472,9 @@ class Main extends React.Component {
     handleCloseError() {
         this.setState({
             showModalError: false,
-            displayLoginButton: false
+            displayLoginButton: false,
+            displayConfirmButton: false,
+            displayDeleteJustOneButton: false
         });
     }
 
@@ -625,7 +659,8 @@ class Main extends React.Component {
             newDesc: this.state.newDesc,
             newMonth: this.state.newMonth,
             newAmount: this.state.newAmount,
-            handleLoadMore: this.handleLoadMore
+            handleLoadMore: this.handleLoadMore,
+            handleConfirmDelete: this.handleConfirmDelete
         }
 
 
@@ -646,7 +681,7 @@ class Main extends React.Component {
                         </div>
 
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
-                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} />
+                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} displayConfirmButton={this.state.displayConfirmButton} displayDeleteJustOneButton={this.state.displayDeleteJustOneButton} handleDelete={this.handleDeleteAllRecurring} handleDeleteOne={this.handleDeleteJustOne}/>
                         <Form {...formProps} />
                         <ExpenseTable {...expenseTableProps} />
 

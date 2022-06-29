@@ -189,7 +189,8 @@ exports.postExpense = (req, res) => {
                                 type: chosenType,//reference to type schema
                                 description: req.body.desc,
                                 amount: req.body.amount,
-                                user: user._id
+                                user: user._id,
+                                recurring: req.body.recurring,
                             });
 
                             //reset budget when we start a new month
@@ -468,11 +469,15 @@ exports.updateExpense = (req, res) => {
                             .then(() => {
                                 targetExpense.save()
                                     .then(savedExpense => {
+                                        //stop right here. We don't need to update anything else
                                         res.send(savedExpense)
                                     })
                             })
                     }
 
+
+
+                    //Otherwise, proceed to updating the expense below
                     console.log("expense that will be updated is: ")
                     console.log(targetExpense)
                     console.log("its type is: ")

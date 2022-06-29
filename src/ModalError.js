@@ -14,10 +14,13 @@ class ModalError extends React.Component {
 
 
     render() {
-        const { showModalError, displayLoginButton, displayConfirmButton } = this.props
-        const showHideModal = showModalError ? 'view' : 'hide';//whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide
+        const { showModalError, displayLoginButton, displayConfirmButton, displayDeleteJustOneButton } = this.props
+
+        //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide the modal
+        const showHideModal = showModalError ? 'view' : 'hide';
         const showLoginButton = displayLoginButton? 'view' : 'hide';
         const showConfirmButton = displayConfirmButton? 'view' : 'hide';
+        const showDeleteJustOneButton = displayDeleteJustOneButton? 'view' : 'hide';
 
         return <>
             <div className="row justify-content-center">
@@ -34,13 +37,16 @@ class ModalError extends React.Component {
                                     {this.props.errorMessages.map((message, index) => <p key={index}>{message}</p>)}
                                 </div>
                                 <div className="modal-footer">
-                                    <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-danger">Close</button>
+                                    <button onClick={this.props.handleClose} type="button" data-dismiss="modal" className="btn btn-secondary">Close</button>
 
                                     <div className={showLoginButton} >
                                         <button onClick={this.props.handleClose} onClick={this.refresh} type="button" data-dismiss="modal" className="btn btn-warning">Log in</button>
                                     </div>
                                     <div className={showConfirmButton} >
-                                        <button onClick={this.props.handleDeleteUser} type="button" data-dismiss="modal" className="btn btn-warning">Confirm deletion</button>
+                                        <button onClick={this.props.handleDelete} type="button" data-dismiss="modal" className="btn btn-danger">Confirm deletion</button>
+                                    </div>
+                                    <div className={showDeleteJustOneButton} >
+                                        <button onClick={this.props.handleDeleteOne} type="button" data-dismiss="modal" className="btn btn-warning">No, delete only this one</button>
                                     </div>
 
                                 </div>

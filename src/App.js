@@ -539,7 +539,7 @@ class App extends React.Component {
             <>
                 <Nav isLoggedIn={this.state.isLoggedIn} handleLogOut={this.handleLogOut} />
                 <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message } displayConfirmButton={this.state.displayConfirmButton} finalizeDeleteUser={this.finalizeDeleteUser} />
-                <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayConfirmButton={this.state.displayConfirmButton} handleDeleteUser={this.handleDeleteUser} />
+                <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayConfirmButton={this.state.displayConfirmButton} handleDelete={this.handleDeleteUser} />
 
                 <Routes>
                     <Route index path="/" element={<Home />} />
