@@ -145,6 +145,11 @@ exports.postExpense = (req, res) => {
     if (req.session.isAuth) {
         const errors = (validationResult(req)).array();
 
+        if (req.body.recurring == true && req.body.frequency == '') {
+            errors.push({ msg: 'Please select a frequency for recurring expenses' })
+        }
+
+
         //verify token agaisnt reCAPTCHA service
         axios.post('https://www.google.com/recaptcha/api/siteverify',
             querystring.stringify({
@@ -158,7 +163,7 @@ exports.postExpense = (req, res) => {
                 if (!response.data.success || response.data.score < 0.2) {
                     errors.push({ msg: 'reCAPTCHA failed. Score: ' + response.data.score + ", Success: " + response.data.success })
 
-                    let rError = new customError(['reCAPTCHA failed', 'Score: ' +  response.data.score], 401)
+                    let rError = new customError(['reCAPTCHA failed', 'Score: ' + response.data.score], 401)
                     res.status(rError.status).send(rError);
                 }
             })
@@ -219,11 +224,11 @@ exports.postExpense = (req, res) => {
                                     if (budget != null && currentMonth == savedExpense.month) {
 
                                         if (sumOfExpenses > budget)
-                                            smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`,user.phoneNumber)
+                                            smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`, user.phoneNumber)
                                         else if (sumOfExpenses >= budget * 0.7)
-                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`,user.phoneNumber)
+                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`, user.phoneNumber)
                                         else if (sumOfExpenses >= budget * 0.5)
-                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`,user.phoneNumber)
+                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`, user.phoneNumber)
                                     }
 
 
@@ -344,14 +349,14 @@ exports.updateExpense = (req, res) => {
                     let targetExpense = user.expenses.find(expense => expense._id == req.body.expenseId);
 
                     //if expense to be updated has Null type it means we're dealing with a type that has been deleted. It's a special case. We are not updating from the ExpenseTable component. We need to change their type to "Other"
-                    if(targetExpense.type == null){
+                    if (targetExpense.type == null) {
                         let typeOther = user.expenses.find(expense => expense.type.name == "Other");
                         typeOther.sumOfExpenses += targetExpense.amount//correct sumOfExpenses for Other
                         targetExpense.type = typeOther //correct expense that needs to be updated
                         typeOther.save()
-                            .then(()=>{
+                            .then(() => {
                                 targetExpense.save()
-                                    .then(savedExpense=>{
+                                    .then(savedExpense => {
                                         res.send(savedExpense)
                                     })
                             })
@@ -365,46 +370,46 @@ exports.updateExpense = (req, res) => {
                     console.log(req.body.newTypeId)
                     console.log(req.body)
 
-                        if(req.body.newYear && req.body.newYear != ""){
-                            console.log("year will be changed")
-                            targetExpense.year = req.body.newYear
-                        } if(req.body.newMonth && req.body.newMonth != ""){
-                            console.log("month will be changed")
-                            targetExpense.month = req.body.newMonth
-                            const current = new Date();
-                            const currentMonth = current.getMonth() + 1
+                    if (req.body.newYear && req.body.newYear != "") {
+                        console.log("year will be changed")
+                        targetExpense.year = req.body.newYear
+                    } if (req.body.newMonth && req.body.newMonth != "") {
+                        console.log("month will be changed")
+                        targetExpense.month = req.body.newMonth
+                        const current = new Date();
+                        const currentMonth = current.getMonth() + 1
 
-                            if(req.body.newMonth != currentMonth){//if changing to a different month. Remove amount from sumOfExpenses of the current month
-                                targetExpense.type.sumOfExpenses -= targetExpense.amount
-                            } else if(req.body.newMonth == currentMonth) { //if changing from other month to current month, add it's amount to sumOfExpenses of the current month
-                                targetExpense.type.sumOfExpenses += targetExpense.amount                            
-                            }
-                        } if(req.body.newDay && req.body.newDay != ""){
-                            console.log("day will be changed")
-                            targetExpense.day = req.body.newDay
-                        } if(req.body.newDesc && req.body.newDesc != ""){
-                            console.log("desc will be changed")
-                            targetExpense.description = req.body.newDesc
-                        } if(req.body.newAmount && req.body.newAmount != ""){
-                            console.log("amount will be changed")
-                            targetExpense.type.sumOfExpenses -= targetExpense.amount //remove the old amount from type
-                            targetExpense.type.sumOfExpenses += +req.body.newAmount//add new amount from type
-                            targetExpense.amount = req.body.newAmount//change the expense info as well
+                        if (req.body.newMonth != currentMonth) {//if changing to a different month. Remove amount from sumOfExpenses of the current month
+                            targetExpense.type.sumOfExpenses -= targetExpense.amount
+                        } else if (req.body.newMonth == currentMonth) { //if changing from other month to current month, add it's amount to sumOfExpenses of the current month
+                            targetExpense.type.sumOfExpenses += targetExpense.amount
+                        }
+                    } if (req.body.newDay && req.body.newDay != "") {
+                        console.log("day will be changed")
+                        targetExpense.day = req.body.newDay
+                    } if (req.body.newDesc && req.body.newDesc != "") {
+                        console.log("desc will be changed")
+                        targetExpense.description = req.body.newDesc
+                    } if (req.body.newAmount && req.body.newAmount != "") {
+                        console.log("amount will be changed")
+                        targetExpense.type.sumOfExpenses -= targetExpense.amount //remove the old amount from type
+                        targetExpense.type.sumOfExpenses += +req.body.newAmount//add new amount from type
+                        targetExpense.amount = req.body.newAmount//change the expense info as well
 
-                            console.log("after changing amount is: " + targetExpense.amount)
-                        } if(req.body.newTypeId && req.body.newTypeId != ""){
-                            console.log("before changing type amount is: " + targetExpense.amount)
-                            targetExpense.type.sumOfExpenses -= targetExpense.amount;//remove from the old type
-                            targetExpense.type.save() //save old type
+                        console.log("after changing amount is: " + targetExpense.amount)
+                    } if (req.body.newTypeId && req.body.newTypeId != "") {
+                        console.log("before changing type amount is: " + targetExpense.amount)
+                        targetExpense.type.sumOfExpenses -= targetExpense.amount;//remove from the old type
+                        targetExpense.type.save() //save old type
 
-                            Type.findOne({ _id: req.body.newTypeId._id})//get new type
+                        Type.findOne({ _id: req.body.newTypeId._id })//get new type
                             .exec()
-                            .then(type=>{
+                            .then(type => {
                                 type.sumOfExpenses += targetExpense.amount//add amount to new type
                                 targetExpense.type = type //change type in the expense info
                                 type.save() //save type
                                 targetExpense.save() //save expense
-                                    .then(savedExpense=>{
+                                    .then(savedExpense => {
                                         console.log("sent here")
                                         res.send(savedExpense)
                                     })
@@ -415,18 +420,18 @@ exports.updateExpense = (req, res) => {
 
                             })
 
-                        } else {
-                            console.log("sent there")
-                            targetExpense.type.save() //save type
-                            targetExpense.save()
-                                .then(savedExpense=>{
-                                    res.send(savedExpense)
-                                })
-                                .catch(error => {
-                                    console.log(error)
-                                    res.send(error)
-                                });
-                        }
+                    } else {
+                        console.log("sent there")
+                        targetExpense.type.save() //save type
+                        targetExpense.save()
+                            .then(savedExpense => {
+                                res.send(savedExpense)
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                res.send(error)
+                            });
+                    }
 
 
 
@@ -435,17 +440,17 @@ exports.updateExpense = (req, res) => {
                     console.log(error)
                     res.send(error)
                 });
-            } else {
-                    let errorMessages = [];
-                    for (let i of errors) {
-                        errorMessages.push(i.msg)
-                    }
+        } else {
+            let errorMessages = [];
+            for (let i of errors) {
+                errorMessages.push(i.msg)
+            }
 
-                    let errorObject = new customError(errorMessages, 422);
-                    console.log("validation error sent")
-                    res.status(errorObject.status).send(errorObject);
+            let errorObject = new customError(errorMessages, 422);
+            console.log("validation error sent")
+            res.status(errorObject.status).send(errorObject);
 
-                }
+        }
 
     } else {
         let errorObject = new customError(['Please log in first'], 401);

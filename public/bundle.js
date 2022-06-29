@@ -16969,9 +16969,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
           type: _this3.state.type,
           desc: _this3.state.desc,
           amount: _this3.state.amount,
-          token: captchaToken,
           recurring: _this3.state.recurring,
-          frequency: _this3.state.frequency
+          frequency: _this3.state.frequency,
+          token: captchaToken
         }).then(function (results) {
           $('#expense-created-alert').removeClass("hide");
           $('#expense-created-alert').addClass("view");

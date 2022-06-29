@@ -155,9 +155,10 @@ class Main extends React.Component {
                     type: this.state.type,
                     desc: this.state.desc,
                     amount: this.state.amount,
-                    token: captchaToken,
                     recurring: this.state.recurring,
-                    frequency: this.state.frequency
+                    frequency: this.state.frequency,
+                    token: captchaToken,
+                    
                 })
                     .then(results => {
                         $('#expense-created-alert').removeClass("hide")
