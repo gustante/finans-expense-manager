@@ -9,6 +9,27 @@ require('dotenv').config();
 exports.getAllTypes = (req, res) => {
     if (req.session.isAuth) {
         User.findOne({ _id: req.session.userId })
+            .select('types')
+            .populate('types')
+            .exec()
+            .then(user => {
+                res.send(user.types);
+
+            })
+            .catch(error => {
+                console.log(error)
+                res.send(error)
+            });
+    } else {
+        let errorObject = new customError(['Please log in to see this information'], 401);
+        res.status(errorObject.status).send(errorObject);
+    }
+
+}
+
+exports.updateSumOfExpenses = (req, res) => {
+    if (req.session.isAuth) {
+        User.findOne({ _id: req.session.userId })
             .populate('types')
             .populate({
                 path: 'expenses',
@@ -16,26 +37,22 @@ exports.getAllTypes = (req, res) => {
             })
             .exec()
             .then(user => {
-                if (req.query.updateSum && req.query.updateSum == "true") {
-                    console.log("received request to get all types and update sumOfExpenses")
+                console.log("received request to get all types and update sumOfExpenses")
+                //to update sumOfExpenses of types
+                //get current month
+                let currentMonth = new Date().getMonth() + 1;
+                for (let type of user.types) {
+                    type.sumOfExpenses = 0;
 
-                    //to update sumOfExpenses of types
-                    //get current month
-                    let currentMonth = new Date().getMonth() + 1;
-                    for (let type of user.types) {
-                        type.sumOfExpenses = 0;
+                    for (expense of user.expenses) {
+                        if (expense.month == currentMonth && expense.type.name == type.name) {
+                            type.sumOfExpenses += expense.amount;
 
-                        for (expense of user.expenses) {
-                            if (expense.month == currentMonth && expense.type.name == type.name) {
-                                type.sumOfExpenses += expense.amount;
-
-                            }
                         }
-                        type.save()
                     }
-                } else {
-                    console.log("received request to get all types")
+                    type.save()
                 }
+
                 res.send(user.types);
 
             })
