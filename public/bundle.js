@@ -15896,7 +15896,12 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
           className: "view"
         }, "$", expense.amount)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
           className: " d-flex d-flex-row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        }, expense.recurring ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this2.props.handleConfirmEdit.bind(_this2, expense._id),
+          className: "editButtons hide btn h-50 m-1 btn-success"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-check"
+        })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           onClick: _this2.props.handleSaveEditChanges.bind(_this2, expense._id),
           className: "editButtons hide btn h-50 m-1 btn-success"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
@@ -16859,7 +16864,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
       //controls display of confirm button in modal
       displayDeleteJustOneButton: false,
       //controls display of delete just one button in modal
-      expenseToBeDeleted: ""
+      expenseToBeDeleted: "",
+      expenseToBeEdited: ""
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleExpenseSubmit = _this.handleExpenseSubmit.bind(_assertThisInitialized(_this));
@@ -16880,6 +16886,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.handleConfirmDelete = _this.handleConfirmDelete.bind(_assertThisInitialized(_this));
     _this.handleDeleteAllRecurring = _this.handleDeleteAllRecurring.bind(_assertThisInitialized(_this));
     _this.handleDeleteJustOne = _this.handleDeleteJustOne.bind(_assertThisInitialized(_this));
+    _this.handleConfirmEdit = _this.handleConfirmEdit.bind(_assertThisInitialized(_this));
+    _this.handleEditAllRecurring = _this.handleEditAllRecurring.bind(_assertThisInitialized(_this));
+    _this.handleEditJustOne = _this.handleEditJustOne.bind(_assertThisInitialized(_this));
     return _this;
   } //mounts Main component and obtain all expenses in database, adding it to expense state
 
@@ -17176,9 +17185,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       console.log("attempting to delete a recurring expense");
       this.setState({
-        Message: ["Do you want to delete all future expenses as well?"],
+        Message: ["This is a recurring expense. Do you want to delete all future expenses as well?"],
         showModalError: true,
-        displayConfirmButton: true,
         displayDeleteJustOneButton: true,
         expenseToBeDeleted: expenseId
       });
@@ -17196,6 +17204,32 @@ var Main = /*#__PURE__*/function (_React$Component) {
       console.log("deleting just one recurring expense");
       this.handleDelete(this.state.expenseToBeDeleted, e, "one");
       this.handleCloseError();
+    }
+  }, {
+    key: "handleConfirmEdit",
+    value: function handleConfirmEdit(expenseId, e) {
+      e.preventDefault();
+      console.log("attempting to edit a recurring expense");
+      this.setState({
+        Message: ["This is a recurring expense. Do you want to edit all future expenses as well?"],
+        showModalError: true,
+        displayEditJustOneButton: true,
+        expenseToBeEdited: expenseId
+      });
+    }
+  }, {
+    key: "handleEditAllRecurring",
+    value: function handleEditAllRecurring(e) {
+      console.log("editing all recurring expenses");
+      this.handleSaveEditChanges(this.state.expenseToBeEdited, e, "all");
+      this.handleCloseError();
+    }
+  }, {
+    key: "handleEditJustOne",
+    value: function handleEditJustOne(e) {
+      console.log("editing just one recurring expense");
+      this.handleSaveEditChanges(this.state.expenseToBeEdited, e, "one");
+      this.handleCloseError();
     } //deletes an expense based on id of the expense clicked
 
   }, {
@@ -17203,7 +17237,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function handleDelete(expenseId, event, option) {
       var _this6 = this;
 
-      console.log("deleting" + expenseId + " " + option);
       axios__WEBPACK_IMPORTED_MODULE_8___default().delete("/api/v1.0/expense?expenseId=".concat(expenseId, "&option=").concat(option)) //send id when clicking on an expense from the table to backend so that it deletes from database
       .then(function (deletedExpense) {
         // Create a new array based on current state:
@@ -17304,7 +17337,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
         showModalError: false,
         displayLoginButton: false,
         displayConfirmButton: false,
-        displayDeleteJustOneButton: false
+        displayDeleteJustOneButton: false,
+        displayEditJustOneButton: false
       });
     }
   }, {
@@ -17345,13 +17379,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleSaveEditChanges",
-    value: function handleSaveEditChanges(expenseId) {
+    value: function handleSaveEditChanges(expenseId, e, option) {
       var _this8 = this;
 
       var splitDate = this.state.newDate.split("-");
       var newType = this.state.typeDropDown.find(function (type) {
         return type.name == _this8.state.newType;
       });
+      console.log("editing" + expenseId + " " + option);
       axios__WEBPACK_IMPORTED_MODULE_8___default().put('/api/v1.0/expense', {
         expenseId: expenseId,
         newYear: splitDate[0],
@@ -17500,7 +17535,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
         newMonth: this.state.newMonth,
         newAmount: this.state.newAmount,
         handleLoadMore: this.handleLoadMore,
-        handleConfirmDelete: this.handleConfirmDelete
+        handleConfirmDelete: this.handleConfirmDelete,
+        handleConfirmEdit: this.handleConfirmEdit
       };
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseCreatedAlert_js__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseDeletedAlert_js__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseEditedAlert_js__WEBPACK_IMPORTED_MODULE_7__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -17520,8 +17556,11 @@ var Main = /*#__PURE__*/function (_React$Component) {
         displayLoginButton: this.state.displayLoginButton,
         displayConfirmButton: this.state.displayConfirmButton,
         displayDeleteJustOneButton: this.state.displayDeleteJustOneButton,
-        handleDelete: this.handleDeleteAllRecurring,
-        handleDeleteOne: this.handleDeleteJustOne
+        handleDeleteAllRecurring: this.handleDeleteAllRecurring,
+        handleDeleteOne: this.handleDeleteJustOne,
+        displayEditJustOneButton: this.state.displayEditJustOneButton,
+        handleEditJustOne: this.handleEditJustOne,
+        handleEditAllRecurring: this.handleEditAllRecurring
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Form__WEBPACK_IMPORTED_MODULE_2__.default, formProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ExpenseTable__WEBPACK_IMPORTED_MODULE_1__.default, expenseTableProps))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Navigate, {
         to: "/login"
       }));
@@ -18021,12 +18060,14 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
           showModalError = _this$props.showModalError,
           displayLoginButton = _this$props.displayLoginButton,
           displayConfirmButton = _this$props.displayConfirmButton,
-          displayDeleteJustOneButton = _this$props.displayDeleteJustOneButton; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide the modal
+          displayDeleteJustOneButton = _this$props.displayDeleteJustOneButton,
+          displayEditJustOneButton = _this$props.displayEditJustOneButton; //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide the modal
 
       var showHideModal = showModalError ? 'view' : 'hide';
       var showLoginButton = displayLoginButton ? 'view' : 'hide';
       var showConfirmButton = displayConfirmButton ? 'view' : 'hide';
       var showDeleteJustOneButton = displayDeleteJustOneButton ? 'view' : 'hide';
+      var showEditJustOneButton = displayEditJustOneButton ? 'view' : 'hide';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -18077,14 +18118,35 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
         type: "button",
         "data-dismiss": "modal",
         className: "btn btn-danger"
-      }, "Confirm deletion")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "Confirm ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: showDeleteJustOneButton
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.handleDeleteAllRecurring,
+        type: "button",
+        "data-dismiss": "modal",
+        className: "btn btn-danger"
+      }, "Delete all ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: showDeleteJustOneButton
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.props.handleDeleteOne,
         type: "button",
         "data-dismiss": "modal",
         className: "btn btn-warning"
-      }, "No, delete only this one")))))))));
+      }, "Delete only this one")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: showEditJustOneButton
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.handleEditAllRecurring,
+        type: "button",
+        "data-dismiss": "modal",
+        className: "btn btn-danger"
+      }, "Edit all")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: showEditJustOneButton
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.handleEditJustOne,
+        type: "button",
+        "data-dismiss": "modal",
+        className: "btn btn-warning"
+      }, "Edit only this one")))))))));
     }
   }]);
 

@@ -14,13 +14,14 @@ class ModalError extends React.Component {
 
 
     render() {
-        const { showModalError, displayLoginButton, displayConfirmButton, displayDeleteJustOneButton } = this.props
+        const { showModalError, displayLoginButton, displayConfirmButton, displayDeleteJustOneButton, displayEditJustOneButton } = this.props
 
         //whenever Main updates with new message or showModalError becomes true/false, it controls the display of the modal by adding a classe that will show/hide the modal
         const showHideModal = showModalError ? 'view' : 'hide';
         const showLoginButton = displayLoginButton? 'view' : 'hide';
         const showConfirmButton = displayConfirmButton? 'view' : 'hide';
         const showDeleteJustOneButton = displayDeleteJustOneButton? 'view' : 'hide';
+        const showEditJustOneButton = displayEditJustOneButton? 'view' : 'hide';
 
         return <>
             <div className="row justify-content-center">
@@ -43,12 +44,20 @@ class ModalError extends React.Component {
                                         <button onClick={this.refresh} type="button" data-dismiss="modal" className="btn btn-warning">Log in</button>
                                     </div>
                                     <div className={showConfirmButton} >
-                                        <button onClick={this.props.handleDelete} type="button" data-dismiss="modal" className="btn btn-danger">Confirm deletion</button>
+                                        <button onClick={this.props.handleDelete} type="button" data-dismiss="modal" className="btn btn-danger">Confirm </button>
                                     </div>
                                     <div className={showDeleteJustOneButton} >
-                                        <button onClick={this.props.handleDeleteOne} type="button" data-dismiss="modal" className="btn btn-warning">No, delete only this one</button>
+                                        <button onClick={this.props.handleDeleteAllRecurring} type="button" data-dismiss="modal" className="btn btn-danger">Delete all </button>
                                     </div>
-
+                                    <div className={showDeleteJustOneButton} >
+                                        <button onClick={this.props.handleDeleteOne} type="button" data-dismiss="modal" className="btn btn-warning">Delete only this one</button>
+                                    </div>
+                                    <div className={showEditJustOneButton} >
+                                        <button onClick={this.props.handleEditAllRecurring} type="button" data-dismiss="modal" className="btn btn-danger">Edit all</button>
+                                    </div>
+                                    <div className={showEditJustOneButton} >
+                                        <button onClick={this.props.handleEditJustOne} type="button" data-dismiss="modal" className="btn btn-warning">Edit only this one</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

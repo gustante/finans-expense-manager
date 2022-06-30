@@ -90,9 +90,21 @@ class ExpenseTable extends React.Component {
 
                                         <td className=" d-flex d-flex-row">
 
-                                            <button onClick={this.props.handleSaveEditChanges.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-success" >
-                                                <i className="fas fa-check"></i>
-                                            </button>
+
+                                            {expense.recurring ?
+
+                                                <button onClick={this.props.handleConfirmEdit.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-success" >
+                                                    <i className="fas fa-check"></i>
+                                                </button>
+                                                :
+                                                <button onClick={this.props.handleSaveEditChanges.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-success" >
+                                                    <i className="fas fa-check"></i>
+                                                </button>
+                                            }
+
+
+
+
 
 
                                             {expense.recurring ?
@@ -104,21 +116,21 @@ class ExpenseTable extends React.Component {
                                                 <button onClick={this.props.handleDelete.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-danger">
                                                     <i className="fas fa-trash-alt"></i>
                                                 </button>
-                                                }
+                                            }
 
-                                                    <button onClick={this.props.handleStopEditing.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-secondary">
-                                                        <i className="fas fa-times"></i>
-                                                    </button>
-
-
-
-                                                    <button onClick={this.props.handleStartEditing.bind(this, expense._id)} className="defaultButtons view btn h-50 m-1 btn-secondary"  >
-                                                        <i className="fas fa-edit"></i>
-                                                    </button>
+                                            <button onClick={this.props.handleStopEditing.bind(this, expense._id)} className="editButtons hide btn h-50 m-1 btn-secondary">
+                                                <i className="fas fa-times"></i>
+                                            </button>
 
 
 
-                                                </td>
+                                            <button onClick={this.props.handleStartEditing.bind(this, expense._id)} className="defaultButtons view btn h-50 m-1 btn-secondary"  >
+                                                <i className="fas fa-edit"></i>
+                                            </button>
+
+
+
+                                        </td>
 
 
 

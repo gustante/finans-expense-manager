@@ -47,7 +47,8 @@ class Main extends React.Component {
             position: 15, //controls position to splice array of expenses and set pagination
             displayConfirmButton: false, //controls display of confirm button in modal
             displayDeleteJustOneButton: false, //controls display of delete just one button in modal
-            expenseToBeDeleted: ""
+            expenseToBeDeleted: "",
+            expenseToBeEdited: "",
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -69,6 +70,9 @@ class Main extends React.Component {
         this.handleConfirmDelete = this.handleConfirmDelete.bind(this);
         this.handleDeleteAllRecurring = this.handleDeleteAllRecurring.bind(this);
         this.handleDeleteJustOne = this.handleDeleteJustOne.bind(this);
+        this.handleConfirmEdit = this.handleConfirmEdit.bind(this);
+        this.handleEditAllRecurring = this.handleEditAllRecurring.bind(this);
+        this.handleEditJustOne = this.handleEditJustOne.bind(this);
 
     }
 
@@ -350,9 +354,8 @@ class Main extends React.Component {
         e.preventDefault()
         console.log("attempting to delete a recurring expense")
         this.setState({
-            Message: ["Do you want to delete all future expenses as well?"],
+            Message: ["This is a recurring expense. Do you want to delete all future expenses as well?"],
             showModalError: true,
-            displayConfirmButton: true,
             displayDeleteJustOneButton: true,
             expenseToBeDeleted: expenseId
         })
@@ -371,11 +374,33 @@ class Main extends React.Component {
         this.handleCloseError()
     }
 
+    handleConfirmEdit(expenseId,e){
+        e.preventDefault()
+        console.log("attempting to edit a recurring expense")
+        this.setState({
+            Message: ["This is a recurring expense. Do you want to edit all future expenses as well?"],
+            showModalError: true,
+            displayEditJustOneButton: true,
+            expenseToBeEdited: expenseId
+        })
+    }
+
+    handleEditAllRecurring(e){
+        console.log("editing all recurring expenses")
+        this.handleSaveEditChanges(this.state.expenseToBeEdited,e,"all")
+        this.handleCloseError()
+    }
+
+    handleEditJustOne(e){
+        console.log("editing just one recurring expense")
+        this.handleSaveEditChanges(this.state.expenseToBeEdited,e,"one")
+        this.handleCloseError()
+    }
+
 
 
     //deletes an expense based on id of the expense clicked
     handleDelete(expenseId, event, option) {
-        console.log("deleting" + expenseId + " " + option)
         axios.delete(`/api/v1.0/expense?expenseId=${expenseId}&option=${option}`)//send id when clicking on an expense from the table to backend so that it deletes from database
             .then(deletedExpense => {
                 // Create a new array based on current state:
@@ -474,7 +499,8 @@ class Main extends React.Component {
             showModalError: false,
             displayLoginButton: false,
             displayConfirmButton: false,
-            displayDeleteJustOneButton: false
+            displayDeleteJustOneButton: false,
+            displayEditJustOneButton: false
         });
     }
 
@@ -514,10 +540,10 @@ class Main extends React.Component {
         });
     }
 
-    handleSaveEditChanges(expenseId) {
+    handleSaveEditChanges(expenseId,e,option) {
         let splitDate = this.state.newDate.split("-")
         let newType = this.state.typeDropDown.find(type => type.name == this.state.newType);
-
+        console.log("editing" + expenseId + " " + option)
         axios.put('/api/v1.0/expense', { expenseId: expenseId, newYear: splitDate[0], newMonth: splitDate[1], newDay: splitDate[2], newTypeId: newType, newDesc: this.state.newDesc, newAmount: this.state.newAmount })
             .then(results => {
 
@@ -660,7 +686,8 @@ class Main extends React.Component {
             newMonth: this.state.newMonth,
             newAmount: this.state.newAmount,
             handleLoadMore: this.handleLoadMore,
-            handleConfirmDelete: this.handleConfirmDelete
+            handleConfirmDelete: this.handleConfirmDelete,
+            handleConfirmEdit: this.handleConfirmEdit,
         }
 
 
@@ -681,7 +708,7 @@ class Main extends React.Component {
                         </div>
 
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
-                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} displayConfirmButton={this.state.displayConfirmButton} displayDeleteJustOneButton={this.state.displayDeleteJustOneButton} handleDelete={this.handleDeleteAllRecurring} handleDeleteOne={this.handleDeleteJustOne}/>
+                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} displayConfirmButton={this.state.displayConfirmButton} displayDeleteJustOneButton={this.state.displayDeleteJustOneButton} handleDeleteAllRecurring={this.handleDeleteAllRecurring} handleDeleteOne={this.handleDeleteJustOne} displayEditJustOneButton={this.state.displayEditJustOneButton} handleEditJustOne={this.handleEditJustOne} handleEditAllRecurring={this.handleEditAllRecurring}/>
                         <Form {...formProps} />
                         <ExpenseTable {...expenseTableProps} />
 
