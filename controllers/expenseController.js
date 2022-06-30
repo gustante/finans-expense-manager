@@ -6,7 +6,9 @@ const axios = require('axios');
 const querystring = require('querystring');
 var twilio = require('twilio');
 const { smsAlert } = require('../twilioSMS.js');
-const customError = require('../customError.js')
+const customError = require('../customError.js');
+const e = require('express');
+const { type } = require('os');
 require('dotenv').config();
 
 ////gets and array of all expenses
@@ -40,10 +42,11 @@ exports.getAllExpenses = (req, res) => {
             .then(user => {
 
                 //to update sumOfExpenses of types
-                // for(type of user.types){
+                // for(let type of user.types){
+                //  type.sumOfExpenses = 0;
 
                 //     for(expense of user.expenses){
-                //         if(expense.month == 3 && expense.type.name == type.name){
+                //         if(expense.month == 6 && expense.type.name == type.name){
                 //             type.sumOfExpenses += expense.amount;
 
                 //         }
@@ -193,20 +196,7 @@ exports.postExpense = (req, res) => {
                                 recurring: req.body.recurring,
                             });
 
-                            //reset budget when we start a new month
-                            // if(user.expenses.length > 0){
-                            //     let latestExpenseMonth = user.expenses[user.expenses.length-1].month;
-                            //     let newExpenseMonth = expense.month;
-                            //     if(newExpenseMonth > latestExpenseMonth){
-                            //         for(type of user.types){
-                            //             console.log(type)
-                            //             type.sumOfExpenses = 0;
-                            //             type.save();
-                            //         }
-
-                            //     }
-
-                            // }
+                            user.expenses.push(expense);
 
                             //include to the sum so that we can compare budget later (only if new expense is created for current month. We only keep track of current's month budgets)
 
@@ -214,11 +204,7 @@ exports.postExpense = (req, res) => {
                             const currentMonth = current.getMonth() + 1
                             if (currentMonth == expense.month) {
                                 chosenType.sumOfExpenses += expense.amount;
-                                chosenType.save()
                             }
-
-
-
 
                             //RECURRING EXPENSES CREATION
                             if (req.body.recurring == true) {
@@ -279,6 +265,10 @@ exports.postExpense = (req, res) => {
                                         });
                                         user.expenses.push(newExpense);
                                         newExpense.save()
+                                        //adjusts sumOfExpenses for multiple creations in the same month
+                                        if (currentMonth == newExpense.month) {
+                                            chosenType.sumOfExpenses += newExpense.amount;
+                                        }
                                         //add one week to todaysDate
                                         todaysDate.setDate(todaysDate.getDate() + 7);
 
@@ -311,6 +301,10 @@ exports.postExpense = (req, res) => {
                                         });
                                         user.expenses.push(newExpense);
                                         newExpense.save()
+                                        //adjusts sumOfExpenses for multiple creations in the same month
+                                        if (currentMonth == newExpense.month) {
+                                            chosenType.sumOfExpenses += newExpense.amount;
+                                        }
                                         //add one week to todaysDate
                                         todaysDate.setDate(todaysDate.getDate() + 14);
 
@@ -322,8 +316,9 @@ exports.postExpense = (req, res) => {
                             //END OF RECURRING EXPENSES CREATION
 
 
-                            user.expenses.push(expense);
+
                             user.save()
+                            chosenType.save()
                             expense.save()
                                 .then(savedExpense => {
                                     res.status(201).send(savedExpense);//status 201
@@ -396,41 +391,55 @@ exports.deleteExpense = (req, res) => {
             .then(user => {
                 let targetExpense = user.expenses.find(expense => expense._id == req.query.expenseId);//compare with id in query parameter
 
-                for (i in user.expenses) {//delete from user.expenses
-                    if (user.expenses[i]._id == targetExpense._id) {
-                        user.expenses.splice(i, 1)
-                    }
+                const current = new Date();
+                const currentMonth = current.getMonth() + 1
+
+
+                //remove targetExpense from user.expenses
+                user.expenses.pull(targetExpense);
+
+                //adjust the type that got and expense delete from to reflect correct sumOfExpenses (only if deletes from current month)
+                if (currentMonth == targetExpense.month) {
+                    targetExpense.type.sumOfExpenses -= targetExpense.amount;
+                    if (targetExpense.type.sumOfExpenses < 0)
+                        targetExpense.type.sumOfExpenses = 0
+
                 }
+
+                let arrayOfExpenses = [...user.expenses];
 
                 //delete all recurring expenses from user.expenses if req.query.option says so
                 if (req.query.option == "all" && targetExpense.recurring == true) {
-                    for (i in user.expenses) {
-                        if (user.expenses[i].description == targetExpense.description) {
-                            user.expenses.splice(i, 1)
+                    for (let i in arrayOfExpenses) {
+
+                        //delete all future recuring expenses
+                        if (arrayOfExpenses[i].description == targetExpense.description && ((arrayOfExpenses[i].day > targetExpense.day && arrayOfExpenses[i].month == targetExpense.month) || arrayOfExpenses[i].month > targetExpense.month)) {
+                            //adjusts sumOfExpenses if removing multiple expenses from current month
+                            if (arrayOfExpenses[i].month == currentMonth) {
+                                targetExpense.type.sumOfExpenses -= arrayOfExpenses[i].amount;
+                            }
+
+                            if (targetExpense.type.sumOfExpenses < 0) {
+                                targetExpense.type.sumOfExpenses = 0
+                            }
+
+                            //filter out user.expenses[i] from user.expenses
+                            user.expenses = user.expenses.filter(expense => expense._id != arrayOfExpenses[i]._id);
                         }
                     }
+
                 }
+
 
 
                 user.save()
-
-
-
-                //adjust the type that got and expense delete from to reflect correct sumOfExpenses (only if deletes from current month)
-                const current = new Date();
-                const currentMonth = current.getMonth() + 1
-                if (currentMonth == targetExpense.month) {
-                    let targetType = user.types.find(type => type.name == targetExpense.type.name);
-                    targetType.sumOfExpenses -= targetExpense.amount;
-                    if (targetType.sumOfExpenses < 0)
-                        targetType.sumOfExpenses = 0
-                    targetType.save()
-                }
+                targetExpense.type.save()
 
                 //delete from expenses collection
                 Expense.deleteOne({ _id: req.query.expenseId }).exec()
                     .then(deletedExpense => {
                         res.send(deletedExpense);
+
                     })
                     .catch(error => {
                         console.log(error)
@@ -439,41 +448,36 @@ exports.deleteExpense = (req, res) => {
 
                 //delete all recurring expenses from expenses collection if req.query.option says so
                 if (req.query.option == 'all' && targetExpense.recurring == true) {
-                    console.log("deleting many")
-                    Expense.deleteMany({ recurring: true, description: targetExpense.description, 
-                        {
-                            $or:
-                                [
-                                    { 
-                                        day: { $gt: (current.getDate()) } 
-                                    },
-                                    {
-                                        month: { $gt: (current.getMonth + 1()) }
-                                    }
-                                ]
-                        }
-                    }).exec()
-            .then(results => {
-                console.log("deleteted many")
+                    Expense.deleteMany({
+                        recurring: true, description: targetExpense.description,
+                        $or: [
+                            { $and: [{ month: { $eq: parseInt(targetExpense.month) } }, { day: { $gt: parseInt(targetExpense.day) } }] },
+                            { month: { $gt: parseInt(targetExpense.month) } }
+
+                        ]
+                    })
+
+                        .then(results => {
+                            console.log("deleteted many")
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            res.send(error)
+                        });
+
+                }
+
             })
             .catch(error => {
                 console.log(error)
                 res.send(error)
             });
 
-    }
-
-})
-            .catch (error => {
-    console.log(error)
-    res.send(error)
-});
-
 
     } else {
-    let errorObject = new customError(['Please log in to delete expense'], 401);
-    res.status(errorObject.status).send(errorObject);
-}
+        let errorObject = new customError(['Please log in to delete expense'], 401);
+        res.status(errorObject.status).send(errorObject);
+    }
 
 
 
