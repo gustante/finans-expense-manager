@@ -9,10 +9,33 @@ require('dotenv').config();
 exports.getAllTypes = (req, res) => {
     if (req.session.isAuth) {
         User.findOne({ _id: req.session.userId })
-            .select('types')
             .populate('types')
+            .populate({
+                path: 'expenses',
+                populate: { path: 'type' }
+            })
             .exec()
             .then(user => {
+                if (req.query.updateSum && req.query.updateSum == "true") {
+                    console.log("received request to get all types and update sumOfExpenses")
+
+                    //to update sumOfExpenses of types
+                    //get current month
+                    let currentMonth = new Date().getMonth() + 1;
+                    for (let type of user.types) {
+                        type.sumOfExpenses = 0;
+
+                        for (expense of user.expenses) {
+                            if (expense.month == currentMonth && expense.type.name == type.name) {
+                                type.sumOfExpenses += expense.amount;
+
+                            }
+                        }
+                        type.save()
+                    }
+                } else {
+                    console.log("received request to get all types")
+                }
                 res.send(user.types);
 
             })
@@ -102,43 +125,43 @@ exports.deleteType = (req, res) => {
         User.findOne({ _id: req.session.userId })
             .populate('types')
             .exec()
-        .then(user => {
-            let targetType = user.types.find(type => type.name == req.query.type);//compare with id in query parameter
-            for (i in user.types) {
-                if (user.types[i] == targetType) {
-                    user.types.splice(i, 1)
+            .then(user => {
+                let targetType = user.types.find(type => type.name == req.query.type);//compare with id in query parameter
+                for (i in user.types) {
+                    if (user.types[i] == targetType) {
+                        user.types.splice(i, 1)
+                    }
                 }
-            }
-            console.log("deleted type from user")
-            user.save()
-        })
+                console.log("deleted type from user")
+                user.save()
+            })
 
-    Type.findOne({ name: req.query.type, user: req.session.userId })//delete only types of user that requested
-        .exec()//search for a type with the value passed
-        .then(chosenType => {//if finds, delete
-            if (chosenType != null) {
-                if (chosenType.name != "Other") {//other type cannot be deleted. There has to be at least one type
-                    Type.deleteOne({ name: chosenType.name })
-                        .exec()
-                        .then(deletedType => {
-                            console.log("deleted type from types collection")
-                            res.send(deletedType);
-                        })
-                } else {
+        Type.findOne({ name: req.query.type, user: req.session.userId })//delete only types of user that requested
+            .exec()//search for a type with the value passed
+            .then(chosenType => {//if finds, delete
+                if (chosenType != null) {
+                    if (chosenType.name != "Other") {//other type cannot be deleted. There has to be at least one type
+                        Type.deleteOne({ name: chosenType.name })
+                            .exec()
+                            .then(deletedType => {
+                                console.log("deleted type from types collection")
+                                res.send(deletedType);
+                            })
+                    } else {
+                        let errorMessages = [];
+                        errorMessages.push(['"Other" type cannot be deleted'])
+                        let errorObject = new customError(errorMessages, 422);
+                        res.status(errorObject.status).send(errorObject);
+                    }
+                } else {//if no type is found, or if user tried to delete "Other", send error message
                     let errorMessages = [];
-                    errorMessages.push(['"Other" type cannot be deleted'])
+                    errorMessages.push(['Please input correct type you wish to delete from the list'])
                     let errorObject = new customError(errorMessages, 422);
+
                     res.status(errorObject.status).send(errorObject);
                 }
-            } else {//if no type is found, or if user tried to delete "Other", send error message
-                let errorMessages = [];
-                errorMessages.push(['Please input correct type you wish to delete from the list'])
-                let errorObject = new customError(errorMessages, 422);
 
-                res.status(errorObject.status).send(errorObject);
-            }
-
-        })
+            })
     } else {
         let errorObject = new customError(['Please log in to delete type'], 401);
         res.status(errorObject.status).send(errorObject);
@@ -156,24 +179,24 @@ exports.updateType = (req, res) => {
             User.findOne({ _id: req.session.userId })
                 .populate('types')
                 .exec()
-            .then(user => {
-                let targetType = user.types.find(type => type._id == req.body.typeId);
+                .then(user => {
+                    let targetType = user.types.find(type => type._id == req.body.typeId);
 
-                if(req.body.newName && req.body.newName != ""){
-                    console.log(" name will be changed")
-                    targetType.name = req.body.newName
-                }
+                    if (req.body.newName && req.body.newName != "") {
+                        console.log(" name will be changed")
+                        targetType.name = req.body.newName
+                    }
 
-                if(req.body.newBudget && req.body.newBudget != ""){
-                    console.log(" budget will be changed")
-                    targetType.budget = req.body.newBudget
-                }
+                    if (req.body.newBudget && req.body.newBudget != "") {
+                        console.log(" budget will be changed")
+                        targetType.budget = req.body.newBudget
+                    }
 
-                targetType.save()
-                    .then(savedType=>{
-                        res.send(savedType)
-                    })
-            })
+                    targetType.save()
+                        .then(savedType => {
+                            res.send(savedType)
+                        })
+                })
         } else {
             let errorMessages = [];
             for (let i of errors) {
