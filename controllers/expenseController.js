@@ -191,6 +191,7 @@ exports.postExpense = (req, res) => {
                                 chosenType.sumOfExpenses += expense.amount;
                             }
 
+
                             //RECURRING EXPENSES CREATION
                             if (req.body.recurring == true) {
                                 console.log("recurring")
@@ -215,6 +216,7 @@ exports.postExpense = (req, res) => {
                                             amount: req.body.amount,
                                             user: user._id,
                                             recurring: true,
+                                            frequency: req.body.frequency 
                                         });
                                         user.expenses.push(newExpense);
                                         newExpense.save()
@@ -247,6 +249,7 @@ exports.postExpense = (req, res) => {
                                             amount: req.body.amount,
                                             user: user._id,
                                             recurring: true,
+                                            frequency: req.body.frequency
                                         });
                                         user.expenses.push(newExpense);
                                         newExpense.save()
@@ -283,6 +286,7 @@ exports.postExpense = (req, res) => {
                                             amount: req.body.amount,
                                             user: user._id,
                                             recurring: true,
+                                            frequency: req.body.frequency
                                         });
                                         user.expenses.push(newExpense);
                                         newExpense.save()
@@ -508,6 +512,12 @@ exports.updateExpense = (req, res) => {
                     } if (req.body.newDay && req.body.newDay != "") {
                         console.log("day will be changed")
                         targetExpense.day = req.body.newDay
+                        if (targetExpense.recurring == true && req.body.option == "all") {
+                            if(targetExpense.frequency == 'monthly'){
+
+                            }
+                        }
+
                     } if (req.body.newAmount && req.body.newAmount != "") {
                         console.log("amount will be changed")
                         targetExpense.amount = req.body.newAmount//change the expense info as well
