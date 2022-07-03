@@ -251,9 +251,6 @@ exports.getNoOfExpenses = (req, res) => {
 
 
 exports.updateUser = (req, res) => {
-
-    console.log(req.body)
-
     if (req.session.isAuth) {
         const errors = (validationResult(req)).array();
 
@@ -268,6 +265,7 @@ exports.updateUser = (req, res) => {
                 })
                 .exec()
                 .then(user => {
+                    
                         if(req.body.oldPassword && req.body.oldPassword != user.password){
                             throw new customError(['Old password is incorrect'], 403)
                         } else if(req.body.newPassword != req.body.repeatNewPassword) {
@@ -277,19 +275,19 @@ exports.updateUser = (req, res) => {
                             user.password = req.body.newPassword
                         }
 
-                        if(req.body.firstName && req.body.firstName != ""){
+                        if(req.body.firstName && req.body.firstName != "" && req.body.firstName != user.firstName){
                             console.log("first name will be changed")
                             user.firstName = req.body.firstName
                         }
-                        if(req.body.lastName && req.body.lastName != ""){
+                        if(req.body.lastName && req.body.lastName != "" && req.body.lastName != user.lastName){
                             console.log("last name will be changed")
                             user.lastName = req.body.lastName
                         }
-                        if(req.body.email && req.body.email != ""){
+                        if(req.body.email && req.body.email != "" && req.body.email != user.email){
                             console.log("email will be changed")
                             user.email = req.body.email
                         }
-                        if(req.body.phoneNumber && req.body.phoneNumber != ""){
+                        if(req.body.phoneNumber || req.body.phoneNumber == "" && req.body.phoneNumber != user.phoneNumber){//user can leave phonNumber empty, not required
                             console.log("phone number will be changed")
                             user.phoneNumber = req.body.phoneNumber
                         }
