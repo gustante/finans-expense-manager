@@ -179,6 +179,7 @@ exports.postExpense = (req, res) => {
                                 amount: req.body.amount,
                                 user: user._id,
                                 recurring: req.body.recurring,
+                                frequency: req.body.frequency
                             });
 
                             user.expenses.push(expense);
@@ -216,7 +217,7 @@ exports.postExpense = (req, res) => {
                                             amount: req.body.amount,
                                             user: user._id,
                                             recurring: true,
-                                            frequency: req.body.frequency 
+                                            frequency: req.body.frequency
                                         });
                                         user.expenses.push(newExpense);
                                         newExpense.save()
@@ -312,11 +313,11 @@ exports.postExpense = (req, res) => {
                                 .then(savedExpense => {
                                     res.status(201).send(savedExpense);//status 201
 
-                                    
+
 
                                     let { budget, sumOfExpenses, name } = savedExpense.type;
                                     //send SMS using twilio if close to exceeding budget
-                                    //dont send SMS if expense created is for a different month.
+                                    //dont send SMS if expense created is for a different month or there's no budget for type selected or if a phone number is not registered
                                     if (budget != null && currentMonth == savedExpense.month && user.phoneNumber) {
                                         console.log("will send text to " + user.phoneNumber && user.phoneNumber != "")
                                         if (sumOfExpenses > budget)
@@ -392,7 +393,7 @@ exports.deleteExpense = (req, res) => {
                     for (let i in arrayOfExpenses) {
 
                         //delete all future recuring expenses
-                        if (arrayOfExpenses[i].description == targetExpense.description && ((arrayOfExpenses[i].day > targetExpense.day && arrayOfExpenses[i].month == targetExpense.month) || arrayOfExpenses[i].month > targetExpense.month)) {
+                        if (arrayOfExpenses[i].description == targetExpense.description && ((arrayOfExpenses[i].day > targetExpense.day && arrayOfExpenses[i].month == targetExpense.month) || arrayOfExpenses[i].month > targetExpense.month || arrayOfExpenses[i].year > targetExpense.year)) {
                             //filter out user.expenses[i] from user.expenses
                             user.expenses = user.expenses.filter(expense => expense._id != arrayOfExpenses[i]._id);
                         }
@@ -503,23 +504,71 @@ exports.updateExpense = (req, res) => {
                             res.status(errorObject.status).send(errorObject);
                             return
                         }
-                    } if (req.body.newMonth && req.body.newMonth != "" && req.body.newMonth != targetExpense.month) {
+                    } if (req.body.newMonth && req.body.newMonth != "" && (targetExpense.recurring == false || targetExpense.recurring == true && req.body.option == "one")) {
                         console.log("month will be changed")
                         targetExpense.month = req.body.newMonth
-                        if (targetExpense.recurring == true && req.body.option == "all") {
-                            let errorObject = new customError(['You cannnot change the month of recurring all expenses. Please delete the selected one if you want to remove it from this month\'s budget.'], 422);
-                            res.status(errorObject.status).send(errorObject);
-                            return
-                        }
                     } if (req.body.newDay && req.body.newDay != "") {
-                        console.log("day will be changed")
-                        targetExpense.day = req.body.newDay
+                        console.log("day will be changed, frequency is: ")
+                        console.log(targetExpense.frequency)
+
+                        // to update day of monthly recurring expenses, simply change day for all future ones
                         if (targetExpense.recurring == true && req.body.option == "all") {
-                            if(targetExpense.frequency == 'monthly'){
+                            if (targetExpense.frequency == 'monthly') {
+                                targetExpense.day = req.body.newDay
+                                Expense.updateMany({
+                                    recurring: true, description: targetExpense.description,
+                                    month: { $gt: parseInt(targetExpense.month) }
+                                }, { day: req.body.newDay })
+                                    .then(results => {
+                                        console.log("updated many")
 
+                                    }).catch(error => {
+                                        console.log(error)
+                                        res.send(error)
+                                    }
+                                    )
+                            } else if (targetExpense.frequency == 'bi-weekly' || targetExpense.frequency == 'weekly') {
+                                let frequency = targetExpense.frequency == 'bi-weekly' ? 14 : 7
+
+                                updateAll(frequency)
+
+                                async function updateAll(frequency) {
+                                    console.log("frequency is : " + frequency)
+                                    //create date object using req.body.newDay, req.body.newMonth, req.body.newYear
+                                    let newStartDate = new Date(req.body.newYear, req.body.newMonth - 1, req.body.newDay)
+                                    //clone targetExpense
+                                    let targetExpenseClone = JSON.parse(JSON.stringify(targetExpense))
+
+                                    //update targetExpense
+                                    targetExpense.day = newStartDate.getDate()
+                                    targetExpense.month = newStartDate.getMonth() + 1
+                                    targetExpense.year = newStartDate.getFullYear()
+                                    //add one week to newStartDate
+                                    newStartDate.setDate(newStartDate.getDate() + frequency)
+
+                                    console.log("called updateAll")
+                                    console.log("target expense clone is : ")
+                                    console.log(targetExpenseClone)
+                                    for (let i in user.expenses) {
+                                        //
+                                        if (user.expenses[i].description == targetExpenseClone.description && ((user.expenses[i].day > targetExpenseClone.day && user.expenses[i].month == targetExpenseClone.month) || user.expenses[i].month > targetExpenseClone.month || user.expenses[i].year > targetExpenseClone.year) && user.expenses[i]._id != targetExpenseClone._id) {
+
+                                            console.log("updating expense: ")
+                                            console.log(user.expenses[i])
+
+                                            await Expense.findOneAndUpdate({ _id: user.expenses[i]._id }, { day: newStartDate.getDate(), month: newStartDate.getMonth() + 1, year: newStartDate.getFullYear() })
+
+                                            //add one week to newStartDate
+                                            newStartDate.setDate(newStartDate.getDate() + frequency)
+                                        }
+                                    }
+                                }
+                                
                             }
-                        }
 
+                        } else {
+                            targetExpense.day = req.body.newDay
+                        }
                     } if (req.body.newAmount && req.body.newAmount != "") {
                         console.log("amount will be changed")
                         targetExpense.amount = req.body.newAmount//change the expense info as well
