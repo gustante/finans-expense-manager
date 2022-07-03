@@ -350,7 +350,7 @@ class Main extends React.Component {
         console.log(e.target.value)
     }
 
-    handleConfirmDelete(expenseId,e){
+    handleConfirmDelete(expenseId, e) {
         e.preventDefault()
         console.log("attempting to delete a recurring expense")
         this.setState({
@@ -362,19 +362,19 @@ class Main extends React.Component {
 
     }
 
-    handleDeleteAllRecurring(e){
+    handleDeleteAllRecurring(e) {
         console.log("deleting all recurring expenses")
-        this.handleDelete(this.state.expenseToBeDeleted,e,"all")
-        this.handleCloseError()
-    }
-    
-    handleDeleteJustOne(e){
-        console.log("deleting just one recurring expense")
-        this.handleDelete(this.state.expenseToBeDeleted,e,"one")
+        this.handleDelete(this.state.expenseToBeDeleted, e, "all")
         this.handleCloseError()
     }
 
-    handleConfirmEdit(expenseId,e){
+    handleDeleteJustOne(e) {
+        console.log("deleting just one recurring expense")
+        this.handleDelete(this.state.expenseToBeDeleted, e, "one")
+        this.handleCloseError()
+    }
+
+    handleConfirmEdit(expenseId, e) {
         e.preventDefault()
         console.log("attempting to edit a recurring expense")
         this.setState({
@@ -385,15 +385,15 @@ class Main extends React.Component {
         })
     }
 
-    handleEditAllRecurring(e){
+    handleEditAllRecurring(e) {
         console.log("editing all recurring expenses")
-        this.handleSaveEditChanges(this.state.expenseToBeEdited,e,"all")
+        this.handleSaveEditChanges(this.state.expenseToBeEdited, e, "all")
         this.handleCloseError()
     }
 
-    handleEditJustOne(e){
+    handleEditJustOne(e) {
         console.log("editing just one recurring expense")
-        this.handleSaveEditChanges(this.state.expenseToBeEdited,e,"one")
+        this.handleSaveEditChanges(this.state.expenseToBeEdited, e, "one")
         this.handleCloseError()
     }
 
@@ -403,6 +403,9 @@ class Main extends React.Component {
     handleDelete(expenseId, event, option) {
         axios.delete(`/api/v1.0/expense?expenseId=${expenseId}&option=${option}`)//send id when clicking on an expense from the table to backend so that it deletes from database
             .then(deletedExpense => {
+                //updates sumOfExpenses
+                axios.get('/api/v1.0/type/updateSumOfExpenses')
+                
                 // Create a new array based on current state:
                 let arrayOfExpenses = [...this.state.expenses];
 
@@ -540,12 +543,16 @@ class Main extends React.Component {
         });
     }
 
-    handleSaveEditChanges(expenseId,e,option) {
+    handleSaveEditChanges(expenseId, e, option) {
         let splitDate = this.state.newDate.split("-")
         let newType = this.state.typeDropDown.find(type => type.name == this.state.newType);
         console.log("editing" + expenseId + " " + option)
-        axios.put('/api/v1.0/expense', { expenseId: expenseId, newYear: splitDate[0], newMonth: splitDate[1], newDay: splitDate[2], newTypeId: newType, newDesc: this.state.newDesc, newAmount: this.state.newAmount })
+
+        axios.put('/api/v1.0/expense', { expenseId: expenseId, newYear: splitDate[0], newMonth: splitDate[1], newDay: splitDate[2], newTypeId: newType, newDesc: this.state.newDesc, newAmount: this.state.newAmount, option: option })
             .then(results => {
+                //update sumOfExpenses
+                axios.get('/api/v1.0/type/updateSumOfExpenses')
+                
 
                 let updatedExpense = results.data;
 
@@ -708,7 +715,7 @@ class Main extends React.Component {
                         </div>
 
                         <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
-                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} displayConfirmButton={this.state.displayConfirmButton} displayDeleteJustOneButton={this.state.displayDeleteJustOneButton} handleDeleteAllRecurring={this.handleDeleteAllRecurring} handleDeleteOne={this.handleDeleteJustOne} displayEditJustOneButton={this.state.displayEditJustOneButton} handleEditJustOne={this.handleEditJustOne} handleEditAllRecurring={this.handleEditAllRecurring}/>
+                        <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayLoginButton={this.state.displayLoginButton} displayConfirmButton={this.state.displayConfirmButton} displayDeleteJustOneButton={this.state.displayDeleteJustOneButton} handleDeleteAllRecurring={this.handleDeleteAllRecurring} handleDeleteOne={this.handleDeleteJustOne} displayEditJustOneButton={this.state.displayEditJustOneButton} handleEditJustOne={this.handleEditJustOne} handleEditAllRecurring={this.handleEditAllRecurring} />
                         <Form {...formProps} />
                         <ExpenseTable {...expenseTableProps} />
 

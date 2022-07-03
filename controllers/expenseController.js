@@ -41,21 +41,6 @@ exports.getAllExpenses = (req, res) => {
             .exec()
             .then(user => {
 
-                //to update sumOfExpenses of types
-                // for(let type of user.types){
-                //  type.sumOfExpenses = 0;
-
-                //     for(expense of user.expenses){
-                //         if(expense.month == 6 && expense.type.name == type.name){
-                //             type.sumOfExpenses += expense.amount;
-
-                //         }
-                //     }
-                //     type.save()
-
-                // }
-
-
                 //sort so that we have recent expenses displayed first
                 user.expenses.sort((a, b) => { //https://www.javascripttutorial.net/array/javascript-sort-an-array-of-objects/
                     let da = new Date(a.year, a.month, a.day),
@@ -391,20 +376,8 @@ exports.deleteExpense = (req, res) => {
             .then(user => {
                 let targetExpense = user.expenses.find(expense => expense._id == req.query.expenseId);//compare with id in query parameter
 
-                const current = new Date();
-                const currentMonth = current.getMonth() + 1
-
-
                 //remove targetExpense from user.expenses
                 user.expenses.pull(targetExpense);
-
-                //adjust the type that got and expense delete from to reflect correct sumOfExpenses (only if deletes from current month)
-                if (currentMonth == targetExpense.month) {
-                    targetExpense.type.sumOfExpenses -= targetExpense.amount;
-                    if (targetExpense.type.sumOfExpenses < 0)
-                        targetExpense.type.sumOfExpenses = 0
-
-                }
 
                 let arrayOfExpenses = [...user.expenses];
 
@@ -414,23 +387,12 @@ exports.deleteExpense = (req, res) => {
 
                         //delete all future recuring expenses
                         if (arrayOfExpenses[i].description == targetExpense.description && ((arrayOfExpenses[i].day > targetExpense.day && arrayOfExpenses[i].month == targetExpense.month) || arrayOfExpenses[i].month > targetExpense.month)) {
-                            //adjusts sumOfExpenses if removing multiple expenses from current month
-                            if (arrayOfExpenses[i].month == currentMonth) {
-                                targetExpense.type.sumOfExpenses -= arrayOfExpenses[i].amount;
-                            }
-
-                            if (targetExpense.type.sumOfExpenses < 0) {
-                                targetExpense.type.sumOfExpenses = 0
-                            }
-
                             //filter out user.expenses[i] from user.expenses
                             user.expenses = user.expenses.filter(expense => expense._id != arrayOfExpenses[i]._id);
                         }
                     }
 
                 }
-
-
 
                 user.save()
                 targetExpense.type.save()
@@ -489,7 +451,6 @@ exports.updateExpense = (req, res) => {
         const errors = (validationResult(req)).array();
 
         if (errors.length < 1) {
-
             User.findOne({ _id: req.session.userId })
                 .populate({
                     path: 'expenses',
@@ -499,10 +460,13 @@ exports.updateExpense = (req, res) => {
                 .then(user => {
                     let targetExpense = user.expenses.find(expense => expense._id == req.body.expenseId);
 
+                    //get current month
+                    const current = new Date();
+                    const currentMonth = current.getMonth() + 1
+
                     //if expense to be updated has Null type it means we're dealing with a type that has been deleted. It's a special case. We are not updating from the ExpenseTable component. We need to change their type to "Other"
                     if (targetExpense.type == null) {
                         let typeOther = user.expenses.find(expense => expense.type.name == "Other");
-                        typeOther.sumOfExpenses += targetExpense.amount//correct sumOfExpenses for Other
                         targetExpense.type = typeOther //correct expense that needs to be updated
                         typeOther.save()
                             .then(() => {
@@ -525,44 +489,99 @@ exports.updateExpense = (req, res) => {
                     console.log(req.body.newTypeId)
                     console.log(req.body)
 
-                    if (req.body.newYear && req.body.newYear != "") {
+                    if (req.body.newYear && req.body.newYear != "" && req.body.newYear != targetExpense.year) {
                         console.log("year will be changed")
                         targetExpense.year = req.body.newYear
-                    } if (req.body.newMonth && req.body.newMonth != "") {
+                        if (targetExpense.recurring == true && req.body.option == "all") {
+                            let errorObject = new customError(['You cannnot change the year of recurring all expenses. Please create new ones for a different year'], 422);
+                            res.status(errorObject.status).send(errorObject);
+                            return
+                        }
+                    } if (req.body.newMonth && req.body.newMonth != "" && req.body.newMonth != targetExpense.month) {
                         console.log("month will be changed")
                         targetExpense.month = req.body.newMonth
-                        const current = new Date();
-                        const currentMonth = current.getMonth() + 1
-
-                        if (req.body.newMonth != currentMonth) {//if changing to a different month. Remove amount from sumOfExpenses of the current month
-                            targetExpense.type.sumOfExpenses -= targetExpense.amount
-                        } else if (req.body.newMonth == currentMonth) { //if changing from other month to current month, add it's amount to sumOfExpenses of the current month
-                            targetExpense.type.sumOfExpenses += targetExpense.amount
+                        if (targetExpense.recurring == true && req.body.option == "all") {
+                            let errorObject = new customError(['You cannnot change the month of recurring all expenses. Please delete the selected one if you want to remove it from this month\'s budget.'], 422);
+                            res.status(errorObject.status).send(errorObject);
+                            return
                         }
                     } if (req.body.newDay && req.body.newDay != "") {
                         console.log("day will be changed")
                         targetExpense.day = req.body.newDay
-                    } if (req.body.newDesc && req.body.newDesc != "") {
-                        console.log("desc will be changed")
-                        targetExpense.description = req.body.newDesc
                     } if (req.body.newAmount && req.body.newAmount != "") {
                         console.log("amount will be changed")
-                        targetExpense.type.sumOfExpenses -= targetExpense.amount //remove the old amount from type
-                        targetExpense.type.sumOfExpenses += +req.body.newAmount//add new amount from type
                         targetExpense.amount = req.body.newAmount//change the expense info as well
 
-                        console.log("after changing amount is: " + targetExpense.amount)
-                    } if (req.body.newTypeId && req.body.newTypeId != "") {
-                        console.log("before changing type amount is: " + targetExpense.amount)
-                        targetExpense.type.sumOfExpenses -= targetExpense.amount;//remove from the old type
-                        targetExpense.type.save() //save old type
 
+                        //if changing amount of recurring expenses, edit all future when req.body.option says so first
+                        if (req.body.option == 'all' && targetExpense.recurring == true) {
+                            Expense.updateMany({
+                                recurring: true, description: targetExpense.description,
+                                $or: [
+                                    { $and: [{ month: { $eq: parseInt(targetExpense.month) } }, { day: { $gt: parseInt(targetExpense.day) } }] },
+                                    { month: { $gt: parseInt(targetExpense.month) } }
+
+                                ]
+                            }, { amount: req.body.newAmount })
+                                .then(results => {
+                                    console.log("updated many")
+                                }).catch(error => {
+                                    console.log(error)
+                                    res.send(error)
+                                }
+                                )
+                        }
+
+                    } if (req.body.newDesc && req.body.newDesc != "") {
+                        console.log("desc will be changed")
+
+                        //if changing description of recurring expenses, edit all future when req.body.option says so first
+                        if (req.body.option == 'all' && targetExpense.recurring == true) {
+                            Expense.updateMany({
+                                recurring: true, description: targetExpense.description,
+                                $or: [
+                                    { $and: [{ month: { $eq: parseInt(targetExpense.month) } }, { day: { $gt: parseInt(targetExpense.day) } }] },
+                                    { month: { $gt: parseInt(targetExpense.month) } }
+
+                                ]
+                            }, { description: req.body.newDesc })
+                                .then(results => {
+                                    console.log("updated many")
+                                }).catch(error => {
+                                    console.log(error)
+                                    res.send(error)
+                                }
+                                )
+                        }
+                        //change selected expense's description
+                        targetExpense.description = req.body.newDesc
+
+                    } if (req.body.newTypeId && req.body.newTypeId != "") {
+                        console.log("type will be changed")
                         Type.findOne({ _id: req.body.newTypeId._id })//get new type
                             .exec()
                             .then(type => {
-                                type.sumOfExpenses += targetExpense.amount//add amount to new type
                                 targetExpense.type = type //change type in the expense info
-                                type.save() //save type
+
+                                //check for future recurring expenses and change their type too
+                                if (req.body.option == 'all' && targetExpense.recurring == true) {
+                                    Expense.updateMany({
+                                        recurring: true, description: targetExpense.description,
+                                        $or: [
+                                            { $and: [{ month: { $eq: parseInt(targetExpense.month) } }, { day: { $gt: parseInt(targetExpense.day) } }] },
+                                            { month: { $gt: parseInt(targetExpense.month) } }
+
+                                        ]
+                                    }, { type: type })
+                                        .then(results => {
+                                            console.log("updated many")
+                                        }).catch(error => {
+                                            console.log(error)
+                                            res.send(error)
+                                        }
+                                        )
+                                }
+
                                 targetExpense.save() //save expense
                                     .then(savedExpense => {
                                         console.log("sent here")
