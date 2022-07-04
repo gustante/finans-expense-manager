@@ -17008,7 +17008,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
           arrayOfExpenses.unshift(results.data); // Set state
 
           _this3.setState({
-            expenses: arrayOfExpenses
+            expenses: arrayOfExpenses,
+            frequency: "",
+            recurring: false
           }); //Records expense creation event
 
 

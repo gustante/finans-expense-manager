@@ -187,7 +187,7 @@ class Main extends React.Component {
                         arrayOfExpenses.unshift(results.data);
 
                         // Set state
-                        this.setState({ expenses: arrayOfExpenses });
+                        this.setState({ expenses: arrayOfExpenses, frequency: "", recurring: false });
 
 
                         //Records expense creation event
