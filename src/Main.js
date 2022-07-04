@@ -67,6 +67,7 @@ class Main extends React.Component {
         this.handleGetTodaysDate = this.handleGetTodaysDate.bind(this);
         this.handleGetFrequency = this.handleGetFrequency.bind(this);
         this.handleCheckRecurring = this.handleCheckRecurring.bind(this);
+        this.handleUncheckRecurring = this.handleUncheckRecurring.bind(this);
         this.handleConfirmDelete = this.handleConfirmDelete.bind(this);
         this.handleDeleteAllRecurring = this.handleDeleteAllRecurring.bind(this);
         this.handleDeleteJustOne = this.handleDeleteJustOne.bind(this);
@@ -187,7 +188,8 @@ class Main extends React.Component {
                         arrayOfExpenses.unshift(results.data);
 
                         // Set state
-                        this.setState({ expenses: arrayOfExpenses, frequency: "", recurring: false });
+                        this.setState({ expenses: arrayOfExpenses });
+                        this.handleUncheckRecurring()
 
 
                         //Records expense creation event
@@ -340,6 +342,13 @@ class Main extends React.Component {
             $(".dropdown").removeClass("d-inline")
             $(".dropdown").addClass("d-none")
         }
+    }
+
+    handleUncheckRecurring() {
+
+        $(".dropdown").removeClass("d-inline")
+        $(".dropdown").addClass("d-none")
+        $("#flexCheckDefault").prop("checked", false)
 
     }
 
@@ -406,15 +415,30 @@ class Main extends React.Component {
             .then(deletedExpense => {
                 //updates sumOfExpenses
                 axios.get('/api/v1.0/type/updateSumOfExpenses')
-
                 // Create a new array based on current state:
-                let arrayOfExpenses = [...this.state.expenses];
+                let arrayOfExpenses = [];
 
-                let targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
-                    return expense._id == expenseId;
-                });
+                if (option && option == "all") {
+                    //find expense that has expenseId from arrayOfExpenses
+                    let recurringExpenseDeleted = this.state.expenses.find(expense => expense._id == expenseId)
+                    //filter out all future expenses that have the same description as recurringExpenseDeleted
 
-                arrayOfExpenses.splice(targetedExpenseIndex, 1)
+                    for (let expense of this.state.expenses) {
+                        //only add expense to array if it is not a future expense linked to the deleted one
+                        if (expense.description != recurringExpenseDeleted.description || (expense.description == recurringExpenseDeleted.description && expense.day < recurringExpenseDeleted.day && expense.month == recurringExpenseDeleted.month || (expense.description == recurringExpenseDeleted.description && expense.month < recurringExpenseDeleted.month || (expense.description == recurringExpenseDeleted.description && expense.year < recurringExpenseDeleted.year)))) {
+                            arrayOfExpenses.push(expense)
+                        }
+                    }
+
+                } else {
+                    arrayOfExpenses = [...this.state.expenses]
+                    let targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
+                        return expense._id == expenseId;
+                    });
+
+                    arrayOfExpenses.splice(targetedExpenseIndex, 1)
+                }
+
 
                 this.handleStopEditing(expenseId)
 
@@ -428,6 +452,8 @@ class Main extends React.Component {
                 }, 5000);
 
 
+
+
                 //Records expense deletion event
                 ReactGA.event({
                     category: "Expense",
@@ -436,6 +462,7 @@ class Main extends React.Component {
 
             })
             .catch(error => {
+                console.log(error)
                 console.log(error.response)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
@@ -509,7 +536,7 @@ class Main extends React.Component {
     }
 
     handleStartEditing(expenseId) {
-        
+
         //show inputs and buttons for editing
         $(`.${expenseId} select`).removeClass("hide")
         $(`.${expenseId} select`).addClass("view")
@@ -578,8 +605,8 @@ class Main extends React.Component {
 
                 this.handleStopEditing(expenseId)
 
-                if(option){
-                    console.log( "updated all recurring ")
+                if (option && option == 'all') {
+                    console.log("updated all recurring ")
                     this.handleUpdateAllRecurring()
                 }
 

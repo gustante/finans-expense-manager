@@ -16772,6 +16772,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -16883,6 +16885,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.handleGetTodaysDate = _this.handleGetTodaysDate.bind(_assertThisInitialized(_this));
     _this.handleGetFrequency = _this.handleGetFrequency.bind(_assertThisInitialized(_this));
     _this.handleCheckRecurring = _this.handleCheckRecurring.bind(_assertThisInitialized(_this));
+    _this.handleUncheckRecurring = _this.handleUncheckRecurring.bind(_assertThisInitialized(_this));
     _this.handleConfirmDelete = _this.handleConfirmDelete.bind(_assertThisInitialized(_this));
     _this.handleDeleteAllRecurring = _this.handleDeleteAllRecurring.bind(_assertThisInitialized(_this));
     _this.handleDeleteJustOne = _this.handleDeleteJustOne.bind(_assertThisInitialized(_this));
@@ -17008,10 +17011,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
           arrayOfExpenses.unshift(results.data); // Set state
 
           _this3.setState({
-            expenses: arrayOfExpenses,
-            frequency: "",
-            recurring: false
-          }); //Records expense creation event
+            expenses: arrayOfExpenses
+          });
+
+          _this3.handleUncheckRecurring(); //Records expense creation event
 
 
           react_ga__WEBPACK_IMPORTED_MODULE_9__.default.event({
@@ -17174,6 +17177,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "handleUncheckRecurring",
+    value: function handleUncheckRecurring() {
+      $(".dropdown").removeClass("d-inline");
+      $(".dropdown").addClass("d-none");
+      $("#flexCheckDefault").prop("checked", false);
+    }
+  }, {
     key: "handleGetFrequency",
     value: function handleGetFrequency(e) {
       e.preventDefault();
@@ -17245,12 +17255,39 @@ var Main = /*#__PURE__*/function (_React$Component) {
         //updates sumOfExpenses
         axios__WEBPACK_IMPORTED_MODULE_8___default().get('/api/v1.0/type/updateSumOfExpenses'); // Create a new array based on current state:
 
-        var arrayOfExpenses = _toConsumableArray(_this6.state.expenses);
+        var arrayOfExpenses = [];
 
-        var targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
-          return expense._id == expenseId;
-        });
-        arrayOfExpenses.splice(targetedExpenseIndex, 1);
+        if (option && option == "all") {
+          //find expense that has expenseId from arrayOfExpenses
+          var recurringExpenseDeleted = _this6.state.expenses.find(function (expense) {
+            return expense._id == expenseId;
+          }); //filter out all future expenses that have the same description as recurringExpenseDeleted
+
+
+          var _iterator = _createForOfIteratorHelper(_this6.state.expenses),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var expense = _step.value;
+
+              //only add expense to array if it is not a future expense linked to the deleted one
+              if (expense.description != recurringExpenseDeleted.description || expense.description == recurringExpenseDeleted.description && expense.day < recurringExpenseDeleted.day && expense.month == recurringExpenseDeleted.month || expense.description == recurringExpenseDeleted.description && expense.month < recurringExpenseDeleted.month || expense.description == recurringExpenseDeleted.description && expense.year < recurringExpenseDeleted.year) {
+                arrayOfExpenses.push(expense);
+              }
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+        } else {
+          arrayOfExpenses = _toConsumableArray(_this6.state.expenses);
+          var targetedExpenseIndex = arrayOfExpenses.findIndex(function (expense) {
+            return expense._id == expenseId;
+          });
+          arrayOfExpenses.splice(targetedExpenseIndex, 1);
+        }
 
         _this6.handleStopEditing(expenseId);
 
@@ -17270,6 +17307,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           action: "Deleted"
         });
       })["catch"](function (error) {
+        console.log(error);
         console.log(error.response);
 
         if (error.response.data.status == 401) {
@@ -17425,7 +17463,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
         _this8.handleStopEditing(expenseId);
 
-        if (option) {
+        if (option && option == 'all') {
           console.log("updated all recurring ");
 
           _this8.handleUpdateAllRecurring();
