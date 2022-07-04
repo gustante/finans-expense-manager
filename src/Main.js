@@ -73,6 +73,7 @@ class Main extends React.Component {
         this.handleConfirmEdit = this.handleConfirmEdit.bind(this);
         this.handleEditAllRecurring = this.handleEditAllRecurring.bind(this);
         this.handleEditJustOne = this.handleEditJustOne.bind(this);
+        this.handleUpdateAllRecurring = this.handleUpdateAllRecurring.bind(this);
 
     }
 
@@ -405,7 +406,7 @@ class Main extends React.Component {
             .then(deletedExpense => {
                 //updates sumOfExpenses
                 axios.get('/api/v1.0/type/updateSumOfExpenses')
-                
+
                 // Create a new array based on current state:
                 let arrayOfExpenses = [...this.state.expenses];
 
@@ -508,6 +509,7 @@ class Main extends React.Component {
     }
 
     handleStartEditing(expenseId) {
+        
         //show inputs and buttons for editing
         $(`.${expenseId} select`).removeClass("hide")
         $(`.${expenseId} select`).addClass("view")
@@ -552,7 +554,7 @@ class Main extends React.Component {
             .then(results => {
                 //update sumOfExpenses
                 axios.get('/api/v1.0/type/updateSumOfExpenses')
-                
+
 
                 let updatedExpense = results.data;
 
@@ -575,6 +577,11 @@ class Main extends React.Component {
                 this.setState({ expenses: arrayOfExpenses });
 
                 this.handleStopEditing(expenseId)
+
+                if(option){
+                    console.log( "updated all recurring ")
+                    this.handleUpdateAllRecurring()
+                }
 
 
             })
@@ -625,6 +632,54 @@ class Main extends React.Component {
 
             })
             .catch(error => {
+                console.log(error.response)
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
+
+                }
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
+            });
+    }
+
+    handleUpdateAllRecurring() {
+        //get array of ids of all recurring expenses in this.state.expenses
+        let recurringExpensesIds = this.state.expenses.filter(expense => expense.recurring == true).map(expense => expense._id);
+        axios.get(`/api/v1.0/expense?ids=${recurringExpensesIds}`)
+            .then(results => {
+                let arrayOfExpenses = [...this.state.expenses];
+                console.log(arrayOfExpenses)
+                //replace all recurring expenses in arrayOfExpenses expenses with the ones from the server
+                for (let i in arrayOfExpenses) {
+                    for (let j in results.data) {
+                        if (arrayOfExpenses[i]._id == results.data[j]._id) {
+                            arrayOfExpenses[i] = results.data[j]
+                        }
+                    }
+                }
+
+                console.log("array of expenses after is ")
+                console.log(arrayOfExpenses)
+
+                this.setState({ expenses: arrayOfExpenses });
+
+
+
+                // this.setState({ expenses: arrayOfExpenses });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
+                // //Records expense filter event
+
+            })
+            .catch(error => {
+                console.log(error)
                 console.log(error.response)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });

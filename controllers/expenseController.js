@@ -83,6 +83,7 @@ exports.getAllExpenses = (req, res) => {
 //search by expenses filter fields
 exports.getExpense = (req, res) => {
 
+
     if (req.session.isAuth) {
         User.findOne({ _id: req.session.userId })
             .populate({
@@ -92,34 +93,54 @@ exports.getExpense = (req, res) => {
             .exec()
             .then(user => {
 
-                //gets array of expenses and performs filter according to user inputs
-                if (req.query.month != "") {
-                    user.expenses = user.expenses.filter(expense => expense.month == req.query.month)
-                }
-                if (req.query.day != "") {
-                    user.expenses = user.expenses.filter(expense => expense.day == req.query.day)
-                }
-                if (req.query.year != "") {
-                    user.expenses = user.expenses.filter(expense => expense.year == req.query.year)
-                }
-                if (req.query.type != "") {
-                    user.expenses = user.expenses.filter(expense => expense.type.name == req.query.type)
-                }
-                if (req.query.amount != 0) {
-                    user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
-                }
-                if (req.query.desc != "") {
-                    user.expenses = user.expenses.filter(expense => expense.description.toLowerCase().includes(req.query.desc.toLowerCase()))
+                if (req.query.ids) {
+                    console.log("array of recurring expenses ids :")
+                    console.log(req.query.ids)
+                    //split req.query.ids into an array of strings separated by commas
+                    let recurringExpenseIds = req.query.ids.split(',');
+
+                    if (recurringExpenseIds.length > 0) {
+                        //find all expenses that have an id in the recurringExpenseIds array
+                        let results = user.expenses = user.expenses.filter(expense => {
+                            return recurringExpenseIds.includes(expense._id.toString());
+                        });
+                        res.send(results);
+                    }
+
                 }
 
-                //most recent expenses will be placed first
-                user.expenses.sort((a, b) => {
-                    let da = new Date(a.year, a.month, a.day),
-                        db = new Date(b.year, b.month, b.day);
-                    return db - da;
-                });
+                else {
+                    //gets array of expenses and performs filter according to user inputs
+                    if (req.query.month != "") {
+                        user.expenses = user.expenses.filter(expense => expense.month == req.query.month)
+                    }
+                    if (req.query.day != "") {
+                        user.expenses = user.expenses.filter(expense => expense.day == req.query.day)
+                    }
+                    if (req.query.year != "") {
+                        user.expenses = user.expenses.filter(expense => expense.year == req.query.year)
+                    }
+                    if (req.query.type != "") {
+                        user.expenses = user.expenses.filter(expense => expense.type.name == req.query.type)
+                    }
+                    if (req.query.amount != 0) {
+                        user.expenses = user.expenses.filter(expense => expense.amount == req.query.amount)
+                    }
+                    if (req.query.desc != "") {
+                        user.expenses = user.expenses.filter(expense => expense.description.toLowerCase().includes(req.query.desc.toLowerCase()))
+                    }
 
-                res.send(user.expenses);
+                    //most recent expenses will be placed first
+                    user.expenses.sort((a, b) => {
+                        let da = new Date(a.year, a.month, a.day),
+                            db = new Date(b.year, b.month, b.day);
+                        return db - da;
+                    });
+
+                    res.send(user.expenses);
+                }
+
+
             })
             .catch(error => {
                 console.log(error)
@@ -563,7 +584,7 @@ exports.updateExpense = (req, res) => {
                                         }
                                     }
                                 }
-                                
+
                             }
 
                         } else {
