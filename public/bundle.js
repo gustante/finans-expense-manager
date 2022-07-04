@@ -18140,11 +18140,12 @@ var ModalError = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-lg-6 col-md-8 col-10"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: showHideModal,
+        className: "".concat(showHideModal),
         style: {
-          position: "absolute",
+          position: "fixed",
           zIndex: "2",
-          width: "100%"
+          width: "90%",
+          right: "30px"
         },
         role: "dialog"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -18305,9 +18306,10 @@ var ModalSuccess = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: showHideModal,
         style: {
-          position: "absolute",
+          position: "fixed",
           zIndex: "2",
-          width: "100%"
+          width: "90%",
+          right: "30px"
         },
         role: "dialog"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
