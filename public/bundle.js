@@ -16999,6 +16999,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           frequency: _this3.state.frequency,
           token: captchaToken
         }).then(function (results) {
+          console.log(results.data);
           $('#expense-created-alert').removeClass("hide");
           $('#expense-created-alert').addClass("view");
           var myTimeout = setTimeout(function () {
@@ -17008,7 +17009,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
           var arrayOfExpenses = _toConsumableArray(_this3.state.expenses); // Add item to it
 
 
-          arrayOfExpenses.unshift(results.data); // Set state
+          arrayOfExpenses.unshift(results.data[0]); //in case of recurring expense creation, add other repeated up until today's data which have been sent from backend\
+
+          if (results.data[0].recurring == true) {
+            for (var i = 1; i < results.data.length; i++) {
+              arrayOfExpenses.unshift(results.data[i]);
+            }
+          } // Set state, reset recurring to no create others by accident for subsequent expense creation
+
 
           _this3.setState({
             expenses: arrayOfExpenses
@@ -17182,6 +17190,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
       $(".dropdown").removeClass("d-inline");
       $(".dropdown").addClass("d-none");
       $("#flexCheckDefault").prop("checked", false);
+      this.setState({
+        recurring: false,
+        frequency: ""
+      });
     }
   }, {
     key: "handleGetFrequency",

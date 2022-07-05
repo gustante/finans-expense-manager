@@ -173,6 +173,7 @@ class Main extends React.Component {
 
                 })
                     .then(results => {
+                        console.log(results.data)
                         $('#expense-created-alert').removeClass("hide")
                         $('#expense-created-alert').addClass("view")
 
@@ -185,9 +186,16 @@ class Main extends React.Component {
                         let arrayOfExpenses = [...this.state.expenses];
 
                         // Add item to it
-                        arrayOfExpenses.unshift(results.data);
+                        arrayOfExpenses.unshift(results.data[0]);
+                        
+                        //in case of recurring expense creation, add other repeated up until today's data which have been sent from backend\
+                        if(results.data[0].recurring == true ){
+                            for(let i = 1; i < results.data.length; i++){
+                                arrayOfExpenses.unshift(results.data[i]);
+                            }
+                        }
 
-                        // Set state
+                        // Set state, reset recurring to no create others by accident for subsequent expense creation
                         this.setState({ expenses: arrayOfExpenses });
                         this.handleUncheckRecurring()
 
@@ -349,6 +357,11 @@ class Main extends React.Component {
         $(".dropdown").removeClass("d-inline")
         $(".dropdown").addClass("d-none")
         $("#flexCheckDefault").prop("checked", false)
+
+        this.setState({
+            recurring: false,
+            frequency: "",
+        })
 
     }
 

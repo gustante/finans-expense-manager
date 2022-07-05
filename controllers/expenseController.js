@@ -213,8 +213,9 @@ exports.postExpense = (req, res) => {
                                 chosenType.sumOfExpenses += expense.amount;
                             }
 
-
+                            
                             //RECURRING EXPENSES CREATION
+                            let arrayOfExpensesInSameMonth = [] //keep track and send later with response
                             if (req.body.recurring == true) {
                                 console.log("recurring")
                                 if (req.body.frequency == "monthly") {
@@ -278,6 +279,7 @@ exports.postExpense = (req, res) => {
                                         //adjusts sumOfExpenses for multiple creations in the same month
                                         if (currentMonth == newExpense.month) {
                                             chosenType.sumOfExpenses += newExpense.amount;
+                                            arrayOfExpensesInSameMonth.push(newExpense)
                                         }
                                         //add one week to todaysDate
                                         todaysDate.setDate(todaysDate.getDate() + 7);
@@ -315,6 +317,7 @@ exports.postExpense = (req, res) => {
                                         //adjusts sumOfExpenses for multiple creations in the same month
                                         if (currentMonth == newExpense.month) {
                                             chosenType.sumOfExpenses += newExpense.amount;
+                                            arrayOfExpensesInSameMonth.push(newExpense)
                                         }
                                         //add one week to todaysDate
                                         todaysDate.setDate(todaysDate.getDate() + 14);
@@ -332,7 +335,10 @@ exports.postExpense = (req, res) => {
                             chosenType.save()
                             expense.save()
                                 .then(savedExpense => {
-                                    res.status(201).send(savedExpense);//status 201
+                                    //add at the beginnig of array so it shows up first
+                                    arrayOfExpensesInSameMonth.unshift(savedExpense)
+
+                                    res.status(201).send(arrayOfExpensesInSameMonth);//status 201
 
 
 
@@ -407,16 +413,16 @@ exports.deleteExpense = (req, res) => {
                 //remove targetExpense from user.expenses
                 user.expenses.pull(targetExpense);
 
-                let arrayOfExpenses = [...user.expenses];
+                let arrayOfExpensesInSameMonth = [...user.expenses];
 
                 //delete all recurring expenses from user.expenses if req.query.option says so
                 if (req.query.option == "all" && targetExpense.recurring == true) {
-                    for (let i in arrayOfExpenses) {
+                    for (let i in arrayOfExpensesInSameMonth) {
 
                         //delete all future recuring expenses
-                        if (arrayOfExpenses[i].description == targetExpense.description && ((arrayOfExpenses[i].day > targetExpense.day && arrayOfExpenses[i].month == targetExpense.month) || arrayOfExpenses[i].month > targetExpense.month || arrayOfExpenses[i].year > targetExpense.year)) {
+                        if (arrayOfExpensesInSameMonth[i].description == targetExpense.description && ((arrayOfExpensesInSameMonth[i].day > targetExpense.day && arrayOfExpensesInSameMonth[i].month == targetExpense.month) || arrayOfExpensesInSameMonth[i].month > targetExpense.month || arrayOfExpensesInSameMonth[i].year > targetExpense.year)) {
                             //filter out user.expenses[i] from user.expenses
-                            user.expenses = user.expenses.filter(expense => expense._id != arrayOfExpenses[i]._id);
+                            user.expenses = user.expenses.filter(expense => expense._id != arrayOfExpensesInSameMonth[i]._id);
                         }
                     }
 
