@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Form extends React.Component {
-    
+
 
     componentDidMount() {
         //set arrow keys accessibility with jquery
@@ -193,24 +193,19 @@ class Form extends React.Component {
                             </div>
 
                             <div className="row d-flex ">
-                                <div className="p-3 ml-4">
+                                <div className="p-3 ml-4 mt-2">
                                     <input className="form-check-input" type="checkbox" id="flexCheckDefault" onClick={this.props.handleCheckRecurring} name="recurring" />
                                     <label className="form-check-label" for="flexCheckDefault">
                                         Recurring
                                     </label>
                                 </div>
 
-                                <div className="dropdown d-none p-3">
-                                    <button className="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                        Frequency
-                                    </button>
-                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <button type="button" onClick={this.props.handleGetFrequency} value="weekly" name="weekly" className="dropdown-item">Weekly</button>
-
-                                        <button type="button" onClick={this.props.handleGetFrequency} value="bi-weekly" name="bi-weekly" className="dropdown-item">Bi-weekly</button>
-
-                                        <button type="button" onClick={this.props.handleGetFrequency} value="monthly" name="monthly" className="dropdown-item">Monthly</button>
-                                    </div>
+                                <div className="dropdown d-none p-3 mt-2" onChange={this.props.handleGetFrequency}>
+                                    <select id="type" className="form-control" name="type" >
+                                        <option value="weekly" >Weekly</option>
+                                        <option value="bi-weekly" >Bi-weekly</option>
+                                        <option value="monthly" >Monthly</option>
+                                    </select> 
                                 </div>
                             </div>
 

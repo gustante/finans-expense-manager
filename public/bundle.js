@@ -16323,7 +16323,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row d-flex "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "p-3 ml-4"
+        className: "p-3 ml-4 mt-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "form-check-input",
         type: "checkbox",
@@ -16334,34 +16334,18 @@ var Form = /*#__PURE__*/function (_React$Component) {
         className: "form-check-label",
         "for": "flexCheckDefault"
       }, "Recurring")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "dropdown d-none p-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "btn btn-sm btn-secondary dropdown-toggle",
-        type: "button",
-        id: "dropdownMenuButton",
-        "data-toggle": "dropdown",
-        "aria-expanded": "false"
-      }, "Frequency"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "dropdown-menu",
-        "aria-labelledby": "dropdownMenuButton"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "button",
-        onClick: this.props.handleGetFrequency,
-        value: "weekly",
-        name: "weekly",
-        className: "dropdown-item"
-      }, "Weekly"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "button",
-        onClick: this.props.handleGetFrequency,
-        value: "bi-weekly",
-        name: "bi-weekly",
-        className: "dropdown-item"
-      }, "Bi-weekly"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "button",
-        onClick: this.props.handleGetFrequency,
-        value: "monthly",
-        name: "monthly",
-        className: "dropdown-item"
+        className: "dropdown d-none p-3 mt-2",
+        onChange: this.props.handleGetFrequency
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        id: "type",
+        className: "form-control",
+        name: "type"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "weekly"
+      }, "Weekly"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "bi-weekly"
+      }, "Bi-weekly"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "monthly"
       }, "Monthly")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row p-2 d-flex flex-grow"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -17170,8 +17154,11 @@ var Main = /*#__PURE__*/function (_React$Component) {
     key: "handleCheckRecurring",
     value: function handleCheckRecurring(e) {
       this.setState({
-        recurring: e.target.checked
+        recurring: e.target.checked,
+        frequency: "weekly" //default frequency is weekly, first item on select 
+
       });
+      $(".dropdown select").val("weekly");
 
       if (e.target.checked) {
         $(".dropdown").removeClass("d-none");

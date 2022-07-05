@@ -334,8 +334,11 @@ class Main extends React.Component {
 
     handleCheckRecurring(e) {
         this.setState({
-            recurring: e.target.checked
+            recurring: e.target.checked,
+            frequency: "weekly",//default frequency is weekly, first item on select 
         })
+
+        $(".dropdown select").val("weekly")
 
         if (e.target.checked) {
             $(".dropdown").removeClass("d-none")
