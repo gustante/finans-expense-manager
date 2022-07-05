@@ -37,7 +37,6 @@ exports.updateSumOfExpenses = (req, res) => {
             })
             .exec()
             .then(user => {
-                console.log("received request to get all types and update sumOfExpenses")
                 //to update sumOfExpenses of types
                 //get current month
                 let currentMonth = new Date().getMonth() + 1;

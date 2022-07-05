@@ -16999,7 +16999,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
           frequency: _this3.state.frequency,
           token: captchaToken
         }).then(function (results) {
-          console.log(results.data);
           $('#expense-created-alert').removeClass("hide");
           $('#expense-created-alert').addClass("view");
           var myTimeout = setTimeout(function () {
@@ -17009,7 +17008,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           var arrayOfExpenses = _toConsumableArray(_this3.state.expenses); // Add item to it
 
 
-          arrayOfExpenses.unshift(results.data[0]); //in case of recurring expense creation, add other repeated up until today's data which have been sent from backend\
+          arrayOfExpenses.unshift(results.data[0]); //in case of recurring expense creation, add other repeated up until today's data which have been sent from backend
 
           if (results.data[0].recurring == true) {
             for (var i = 1; i < results.data.length; i++) {
@@ -17089,8 +17088,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
             typeBudget: ""
           });
 
-          $("div .collapse").removeClass("show");
-          console.log(_this4.state.typeDropDown); //Records type creation event
+          $("div .collapse").removeClass("show"); //Records type creation event
 
           react_ga__WEBPACK_IMPORTED_MODULE_9__.default.event({
             category: "Type",
@@ -17129,7 +17127,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount)).then(function (results) {
         console.log("received response from server");
         var arrayOfExpenses = results.data;
-        console.log(results.data);
 
         _this5.setState({
           expenses: arrayOfExpenses
@@ -17208,7 +17205,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
     key: "handleConfirmDelete",
     value: function handleConfirmDelete(expenseId, e) {
       e.preventDefault();
-      console.log("attempting to delete a recurring expense");
       this.setState({
         Message: ["This is a recurring expense. Do you want to delete all future expenses as well?"],
         showModalError: true,
@@ -17219,14 +17215,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleDeleteAllRecurring",
     value: function handleDeleteAllRecurring(e) {
-      console.log("deleting all recurring expenses");
       this.handleDelete(this.state.expenseToBeDeleted, e, "all");
       this.handleCloseError();
     }
   }, {
     key: "handleDeleteJustOne",
     value: function handleDeleteJustOne(e) {
-      console.log("deleting just one recurring expense");
       this.handleDelete(this.state.expenseToBeDeleted, e, "one");
       this.handleCloseError();
     }
@@ -17234,7 +17228,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
     key: "handleConfirmEdit",
     value: function handleConfirmEdit(expenseId, e) {
       e.preventDefault();
-      console.log("attempting to edit a recurring expense");
       this.setState({
         Message: ["This is a recurring expense. Do you want to edit all future expenses as well?"],
         showModalError: true,
@@ -17245,14 +17238,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleEditAllRecurring",
     value: function handleEditAllRecurring(e) {
-      console.log("editing all recurring expenses");
       this.handleSaveEditChanges(this.state.expenseToBeEdited, e, "all");
       this.handleCloseError();
     }
   }, {
     key: "handleEditJustOne",
     value: function handleEditJustOne(e) {
-      console.log("editing just one recurring expense");
       this.handleSaveEditChanges(this.state.expenseToBeEdited, e, "one");
       this.handleCloseError();
     } //deletes an expense based on id of the expense clicked
@@ -17441,7 +17432,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var newType = this.state.typeDropDown.find(function (type) {
         return type.name == _this8.state.newType;
       });
-      console.log("editing" + expenseId + " " + option);
       axios__WEBPACK_IMPORTED_MODULE_8___default().put('/api/v1.0/expense', {
         expenseId: expenseId,
         newYear: splitDate[0],
@@ -17476,13 +17466,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
         _this8.handleStopEditing(expenseId);
 
         if (option && option == 'all') {
-          console.log("updated all recurring ");
-
           _this8.handleUpdateAllRecurring();
         }
       })["catch"](function (error) {
-        console.log(error.response);
-
         if (error.response.data.status == 401) {
           _this8.setState({
             displayLoginButton: true
@@ -17562,9 +17548,8 @@ var Main = /*#__PURE__*/function (_React$Component) {
         return expense._id;
       });
       axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense?ids=".concat(recurringExpensesIds)).then(function (results) {
-        var arrayOfExpenses = _toConsumableArray(_this10.state.expenses);
+        var arrayOfExpenses = _toConsumableArray(_this10.state.expenses); //replace all recurring expenses in arrayOfExpenses expenses with the ones from the server
 
-        console.log(arrayOfExpenses); //replace all recurring expenses in arrayOfExpenses expenses with the ones from the server
 
         for (var i in arrayOfExpenses) {
           for (var j in results.data) {
@@ -17573,9 +17558,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
             }
           }
         }
-
-        console.log("array of expenses after is ");
-        console.log(arrayOfExpenses);
 
         _this10.setState({
           expenses: arrayOfExpenses
@@ -17609,7 +17591,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
     key: "handleGetTodaysDate",
     value: function handleGetTodaysDate(e) {
       e.preventDefault();
-      console.log("editing today's date");
       this.setState({
         month: current.getMonth() + 1,
         day: current.getDate(),

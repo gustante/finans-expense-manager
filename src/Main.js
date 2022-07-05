@@ -173,7 +173,6 @@ class Main extends React.Component {
 
                 })
                     .then(results => {
-                        console.log(results.data)
                         $('#expense-created-alert').removeClass("hide")
                         $('#expense-created-alert').addClass("view")
 
@@ -188,7 +187,7 @@ class Main extends React.Component {
                         // Add item to it
                         arrayOfExpenses.unshift(results.data[0]);
                         
-                        //in case of recurring expense creation, add other repeated up until today's data which have been sent from backend\
+                        //in case of recurring expense creation, add other repeated up until today's data which have been sent from backend
                         if(results.data[0].recurring == true ){
                             for(let i = 1; i < results.data.length; i++){
                                 arrayOfExpenses.unshift(results.data[i]);
@@ -198,7 +197,6 @@ class Main extends React.Component {
                         // Set state, reset recurring to no create others by accident for subsequent expense creation
                         this.setState({ expenses: arrayOfExpenses });
                         this.handleUncheckRecurring()
-
 
                         //Records expense creation event
                         ReactGA.event({
@@ -261,9 +259,6 @@ class Main extends React.Component {
 
                         $("div .collapse").removeClass("show")
 
-
-                        console.log(this.state.typeDropDown)
-
                         //Records type creation event
                         ReactGA.event({
                             category: "Type",
@@ -302,7 +297,6 @@ class Main extends React.Component {
             .then(results => {
                 console.log("received response from server")
                 let arrayOfExpenses = results.data
-                console.log(results.data)
 
                 this.setState({ expenses: arrayOfExpenses });//update expenses state with the data obtained from database. this will remount ExpenseTable with records that matche the filters
                 //Records expense filter event
@@ -375,7 +369,6 @@ class Main extends React.Component {
 
     handleConfirmDelete(expenseId, e) {
         e.preventDefault()
-        console.log("attempting to delete a recurring expense")
         this.setState({
             Message: ["This is a recurring expense. Do you want to delete all future expenses as well?"],
             showModalError: true,
@@ -386,20 +379,17 @@ class Main extends React.Component {
     }
 
     handleDeleteAllRecurring(e) {
-        console.log("deleting all recurring expenses")
         this.handleDelete(this.state.expenseToBeDeleted, e, "all")
         this.handleCloseError()
     }
 
     handleDeleteJustOne(e) {
-        console.log("deleting just one recurring expense")
         this.handleDelete(this.state.expenseToBeDeleted, e, "one")
         this.handleCloseError()
     }
 
     handleConfirmEdit(expenseId, e) {
         e.preventDefault()
-        console.log("attempting to edit a recurring expense")
         this.setState({
             Message: ["This is a recurring expense. Do you want to edit all future expenses as well?"],
             showModalError: true,
@@ -409,13 +399,11 @@ class Main extends React.Component {
     }
 
     handleEditAllRecurring(e) {
-        console.log("editing all recurring expenses")
         this.handleSaveEditChanges(this.state.expenseToBeEdited, e, "all")
         this.handleCloseError()
     }
 
     handleEditJustOne(e) {
-        console.log("editing just one recurring expense")
         this.handleSaveEditChanges(this.state.expenseToBeEdited, e, "one")
         this.handleCloseError()
     }
@@ -588,7 +576,6 @@ class Main extends React.Component {
     handleSaveEditChanges(expenseId, e, option) {
         let splitDate = this.state.newDate.split("-")
         let newType = this.state.typeDropDown.find(type => type.name == this.state.newType);
-        console.log("editing" + expenseId + " " + option)
 
         axios.put('/api/v1.0/expense', { expenseId: expenseId, newYear: splitDate[0], newMonth: splitDate[1], newDay: splitDate[2], newTypeId: newType, newDesc: this.state.newDesc, newAmount: this.state.newAmount, option: option })
             .then(results => {
@@ -619,14 +606,12 @@ class Main extends React.Component {
                 this.handleStopEditing(expenseId)
 
                 if (option && option == 'all') {
-                    console.log("updated all recurring ")
                     this.handleUpdateAllRecurring()
                 }
 
 
             })
             .catch(error => {
-                console.log(error.response)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -697,7 +682,6 @@ class Main extends React.Component {
         axios.get(`/api/v1.0/expense?ids=${recurringExpensesIds}`)
             .then(results => {
                 let arrayOfExpenses = [...this.state.expenses];
-                console.log(arrayOfExpenses)
                 //replace all recurring expenses in arrayOfExpenses expenses with the ones from the server
                 for (let i in arrayOfExpenses) {
                     for (let j in results.data) {
@@ -706,9 +690,6 @@ class Main extends React.Component {
                         }
                     }
                 }
-
-                console.log("array of expenses after is ")
-                console.log(arrayOfExpenses)
 
                 this.setState({ expenses: arrayOfExpenses });
 
@@ -741,7 +722,6 @@ class Main extends React.Component {
 
     handleGetTodaysDate(e) {
         e.preventDefault();
-        console.log("editing today's date")
         this.setState({
             month: current.getMonth() + 1,
             day: current.getDate(),

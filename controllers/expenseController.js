@@ -94,8 +94,6 @@ exports.getExpense = (req, res) => {
             .then(user => {
 
                 if (req.query.ids) {
-                    console.log("array of recurring expenses ids :")
-                    console.log(req.query.ids)
                     //split req.query.ids into an array of strings separated by commas
                     let recurringExpenseIds = req.query.ids.split(',');
 
@@ -217,18 +215,14 @@ exports.postExpense = (req, res) => {
                             //RECURRING EXPENSES CREATION
                             let arrayOfExpensesInSameMonth = [] //keep track and send later with response
                             if (req.body.recurring == true) {
-                                console.log("recurring")
                                 if (req.body.frequency == "monthly") {
-                                    console.log("monthly")
                                     //create monthly expenses
                                     //create date object using month and year passed
                                     let todaysDate = new Date(req.body.year, req.body.month, req.body.day);
                                     var todaysYear = todaysDate.getFullYear();
                                     //count how many months until the end of the year
-                                    let numberOfExpensesToBeCreatedTillTheEndOfTheYear = 0;
                                     //create expenses until the end of the year
                                     while (todaysDate.getFullYear() <= todaysYear) {
-                                        numberOfExpensesToBeCreatedTillTheEndOfTheYear++;
 
                                         let newExpense = new Expense({
                                             month: todaysDate.getMonth() + 1,
@@ -247,9 +241,7 @@ exports.postExpense = (req, res) => {
                                         todaysDate.setMonth(todaysDate.getMonth() + 1);
 
                                     }
-                                    console.log(numberOfExpensesToBeCreatedTillTheEndOfTheYear + " expenses created")
                                 } else if (req.body.frequency == "weekly") {
-                                    console.log("weekly")
                                     //create weekly expenses
                                     //create date object using month and year passed
                                     let todaysDate = new Date(req.body.year, req.body.month - 1, req.body.day);
@@ -257,10 +249,8 @@ exports.postExpense = (req, res) => {
                                     todaysDate.setDate(todaysDate.getDate() + 7);
                                     var todaysYear = todaysDate.getFullYear();
                                     //count how many weeks until the end of the year
-                                    let numberOfExpensesToBeCreatedTillTheEndOfTheYear = 0;
                                     //create expenses until the end of the year
                                     while (todaysDate.getFullYear() <= todaysYear) {
-                                        numberOfExpensesToBeCreatedTillTheEndOfTheYear++;
                                         //create expenses until the end of the year
 
                                         let newExpense = new Expense({
@@ -285,9 +275,7 @@ exports.postExpense = (req, res) => {
                                         todaysDate.setDate(todaysDate.getDate() + 7);
 
                                     }
-                                    console.log(numberOfExpensesToBeCreatedTillTheEndOfTheYear + " expenses created")
                                 } else if (req.body.frequency == "bi-weekly") {
-                                    console.log("bi-weekly")
                                     //create daily expenses
                                     //create date object using month and year passed
                                     let todaysDate = new Date(req.body.year, req.body.month - 1, req.body.day);
@@ -295,10 +283,8 @@ exports.postExpense = (req, res) => {
                                     todaysDate.setDate(todaysDate.getDate() + 14);
                                     var todaysYear = todaysDate.getFullYear();
                                     //count how many expenses until the end of the year
-                                    let numberOfExpensesToBeCreatedTillTheEndOfTheYear = 0;
                                     //create expenses until the end of the year
                                     while (todaysDate.getFullYear() <= todaysYear) {
-                                        numberOfExpensesToBeCreatedTillTheEndOfTheYear++;
                                         //create expenses until the end of the year
 
                                         let newExpense = new Expense({
@@ -323,7 +309,6 @@ exports.postExpense = (req, res) => {
                                         todaysDate.setDate(todaysDate.getDate() + 14);
 
                                     }
-                                    console.log(numberOfExpensesToBeCreatedTillTheEndOfTheYear + " expenses created")
                                 }
 
                             }
@@ -345,8 +330,8 @@ exports.postExpense = (req, res) => {
                                     let { budget, sumOfExpenses, name } = savedExpense.type;
                                     //send SMS using twilio if close to exceeding budget
                                     //dont send SMS if expense created is for a different month or there's no budget for type selected or if a phone number is not registered
-                                    if (budget != null && currentMonth == savedExpense.month && user.phoneNumber) {
-                                        console.log("will send text to " + user.phoneNumber && user.phoneNumber != "")
+                                    if (budget != null && currentMonth == savedExpense.month && user.phoneNumber && user.phoneNumber != "") {
+                                        console.log("will send text to " + user.phoneNumber)
                                         if (sumOfExpenses > budget)
                                             smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`, user.phoneNumber)
                                         else if (sumOfExpenses >= budget * 0.7)
@@ -454,7 +439,7 @@ exports.deleteExpense = (req, res) => {
                     })
 
                         .then(results => {
-                            console.log("deleteted many")
+
                         })
                         .catch(error => {
                             console.log(error)
@@ -515,13 +500,6 @@ exports.updateExpense = (req, res) => {
 
 
                     //Otherwise, proceed to updating the expense below
-                    console.log("expense that will be updated is: ")
-                    console.log(targetExpense)
-                    console.log("its type is: ")
-                    console.log(targetExpense.type)
-                    console.log("new type is gonna be: ")
-                    console.log(req.body.newTypeId)
-                    console.log(req.body)
 
                     if (req.body.newYear && req.body.newYear != "" && req.body.newYear != targetExpense.year) {
                         console.log("year will be changed")
@@ -560,7 +538,6 @@ exports.updateExpense = (req, res) => {
                                 updateAll(frequency)
 
                                 async function updateAll(frequency) {
-                                    console.log("frequency is : " + frequency)
                                     //create date object using req.body.newDay, req.body.newMonth, req.body.newYear
                                     let newStartDate = new Date(req.body.newYear, req.body.newMonth - 1, req.body.newDay)
                                     //clone targetExpense
@@ -574,14 +551,9 @@ exports.updateExpense = (req, res) => {
                                     newStartDate.setDate(newStartDate.getDate() + frequency)
 
                                     console.log("called updateAll")
-                                    console.log("target expense clone is : ")
-                                    console.log(targetExpenseClone)
                                     for (let i in user.expenses) {
                                         //
                                         if (user.expenses[i].description == targetExpenseClone.description && ((user.expenses[i].day > targetExpenseClone.day && user.expenses[i].month == targetExpenseClone.month) || user.expenses[i].month > targetExpenseClone.month || user.expenses[i].year > targetExpenseClone.year) && user.expenses[i]._id != targetExpenseClone._id) {
-
-                                            console.log("updating expense: ")
-                                            console.log(user.expenses[i])
 
                                             await Expense.findOneAndUpdate({ _id: user.expenses[i]._id }, { day: newStartDate.getDate(), month: newStartDate.getMonth() + 1, year: newStartDate.getFullYear() })
 
