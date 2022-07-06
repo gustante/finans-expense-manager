@@ -293,7 +293,7 @@ class Main extends React.Component {
     //search expenses based on user input. Send values from inputs using query
     handleExpenseSearch(event) {
         event.preventDefault();
-        axios.get(`/api/v1.0/expense?month=${this.state.month}&day=${this.state.day}&year=${this.state.year}&type=${this.state.type}&desc=${this.state.desc}&amount=${this.state.amount}`)
+        axios.get(`/api/v1.0/expense?month=${this.state.month}&day=${this.state.day}&year=${this.state.year}&type=${this.state.type}&desc=${this.state.desc}&amount=${this.state.amount}&recurring=${this.state.recurring}&frequency=${this.state.frequency}`)
             .then(results => {
                 console.log("received response from server")
                 let arrayOfExpenses = results.data
@@ -335,10 +335,7 @@ class Main extends React.Component {
     handleCheckRecurring(e) {
         this.setState({
             recurring: e.target.checked,
-            frequency: "weekly",//default frequency is weekly, first item on select 
         })
-
-        $(".dropdown select").val("weekly")
 
         if (e.target.checked) {
             $(".dropdown").removeClass("d-none")

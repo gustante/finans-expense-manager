@@ -202,10 +202,11 @@ class Form extends React.Component {
 
                                 <div className="dropdown d-none p-3 mt-2" onChange={this.props.handleGetFrequency}>
                                     <select id="type" className="form-control" name="type" >
+                                        <option>Select frequency</option>
                                         <option value="weekly" >Weekly</option>
                                         <option value="bi-weekly" >Bi-weekly</option>
                                         <option value="monthly" >Monthly</option>
-                                    </select> 
+                                    </select>
                                 </div>
                             </div>
 
