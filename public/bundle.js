@@ -14933,7 +14933,11 @@ var App = /*#__PURE__*/function (_React$Component) {
       this.setState({
         oldPassword: "",
         newPassword: "",
-        repeatNewPassword: ""
+        repeatNewPassword: "",
+        newFirstName: "",
+        newLastName: "",
+        newPhoneNumber: "",
+        newEmail: ""
       });
     }
   }, {

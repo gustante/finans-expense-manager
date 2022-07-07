@@ -421,6 +421,10 @@ class App extends React.Component {
                 oldPassword: "",
                 newPassword: "",
                 repeatNewPassword: "",
+                newFirstName: "",
+                newLastName: "",
+                newPhoneNumber: "",
+                newEmail: "",
         });
     }
 
