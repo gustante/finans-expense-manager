@@ -16340,7 +16340,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
         id: "type",
         className: "form-control",
         name: "type"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", null, "Select frequency"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: "weekly"
       }, "Weekly"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: "bi-weekly"
@@ -17108,7 +17108,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       var _this5 = this;
 
       event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount)).then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense?month=".concat(this.state.month, "&day=").concat(this.state.day, "&year=").concat(this.state.year, "&type=").concat(this.state.type, "&desc=").concat(this.state.desc, "&amount=").concat(this.state.amount, "&recurring=").concat(this.state.recurring, "&frequency=").concat(this.state.frequency)).then(function (results) {
         console.log("received response from server");
         var arrayOfExpenses = results.data;
 
@@ -17155,10 +17155,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function handleCheckRecurring(e) {
       this.setState({
         recurring: e.target.checked,
-        frequency: "weekly" //default frequency is weekly, first item on select 
-
+        frequency: "selectFrequency"
       });
-      $(".dropdown select").val("weekly");
+      $(".dropdown select").val("Select frequency");
 
       if (e.target.checked) {
         $(".dropdown").removeClass("d-none");
@@ -17490,6 +17489,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         typeName: "",
         typeBudget: ""
       });
+      this.handleUncheckRecurring();
     }
   }, {
     key: "handleLoadMore",

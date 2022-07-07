@@ -108,6 +108,7 @@ exports.getExpense = (req, res) => {
                 }
 
                 else {
+                    console.log(req.query)
                     //gets array of expenses and performs filter according to user inputs
                     if (req.query.month != "") {
                         user.expenses = user.expenses.filter(expense => expense.month == req.query.month)
@@ -126,7 +127,16 @@ exports.getExpense = (req, res) => {
                     }
                     if (req.query.desc != "") {
                         user.expenses = user.expenses.filter(expense => expense.description.toLowerCase().includes(req.query.desc.toLowerCase()))
-                    }
+                    } if (req.query.recurring == "true") {
+                        user.expenses = user.expenses.filter(expense => expense.recurring == true)
+                        if(req.query.frequency == 'weekly'){
+                            user.expenses = user.expenses.filter(expense => expense.frequency == 'weekly')
+                        } else if (req.query.frequency == 'monthly'){
+                            user.expenses = user.expenses.filter(expense => expense.frequency == 'monthly')
+                        } else if (req.query.frequency == 'bi-weekly'){
+                            user.expenses = user.expenses.filter(expense => expense.frequency == 'bi-weekly')
+                        }
+                    } 
 
                     //most recent expenses will be placed first
                     user.expenses.sort((a, b) => {
@@ -157,11 +167,6 @@ exports.getExpense = (req, res) => {
 exports.postExpense = (req, res) => {
     if (req.session.isAuth) {
         const errors = (validationResult(req)).array();
-
-        if (req.body.recurring == true && req.body.frequency == '') {
-            errors.push({ msg: 'Please select a frequency for recurring expenses' })
-        }
-
 
         //verify token agaisnt reCAPTCHA service
         axios.post('https://www.google.com/recaptcha/api/siteverify',

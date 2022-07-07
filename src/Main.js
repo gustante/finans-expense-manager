@@ -335,7 +335,9 @@ class Main extends React.Component {
     handleCheckRecurring(e) {
         this.setState({
             recurring: e.target.checked,
+            frequency: "selectFrequency",
         })
+        $(".dropdown select").val("Select frequency")
 
         if (e.target.checked) {
             $(".dropdown").removeClass("d-none")
@@ -644,6 +646,7 @@ class Main extends React.Component {
             typeName: "",
             typeBudget: ""
         });
+        this.handleUncheckRecurring()
 
     }
 

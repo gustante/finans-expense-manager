@@ -14,6 +14,8 @@ exports.expenseValidator = [
 
     check("amount").escape().isNumeric().withMessage("Please enter a valid amount. Must be a number. Must not be empty"),
 
+    check("frequency").optional({checkFalsy: true}).escape().trim().isIn(['weekly','monthly','bi-weekly']).withMessage("Please select a frequency for recurring expenses"),
+
 ]
 
 exports.typeValidator = [
