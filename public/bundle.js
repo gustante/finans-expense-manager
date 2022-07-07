@@ -14529,6 +14529,10 @@ var App = /*#__PURE__*/function (_React$Component) {
       email: "",
       password: "",
       phoneNumber: "",
+      newFirstName: "",
+      newLastName: "",
+      newEmail: "",
+      newPhoneNumber: "",
       oldPassword: "",
       newPassword: "",
       repeatNewPassword: "",
@@ -14942,10 +14946,10 @@ var App = /*#__PURE__*/function (_React$Component) {
       console.log("send to backend: ");
       console.log(this.state);
       axios__WEBPACK_IMPORTED_MODULE_17___default().put('/api/v1.0/user/updateUser', {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        phoneNumber: this.state.phoneNumber.replaceAll('-', ''),
+        firstName: this.state.newFirstName,
+        lastName: this.state.newLastName,
+        email: this.state.newEmail,
+        phoneNumber: this.state.newPhoneNumber.replaceAll('-', ''),
         oldPassword: this.state.oldPassword,
         newPassword: this.state.newPassword,
         repeatNewPassword: this.state.repeatNewPassword
@@ -18930,7 +18934,6 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props$userInfo = this.props.userInfo,
           isLoggedIn = _this$props$userInfo.isLoggedIn,
-          _id = _this$props$userInfo._id,
           firstName = _this$props$userInfo.firstName,
           lastName = _this$props$userInfo.lastName,
           email = _this$props$userInfo.email,
@@ -18963,16 +18966,16 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         className: "d-inline userInfo"
       }, firstName, " ", lastName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        name: "firstName",
+        name: "newFirstName",
         className: "hide form-control col-12 m-1",
-        value: this.props.userInfo.firstName,
+        value: this.props.userInfo.newFirstName,
         placeholder: "First Name",
         onChange: this.props.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        name: "lastName",
+        name: "newLastName",
         className: "hide form-control col-12 m-1",
-        value: this.props.userInfo.lastName,
+        value: this.props.userInfo.newLastName,
         placeholder: "Last Name",
         onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -18985,9 +18988,9 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         className: "d-inline userInfo"
       }, email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "email",
-        name: "email",
+        name: "newEmail",
         className: "hide form-control col-12 m-1",
-        value: this.props.userInfo.email,
+        value: this.props.userInfo.newEmail,
         placeholder: "abc@g.com",
         onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -19000,9 +19003,9 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         className: "d-inline userInfo"
       }, phoneNumber)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        name: "phoneNumber",
+        name: "newPhoneNumber",
         className: "hide form-control col-12 m-1",
-        value: this.props.userInfo.phoneNumber,
+        value: this.props.userInfo.newPhoneNumber,
         pattern: "[0-9]{3}[0-9]{3}[0-9]{4}",
         placeholder: "10 digits",
         onChange: this.props.handleChange
@@ -19014,7 +19017,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         className: "font-weight-bold"
       }, "Password:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "d-inline userInfo"
-      }, "******")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, " ******")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
         name: "oldPassword",
         className: "hide form-control col-12 m-1",

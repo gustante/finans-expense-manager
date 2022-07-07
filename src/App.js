@@ -31,6 +31,10 @@ class App extends React.Component {
             email: "",
             password: "",
             phoneNumber: "",
+            newFirstName: "",
+            newLastName: "",
+            newEmail: "",
+            newPhoneNumber: "",
             oldPassword: "",
             newPassword: "",
             repeatNewPassword: "",
@@ -426,10 +430,10 @@ class App extends React.Component {
         console.log("send to backend: ")
         console.log(this.state)
         axios.put('/api/v1.0/user/updateUser', {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            phoneNumber:this.state.phoneNumber.replaceAll('-', ''),
+            firstName: this.state.newFirstName,
+            lastName: this.state.newLastName,
+            email: this.state.newEmail,
+            phoneNumber:this.state.newPhoneNumber.replaceAll('-', ''),
             oldPassword: this.state.oldPassword,
             newPassword: this.state.newPassword,
             repeatNewPassword: this.state.repeatNewPassword })

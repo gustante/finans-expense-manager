@@ -70,7 +70,7 @@ class UserInfo extends React.Component {
     }
 
     render() {
-        const { isLoggedIn, _id, firstName, lastName, email, phoneNumber } = this.props.userInfo;
+        const { isLoggedIn, firstName, lastName, email, phoneNumber } = this.props.userInfo;
 
         return (
             <>
@@ -87,8 +87,8 @@ class UserInfo extends React.Component {
                                     <div className="">
                                         <span className="font-weight-bold">Name:</span> <span className='d-inline userInfo'>{firstName} {lastName}</span>
                                     </div>
-                                    <input type="text" name="firstName" className="hide form-control col-12 m-1" value={this.props.userInfo.firstName} placeholder="First Name" onChange={this.props.handleChange}/>
-                                    <input type="text" name="lastName" className="hide form-control col-12 m-1" value={this.props.userInfo.lastName} placeholder="Last Name" onChange={this.props.handleChange}/>
+                                    <input type="text" name="newFirstName" className="hide form-control col-12 m-1" value={this.props.userInfo.newFirstName} placeholder="First Name" onChange={this.props.handleChange}/>
+                                    <input type="text" name="newLastName" className="hide form-control col-12 m-1" value={this.props.userInfo.newLastName} placeholder="Last Name" onChange={this.props.handleChange}/>
 
                                 </li>
 
@@ -96,7 +96,7 @@ class UserInfo extends React.Component {
                                     <div className="">
                                         <span  className="font-weight-bold">Email:</span> <span className='d-inline userInfo'>{email}</span>
                                     </div>
-                                    <input type="email" name="email" className="hide form-control col-12 m-1" value={this.props.userInfo.email} placeholder="abc@g.com" onChange={this.props.handleChange}/>
+                                    <input type="email" name="newEmail" className="hide form-control col-12 m-1" value={this.props.userInfo.newEmail} placeholder="abc@g.com" onChange={this.props.handleChange}/>
 
                                 </li>
 
@@ -104,13 +104,13 @@ class UserInfo extends React.Component {
                                     <div className="">
                                         <span className="font-weight-bold">Phone number:</span> <span className='d-inline userInfo'>{phoneNumber}</span>
                                     </div>
-                                    <input type="text" name="phoneNumber" className="hide form-control col-12 m-1" value={this.props.userInfo.phoneNumber} pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="10 digits" onChange={this.props.handleChange}/>
+                                    <input type="text" name="newPhoneNumber" className="hide form-control col-12 m-1" value={this.props.userInfo.newPhoneNumber} pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="10 digits" onChange={this.props.handleChange}/>
 
                                 </li>
 
                                 <li className="list-group-item">
                                     <div className="">
-                                        <span className="font-weight-bold">Password:</span><span className='d-inline userInfo'>******</span> 
+                                        <span className="font-weight-bold">Password:</span><span className='d-inline userInfo'> ******</span> 
                                     </div>
                                     <input type="password" name="oldPassword" className="hide form-control col-12 m-1" value={this.props.userInfo.oldPassword} placeholder="Old password" onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
                                     <input type="password" name="newPassword" className="hide form-control col-12 m-1 " value={this.props.userInfo.newPassword} placeholder="New Password" onChange={this.props.handleChange} readonly="" onFocus={this.removeReadonly}/>
