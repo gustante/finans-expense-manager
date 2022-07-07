@@ -18969,14 +18969,14 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         name: "newFirstName",
         className: "hide form-control col-12 m-1",
         value: this.props.userInfo.newFirstName,
-        placeholder: "First Name",
+        placeholder: "New first name",
         onChange: this.props.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         name: "newLastName",
         className: "hide form-control col-12 m-1",
         value: this.props.userInfo.newLastName,
-        placeholder: "Last Name",
+        placeholder: "New last name",
         onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "list-group-item"
@@ -18991,7 +18991,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         name: "newEmail",
         className: "hide form-control col-12 m-1",
         value: this.props.userInfo.newEmail,
-        placeholder: "abc@g.com",
+        placeholder: "New email (abc@g.com)",
         onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "list-group-item"
@@ -19007,7 +19007,7 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
         className: "hide form-control col-12 m-1",
         value: this.props.userInfo.newPhoneNumber,
         pattern: "[0-9]{3}[0-9]{3}[0-9]{4}",
-        placeholder: "10 digits",
+        placeholder: "Enter 10 digits number",
         onChange: this.props.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "list-group-item"

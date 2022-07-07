@@ -87,8 +87,8 @@ class UserInfo extends React.Component {
                                     <div className="">
                                         <span className="font-weight-bold">Name:</span> <span className='d-inline userInfo'>{firstName} {lastName}</span>
                                     </div>
-                                    <input type="text" name="newFirstName" className="hide form-control col-12 m-1" value={this.props.userInfo.newFirstName} placeholder="First Name" onChange={this.props.handleChange}/>
-                                    <input type="text" name="newLastName" className="hide form-control col-12 m-1" value={this.props.userInfo.newLastName} placeholder="Last Name" onChange={this.props.handleChange}/>
+                                    <input type="text" name="newFirstName" className="hide form-control col-12 m-1" value={this.props.userInfo.newFirstName} placeholder="New first name" onChange={this.props.handleChange}/>
+                                    <input type="text" name="newLastName" className="hide form-control col-12 m-1" value={this.props.userInfo.newLastName} placeholder="New last name" onChange={this.props.handleChange}/>
 
                                 </li>
 
@@ -96,7 +96,7 @@ class UserInfo extends React.Component {
                                     <div className="">
                                         <span  className="font-weight-bold">Email:</span> <span className='d-inline userInfo'>{email}</span>
                                     </div>
-                                    <input type="email" name="newEmail" className="hide form-control col-12 m-1" value={this.props.userInfo.newEmail} placeholder="abc@g.com" onChange={this.props.handleChange}/>
+                                    <input type="email" name="newEmail" className="hide form-control col-12 m-1" value={this.props.userInfo.newEmail} placeholder="New email (abc@g.com)" onChange={this.props.handleChange}/>
 
                                 </li>
 
@@ -104,7 +104,7 @@ class UserInfo extends React.Component {
                                     <div className="">
                                         <span className="font-weight-bold">Phone number:</span> <span className='d-inline userInfo'>{phoneNumber}</span>
                                     </div>
-                                    <input type="text" name="newPhoneNumber" className="hide form-control col-12 m-1" value={this.props.userInfo.newPhoneNumber} pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="10 digits" onChange={this.props.handleChange}/>
+                                    <input type="text" name="newPhoneNumber" className="hide form-control col-12 m-1" value={this.props.userInfo.newPhoneNumber} pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="Enter 10 digits number" onChange={this.props.handleChange}/>
 
                                 </li>
 
