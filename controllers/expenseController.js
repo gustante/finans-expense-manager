@@ -6,10 +6,12 @@ const axios = require('axios');
 const querystring = require('querystring');
 var twilio = require('twilio');
 const { smsAlert } = require('../twilioSMS.js');
+const { emailAlert } = require('../nodeMailer.js');
 const customError = require('../customError.js');
 const e = require('express');
 const { type } = require('os');
 require('dotenv').config();
+
 
 ////gets and array of all expenses
 exports.getAllExpenses = (req, res) => {
@@ -129,14 +131,14 @@ exports.getExpense = (req, res) => {
                         user.expenses = user.expenses.filter(expense => expense.description.toLowerCase().includes(req.query.desc.toLowerCase()))
                     } if (req.query.recurring == "true") {
                         user.expenses = user.expenses.filter(expense => expense.recurring == true)
-                        if(req.query.frequency == 'weekly'){
+                        if (req.query.frequency == 'weekly') {
                             user.expenses = user.expenses.filter(expense => expense.frequency == 'weekly')
-                        } else if (req.query.frequency == 'monthly'){
+                        } else if (req.query.frequency == 'monthly') {
                             user.expenses = user.expenses.filter(expense => expense.frequency == 'monthly')
-                        } else if (req.query.frequency == 'bi-weekly'){
+                        } else if (req.query.frequency == 'bi-weekly') {
                             user.expenses = user.expenses.filter(expense => expense.frequency == 'bi-weekly')
                         }
-                    } 
+                    }
 
                     //most recent expenses will be placed first
                     user.expenses.sort((a, b) => {
@@ -216,7 +218,7 @@ exports.postExpense = (req, res) => {
                                 chosenType.sumOfExpenses += expense.amount;
                             }
 
-                            
+
                             //RECURRING EXPENSES CREATION
                             let arrayOfExpensesInSameMonth = [] //keep track and send later with response
                             if (req.body.recurring == true) {
@@ -330,22 +332,20 @@ exports.postExpense = (req, res) => {
 
                                     res.status(201).send(arrayOfExpensesInSameMonth);//status 201
 
-
-
+                    
                                     let { budget, sumOfExpenses, name } = savedExpense.type;
                                     //send SMS using twilio if close to exceeding budget
                                     //dont send SMS if expense created is for a different month or there's no budget for type selected or if a phone number is not registered
                                     if (budget != null && currentMonth == savedExpense.month && user.phoneNumber && user.phoneNumber != "") {
                                         console.log("will send text to " + user.phoneNumber)
                                         if (sumOfExpenses > budget)
-                                            smsAlert(`You have exceeded your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`, user.phoneNumber)
+                                            emailAlert("Budget Alert", `Dear user,  \n\nThis message is to let you know that you have exceeded your budget for \"${name}\" for this month, the total amount of expenses is currently $${sumOfExpenses.toFixed(2)}, your budget is $${budget} \n\n Sincerely,\n Team Finans`, user.email)
                                         else if (sumOfExpenses >= budget * 0.7)
-                                            smsAlert(`You are about to exceed your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`, user.phoneNumber)
-                                        else if (sumOfExpenses >= budget * 0.5)
-                                            smsAlert(`You have reached half of your budget for ${name}, the total amount of expenses is currently ${sumOfExpenses.toFixed(2)}, your budget is ${budget}`, user.phoneNumber)
+                                            emailAlert("Budget Alert", `Hello there! \n\nThis message is to let you know that you are about to exceed your budget for \"${name}\" for this month, the total amount of expenses is currently $${sumOfExpenses.toFixed(2)}, your budget is $${budget} \n\n Sincerely,\n Team Finans`, user.email)
                                     } else {
                                         console.log("will not send sms")
                                     }
+
 
 
 
