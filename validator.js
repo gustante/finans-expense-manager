@@ -68,3 +68,9 @@ exports.editExpenseValidator = [
     check("newAmount").optional({checkFalsy: true}).escape().isNumeric().withMessage("Please enter a valid amount"),
 ]
 
+exports.contactFormValidator = [
+    check("email").escape().trim().isEmail().withMessage("Please enter a valid email"),
+    check("firstName").escape().trim().isLength({min: 1}).withMessage("Please enter a valid first name"),
+    check("contactUsTextarea").escape().trim().isLength({min: 2}).withMessage("Please enter a valid message"),
+]
+

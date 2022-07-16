@@ -4,7 +4,7 @@ exports.emailAlert = (subject, message, userEmail) => {
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
-        auth: { user: 'finansexpensemanager@gmail.com', pass: process.env.NODEMAILERPASSWORD }
+        auth: { user: process.env.FINANSEMAIL, pass: process.env.NODEMAILERPASSWORD }
     });
     const mailOptions = {
         from: 'Finans',
