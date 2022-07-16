@@ -46,6 +46,8 @@ class App extends React.Component {
             displayLoginButton: false,
             exists: "", //controls google login,
             googleUser: false,
+            nameForContactUs: "",
+            emailForContactUs: "",
             contactUsTextarea: "",
         }
 
@@ -539,17 +541,17 @@ class App extends React.Component {
         console.log("submitting contact form")
         console.log(this.state)
         axios.post('/api/v1.0/submitContactForm', {
-            firstName: this.state.firstName,
-            email: this.state.email,
+            firstName: this.state.nameForContactUs,
+            email: this.state.emailForContactUs,
             contactUsTextarea: this.state.contactUsTextarea
         })
             .then(results => {
 
                 console.log(results.data)
                 this.setState({
-                    showModalSuccess: true, Message: [`Thank you for your feedback, ${this.state.firstName}! \n We'll get back to you soon!`],
-                    firstName: "",
-                    email: "",
+                    showModalSuccess: true, Message: [`Thank you for your feedback, ${this.state.nameForContactUs}! \n We'll get back to you soon!`],
+                    nameForContactUs: "",
+                    emailForContactUs: "",
                     contactUsTextarea: ""
 
                 });

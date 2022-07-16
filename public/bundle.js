@@ -14550,6 +14550,8 @@ var App = /*#__PURE__*/function (_React$Component) {
       exists: "",
       //controls google login,
       googleUser: false,
+      nameForContactUs: "",
+      emailForContactUs: "",
       contactUsTextarea: ""
     };
     _this.handleLogOut = _this.handleLogOut.bind(_assertThisInitialized(_this));
@@ -15065,17 +15067,17 @@ var App = /*#__PURE__*/function (_React$Component) {
       console.log("submitting contact form");
       console.log(this.state);
       axios__WEBPACK_IMPORTED_MODULE_18___default().post('/api/v1.0/submitContactForm', {
-        firstName: this.state.firstName,
-        email: this.state.email,
+        firstName: this.state.nameForContactUs,
+        email: this.state.emailForContactUs,
         contactUsTextarea: this.state.contactUsTextarea
       }).then(function (results) {
         console.log(results.data);
 
         _this10.setState({
           showModalSuccess: true,
-          Message: ["Thank you for your feedback, ".concat(_this10.state.firstName, "! \n We'll get back to you soon!")],
-          firstName: "",
-          email: "",
+          Message: ["Thank you for your feedback, ".concat(_this10.state.nameForContactUs, "! \n We'll get back to you soon!")],
+          nameForContactUs: "",
+          emailForContactUs: "",
           contactUsTextarea: ""
         });
 
@@ -15797,7 +15799,7 @@ var ResetPassword = /*#__PURE__*/function (_React$Component) {
         className: "form-label-group my-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        name: "firstName",
+        name: "nameForContactUs",
         className: "form-control",
         placeholder: "Email address",
         required: true,
@@ -15808,7 +15810,7 @@ var ResetPassword = /*#__PURE__*/function (_React$Component) {
         className: "form-label-group my-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "email",
-        name: "email",
+        name: "emailForContactUs",
         className: "form-control",
         placeholder: "Email address",
         required: true,

@@ -29,12 +29,12 @@ class ResetPassword extends React.Component {
                         </div>
 
                         <div className="form-label-group my-3">
-                            <input type="text" name="firstName" className="form-control" placeholder="Email address" required onChange={this.props.handleChange} />
+                            <input type="text" name="nameForContactUs" className="form-control" placeholder="Email address" required onChange={this.props.handleChange} />
                             <label htmlFor="firstName">Name</label>
                         </div>
 
                         <div className="form-label-group my-3">
-                            <input type="email" name="email" className="form-control" placeholder="Email address" required onChange={this.props.handleChange} />
+                            <input type="email" name="emailForContactUs" className="form-control" placeholder="Email address" required onChange={this.props.handleChange} />
                             <label htmlFor="email">Email address</label>
                         </div>
 
