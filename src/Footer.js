@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link, Navigate } from "react-router-dom";
 function Footer() {
 
     return (
@@ -10,7 +10,11 @@ function Footer() {
             <div className="row mx-4 mx-sm-5 my-2">
                 <div className="d-flex flex-column flex-sm-row">
              
-                        <a className="text-decoration-none text-dark mx-1" href=""> Contact us <span className='d-none d-sm-inline'>|</span></a>
+                        <a className="text-decoration-none text-dark mx-1">
+                        <Link className="text-decoration-none text-dark" to="/contactus">
+                        Contact us 
+                        </Link>
+                          <span className='d-none d-sm-inline'> |</span></a>
                         <a className="text-decoration-none text-dark mx-1" href=""> Plans <span className='d-none d-sm-inline'>|</span> </a>
                         <a className="text-decoration-none text-dark mx-1" href=""> About <span className='d-none d-sm-inline'>|</span> </a>
                         <a className="text-decoration-none text-dark mx-1" href=""> Partners <span className='d-none d-sm-inline'>|</span> </a>

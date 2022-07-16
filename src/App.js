@@ -15,6 +15,7 @@ import Budgets from "./Budgets.js"
 import UserInfo from "./UserInfo.js"
 import ManageTypes from "./ManageTypes.js"
 import Authenticated from "./Authenticated.js"
+import ContactUs from "./ContactUs.js"
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
@@ -45,7 +46,7 @@ class App extends React.Component {
             displayLoginButton: false,
             exists: "", //controls google login,
             googleUser: false,
-
+            contactUsTextarea: "",
         }
 
         this.handleLogOut = this.handleLogOut.bind(this);
@@ -61,6 +62,7 @@ class App extends React.Component {
         this.handleDeleteUser = this.handleDeleteUser.bind(this);
         this.confirmDeleteUser = this.confirmDeleteUser.bind(this);
         this.finalizeDeleteUser = this.finalizeDeleteUser.bind(this);
+        this.handleSubmitContactForm = this.handleSubmitContactForm.bind(this);
     }
 
     componentDidMount() {
@@ -531,6 +533,40 @@ class App extends React.Component {
 
     }
 
+    handleSubmitContactForm(e){
+        e.preventDefault()
+        console.log("submitting contact form")
+        console.log(this.state) 
+        axios.post('/api/v1.0/submitContactForm', {
+            firstName: this.state.firstName,
+            email: this.state.email,
+            contactUsTextarea: this.state.contactUsTextarea
+            })
+            .then(results => {
+                    
+                    console.log(results.data)
+                    this.setState({ showModalSuccess: true, Message: [`Thank you for your feedback, ${this.state.firstName}! \n We'll get back to you soon!`],  });
+    
+                }
+            )
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+
+                if(error.response.data.data != undefined){
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
+            })
+    }
+
     render() {
 
         let registerFormProps = {
@@ -563,6 +599,7 @@ class App extends React.Component {
                         <Route path="manageTypes" element={<ManageTypes isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>
                     <Route path="/authenticated" element={<Authenticated handleGoogleLogIn={this.handleGoogleLogIn} isLoggedIn={this.state.isLoggedIn}/>} />
+                    <Route path="/contactus" element={<ContactUs handleSubmitContactForm={this.handleSubmitContactForm} handleChange={this.handleChange}/>} />
 
 
                     <Route
