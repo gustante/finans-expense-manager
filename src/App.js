@@ -147,7 +147,7 @@ class App extends React.Component {
 
 
     handleLogIn() {
-        if(event)
+        if (event)
             event.preventDefault()
 
         console.log("executed handleLogin")
@@ -190,11 +190,11 @@ class App extends React.Component {
 
                     .catch(error => {
                         console.log(error.response)
-                        if(error.response.data.status == 401){
-                            this.setState({displayLoginButton: true});
+                        if (error.response.data.status == 401) {
+                            this.setState({ displayLoginButton: true });
 
                         }
-                        if(error.response.data.data != undefined){
+                        if (error.response.data.data != undefined) {
                             this.setState({
                                 Message: error.response.data.data,
                                 showModalError: true
@@ -217,25 +217,25 @@ class App extends React.Component {
         let captchaToken = ''
 
         axios.get("/api/v1.0/oauth/google/login")
-                .then(results => {
-                    console.log("user info receives from backend:")
-                    console.log(results.data)
-                        this.setState({
-                            firstName: results.data.firstName,
-                            lastName: results.data.lastName,
-                            password: results.data.password,
-                            email: results.data.email,
-                            phoneNumber: results.data.phoneNumber,
-                            exists: results.data.exists,
-                            googleUser: results.data.googleUser
-                        });
-                })
-                .then(()=>{
-                    console.log("this is what i have in state:")
-                    console.log(this.state)
+            .then(results => {
+                console.log("user info receives from backend:")
+                console.log(results.data)
+                this.setState({
+                    firstName: results.data.firstName,
+                    lastName: results.data.lastName,
+                    password: results.data.password,
+                    email: results.data.email,
+                    phoneNumber: results.data.phoneNumber,
+                    exists: results.data.exists,
+                    googleUser: results.data.googleUser
+                });
+            })
+            .then(() => {
+                console.log("this is what i have in state:")
+                console.log(this.state)
 
-                    if(!this.state.exists){//create new user if it doesn't exist
-                        grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', { action: 'submit' })
+                if (!this.state.exists) {//create new user if it doesn't exist
+                    grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', { action: 'submit' })
                         .then(function (token) {
                             captchaToken = token;
                             console.log("reCAPTCHA executed");
@@ -254,73 +254,73 @@ class App extends React.Component {
                                 currentYear: current.getFullYear(),
                                 googleUser: true
                             })
-                            .then(results => {
-                                console.log("user created:")
-                                console.log(results.data)
-                                this.handleLogIn()
-                            })
-                            .catch(error => {
-                                console.log(error)
-                                console.log(error.response)
-                                console.log(error.response.data);
-                                let errorCode = error.response.data.code;
+                                .then(results => {
+                                    console.log("user created:")
+                                    console.log(results.data)
+                                    this.handleLogIn()
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    console.log(error.response)
+                                    console.log(error.response.data);
+                                    let errorCode = error.response.data.code;
 
-                                if (error.response.data.data != undefined) {
-                                    this.setState({
-                                        Message: error.response.data.data,
-                                        showModalError: true
-                                    });
-                                } else {
-                                    this.setState({
-                                        Message: error.response.data,
-                                        showModalError: true
-                                    });
-                                }
-                            });
+                                    if (error.response.data.data != undefined) {
+                                        this.setState({
+                                            Message: error.response.data.data,
+                                            showModalError: true
+                                        });
+                                    } else {
+                                        this.setState({
+                                            Message: error.response.data,
+                                            showModalError: true
+                                        });
+                                    }
+                                });
                         })
-                    } else { //user user exists just log in
-                        this.handleLogIn()
-                    }
-                })
-                .catch(error => {
-                    console.log(error)
-                    console.log(error.response)
-                    if(error.response.data.status == 401){
-                        this.setState({displayLoginButton: true});
+                } else { //user user exists just log in
+                    this.handleLogIn()
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
-                    }
-                    if(error.response.data.data != undefined){
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
-                    } else {
-                        this.setState({
-                            Message: error.response.data,
-                            showModalError: true
-                        });
-                    }
-                });
+                }
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
+            });
 
 
     }
 
     handleLogOut() {
         if (this.state.isLoggedIn == true) {
-            if(this.state.googleUser)
+            if (this.state.googleUser)
                 this.handleGoogleLogOut()
 
-                axios.get("/api/v1.0/user/logout")
+            axios.get("/api/v1.0/user/logout")
                 .then(results => {
                     this.setState({ isLoggedIn: false });
                 })
                 .catch(error => {
                     console.log(error.response)
-                    if(error.response.data.status == 401){
-                        this.setState({displayLoginButton: true});
+                    if (error.response.data.status == 401) {
+                        this.setState({ displayLoginButton: true });
 
                     }
-                    if(error.response.data.data != undefined){
+                    if (error.response.data.data != undefined) {
                         this.setState({
                             Message: error.response.data.data,
                             showModalError: true
@@ -338,29 +338,29 @@ class App extends React.Component {
 
     }
 
-    handleGoogleLogOut(){
+    handleGoogleLogOut() {
         axios.get("/api/v1.0/oauth/google/logout")
-                .then(results => {
-                    console.log(results)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    if(error.response.data.status == 401){
-                        this.setState({displayLoginButton: true});
+            .then(results => {
+                console.log(results)
+            })
+            .catch(error => {
+                console.log(error.response)
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
-                    }
-                    if(error.response.data.data != undefined){
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
-                    } else {
-                        this.setState({
-                            Message: error.response.data,
-                            showModalError: true
-                        });
-                    }
-                });
+                }
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                }
+            });
 
     }
 
@@ -393,7 +393,7 @@ class App extends React.Component {
         //show inputs and buttons for editing
         $('#user-info input').removeClass("hide")
         $('#user-info input').addClass("view d-inline")
-        if(this.state.googleUser){
+        if (this.state.googleUser) {
             $('[type=email]').attr('disabled', 'true');
             $('[type=password]').removeAttr('readonly');
             $('[type=password]').attr('disabled', 'true');
@@ -420,17 +420,17 @@ class App extends React.Component {
         $('.editInfo').addClass("hide")
 
         this.setState({
-                oldPassword: "",
-                newPassword: "",
-                repeatNewPassword: "",
-                newFirstName: "",
-                newLastName: "",
-                newPhoneNumber: "",
-                newEmail: "",
+            oldPassword: "",
+            newPassword: "",
+            repeatNewPassword: "",
+            newFirstName: "",
+            newLastName: "",
+            newPhoneNumber: "",
+            newEmail: "",
         });
     }
 
-    handleSaveEditingUser(e){
+    handleSaveEditingUser(e) {
         e.preventDefault()
         console.log("save editing")
         console.log("send to backend: ")
@@ -439,10 +439,11 @@ class App extends React.Component {
             firstName: this.state.newFirstName,
             lastName: this.state.newLastName,
             email: this.state.newEmail,
-            phoneNumber:this.state.newPhoneNumber.replaceAll('-', ''),
+            phoneNumber: this.state.newPhoneNumber.replaceAll('-', ''),
             oldPassword: this.state.oldPassword,
             newPassword: this.state.newPassword,
-            repeatNewPassword: this.state.repeatNewPassword })
+            repeatNewPassword: this.state.repeatNewPassword
+        })
             .then(results => {
 
                 console.log(results.data)
@@ -451,17 +452,17 @@ class App extends React.Component {
                     lastName: results.data.lastName,
                     email: results.data.email,
                     phoneNumber: results.data.phoneNumber
-            });
+                });
                 this.handleStopEditingUser()
 
             })
             .catch(error => {
                 console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
                 }
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
@@ -476,7 +477,7 @@ class App extends React.Component {
 
     }
 
-    confirmDeleteUser(e){
+    confirmDeleteUser(e) {
         e.preventDefault()
         console.log("confirm before delete user")
 
@@ -487,7 +488,7 @@ class App extends React.Component {
         })
     }
 
-    finalizeDeleteUser(e){
+    finalizeDeleteUser(e) {
         e.preventDefault()
         this.handleCloseSuccess()
         this.setState({
@@ -496,14 +497,14 @@ class App extends React.Component {
 
     }
 
-    handleDeleteUser(e){
+    handleDeleteUser(e) {
         e.preventDefault()
         console.log("deleting user")
         this.handleCloseError()
         axios.delete('/api/v1.0/user/deleteUser', {
             userId: this.state.userId,
             email: this.state.email
-            })
+        })
             .then(results => {
 
                 console.log(results.data)
@@ -514,11 +515,11 @@ class App extends React.Component {
             })
             .catch(error => {
                 console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
                 }
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
@@ -533,27 +534,35 @@ class App extends React.Component {
 
     }
 
-    handleSubmitContactForm(e){
+    handleSubmitContactForm(e) {
         e.preventDefault()
         console.log("submitting contact form")
-        console.log(this.state) 
+        console.log(this.state)
         axios.post('/api/v1.0/submitContactForm', {
             firstName: this.state.firstName,
             email: this.state.email,
             contactUsTextarea: this.state.contactUsTextarea
-            })
+        })
             .then(results => {
-                    
-                    console.log(results.data)
-                    this.setState({ showModalSuccess: true, Message: [`Thank you for your feedback, ${this.state.firstName}! \n We'll get back to you soon!`],  });
-    
-                }
+
+                console.log(results.data)
+                this.setState({
+                    showModalSuccess: true, Message: [`Thank you for your feedback, ${this.state.firstName}! \n We'll get back to you soon!`],
+                    firstName: "",
+                    email: "",
+                    contactUsTextarea: ""
+
+                });
+                $('input').val('');
+                $('textarea').val('');
+
+            }
             )
             .catch(error => {
                 console.log(error)
                 console.log(error.response)
 
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
@@ -582,7 +591,7 @@ class App extends React.Component {
         return (
             <>
                 <Nav isLoggedIn={this.state.isLoggedIn} handleLogOut={this.handleLogOut} />
-                <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message } displayConfirmButton={this.state.displayConfirmButton} finalizeDeleteUser={this.finalizeDeleteUser} />
+                <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} displayLoginButton={this.state.displayLoginButton} Message={this.state.Message} displayConfirmButton={this.state.displayConfirmButton} finalizeDeleteUser={this.finalizeDeleteUser} />
                 <ModalError handleClose={this.handleCloseError} showModalError={this.state.showModalError} errorMessages={this.state.Message} displayConfirmButton={this.state.displayConfirmButton} handleDelete={this.handleDeleteUser} />
 
                 <Routes>
@@ -598,8 +607,8 @@ class App extends React.Component {
                         <Route path="userBudgets" element={<Budgets isLoggedIn={this.state.isLoggedIn} />} />
                         <Route path="manageTypes" element={<ManageTypes isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>
-                    <Route path="/authenticated" element={<Authenticated handleGoogleLogIn={this.handleGoogleLogIn} isLoggedIn={this.state.isLoggedIn}/>} />
-                    <Route path="/contactus" element={<ContactUs handleSubmitContactForm={this.handleSubmitContactForm} handleChange={this.handleChange}/>} />
+                    <Route path="/authenticated" element={<Authenticated handleGoogleLogIn={this.handleGoogleLogIn} isLoggedIn={this.state.isLoggedIn} />} />
+                    <Route path="/contactus" element={<ContactUs handleSubmitContactForm={this.handleSubmitContactForm} handleChange={this.handleChange} />} />
 
 
                     <Route
@@ -610,8 +619,8 @@ class App extends React.Component {
                             </main>
                         }
                     />
-                        
-                    </Routes>
+
+                </Routes>
                 <Footer />
 
             </>

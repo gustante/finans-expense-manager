@@ -15073,8 +15073,14 @@ var App = /*#__PURE__*/function (_React$Component) {
 
         _this10.setState({
           showModalSuccess: true,
-          Message: ["Thank you for your feedback, ".concat(_this10.state.firstName, "! \n We'll get back to you soon!")]
+          Message: ["Thank you for your feedback, ".concat(_this10.state.firstName, "! \n We'll get back to you soon!")],
+          firstName: "",
+          email: "",
+          contactUsTextarea: ""
         });
+
+        $('input').val('');
+        $('textarea').val('');
       })["catch"](function (error) {
         console.log(error);
         console.log(error.response);
