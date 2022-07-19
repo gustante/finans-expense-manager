@@ -16679,7 +16679,10 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, LinkAccounts);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      linkToken: ""
+    };
+    _this.getLinkToken = _this.getLinkToken.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -16687,12 +16690,31 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {}
   }, {
+    key: "getLinkToken",
+    value: function getLinkToken() {
+      var _this2 = this;
+
+      console.log("step 1: request a link token from server");
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/v1.0/plaid/createLinkToken').then(function (results) {
+        console.log(results.data);
+        console.log("received link token from server");
+
+        _this2.setState({
+          linkToken: results.data.linkToken
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
         className: "col-12 col-sm-8 my-3 my-sm-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Link your bank accounts to track your transactions"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Link your bank accounts to track your transactions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "btn btn-success",
+        onClick: this.getLinkToken
+      }, "Connect"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
         to: "/login"
       }));
     }
