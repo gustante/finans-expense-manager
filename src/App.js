@@ -15,6 +15,7 @@ import Budgets from "./Budgets.js"
 import UserInfo from "./UserInfo.js"
 import ManageTypes from "./ManageTypes.js"
 import Authenticated from "./Authenticated.js"
+import LinkAccounts from "./LinkAccounts.js"
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
@@ -561,6 +562,7 @@ class App extends React.Component {
                         <Route path="userInfo" element={<UserInfo userInfo={this.state} handleChange={this.handleChange} handleStartEditingUser={this.handleStartEditingUser} handleStopEditingUser={this.handleStopEditingUser} handleSaveEditingUser={this.handleSaveEditingUser} confirmDeleteUser={this.confirmDeleteUser} handleDeleteUser={this.handleDeleteUser} />} />
                         <Route path="userBudgets" element={<Budgets isLoggedIn={this.state.isLoggedIn} />} />
                         <Route path="manageTypes" element={<ManageTypes isLoggedIn={this.state.isLoggedIn} />} />
+                        <Route path="linkAccounts" element={<LinkAccounts isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>
                     <Route path="/authenticated" element={<Authenticated handleGoogleLogIn={this.handleGoogleLogIn} isLoggedIn={this.state.isLoggedIn}/>} />
 

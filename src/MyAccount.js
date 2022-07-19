@@ -26,6 +26,11 @@ class MyAccount extends React.Component {
                                     <i className="fas fa-cog"></i> Manage Types
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/myAccount/linkAccounts">
+                                <i className="fas fa-money-check"></i> Link Accounts
+                                </Link>
+                            </li>
 
 
                         </ul>
