@@ -83,10 +83,21 @@ class Main extends React.Component {
         if (this.props.isLoggedIn) {
             axios.get("/api/v1.0/expense/all")
                 .then(results => {
+                    console.log("before entering loop")
+                    for(let expense of results.data){
+                        console.log("entering loop")
+                        if(expense.type == null)
+                            console.log(expense)
+  
+                    }
+                    
                     this.setState({ expenses: results.data.splice(0, this.state.position) });
+                    
+                    
 
                 })
                 .catch(error => {
+                    console.log(error)
                     console.log(error.response)
                     if (error.response.data.status == 401) {
                         this.setState({ displayLoginButton: true });
