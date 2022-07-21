@@ -130,9 +130,14 @@ class App extends React.Component {
                                     Message: error.response.data.data,
                                     showModalError: true
                                 });
-                            } else {
+                            } else if(error.response.data != undefined) {
                                 this.setState({
                                     Message: error.response.data,
+                                    showModalError: true
+                                });
+                            } else {
+                                this.setState({
+                                    Message: ["Something went wrong", error],
                                     showModalError: true
                                 });
                             }
@@ -198,9 +203,14 @@ class App extends React.Component {
                                 Message: error.response.data.data,
                                 showModalError: true
                             });
-                        } else {
+                        } else if(error.response.data != undefined) {
                             this.setState({
                                 Message: error.response.data,
+                                showModalError: true
+                            });
+                        } else {
+                            this.setState({
+                                Message: ["Something went wrong", error],
                                 showModalError: true
                             });
                         }
@@ -269,9 +279,14 @@ class App extends React.Component {
                                         Message: error.response.data.data,
                                         showModalError: true
                                     });
-                                } else {
+                                } else if(error.response.data != undefined) {
                                     this.setState({
                                         Message: error.response.data,
+                                        showModalError: true
+                                    });
+                                } else {
+                                    this.setState({
+                                        Message: ["Something went wrong", error],
                                         showModalError: true
                                     });
                                 }
@@ -293,9 +308,14 @@ class App extends React.Component {
                             Message: error.response.data.data,
                             showModalError: true
                         });
-                    } else {
+                    } else if(error.response.data != undefined) {
                         this.setState({
                             Message: error.response.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: ["Something went wrong", error],
                             showModalError: true
                         });
                     }
@@ -324,9 +344,14 @@ class App extends React.Component {
                             Message: error.response.data.data,
                             showModalError: true
                         });
-                    } else {
+                    } else if(error.response.data != undefined) {
                         this.setState({
                             Message: error.response.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: ["Something went wrong", error],
                             showModalError: true
                         });
                     }
@@ -353,9 +378,14 @@ class App extends React.Component {
                             Message: error.response.data.data,
                             showModalError: true
                         });
-                    } else {
+                    } else if(error.response.data != undefined) {
                         this.setState({
                             Message: error.response.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: ["Something went wrong", error],
                             showModalError: true
                         });
                     }
@@ -465,9 +495,14 @@ class App extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else {
+                } else if(error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
                         showModalError: true
                     });
                 }
@@ -522,9 +557,14 @@ class App extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else {
+                } else if(error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
                         showModalError: true
                     });
                 }

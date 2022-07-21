@@ -46,24 +46,6 @@ exports.getAllExpenses = (req, res) => {
             .exec()
             .then(user => {
 
-
-
-                    //find type whose name is "Food and Drink"
-                    // let foodAndDrink = user.types.find(type => type.name == "Food and Drink");
-
-                    // console.log(foodAndDrink)
-                    
-
-                    // for(expense of user.expenses){
-                    //     if(expense.type == null){
-                    //         console.log(expense)
-                    //         //update expense to have type of food and drink
-                    //         Expense.findOneAndUpdate({_id: expense._id}, {type: foodAndDrink}).exec()
-
-                    //     }
-                    // }
-                    // res.send("done")
-
                 //sort so that we have recent expenses displayed first
                 user.expenses.sort((a, b) => { //https://www.javascripttutorial.net/array/javascript-sort-an-array-of-objects/
                     let da = new Date(a.year, a.month, a.day),

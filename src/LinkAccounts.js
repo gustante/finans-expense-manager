@@ -1,5 +1,6 @@
 import React from 'react';
-
+import ModalSuccess from './ModalSuccess';
+import ModalError from './ModalError';
 import axios from 'axios';
 import { Link, Navigate } from "react-router-dom";
 
@@ -11,12 +12,19 @@ class LinkAccounts extends React.Component {
         this.state = {
             linkToken: "",
             transactions: [],
+            showModalSuccess: false,
+            showModalError: false,
+            displayLoginButton: false,
+            Message: [],
+            displayLoginButton: false
 
         }
         this.getLinkToken = this.getLinkToken.bind(this);
         this.getAccessToken = this.getAccessToken.bind(this);
         this.getTransactions = this.getTransactions.bind(this);
         this.syncTransactions = this.syncTransactions.bind(this);
+        this.handleCloseError = this.handleCloseError.bind(this);
+        this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
 
     }
 
@@ -25,6 +33,7 @@ class LinkAccounts extends React.Component {
     }
 
     getLinkToken() {
+
         console.log("step 1: request a link token from server")
         axios.post('/api/v1.0/plaid/createLinkToken')
             .then(results => {
@@ -38,8 +47,32 @@ class LinkAccounts extends React.Component {
                     console.log("has access token")
                     this.getTransactions()
                 }
-            }
-            )
+            })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response)
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
+
+                }
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else if (error.response.data != undefined) {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
+                        showModalError: true
+                    });
+                }
+            });
+
 
     }
 
@@ -60,9 +93,32 @@ class LinkAccounts extends React.Component {
                     this.getTransactions()
                     console.log("received access token from server")
 
-                }).catch(err => {
-                    console.log(err)
-                })
+                }).catch(error => {
+                    console.log(error.response)
+                    console.log(error.response.data);
+                    let errorCode = error.response.data.code;
+
+
+                    if (error.response.data.data != undefined) {
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    } else if (error.response.data != undefined) {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: ["Something went wrong", error],
+                            showModalError: true
+                        });
+                    }
+
+
+
+                });
 
             },
             onLoad: () => { },
@@ -76,7 +132,10 @@ class LinkAccounts extends React.Component {
                     console.log('stopping')
                 }
                 else {
-                    console.log(err)
+                    this.setState({
+                        Message: ["Something went wrong", "Please refresh the page and check that you are logged in", err],
+                        showModalError: true
+                    });
                 }
             },
             onEvent: (eventName, metadata) => { },
@@ -115,6 +174,26 @@ class LinkAccounts extends React.Component {
             })
     }
 
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    //controls display of modals
+    handleCloseSuccess() {
+        this.setState({
+            showModalSuccess: false,
+            displayLoginButton: false
+        });
+    }
+    handleCloseError() {
+        this.setState({
+            showModalError: false,
+            displayLoginButton: false
+        });
+    }
+
 
 
 
@@ -125,7 +204,8 @@ class LinkAccounts extends React.Component {
             <>
                 {isLoggedIn ? (
                     <>
-                       
+                        <ModalSuccess handleClose={this.handleCloseSuccess} showModalSuccess={this.state.showModalSuccess} Message={this.state.Message} />
+                        <ModalError handleClose={this.handleCloseError} displayLoginButton={this.state.displayLoginButton} showModalError={this.state.showModalError} errorMessages={this.state.Message} />
 
                         <main className="col-12 col-sm-8 my-3 my-sm-4">
                             <h4>Transactions for current month</h4>

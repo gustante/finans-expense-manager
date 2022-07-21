@@ -14645,9 +14645,14 @@ var App = /*#__PURE__*/function (_React$Component) {
                 Message: error.response.data.data,
                 showModalError: true
               });
-            } else {
+            } else if (error.response.data != undefined) {
               _this3.setState({
                 Message: error.response.data,
+                showModalError: true
+              });
+            } else {
+              _this3.setState({
+                Message: ["Something went wrong", error],
                 showModalError: true
               });
             }
@@ -14712,9 +14717,14 @@ var App = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this4.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this4.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -14782,9 +14792,14 @@ var App = /*#__PURE__*/function (_React$Component) {
                   Message: error.response.data.data,
                   showModalError: true
                 });
-              } else {
+              } else if (error.response.data != undefined) {
                 _this5.setState({
                   Message: error.response.data,
+                  showModalError: true
+                });
+              } else {
+                _this5.setState({
+                  Message: ["Something went wrong", error],
                   showModalError: true
                 });
               }
@@ -14809,9 +14824,14 @@ var App = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this5.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this5.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -14842,9 +14862,14 @@ var App = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this6.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this6.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -14872,9 +14897,14 @@ var App = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this7.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this7.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -14984,9 +15014,14 @@ var App = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this8.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this8.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -15046,9 +15081,14 @@ var App = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this9.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this9.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -15394,9 +15434,14 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this2.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -15519,9 +15564,14 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this3.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this3.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -16126,87 +16176,6 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Form, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {//set arrow keys accessibility with jquery
-      // $(".form-control").keydown(function (e) {
-      //     let target = $(this).parent();
-      //     if (e.which == 39) {//key right, moves through inputs
-      //         console.log('right key pressed')
-      //         event.preventDefault();
-      //         target.next().children(".form-control").focus();
-      //     } else if (e.which == 37) {//key left, moves through inputs
-      //         console.log('left key pressed')
-      //         event.preventDefault();
-      //         target.prev().children(".form-control").focus();
-      //     }
-      //     //goes back to first if in last item and press right
-      //     if (target.next().length == 0 && e.which == 39) {
-      //         event.preventDefault();
-      //         $(this).parent().parent().next().children().find(".form-control").first().focus();
-      //     }
-      //     //goes back to bottom if in first item and press UpArrow
-      //     if (target.prev().length == 0 && e.which == 37) {
-      //         event.preventDefault();
-      //         target.parent().prev().children().find(".form-control").last().focus();
-      //     }
-      // })
-      // $("#typeSelector").keydown(function (e) {
-      //     let target = $(this).parent();
-      //     if (e.which == 39) {//key right, moves through inputs
-      //         console.log('right key pressed on type selector')
-      //         event.preventDefault();
-      //         target.parent().next().children().find("button").first().focus();
-      //     }
-      // })
-      // $("[type=submit]").keydown(function (e) {
-      //     let target = $(this).parent();
-      //     if (e.which == 37) {//key left, moves through inputs
-      //         console.log('left key pressed on submit button')
-      //         event.preventDefault();
-      //         target.parent().parent().prev().children().find(".form-control").last().focus();
-      //     }
-      // })
-      // $("form button").keydown(function (e) {
-      //     let target = $(this).parent();
-      //     if (e.which == 39) {//key right, moves through buttons
-      //         console.log('right key pressed on button')
-      //         event.preventDefault();
-      //         target.next().children().focus();
-      //     }
-      //     if (e.which == 37) {//key left, moves through buttons
-      //         console.log('left key pressed on button')
-      //         event.preventDefault();
-      //         target.prev().children().focus();
-      //     }
-      // })
-      // $("#typesDiv").keydown(function (e) {
-      //     if (e.which == 39) {//key right, moves through buttons
-      //         console.log('right key pressed on typesDiv')
-      //         event.preventDefault();
-      //         $(this).next().children().children().first().focus();
-      //     }
-      // })
-      // $("#typeName").keydown(function (e) {
-      //     if (e.which == 39) {
-      //         console.log('right key pressed on newtype input')
-      //         event.preventDefault();
-      //         $(this).next().children().focus();
-      //     }
-      //     else if (e.which == 37) {
-      //         console.log('left key pressed on newtype input')
-      //         event.preventDefault();
-      //         $(this).parent().parent().prev().focus();
-      //     }
-      // })
-      // $("#addType").keydown(function (e) {
-      //     if (e.which == 37) {
-      //         console.log('left key pressed on addType button');
-      //         event.preventDefault();
-      //         $(this).parent().prev().focus();
-      //     }
-      // })
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -16635,10 +16604,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var _ModalSuccess__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalSuccess */ "./src/ModalSuccess.js");
+/* harmony import */ var _ModalError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalError */ "./src/ModalError.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -16664,6 +16637,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var LinkAccounts = /*#__PURE__*/function (_React$Component) {
   _inherits(LinkAccounts, _React$Component);
 
@@ -16675,14 +16650,20 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, LinkAccounts);
 
     _this = _super.call(this, props);
-    _this.state = {
+    _this.state = _defineProperty({
       linkToken: "",
-      transactions: []
-    };
+      transactions: [],
+      showModalSuccess: false,
+      showModalError: false,
+      displayLoginButton: false,
+      Message: []
+    }, "displayLoginButton", false);
     _this.getLinkToken = _this.getLinkToken.bind(_assertThisInitialized(_this));
     _this.getAccessToken = _this.getAccessToken.bind(_assertThisInitialized(_this));
     _this.getTransactions = _this.getTransactions.bind(_assertThisInitialized(_this));
     _this.syncTransactions = _this.syncTransactions.bind(_assertThisInitialized(_this));
+    _this.handleCloseError = _this.handleCloseError.bind(_assertThisInitialized(_this));
+    _this.handleCloseSuccess = _this.handleCloseSuccess.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -16697,7 +16678,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       console.log("step 1: request a link token from server");
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/v1.0/plaid/createLinkToken').then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/createLinkToken').then(function (results) {
         console.log(results.data);
         console.log("received link token from server");
 
@@ -16709,6 +16690,32 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
           console.log("has access token");
 
           _this2.getTransactions();
+        }
+      })["catch"](function (error) {
+        console.log(error);
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this2.setState({
+            displayLoginButton: true
+          });
+        }
+
+        if (error.response.data.data != undefined) {
+          _this2.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        } else if (error.response.data != undefined) {
+          _this2.setState({
+            Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
+            showModalError: true
+          });
         }
       });
     }
@@ -16722,7 +16729,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       var handler = Plaid.create({
         token: this.state.linkToken,
         onSuccess: function onSuccess(token, metadata) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/v1.0/plaid/exchangePublicToken', {
+          axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/exchangePublicToken', {
             public_token: token,
             accounts: metadata.accounts,
             institution: metadata.institution,
@@ -16733,8 +16740,27 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
             _this3.getTransactions();
 
             console.log("received access token from server");
-          })["catch"](function (err) {
-            console.log(err);
+          })["catch"](function (error) {
+            console.log(error.response);
+            console.log(error.response.data);
+            var errorCode = error.response.data.code;
+
+            if (error.response.data.data != undefined) {
+              _this3.setState({
+                Message: error.response.data.data,
+                showModalError: true
+              });
+            } else if (error.response.data != undefined) {
+              _this3.setState({
+                Message: error.response.data,
+                showModalError: true
+              });
+            } else {
+              _this3.setState({
+                Message: ["Something went wrong", error],
+                showModalError: true
+              });
+            }
           });
         },
         onLoad: function onLoad() {},
@@ -16746,7 +16772,10 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
             // The user exited the Link flow without linking.
             console.log('stopping');
           } else {
-            console.log(err);
+            _this3.setState({
+              Message: ["Something went wrong", "Please refresh the page and check that you are logged in", err],
+              showModalError: true
+            });
           }
         },
         onEvent: function onEvent(eventName, metadata) {}
@@ -16759,7 +16788,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       console.log("getting transactions");
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/v1.0/plaid/getTransactions').then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/v1.0/plaid/getTransactions').then(function (results) {
         console.log(results.data);
         console.log("received transactions from server");
 
@@ -16773,7 +16802,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "syncTransactions",
     value: function syncTransactions() {
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/v1.0/plaid/syncTransactions').then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/syncTransactions').then(function (results) {
         console.log(results.data);
         console.log("syncronized transactions in backend server");
       })["catch"](function (err) {
@@ -16781,10 +16810,41 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    } //controls display of modals
+
+  }, {
+    key: "handleCloseSuccess",
+    value: function handleCloseSuccess() {
+      this.setState({
+        showModalSuccess: false,
+        displayLoginButton: false
+      });
+    }
+  }, {
+    key: "handleCloseError",
+    value: function handleCloseError() {
+      this.setState({
+        showModalError: false,
+        displayLoginButton: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalSuccess__WEBPACK_IMPORTED_MODULE_1__.default, {
+        handleClose: this.handleCloseSuccess,
+        showModalSuccess: this.state.showModalSuccess,
+        Message: this.state.Message
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalError__WEBPACK_IMPORTED_MODULE_2__.default, {
+        handleClose: this.handleCloseError,
+        displayLoginButton: this.state.displayLoginButton,
+        showModalError: this.state.showModalError,
+        errorMessages: this.state.Message
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
         className: "col-12 col-sm-8 my-3 my-sm-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Transactions for current month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
         className: "table table-responsive-sm"
@@ -16802,7 +16862,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         type: "button",
         className: "btn btn-primary my-2 ml-3",
         onClick: this.syncTransactions
-      }, "Sync transactions"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Navigate, {
+      }, "Sync transactions"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
         to: "/login"
       }));
     }
@@ -17134,9 +17194,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this2.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this2.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -17161,9 +17226,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this2.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this2.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -17255,9 +17325,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this3.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this3.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -17321,9 +17396,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this4.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this4.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -17365,9 +17445,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this5.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this5.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17539,9 +17624,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this6.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this6.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17574,9 +17664,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this7.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this7.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17695,9 +17790,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this8.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this8.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17744,9 +17844,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this9.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this9.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17795,9 +17900,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this10.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this10.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -18012,9 +18122,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this2.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -18039,9 +18154,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this2.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -18120,9 +18240,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this3.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this3.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -18203,9 +18328,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this4.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this4.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -19136,9 +19266,14 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this2.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
