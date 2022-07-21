@@ -1,5 +1,8 @@
 const axios = require('axios');
 const User = require('../models/User.js');
+const Expense = require('../models/Expense.js');
+const Type = require('../models/Type.js');
+const AccessToken = require('../models/AccessToken.js');
 require('dotenv').config();
 const { Configuration, PlaidApi, PlaidEnvironments } = require('plaid');
 const moment = require('moment');
@@ -48,13 +51,18 @@ exports.createLinkToken = async (req, res) => {
                 // This should correspond to a unique id for the current user.
                 client_user_id: user.id,
             },
-            client_name: 'Gustante',
+            client_name: 'Finans Expense Manager',
             products: PLAID_PRODUCTS,
             country_codes: PLAID_COUNTRY_CODES,
+            redirect_uri: PLAID_REDIRECT_URI,
             language: 'en',
         };
 
         const createTokenResponse = await client.linkTokenCreate(configs);
+
+        if (user.plaidAccessTokens && user.plaidAccessTokens.length > 0) {
+            createTokenResponse.data.hasAccessToken = true;
+        }
 
         //res.send(createTokenResponse.data);
         res.send(createTokenResponse.data)
@@ -64,8 +72,232 @@ exports.createLinkToken = async (req, res) => {
         res.status(errorObject.status).send(errorObject);
     }
 
+}
+
+// Exchange token flow - exchange a Link public_token for
+// an API access_token
+exports.exchangePublicToken = async (req, res) => {
+
+    console.log("received request to exchange public token")
+    console.log("Info from user:")
+    console.log(req.body)
+
+    const alreadyHasToken = await AccessToken.findOne({ institutionName: req.body.institution.name, userId: req.session.userId });
+
+
+    //create new item if institution hasn't been linked already
+    if (alreadyHasToken === null) {
+        try {
+            const tokenResponse = await client.itemPublicTokenExchange({
+                public_token: req.body.public_token,
+            });
+
+            const user = await User.findById(req.session.userId);
+            console.log(tokenResponse.data)
+
+            const accessToken = new AccessToken({
+                userId: user.id,
+                token: tokenResponse.data.access_token,
+                itemId: tokenResponse.data.item_id,
+                institutionName: req.body.institution.name,
+                accounts: req.body.accounts,
+            });
+            await accessToken.save();
+            user.plaidAccessTokens.push(accessToken);
+            await user.save()
+
+            console.log("received access token from plaid :")
+            console.log(accessToken)
+
+            res.send("item created")
+        } catch (error) {
+            console.log(error)
+            console.log(error.data)
+        }
+    } else {
+        console.log("item already exists")
+        res.send("item already exists")
+    }
 
 
 
+
+
+}
+
+exports.getTransactions = async (req, res) => {
+    const accessTokens = await AccessToken.find({ userId: req.session.userId });
+
+    //get todays day
+    const today = moment().format('DD');
+    //get only transactions for current month up until today
+    const startDate = moment().subtract(today - 1, 'days').format('YYYY-MM-DD');
+    const endDate = moment().format('YYYY-MM-DD');
+
+    const arrayOfTransactions = [];
+
+    for (let accessToken of accessTokens) {
+        const request = {
+            access_token: accessToken.token,
+            options: {
+                count: 250,
+            },
+            start_date: startDate,
+            end_date: endDate,
+        };
+        const getTransactionsResponse = await client.transactionsGet(request);
+        let transactions = getTransactionsResponse.data.transactions;
+        //const total_transactions = getTransactionsResponse.data.total_transactions;
+
+
+
+        console.log("received transactions from plaid :")
+        for (let transaction of transactions) {
+            if (transaction.amount > 0) {
+                arrayOfTransactions.push({
+                    _id: transaction.transaction_id,
+                    account_id: transaction.account_id,
+                    name: transaction.name,
+                    amount: transaction.amount,
+                    date: transaction.date,
+                    category: transaction.category,
+                })
+            }
+
+        }
+    }
+
+
+
+
+    res.send(arrayOfTransactions)
+}
+
+
+
+
+
+exports.syncTransactions = async (req, res) => {
+    const allUsers = await User.find().populate({
+        path: 'expenses',
+        populate: { path: 'type' }
+    }).populate('types').exec();
+
+
+    for (let user of allUsers) {
+        console.log("user to be synced:")
+        console.log(user.firstName)
+
+        //get all items that user has connected
+        const accessTokens = await AccessToken.find({ userId: user._id });
+
+        if (accessTokens != null && accessTokens.length > 0) {
+            //get todays day
+            const today = moment().format('DD');
+            //get only transactions for current month up until today
+            const startDate = moment().subtract(today - 1 , 'days').format('YYYY-MM-DD');
+            const endDate = moment().format('YYYY-MM-DD');
+
+            for (let accessToken of accessTokens) {
+                const request = {
+                    access_token: accessToken.token,
+                    options: {
+                        count: 250,
+                    },
+                    start_date: startDate,
+                    end_date: endDate,
+                };
+                const getTransactionsResponse = await client.transactionsGet(request);
+                let transactions = getTransactionsResponse.data.transactions;
+
+
+
+                for (let transaction of transactions) {
+                    //check if transaction already exists
+                    let transactionExists = false;
+                    for(let i = user.expenses.length - 1; i >= 0; i--) {
+                        if (user.expenses[i].plaidId == transaction.transaction_id) {
+                            console.log("transaction already exists, skipping")
+                            transactionExists = true;
+                            break;
+                        }
+                    }
+                    if (transaction.amount > 0 && !transactionExists) {
+                        
+                        
+
+
+                        let chosenType;
+                        //check if user has type that matches transaction.category
+                        //find types that belong to user
+
+                        //what does this do?    
+                        for (let type of user.types) {
+                            if (type.name == transaction.category[0]) {
+                                chosenType = type;
+                                console.log("found type")
+                                break;
+
+                            }
+                        }
+                        if (!chosenType) {
+                            console.log("did not find type")
+                            chosenType = new Type({
+                                name: transaction.category[0],
+                                budget: "",
+                                sumOfExpenses: 0,
+                                user: user._id
+                            });
+                            await chosenType.save();
+                            user.types.push(chosenType);
+
+                        }
+
+                        console.log("type chosen is:")
+                        console.log(chosenType)
+
+                        //separate transaction.date into year, month, day
+                        const date = moment(transaction.date);
+                        const year = date.format('YYYY');
+                        const month = date.format('MM');
+                        const day = date.format('DD');
+
+                        //create new expense if user doesn't already have one 
+                        let expense = new Expense({
+                            month: month,
+                            day: day,
+                            year: year,
+                            type: chosenType,
+                            description: transaction.name + " *****************",
+                            amount: transaction.amount,
+                            user: user._id,
+                            recurring: false,
+                            frequency: "",
+                            plaidId: transaction.transaction_id,
+                        });
+
+                        chosenType.sumOfExpenses += transaction.amount;
+                        user.expenses.push(expense);
+                        await chosenType.save();
+                        await expense.save();
+                        await user.save()
+                        console.log("expense saved")
+
+                    }
+
+                }
+            }
+            console.log("user synced")
+
+        } else {
+            console.log("user has no access tokens. Nothing to be done")
+
+        }
+
+
+
+    }
+
+    res.send("done")
 }
 

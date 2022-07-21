@@ -16637,9 +16637,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _ModalSuccess__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalSuccess */ "./src/ModalSuccess.js");
-/* harmony import */ var _ModalError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ModalError */ "./src/ModalError.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16666,8 +16664,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
-
 var LinkAccounts = /*#__PURE__*/function (_React$Component) {
   _inherits(LinkAccounts, _React$Component);
 
@@ -16680,15 +16676,21 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      linkToken: ""
+      linkToken: "",
+      transactions: []
     };
     _this.getLinkToken = _this.getLinkToken.bind(_assertThisInitialized(_this));
+    _this.getAccessToken = _this.getAccessToken.bind(_assertThisInitialized(_this));
+    _this.getTransactions = _this.getTransactions.bind(_assertThisInitialized(_this));
+    _this.syncTransactions = _this.syncTransactions.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(LinkAccounts, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      this.getLinkToken();
+    }
   }, {
     key: "getLinkToken",
     value: function getLinkToken() {
@@ -16700,8 +16702,82 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         console.log("received link token from server");
 
         _this2.setState({
-          linkToken: results.data.linkToken
+          linkToken: results.data.link_token
         });
+
+        if (results.data.hasAccessToken) {
+          console.log("has access token");
+
+          _this2.getTransactions();
+        }
+      });
+    }
+  }, {
+    key: "getAccessToken",
+    value: function getAccessToken() {
+      var _this3 = this;
+
+      console.log("step 2: exchange public token for access token");
+      console.log("token is " + this.state.linkToken);
+      var handler = Plaid.create({
+        token: this.state.linkToken,
+        onSuccess: function onSuccess(token, metadata) {
+          axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/v1.0/plaid/exchangePublicToken', {
+            public_token: token,
+            accounts: metadata.accounts,
+            institution: metadata.institution,
+            link_session_id: metadata.link_session_id
+          }).then(function (results) {
+            console.log(results.data);
+
+            _this3.getTransactions();
+
+            console.log("received access token from server");
+          })["catch"](function (err) {
+            console.log(err);
+          });
+        },
+        onLoad: function onLoad() {},
+        onExit: function onExit(err, metadata) {
+          if (err != null) {
+            // The user encountered a Plaid API error prior to exiting.
+            console.log('stopping');
+          } else if (metadata.exit_type === 'logout') {
+            // The user exited the Link flow without linking.
+            console.log('stopping');
+          } else {
+            console.log(err);
+          }
+        },
+        onEvent: function onEvent(eventName, metadata) {}
+      });
+      handler.open();
+    }
+  }, {
+    key: "getTransactions",
+    value: function getTransactions() {
+      var _this4 = this;
+
+      console.log("getting transactions");
+      axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/v1.0/plaid/getTransactions').then(function (results) {
+        console.log(results.data);
+        console.log("received transactions from server");
+
+        _this4.setState({
+          transactions: results.data
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: "syncTransactions",
+    value: function syncTransactions() {
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/v1.0/plaid/syncTransactions').then(function (results) {
+        console.log(results.data);
+        console.log("syncronized transactions in backend server");
+      })["catch"](function (err) {
+        console.log(err);
       });
     }
   }, {
@@ -16710,11 +16786,23 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
         className: "col-12 col-sm-8 my-3 my-sm-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Link your bank accounts to track your transactions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Transactions for current month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
+        className: "table table-responsive-sm"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.transactions && this.state.transactions.map(function (transaction) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
+          key: transaction.transaction_id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.category.map(function (category) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, category, ", ");
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.amount));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
-        className: "btn btn-success",
-        onClick: this.getLinkToken
-      }, "Connect"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
+        className: "btn btn-success my-2",
+        onClick: this.getAccessToken
+      }, "Connect an account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "btn btn-primary my-2 ml-3",
+        onClick: this.syncTransactions
+      }, "Sync transactions"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Navigate, {
         to: "/login"
       }));
     }
@@ -16879,19 +16967,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -17011,10 +17099,28 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.isLoggedIn) {
         axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
+          console.log("before entering loop");
+
+          var _iterator = _createForOfIteratorHelper(results.data),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var expense = _step.value;
+              console.log("entering loop");
+              if (expense.type == null) console.log(expense);
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
           _this2.setState({
             expenses: results.data.splice(0, _this2.state.position)
           });
         })["catch"](function (error) {
+          console.log(error);
           console.log(error.response);
 
           if (error.response.data.status == 401) {
@@ -17376,12 +17482,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
           }); //filter out all future expenses that have the same description as recurringExpenseDeleted
 
 
-          var _iterator = _createForOfIteratorHelper(_this6.state.expenses),
-              _step;
+          var _iterator2 = _createForOfIteratorHelper(_this6.state.expenses),
+              _step2;
 
           try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var expense = _step.value;
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var expense = _step2.value;
 
               //only add expense to array if it is not a future expense linked to the deleted one
               if (expense.description != recurringExpenseDeleted.description || expense.description == recurringExpenseDeleted.description && expense.day < recurringExpenseDeleted.day && expense.month == recurringExpenseDeleted.month || expense.description == recurringExpenseDeleted.description && expense.month < recurringExpenseDeleted.month || expense.description == recurringExpenseDeleted.description && expense.year < recurringExpenseDeleted.year) {
@@ -17389,9 +17495,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
               }
             }
           } catch (err) {
-            _iterator.e(err);
+            _iterator2.e(err);
           } finally {
-            _iterator.f();
+            _iterator2.f();
           }
         } else {
           arrayOfExpenses = _toConsumableArray(_this6.state.expenses);
