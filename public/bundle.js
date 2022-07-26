@@ -16686,6 +16686,8 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
           linkToken: results.data.link_token
         });
 
+        $('#connect').removeClass("d-none");
+
         if (results.data.hasAccessToken) {
           console.log("has access token");
 
@@ -16856,7 +16858,8 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.amount));
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
-        className: "btn btn-success my-2",
+        id: "connect",
+        className: "btn d-none btn-success my-2",
         onClick: this.getAccessToken
       }, "Connect an account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",

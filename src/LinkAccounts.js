@@ -43,6 +43,8 @@ class LinkAccounts extends React.Component {
                     linkToken: results.data.link_token
                 })
 
+                $('#connect').removeClass("d-none")
+
                 if (results.data.hasAccessToken) {
                     console.log("has access token")
                     this.getTransactions()
@@ -230,7 +232,7 @@ class LinkAccounts extends React.Component {
                                     ))}
                                 </tbody>
                             </table>
-                            <button type='button' className="btn btn-success my-2" onClick={this.getAccessToken}>Connect an account</button>
+                            <button type='button' id="connect" className="btn d-none btn-success my-2" onClick={this.getAccessToken}>Connect an account</button>
                             <button type='button' className="btn btn-primary my-2 ml-3" onClick={this.syncTransactions}>Sync transactions</button>
                         </main>
                     </>
