@@ -14464,9 +14464,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ManageTypes_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ManageTypes.js */ "./src/ManageTypes.js");
 /* harmony import */ var _Authenticated_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Authenticated.js */ "./src/Authenticated.js");
 /* harmony import */ var _ContactUs_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./ContactUs.js */ "./src/ContactUs.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var _LinkAccounts_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./LinkAccounts.js */ "./src/LinkAccounts.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -14490,6 +14491,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -14576,7 +14578,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_18___default().get("/api/v1.0/user/verifyAuth").then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_19___default().get("/api/v1.0/user/verifyAuth").then(function (results) {
         var _results$data = results.data,
             _id = _results$data._id,
             firstName = _results$data.firstName,
@@ -14614,7 +14616,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         console.log("reCAPTCHA executed");
       }).then(function () {
         var current = new Date();
-        axios__WEBPACK_IMPORTED_MODULE_18___default().post("/api/v1.0/user/register", {
+        axios__WEBPACK_IMPORTED_MODULE_19___default().post("/api/v1.0/user/register", {
           firstName: _this3.state.firstName,
           lastName: _this3.state.lastName,
           email: _this3.state.email,
@@ -14649,9 +14651,14 @@ var App = /*#__PURE__*/function (_React$Component) {
                 Message: error.response.data.data,
                 showModalError: true
               });
-            } else {
+            } else if (error.response.data != undefined) {
               _this3.setState({
                 Message: error.response.data,
+                showModalError: true
+              });
+            } else {
+              _this3.setState({
+                Message: ["Something went wrong", error],
                 showModalError: true
               });
             }
@@ -14675,7 +14682,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         console.log("reCAPTCHA executed");
       }).then(function () {
         var current = new Date();
-        axios__WEBPACK_IMPORTED_MODULE_18___default().post("/api/v1.0/user/login", {
+        axios__WEBPACK_IMPORTED_MODULE_19___default().post("/api/v1.0/user/login", {
           email: _this4.state.email,
           password: _this4.state.password,
           token: captchaToken,
@@ -14716,9 +14723,14 @@ var App = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this4.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this4.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -14732,7 +14744,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 
       console.log("execited handleGoogleLogin");
       var captchaToken = '';
-      axios__WEBPACK_IMPORTED_MODULE_18___default().get("/api/v1.0/oauth/google/login").then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_19___default().get("/api/v1.0/oauth/google/login").then(function (results) {
         console.log("user info receives from backend:");
         console.log(results.data);
 
@@ -14759,7 +14771,7 @@ var App = /*#__PURE__*/function (_React$Component) {
           }).then(function () {
             var current = new Date();
             console.log("attempts to create user");
-            axios__WEBPACK_IMPORTED_MODULE_18___default().post("/api/v1.0/user/register", {
+            axios__WEBPACK_IMPORTED_MODULE_19___default().post("/api/v1.0/user/register", {
               firstName: _this5.state.firstName,
               lastName: _this5.state.lastName,
               email: _this5.state.email,
@@ -14786,9 +14798,14 @@ var App = /*#__PURE__*/function (_React$Component) {
                   Message: error.response.data.data,
                   showModalError: true
                 });
-              } else {
+              } else if (error.response.data != undefined) {
                 _this5.setState({
                   Message: error.response.data,
+                  showModalError: true
+                });
+              } else {
+                _this5.setState({
+                  Message: ["Something went wrong", error],
                   showModalError: true
                 });
               }
@@ -14813,9 +14830,14 @@ var App = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this5.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this5.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -14828,7 +14850,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 
       if (this.state.isLoggedIn == true) {
         if (this.state.googleUser) this.handleGoogleLogOut();
-        axios__WEBPACK_IMPORTED_MODULE_18___default().get("/api/v1.0/user/logout").then(function (results) {
+        axios__WEBPACK_IMPORTED_MODULE_19___default().get("/api/v1.0/user/logout").then(function (results) {
           _this6.setState({
             isLoggedIn: false
           });
@@ -14846,9 +14868,14 @@ var App = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this6.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this6.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -14860,7 +14887,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function handleGoogleLogOut() {
       var _this7 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_18___default().get("/api/v1.0/oauth/google/logout").then(function (results) {
+      axios__WEBPACK_IMPORTED_MODULE_19___default().get("/api/v1.0/oauth/google/logout").then(function (results) {
         console.log(results);
       })["catch"](function (error) {
         console.log(error.response);
@@ -14876,9 +14903,14 @@ var App = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this7.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this7.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -14955,7 +14987,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       console.log("save editing");
       console.log("send to backend: ");
       console.log(this.state);
-      axios__WEBPACK_IMPORTED_MODULE_18___default().put('/api/v1.0/user/updateUser', {
+      axios__WEBPACK_IMPORTED_MODULE_19___default().put('/api/v1.0/user/updateUser', {
         firstName: this.state.newFirstName,
         lastName: this.state.newLastName,
         email: this.state.newEmail,
@@ -14988,9 +15020,14 @@ var App = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this8.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this8.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -15024,7 +15061,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       console.log("deleting user");
       this.handleCloseError();
-      axios__WEBPACK_IMPORTED_MODULE_18___default().delete('/api/v1.0/user/deleteUser', {
+      axios__WEBPACK_IMPORTED_MODULE_19___default().delete('/api/v1.0/user/deleteUser', {
         userId: this.state.userId,
         email: this.state.email
       }).then(function (results) {
@@ -15050,9 +15087,14 @@ var App = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this9.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this9.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -15066,7 +15108,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       console.log("submitting contact form");
       console.log(this.state);
-      axios__WEBPACK_IMPORTED_MODULE_18___default().post('/api/v1.0/submitContactForm', {
+      axios__WEBPACK_IMPORTED_MODULE_19___default().post('/api/v1.0/submitContactForm', {
         firstName: this.state.nameForContactUs,
         email: this.state.emailForContactUs,
         contactUsTextarea: this.state.contactUsTextarea
@@ -15128,26 +15170,26 @@ var App = /*#__PURE__*/function (_React$Component) {
         errorMessages: this.state.Message,
         displayConfirmButton: this.state.displayConfirmButton,
         handleDelete: this.handleDeleteUser
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         index: true,
         path: "/",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Home_js__WEBPACK_IMPORTED_MODULE_1__.default, null)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/about",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_About_js__WEBPACK_IMPORTED_MODULE_4__.default, null)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/plans",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Plans_js__WEBPACK_IMPORTED_MODULE_5__.default, null)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/faq",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FAQ_js__WEBPACK_IMPORTED_MODULE_3__.default, null)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/dashboard",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Main_js__WEBPACK_IMPORTED_MODULE_6__.default, {
           isLoggedIn: this.state.isLoggedIn,
           userId: this.state.userId
         })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/login",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Login_js__WEBPACK_IMPORTED_MODULE_7__.default, {
           handleLogIn: this.handleLogIn,
@@ -15155,13 +15197,13 @@ var App = /*#__PURE__*/function (_React$Component) {
           handleChange: this.handleChange,
           isLoggedIn: this.state.isLoggedIn
         })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/register",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Register_js__WEBPACK_IMPORTED_MODULE_9__.default, registerFormProps)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/myAccount",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MyAccount__WEBPACK_IMPORTED_MODULE_12__.default, null)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "userInfo",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_UserInfo_js__WEBPACK_IMPORTED_MODULE_14__.default, {
           userInfo: this.state,
@@ -15172,29 +15214,34 @@ var App = /*#__PURE__*/function (_React$Component) {
           confirmDeleteUser: this.confirmDeleteUser,
           handleDeleteUser: this.handleDeleteUser
         })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "userBudgets",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Budgets_js__WEBPACK_IMPORTED_MODULE_13__.default, {
           isLoggedIn: this.state.isLoggedIn
         })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "manageTypes",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ManageTypes_js__WEBPACK_IMPORTED_MODULE_15__.default, {
           isLoggedIn: this.state.isLoggedIn
         })
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
+        path: "linkAccounts",
+        element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_LinkAccounts_js__WEBPACK_IMPORTED_MODULE_18__.default, {
+          isLoggedIn: this.state.isLoggedIn
+        })
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/authenticated",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Authenticated_js__WEBPACK_IMPORTED_MODULE_16__.default, {
           handleGoogleLogIn: this.handleGoogleLogIn,
           isLoggedIn: this.state.isLoggedIn
         })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "/contactus",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ContactUs_js__WEBPACK_IMPORTED_MODULE_17__.default, {
           handleSubmitContactForm: this.handleSubmitContactForm,
           handleChange: this.handleChange
         })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.Route, {
         path: "*",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
           style: {
@@ -15441,9 +15488,14 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this2.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -15566,9 +15618,14 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this3.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this3.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -16301,87 +16358,6 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Form, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {//set arrow keys accessibility with jquery
-      // $(".form-control").keydown(function (e) {
-      //     let target = $(this).parent();
-      //     if (e.which == 39) {//key right, moves through inputs
-      //         console.log('right key pressed')
-      //         event.preventDefault();
-      //         target.next().children(".form-control").focus();
-      //     } else if (e.which == 37) {//key left, moves through inputs
-      //         console.log('left key pressed')
-      //         event.preventDefault();
-      //         target.prev().children(".form-control").focus();
-      //     }
-      //     //goes back to first if in last item and press right
-      //     if (target.next().length == 0 && e.which == 39) {
-      //         event.preventDefault();
-      //         $(this).parent().parent().next().children().find(".form-control").first().focus();
-      //     }
-      //     //goes back to bottom if in first item and press UpArrow
-      //     if (target.prev().length == 0 && e.which == 37) {
-      //         event.preventDefault();
-      //         target.parent().prev().children().find(".form-control").last().focus();
-      //     }
-      // })
-      // $("#typeSelector").keydown(function (e) {
-      //     let target = $(this).parent();
-      //     if (e.which == 39) {//key right, moves through inputs
-      //         console.log('right key pressed on type selector')
-      //         event.preventDefault();
-      //         target.parent().next().children().find("button").first().focus();
-      //     }
-      // })
-      // $("[type=submit]").keydown(function (e) {
-      //     let target = $(this).parent();
-      //     if (e.which == 37) {//key left, moves through inputs
-      //         console.log('left key pressed on submit button')
-      //         event.preventDefault();
-      //         target.parent().parent().prev().children().find(".form-control").last().focus();
-      //     }
-      // })
-      // $("form button").keydown(function (e) {
-      //     let target = $(this).parent();
-      //     if (e.which == 39) {//key right, moves through buttons
-      //         console.log('right key pressed on button')
-      //         event.preventDefault();
-      //         target.next().children().focus();
-      //     }
-      //     if (e.which == 37) {//key left, moves through buttons
-      //         console.log('left key pressed on button')
-      //         event.preventDefault();
-      //         target.prev().children().focus();
-      //     }
-      // })
-      // $("#typesDiv").keydown(function (e) {
-      //     if (e.which == 39) {//key right, moves through buttons
-      //         console.log('right key pressed on typesDiv')
-      //         event.preventDefault();
-      //         $(this).next().children().children().first().focus();
-      //     }
-      // })
-      // $("#typeName").keydown(function (e) {
-      //     if (e.which == 39) {
-      //         console.log('right key pressed on newtype input')
-      //         event.preventDefault();
-      //         $(this).next().children().focus();
-      //     }
-      //     else if (e.which == 37) {
-      //         console.log('left key pressed on newtype input')
-      //         event.preventDefault();
-      //         $(this).parent().parent().prev().focus();
-      //     }
-      // })
-      // $("#addType").keydown(function (e) {
-      //     if (e.which == 37) {
-      //         console.log('left key pressed on addType button');
-      //         event.preventDefault();
-      //         $(this).parent().prev().focus();
-      //     }
-      // })
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -16794,6 +16770,296 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./src/LinkAccounts.js":
+/*!*****************************!*\
+  !*** ./src/LinkAccounts.js ***!
+  \*****************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ModalSuccess__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalSuccess */ "./src/ModalSuccess.js");
+/* harmony import */ var _ModalError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalError */ "./src/ModalError.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+var LinkAccounts = /*#__PURE__*/function (_React$Component) {
+  _inherits(LinkAccounts, _React$Component);
+
+  var _super = _createSuper(LinkAccounts);
+
+  function LinkAccounts(props) {
+    var _this;
+
+    _classCallCheck(this, LinkAccounts);
+
+    _this = _super.call(this, props);
+    _this.state = _defineProperty({
+      linkToken: "",
+      transactions: [],
+      showModalSuccess: false,
+      showModalError: false,
+      displayLoginButton: false,
+      Message: []
+    }, "displayLoginButton", false);
+    _this.getLinkToken = _this.getLinkToken.bind(_assertThisInitialized(_this));
+    _this.getAccessToken = _this.getAccessToken.bind(_assertThisInitialized(_this));
+    _this.getTransactions = _this.getTransactions.bind(_assertThisInitialized(_this));
+    _this.syncTransactions = _this.syncTransactions.bind(_assertThisInitialized(_this));
+    _this.handleCloseError = _this.handleCloseError.bind(_assertThisInitialized(_this));
+    _this.handleCloseSuccess = _this.handleCloseSuccess.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(LinkAccounts, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getLinkToken();
+    }
+  }, {
+    key: "getLinkToken",
+    value: function getLinkToken() {
+      var _this2 = this;
+
+      console.log("step 1: request a link token from server");
+      axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/createLinkToken').then(function (results) {
+        console.log(results.data);
+        console.log("received link token from server");
+
+        _this2.setState({
+          linkToken: results.data.link_token
+        });
+
+        $('#connect').removeClass("d-none");
+
+        if (results.data.hasAccessToken) {
+          console.log("has access token");
+
+          _this2.getTransactions();
+        }
+      })["catch"](function (error) {
+        console.log(error);
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this2.setState({
+            displayLoginButton: true
+          });
+        }
+
+        if (error.response.data.data != undefined) {
+          _this2.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        } else if (error.response.data != undefined) {
+          _this2.setState({
+            Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
+            showModalError: true
+          });
+        }
+      });
+    }
+  }, {
+    key: "getAccessToken",
+    value: function getAccessToken() {
+      var _this3 = this;
+
+      console.log("step 2: exchange public token for access token");
+      console.log("token is " + this.state.linkToken);
+      var handler = Plaid.create({
+        token: this.state.linkToken,
+        onSuccess: function onSuccess(token, metadata) {
+          axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/exchangePublicToken', {
+            public_token: token,
+            accounts: metadata.accounts,
+            institution: metadata.institution,
+            link_session_id: metadata.link_session_id
+          }).then(function (results) {
+            console.log(results.data);
+
+            _this3.getTransactions();
+
+            console.log("received access token from server");
+          })["catch"](function (error) {
+            console.log(error.response);
+            console.log(error.response.data);
+            var errorCode = error.response.data.code;
+
+            if (error.response.data.data != undefined) {
+              _this3.setState({
+                Message: error.response.data.data,
+                showModalError: true
+              });
+            } else if (error.response.data != undefined) {
+              _this3.setState({
+                Message: error.response.data,
+                showModalError: true
+              });
+            } else {
+              _this3.setState({
+                Message: ["Something went wrong", error],
+                showModalError: true
+              });
+            }
+          });
+        },
+        onLoad: function onLoad() {},
+        onExit: function onExit(err, metadata) {
+          if (err != null) {
+            // The user encountered a Plaid API error prior to exiting.
+            console.log('stopping');
+          } else if (metadata.exit_type === 'logout') {
+            // The user exited the Link flow without linking.
+            console.log('stopping');
+          } else {
+            _this3.setState({
+              Message: ["Something went wrong", "Please refresh the page and check that you are logged in", err],
+              showModalError: true
+            });
+          }
+        },
+        onEvent: function onEvent(eventName, metadata) {}
+      });
+      handler.open();
+    }
+  }, {
+    key: "getTransactions",
+    value: function getTransactions() {
+      var _this4 = this;
+
+      console.log("getting transactions");
+      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/v1.0/plaid/getTransactions').then(function (results) {
+        console.log(results.data);
+        console.log("received transactions from server");
+
+        _this4.setState({
+          transactions: results.data
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: "syncTransactions",
+    value: function syncTransactions() {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/syncTransactions').then(function (results) {
+        console.log(results.data);
+        console.log("syncronized transactions in backend server");
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    } //controls display of modals
+
+  }, {
+    key: "handleCloseSuccess",
+    value: function handleCloseSuccess() {
+      this.setState({
+        showModalSuccess: false,
+        displayLoginButton: false
+      });
+    }
+  }, {
+    key: "handleCloseError",
+    value: function handleCloseError() {
+      this.setState({
+        showModalError: false,
+        displayLoginButton: false
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var isLoggedIn = this.props.isLoggedIn;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalSuccess__WEBPACK_IMPORTED_MODULE_1__.default, {
+        handleClose: this.handleCloseSuccess,
+        showModalSuccess: this.state.showModalSuccess,
+        Message: this.state.Message
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalError__WEBPACK_IMPORTED_MODULE_2__.default, {
+        handleClose: this.handleCloseError,
+        displayLoginButton: this.state.displayLoginButton,
+        showModalError: this.state.showModalError,
+        errorMessages: this.state.Message
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
+        className: "col-12 col-sm-8 my-3 my-sm-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Transactions for current month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
+        className: "table table-responsive-sm"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.transactions && this.state.transactions.map(function (transaction) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
+          key: transaction.transaction_id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.category.map(function (category) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, category, ", ");
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.amount));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "connect",
+        className: "btn d-none btn-success my-2",
+        onClick: this.getAccessToken
+      }, "Connect an account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "btn btn-primary my-2 ml-3",
+        onClick: this.syncTransactions
+      }, "Sync transactions"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
+        to: "/login"
+      }));
+    }
+  }]);
+
+  return LinkAccounts;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LinkAccounts);
+
+/***/ }),
+
 /***/ "./src/Login.js":
 /*!**********************!*\
   !*** ./src/Login.js ***!
@@ -16946,19 +17212,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -17078,10 +17344,28 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.isLoggedIn) {
         axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
+          console.log("before entering loop");
+
+          var _iterator = _createForOfIteratorHelper(results.data),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var expense = _step.value;
+              console.log("entering loop");
+              if (expense.type == null) console.log(expense);
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
           _this2.setState({
             expenses: results.data.splice(0, _this2.state.position)
           });
         })["catch"](function (error) {
+          console.log(error);
           console.log(error.response);
 
           if (error.response.data.status == 401) {
@@ -17095,9 +17379,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this2.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this2.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -17122,9 +17411,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this2.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this2.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -17216,9 +17510,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this3.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this3.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -17282,9 +17581,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
               Message: error.response.data.data,
               showModalError: true
             });
-          } else {
+          } else if (error.response.data != undefined) {
             _this4.setState({
               Message: error.response.data,
+              showModalError: true
+            });
+          } else {
+            _this4.setState({
+              Message: ["Something went wrong", error],
               showModalError: true
             });
           }
@@ -17326,9 +17630,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this5.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this5.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17443,12 +17752,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
           }); //filter out all future expenses that have the same description as recurringExpenseDeleted
 
 
-          var _iterator = _createForOfIteratorHelper(_this6.state.expenses),
-              _step;
+          var _iterator2 = _createForOfIteratorHelper(_this6.state.expenses),
+              _step2;
 
           try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var expense = _step.value;
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var expense = _step2.value;
 
               //only add expense to array if it is not a future expense linked to the deleted one
               if (expense.description != recurringExpenseDeleted.description || expense.description == recurringExpenseDeleted.description && expense.day < recurringExpenseDeleted.day && expense.month == recurringExpenseDeleted.month || expense.description == recurringExpenseDeleted.description && expense.month < recurringExpenseDeleted.month || expense.description == recurringExpenseDeleted.description && expense.year < recurringExpenseDeleted.year) {
@@ -17456,9 +17765,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
               }
             }
           } catch (err) {
-            _iterator.e(err);
+            _iterator2.e(err);
           } finally {
-            _iterator.f();
+            _iterator2.f();
           }
         } else {
           arrayOfExpenses = _toConsumableArray(_this6.state.expenses);
@@ -17500,9 +17809,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this6.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this6.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17535,9 +17849,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this7.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this7.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17656,9 +17975,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this8.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this8.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17705,9 +18029,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this9.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this9.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17756,9 +18085,14 @@ var Main = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this10.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this10.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -17973,9 +18307,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this2.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -18000,9 +18339,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this2.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -18081,9 +18425,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this3.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this3.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -18164,9 +18513,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this4.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this4.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }
@@ -18659,7 +19013,14 @@ var MyAccount = /*#__PURE__*/function (_React$Component) {
         to: "/myAccount/manageTypes"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-cog"
-      }), " Manage Types")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Outlet, null)));
+      }), " Manage Types")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        className: "nav-link",
+        to: "/myAccount/linkAccounts"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-money-check"
+      }), " Link Accounts")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Outlet, null)));
     }
   }]);
 
@@ -19090,9 +19451,14 @@ var UserInfo = /*#__PURE__*/function (_React$Component) {
             Message: error.response.data.data,
             showModalError: true
           });
-        } else {
+        } else if (error.response.data != undefined) {
           _this2.setState({
             Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this2.setState({
+            Message: ["Something went wrong", error],
             showModalError: true
           });
         }

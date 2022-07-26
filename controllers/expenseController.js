@@ -30,6 +30,9 @@ exports.getAllExpenses = (req, res) => {
     //                 user.save()
     //             })
 
+    
+    
+
 
 
     if (req.session.isAuth) {

@@ -16,6 +16,7 @@ import UserInfo from "./UserInfo.js"
 import ManageTypes from "./ManageTypes.js"
 import Authenticated from "./Authenticated.js"
 import ContactUs from "./ContactUs.js"
+import LinkAccounts from "./LinkAccounts.js"
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
@@ -133,9 +134,14 @@ class App extends React.Component {
                                     Message: error.response.data.data,
                                     showModalError: true
                                 });
-                            } else {
+                            } else if(error.response.data != undefined) {
                                 this.setState({
                                     Message: error.response.data,
+                                    showModalError: true
+                                });
+                            } else {
+                                this.setState({
+                                    Message: ["Something went wrong", error],
                                     showModalError: true
                                 });
                             }
@@ -201,9 +207,14 @@ class App extends React.Component {
                                 Message: error.response.data.data,
                                 showModalError: true
                             });
-                        } else {
+                        } else if(error.response.data != undefined) {
                             this.setState({
                                 Message: error.response.data,
+                                showModalError: true
+                            });
+                        } else {
+                            this.setState({
+                                Message: ["Something went wrong", error],
                                 showModalError: true
                             });
                         }
@@ -256,29 +267,34 @@ class App extends React.Component {
                                 currentYear: current.getFullYear(),
                                 googleUser: true
                             })
-                                .then(results => {
-                                    console.log("user created:")
-                                    console.log(results.data)
-                                    this.handleLogIn()
-                                })
-                                .catch(error => {
-                                    console.log(error)
-                                    console.log(error.response)
-                                    console.log(error.response.data);
-                                    let errorCode = error.response.data.code;
+                            .then(results => {
+                                console.log("user created:")
+                                console.log(results.data)
+                                this.handleLogIn()
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                console.log(error.response)
+                                console.log(error.response.data);
+                                let errorCode = error.response.data.code;
 
-                                    if (error.response.data.data != undefined) {
-                                        this.setState({
-                                            Message: error.response.data.data,
-                                            showModalError: true
-                                        });
-                                    } else {
-                                        this.setState({
-                                            Message: error.response.data,
-                                            showModalError: true
-                                        });
-                                    }
-                                });
+                                if (error.response.data.data != undefined) {
+                                    this.setState({
+                                        Message: error.response.data.data,
+                                        showModalError: true
+                                    });
+                                } else if(error.response.data != undefined) {
+                                    this.setState({
+                                        Message: error.response.data,
+                                        showModalError: true
+                                    });
+                                } else {
+                                    this.setState({
+                                        Message: ["Something went wrong", error],
+                                        showModalError: true
+                                    });
+                                }
+                            });
                         })
                 } else { //user user exists just log in
                     this.handleLogIn()
@@ -290,19 +306,24 @@ class App extends React.Component {
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
-                }
-                if (error.response.data.data != undefined) {
-                    this.setState({
-                        Message: error.response.data.data,
-                        showModalError: true
-                    });
-                } else {
-                    this.setState({
-                        Message: error.response.data,
-                        showModalError: true
-                    });
-                }
-            });
+                    }
+                    if(error.response.data.data != undefined){
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    } else if(error.response.data != undefined) {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: ["Something went wrong", error],
+                            showModalError: true
+                        });
+                    }
+                });
 
 
     }
@@ -327,9 +348,14 @@ class App extends React.Component {
                             Message: error.response.data.data,
                             showModalError: true
                         });
-                    } else {
+                    } else if(error.response.data != undefined) {
                         this.setState({
                             Message: error.response.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: ["Something went wrong", error],
                             showModalError: true
                         });
                     }
@@ -350,19 +376,24 @@ class App extends React.Component {
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
-                }
-                if (error.response.data.data != undefined) {
-                    this.setState({
-                        Message: error.response.data.data,
-                        showModalError: true
-                    });
-                } else {
-                    this.setState({
-                        Message: error.response.data,
-                        showModalError: true
-                    });
-                }
-            });
+                    }
+                    if(error.response.data.data != undefined){
+                        this.setState({
+                            Message: error.response.data.data,
+                            showModalError: true
+                        });
+                    } else if(error.response.data != undefined) {
+                        this.setState({
+                            Message: error.response.data,
+                            showModalError: true
+                        });
+                    } else {
+                        this.setState({
+                            Message: ["Something went wrong", error],
+                            showModalError: true
+                        });
+                    }
+                });
 
     }
 
@@ -469,9 +500,14 @@ class App extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else {
+                } else if(error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
                         showModalError: true
                     });
                 }
@@ -526,9 +562,14 @@ class App extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else {
+                } else if(error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
                         showModalError: true
                     });
                 }
@@ -608,6 +649,7 @@ class App extends React.Component {
                         <Route path="userInfo" element={<UserInfo userInfo={this.state} handleChange={this.handleChange} handleStartEditingUser={this.handleStartEditingUser} handleStopEditingUser={this.handleStopEditingUser} handleSaveEditingUser={this.handleSaveEditingUser} confirmDeleteUser={this.confirmDeleteUser} handleDeleteUser={this.handleDeleteUser} />} />
                         <Route path="userBudgets" element={<Budgets isLoggedIn={this.state.isLoggedIn} />} />
                         <Route path="manageTypes" element={<ManageTypes isLoggedIn={this.state.isLoggedIn} />} />
+                        <Route path="linkAccounts" element={<LinkAccounts isLoggedIn={this.state.isLoggedIn} />} />
                     </Route>
                     <Route path="/authenticated" element={<Authenticated handleGoogleLogIn={this.handleGoogleLogIn} isLoggedIn={this.state.isLoggedIn} />} />
                     <Route path="/contactus" element={<ContactUs handleSubmitContactForm={this.handleSubmitContactForm} handleChange={this.handleChange} />} />

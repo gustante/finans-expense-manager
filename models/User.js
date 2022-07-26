@@ -13,6 +13,7 @@ const UserSchema = new Schema({
     lastLoginMonth:{type: Number, require: false},
     lastLoginYear:{type: Number, require: false},
     googleUser: {type: Boolean, require: true},
+    plaidAccessTokens: [{type: Schema.Types.ObjectId, ref: 'AccessToken'}],
 
 
 });

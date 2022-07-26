@@ -11,6 +11,7 @@ const ExpenseSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     recurring: {type: Boolean, default: false, required: false},
     frequency: {type:String, required: false},
+    plaidId: {type:String, required: false},
 });
 
 const Expense = mongoose.model("Expense", ExpenseSchema);
