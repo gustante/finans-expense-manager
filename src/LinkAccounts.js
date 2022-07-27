@@ -26,11 +26,17 @@ class LinkAccounts extends React.Component {
         this.syncTransactions = this.syncTransactions.bind(this);
         this.handleCloseError = this.handleCloseError.bind(this);
         this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
+        this.handleUnlinkAccount = this.handleUnlinkAccount.bind(this);
+        this.getItems = this.getItems.bind(this);
 
     }
 
     componentDidMount() {
         this.getLinkToken()
+
+    }
+
+    getItems(){
         axios.get('/api/v1.0/plaid/getItems')
             .then(results => {
 
@@ -39,6 +45,8 @@ class LinkAccounts extends React.Component {
                     this.setState({
                         accounts: results.data
                     })
+                    this.getTransactions()
+
                 }
 
                 console.log(results.data)
@@ -76,7 +84,6 @@ class LinkAccounts extends React.Component {
         console.log("step 1: request a link token from server")
         axios.post('/api/v1.0/plaid/createLinkToken')
             .then(results => {
-                console.log(results.data)
                 console.log("received link token from server")
                 this.setState({
                     linkToken: results.data.link_token
@@ -86,7 +93,8 @@ class LinkAccounts extends React.Component {
 
                 if (results.data.hasAccessToken) {
                     console.log("has access token")
-                    this.getTransactions()
+                    this.getItems()
+                  
                 }
             })
             .catch(error => {
@@ -131,14 +139,11 @@ class LinkAccounts extends React.Component {
 
                 }).then(results => {
                     console.log(results.data)
-                    this.getTransactions()
                     console.log("received access token from server")
+                    this.getItems()
 
                 }).catch(error => {
-                    console.log(error.response)
-                    console.log(error.response.data);
-                    let errorCode = error.response.data.code;
-
+                    console.log(error)
 
                     if (error.response.data.data != undefined) {
                         this.setState({
@@ -189,16 +194,41 @@ class LinkAccounts extends React.Component {
         console.log("getting transactions")
         axios.get('/api/v1.0/plaid/getTransactions')
             .then(results => {
+                $('.spinner').removeClass("d-flex")
+                $('.spinner').addClass("d-none")
+                $('table').removeClass("d-none")
+
                 console.log(results.data)
                 console.log("received transactions from server")
-                this.setState({
-                    transactions: results.data
-                })
+                if (results.data.length > 0) {
+                    this.setState({
+                        transactions: results.data
+                    })
+
+                }
             }
             )
-            .catch(err => {
-                console.log(err)
-            })
+            .catch(error => {
+                console.log(error)
+
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else if (error.response.data != undefined) {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
+                        showModalError: true
+                    });
+                }
+
+            });
 
     }
 
@@ -213,6 +243,63 @@ class LinkAccounts extends React.Component {
             .catch(err => {
                 console.log(err)
             })
+    }
+
+    handleUnlinkAccount(accountId) {
+        console.log("unlinking account")
+        console.log(accountId)
+        axios.delete('/api/v1.0/plaid/unlinkAccount?itemId=' + accountId)
+            .then(results => {
+                console.log("unlinked account")
+                console.log(results.data)
+
+                //remove account from state
+                let accounts = [...this.state.accounts]
+                let index = accounts.findIndex(account => account.item_id == accountId)
+                accounts.splice(index, 1)
+
+                //remove account deleted from state.accounts
+                let transactions = [...this.state.transactions]
+                for (let i in transactions) {
+                    if (transactions[i].account_id == accountId) {
+                        transactions.splice(i, 1)
+                    }
+                }
+
+                //remove transactions belonging to account deleted
+                this.setState({
+                    accounts: accounts,
+                    transactions: transactions
+                })
+
+                $('table').addClass("d-none")
+
+            }
+            )
+            .catch(error => {
+                console.log(error.response)
+                console.log(error.response.data);
+                let errorCode = error.response.data.code;
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else if (error.response.data != undefined) {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
+                        showModalError: true
+                    });
+                }
+
+
+
+            });
     }
 
     handleChange(e) {
@@ -240,6 +327,7 @@ class LinkAccounts extends React.Component {
 
     render() {
         const isLoggedIn = this.props.isLoggedIn;
+        
 
         return (
             <>
@@ -251,34 +339,57 @@ class LinkAccounts extends React.Component {
                         <main className="col-12 col-sm-8 my-3 my-sm-4">
 
                             {this.state.accounts.length > 0 ? (<>
-                                <h4>Transactions for current month</h4>
-                                <p>From your linked accounts:</p>
-                                {this.state.accounts.map(account => (<span className="btn btn-warning m-2">{account} </span>))}
+                                <h4>View transactions for current month</h4>
+                                <p>Click to expand</p>
+                                {this.state.accounts.map((account, index) => (<><a className="btn btn-warning my-2 w-100" data-toggle="collapse" href={`#collapse${index}`} role="button" aria-expanded="false" aria-controls={`collapse${index}`}>
+                                    {account.institutionName}
+                                </a>
+                                    <div class="collapse" id={`collapse${index}`}>
+                                        <div className="card">
+                                            <div className="spinner d-flex justify-content-center m-3">
+                                                <div className="spinner-border " role="status">
+                                                    <p class=" d-block sr-only">Loading...</p>
+                                                </div>
+                                            </div>
+                                            <table className={`table table-responsive flex-fill d-none`} >
+                                                
+                                                <thead className={`${account.noOfTransactions > 0 ? "" : "d-none" }`}>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {this.state.transactions && this.state.transactions.map(transaction => (transaction.account_id == account.itemId ? (
+                                                        <tr key={transaction.transaction_id}>
+                                                            <td>{transaction.date}</td>
+                                                            <td>{transaction.category.map(category => (<span>{category}, </span>))}</td>
+                                                            <td>{transaction.name}</td>
+                                                            <td>{transaction.amount}</td>
 
-                                <table className="table table-responsive-sm" >
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                            <th>Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.state.transactions && this.state.transactions.map(transaction => (
-                                            <tr key={transaction.transaction_id}>
-                                                <td>{transaction.date}</td>
-                                                <td>{transaction.category.map(category => (<span>{category}, </span>))}</td>
-                                                <td>{transaction.name}</td>
-                                                <td>{transaction.amount}</td>
+                                                        </tr>) : null
+                                                    ))}
+                                                </tbody>
+                                            </table>
 
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table></>) : (<></>)}
 
-                            <button type='button' id="connect" className="btn d-none btn-success my-2" onClick={this.getAccessToken}>Connect an account</button>
-                            <button type='button' className="btn btn-primary my-2 ml-3" onClick={this.syncTransactions}>Sync transactions</button>
+                                            <div className="d-flex justify-content-center">
+
+                                                <button className="btn m-2 btn-sm btn-danger w-25" onClick={this.handleUnlinkAccount.bind(this, account.itemId)}>Unlink account</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                                ))}
+
+                            </>) : (<><h4>Link your bank account and quickly add your transactions to your finans account</h4></>)}
+                            <div className="d-flex justify-content-center">
+
+                                <button type='button' id="connect" className="btn d-none btn-success my-2 flex-fill classButtons" onClick={this.getAccessToken}>Connect an account</button>
+                                <button type='button' className="btn btn-primary my-2 ml-3 flex-fill classButtons" onClick={this.syncTransactions}>Sync transactions</button>
+                            </div>
                         </main>
                     </>
                 ) : <Navigate to="/login" />
