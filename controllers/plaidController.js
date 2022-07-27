@@ -171,7 +171,7 @@ exports.getTransactions = async (req, res) => {
 
                 }
             }
-            
+
             res.send(arrayOfTransactions)
         } else {
             let errorObject = new customError(['No institutions linked'], 422);
@@ -306,5 +306,26 @@ exports.syncTransactions = async (req, res) => {
     }
 
     res.send("done")
+}
+
+
+exports.getItems = async (req, res) => {
+    console.log("get items")
+    if (req.session.isAuth) {
+        const accessTokens = await AccessToken.find({ userId: req.session.userId });
+
+
+        let items = [];
+        for (let accessToken of accessTokens) {
+            console.log("access token:")
+            items.push(accessToken.institutionName)
+        }
+        res.send(items)
+            
+
+    } else {
+        let errorObject = new customError(['Please log in to see this information'], 401);
+        res.status(errorObject.status).send(errorObject);
+    }
 }
 

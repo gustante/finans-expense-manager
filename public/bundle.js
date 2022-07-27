@@ -16653,6 +16653,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
     _this.state = _defineProperty({
       linkToken: "",
       transactions: [],
+      accounts: [],
       showModalSuccess: false,
       showModalError: false,
       displayLoginButton: false,
@@ -16670,29 +16671,19 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
   _createClass(LinkAccounts, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.getLinkToken();
-    }
-  }, {
-    key: "getLinkToken",
-    value: function getLinkToken() {
       var _this2 = this;
 
-      console.log("step 1: request a link token from server");
-      axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/createLinkToken').then(function (results) {
-        console.log(results.data);
-        console.log("received link token from server");
+      this.getLinkToken();
+      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/v1.0/plaid/getItems').then(function (results) {
+        console.log("received items from server");
 
-        _this2.setState({
-          linkToken: results.data.link_token
-        });
-
-        $('#connect').removeClass("d-none");
-
-        if (results.data.hasAccessToken) {
-          console.log("has access token");
-
-          _this2.getTransactions();
+        if (results.data && results.data.length > 0) {
+          _this2.setState({
+            accounts: results.data
+          });
         }
+
+        console.log(results.data);
       })["catch"](function (error) {
         console.log(error);
         console.log(error.response);
@@ -16722,9 +16713,58 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "getLinkToken",
+    value: function getLinkToken() {
+      var _this3 = this;
+
+      console.log("step 1: request a link token from server");
+      axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/createLinkToken').then(function (results) {
+        console.log(results.data);
+        console.log("received link token from server");
+
+        _this3.setState({
+          linkToken: results.data.link_token
+        });
+
+        $('#connect').removeClass("d-none");
+
+        if (results.data.hasAccessToken) {
+          console.log("has access token");
+
+          _this3.getTransactions();
+        }
+      })["catch"](function (error) {
+        console.log(error);
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this3.setState({
+            displayLoginButton: true
+          });
+        }
+
+        if (error.response.data.data != undefined) {
+          _this3.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        } else if (error.response.data != undefined) {
+          _this3.setState({
+            Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this3.setState({
+            Message: ["Something went wrong", error],
+            showModalError: true
+          });
+        }
+      });
+    }
+  }, {
     key: "getAccessToken",
     value: function getAccessToken() {
-      var _this3 = this;
+      var _this4 = this;
 
       console.log("step 2: exchange public token for access token");
       console.log("token is " + this.state.linkToken);
@@ -16739,7 +16779,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
           }).then(function (results) {
             console.log(results.data);
 
-            _this3.getTransactions();
+            _this4.getTransactions();
 
             console.log("received access token from server");
           })["catch"](function (error) {
@@ -16748,17 +16788,17 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
             var errorCode = error.response.data.code;
 
             if (error.response.data.data != undefined) {
-              _this3.setState({
+              _this4.setState({
                 Message: error.response.data.data,
                 showModalError: true
               });
             } else if (error.response.data != undefined) {
-              _this3.setState({
+              _this4.setState({
                 Message: error.response.data,
                 showModalError: true
               });
             } else {
-              _this3.setState({
+              _this4.setState({
                 Message: ["Something went wrong", error],
                 showModalError: true
               });
@@ -16774,7 +16814,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
             // The user exited the Link flow without linking.
             console.log('stopping');
           } else {
-            _this3.setState({
+            _this4.setState({
               Message: ["Something went wrong", "Please refresh the page and check that you are logged in", err],
               showModalError: true
             });
@@ -16787,14 +16827,14 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getTransactions",
     value: function getTransactions() {
-      var _this4 = this;
+      var _this5 = this;
 
       console.log("getting transactions");
       axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/v1.0/plaid/getTransactions').then(function (results) {
         console.log(results.data);
         console.log("received transactions from server");
 
-        _this4.setState({
+        _this5.setState({
           transactions: results.data
         });
       })["catch"](function (err) {
@@ -16848,7 +16888,11 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         errorMessages: this.state.Message
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
         className: "col-12 col-sm-8 my-3 my-sm-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Transactions for current month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
+      }, this.state.accounts.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Transactions for current month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "From your linked accounts:"), this.state.accounts.map(function (account) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: "btn btn-warning m-2"
+        }, account, " ");
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
         className: "table table-responsive-sm"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.transactions && this.state.transactions.map(function (transaction) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
@@ -16856,7 +16900,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.category.map(function (category) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, category, ", ");
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.amount));
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
         id: "connect",
         className: "btn d-none btn-success my-2",
