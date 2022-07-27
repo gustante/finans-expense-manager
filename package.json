@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run jest",
-    "dev": "nodemon app.js",
+    "dev": "HTTPS=true SSL_CRT_FILE=localhost.pem SSL_KEY_FILE=localhost-key.pem nodemon app.js",
     "watch": "webpack --watch",
     "start": "node app.js",
     "jest": "jest"

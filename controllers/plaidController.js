@@ -171,6 +171,7 @@ exports.getTransactions = async (req, res) => {
 
                 }
             }
+            
             res.send(arrayOfTransactions)
         } else {
             let errorObject = new customError(['No institutions linked'], 422);
@@ -274,7 +275,7 @@ exports.syncTransactions = async (req, res) => {
                             day: day,
                             year: year,
                             type: chosenType,
-                            description: transaction.name + " *****************",
+                            description: transaction.name,
                             amount: transaction.amount,
                             user: user._id,
                             recurring: false,
