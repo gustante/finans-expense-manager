@@ -40,6 +40,13 @@ class ExpenseTable extends React.Component {
                             </tr>
                         </thead>
 
+                        <div className="table-spinner spinner">
+                            <div className="spinner-border " role="status">
+                                <p class=" d-block sr-only">Loading...</p>
+                            </div>
+                        </div>
+
+
                         {this.props.expenses.map((expense, index) =>
                             <>
                                 <tbody>
@@ -75,6 +82,7 @@ class ExpenseTable extends React.Component {
                                             <div className="view">
                                                 {expense.description}
                                             </div>
+
                                         </td>
 
 
@@ -147,7 +155,7 @@ class ExpenseTable extends React.Component {
                     </table>
 
 
-                    <div className="d-flex mb-2 flex-wrap justify-content-center">
+                    <div className="mt-5 pt-5 table-cards d-flex mb-2 flex-wrap justify-content-center">
 
                         <button className="btn btn-warning mx-3">Total: ${this.state.total}</button>
 

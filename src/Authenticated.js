@@ -25,11 +25,16 @@ class Authenticated extends React.Component {
         return (
             <>
                 {isLoggedIn ? (
-                    <Navigate to="/dashboard"/>
+                    <Navigate to="/dashboard" />
                 ) : (<>
-                    <h1>Loading...</h1>
+                    <h1 className='m-2'>Redirecting...</h1>
+                    <div className="table-spinner mt-1 spinner">
+                        <div className="spinner-border " role="status">
+                            <p class=" d-block sr-only">Loading...</p>
+                        </div>
+                    </div>
                 </>
-                    )
+                )
                 }
 
 

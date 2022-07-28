@@ -145,6 +145,7 @@ exports.getTransactions = async (req, res) => {
         if (accessTokens && accessTokens.length > 0) {
 
             for (let accessToken of accessTokens) {
+                accessToken.noOfTransactions = 0;
                 const request = {
                     access_token: accessToken.token,
                     options: {
@@ -161,16 +162,19 @@ exports.getTransactions = async (req, res) => {
                     if (transaction.amount > 0) {
                         arrayOfTransactions.push({
                             _id: transaction.transaction_id,
-                            account_id: transaction.account_id,
+                            account_id: accessToken.itemId,
                             name: transaction.name,
                             amount: transaction.amount,
                             date: transaction.date,
                             category: transaction.category,
                         })
                     }
+                    accessToken.noOfTransactions += 1;
 
                 }
+                await accessToken.save();
             }
+
             res.send(arrayOfTransactions)
         } else {
             let errorObject = new customError(['No institutions linked'], 422);
@@ -274,7 +278,7 @@ exports.syncTransactions = async (req, res) => {
                             day: day,
                             year: year,
                             type: chosenType,
-                            description: transaction.name + " *****************",
+                            description: transaction.name,
                             amount: transaction.amount,
                             user: user._id,
                             recurring: false,
@@ -305,5 +309,64 @@ exports.syncTransactions = async (req, res) => {
     }
 
     res.send("done")
+}
+
+
+exports.getItems = async (req, res) => {
+    console.log("get items")
+    if (req.session.isAuth) {
+        const accessTokens = await AccessToken.find({ userId: req.session.userId });
+
+
+        let items = [];
+        for (let accessToken of accessTokens) {
+            console.log("access token:")
+            console.log(accessToken)
+            items.push({institutionName: accessToken.institutionName,
+                        itemId: accessToken.itemId,
+                        noOfTransactions: accessToken.noOfTransactions
+                    })
+        }
+        res.send(items)
+            
+
+    } else {
+        let errorObject = new customError(['Please log in to see this information'], 401);
+        res.status(errorObject.status).send(errorObject);
+    }
+}
+
+exports.unlinkAccount = async (req, res) => {
+    console.log("received request to delete item: ")
+    console.log(req.query.itemId)
+    if (req.session.isAuth) {
+
+        //remove from user's access tokens
+        const user = await User.findById(req.session.userId).populate('plaidAccessTokens').exec();
+        console.log(user)
+
+        for (let i = user.plaidAccessTokens.length - 1; i >= 0; i--) {
+            if (user.plaidAccessTokens[i].itemId == req.query.itemId) {
+                console.log("found item to be deleted")
+                user.plaidAccessTokens.splice(i, 1);
+            }
+        }
+        await user.save();
+
+        //remove from access tokens
+        const accessToken = await AccessToken.findOneAndDelete({ itemId: req.query.itemId });
+        console.log(accessToken)
+
+        
+        console.log("deleted")
+        res.send("done")
+
+        
+    } else {
+        let errorObject = new customError(['Please log in to see this information'], 401);
+        res.status(errorObject.status).send(errorObject);
+    }
+    
+
 }
 

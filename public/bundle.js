@@ -14421,10 +14421,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+
 
 
 function About() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "This is the about page");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "dashboard mb-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": " my-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    "class": "display-4"
+  }, "About finans"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    "class": "lead"
+  }, "Finans is a simple and easy-to-use application to keep your spendings in control. It creates a detailed record of expenses and provides several other tools to help you manage them.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "After log ing and upon start, the app loads all existing expenses in the database at the dashboard and creates a table with the records. The user can then fill all the fields and click the add button to register a new transaction, which will promptly be added to the end of the table along with a success pop-up message with the transaction id.  If any field is missing or if incorrect information is passed, such as a year that contains a letter, an error message is displayed and the transaction is not added. Newest expenses are always displayed on top."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The user can also dynamically filter expenses based on the information contained in the fields. As an example, they can click the button to clear all the fields and then select only type Groceries, then click the filter button. That will search the database and rebuild the table only with expenses in the Groceries category. They can also add more filters, like for example search Groceries expenses in the month of October, and so on... The sum of expenses displayed at the end will also be updated to reflect the results of the search."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "A button to search all expenses was also added to go back to the original state without having to refresh it."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Each expense in the table has a button at the end which toggles editable options where the user can modify any data, save or discard changes, as well as delete the entire row if needed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Every new account starts with an \"Other\" type, which cannot be deleted. However, the user has the freedom to create and delete as many types of expenses as they wish, as well as assign specific budgets to it by clicking the yellow button in the form. If the user chooses to add a budget, an SMS notification will be sent to their phone alerting them when they reach half of their budget, when it is at 80%, and then they exceed it, as long as they have a phone number registered."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The \"My Account\" link on the navbar takes the user to a menu with a few other features including the option to edit their account information as well as manage their types and budgets. From there, it is possible to analyze a detailed visual summary of all types and their budgets with progress bars and colors to help monitor their expenses. At the bottom of the \"Budgets\" page, there are also cards displaying the total budget, the amount for expenses inside their budgets, and finally the total amount spent, which includes extra expenses in types that do not have a budget set. The user can also compare with previous months by selecting the navigation buttons at the very end for an easy comparison. It fetches the data from different months from the database and updates the diagram."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "In \"Manage Types\", it is possible to also edit types' names and budgets, or delete them if needed. When a type is deleted, all its expenses are automatically assigned to \"Other\", which is the default type."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Every action where user input is provided is protected by reCAPTCHA v3, as well as by extensive front-end and back-end validators and sanitizers which cover updating, creation or deletion of expenses, types and user accounts/personal information. "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "d-flex justify-content-center my-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/login"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "button",
+    "data-dismiss": "modal",
+    className: "btn btn-warning"
+  }, "Start using Finans today!")))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (About);
@@ -15333,7 +15353,16 @@ var Authenticated = /*#__PURE__*/function (_React$Component) {
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Navigate, {
         to: "/dashboard"
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Loading...")));
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+        className: "m-2"
+      }, "Redirecting..."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "table-spinner mt-1 spinner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "spinner-border ",
+        role: "status"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        "class": " d-block sr-only"
+      }, "Loading...")))));
     }
   }]);
 
@@ -15474,6 +15503,8 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
           totalBudget: totalBudget,
           totalInsideBudget: totalInsideBudget.toFixed(2)
         });
+
+        $('.table-spinner').hide();
       })["catch"](function (error) {
         console.log(error.response);
 
@@ -15720,7 +15751,14 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
         className: "table "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", {
         className: ""
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Total in ", monthString, " ", this.state.currentYear))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.types.map(function (type, index) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Total in ", monthString, " ", this.state.currentYear))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "table-spinner pt-1 spinner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "spinner-border ",
+        role: "status"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        "class": " d-block sr-only"
+      }, "Loading..."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.types.map(function (type, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
           key: index
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, type.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -16094,7 +16132,14 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
         className: "table table-responsive-sm"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
         className: ""
-      }, "Edit"))), this.props.expenses.map(function (expense, index) {
+      }, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "table-spinner spinner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "spinner-border ",
+        role: "status"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        "class": " d-block sr-only"
+      }, "Loading..."))), this.props.expenses.map(function (expense, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
           key: index,
           className: expense._id
@@ -16171,7 +16216,7 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
           className: "fas fa-edit"
         }))))));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "d-flex mb-2 flex-wrap justify-content-center"
+        className: "mt-5 pt-5 table-cards d-flex mb-2 flex-wrap justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "btn btn-warning mx-3"
       }, "Total: $", this.state.total)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -16793,6 +16838,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16835,6 +16892,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
     _this.state = _defineProperty({
       linkToken: "",
       transactions: [],
+      accounts: [],
       showModalSuccess: false,
       showModalError: false,
       displayLoginButton: false,
@@ -16846,6 +16904,8 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
     _this.syncTransactions = _this.syncTransactions.bind(_assertThisInitialized(_this));
     _this.handleCloseError = _this.handleCloseError.bind(_assertThisInitialized(_this));
     _this.handleCloseSuccess = _this.handleCloseSuccess.bind(_assertThisInitialized(_this));
+    _this.handleUnlinkAccount = _this.handleUnlinkAccount.bind(_assertThisInitialized(_this));
+    _this.getItems = _this.getItems.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -16855,26 +16915,22 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       this.getLinkToken();
     }
   }, {
-    key: "getLinkToken",
-    value: function getLinkToken() {
+    key: "getItems",
+    value: function getItems() {
       var _this2 = this;
 
-      console.log("step 1: request a link token from server");
-      axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/createLinkToken').then(function (results) {
-        console.log(results.data);
-        console.log("received link token from server");
+      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/v1.0/plaid/getItems').then(function (results) {
+        console.log("received items from server");
 
-        _this2.setState({
-          linkToken: results.data.link_token
-        });
-
-        $('#connect').removeClass("d-none");
-
-        if (results.data.hasAccessToken) {
-          console.log("has access token");
+        if (results.data && results.data.length > 0) {
+          _this2.setState({
+            accounts: results.data
+          });
 
           _this2.getTransactions();
         }
+
+        console.log(results.data);
       })["catch"](function (error) {
         console.log(error);
         console.log(error.response);
@@ -16904,9 +16960,57 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "getLinkToken",
+    value: function getLinkToken() {
+      var _this3 = this;
+
+      console.log("step 1: request a link token from server");
+      axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/createLinkToken').then(function (results) {
+        console.log("received link token from server");
+
+        _this3.setState({
+          linkToken: results.data.link_token
+        });
+
+        $('#connect').removeClass("d-none");
+
+        if (results.data.hasAccessToken) {
+          console.log("has access token");
+
+          _this3.getItems();
+        }
+      })["catch"](function (error) {
+        console.log(error);
+        console.log(error.response);
+
+        if (error.response.data.status == 401) {
+          _this3.setState({
+            displayLoginButton: true
+          });
+        }
+
+        if (error.response.data.data != undefined) {
+          _this3.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        } else if (error.response.data != undefined) {
+          _this3.setState({
+            Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this3.setState({
+            Message: ["Something went wrong", error],
+            showModalError: true
+          });
+        }
+      });
+    }
+  }, {
     key: "getAccessToken",
     value: function getAccessToken() {
-      var _this3 = this;
+      var _this4 = this;
 
       console.log("step 2: exchange public token for access token");
       console.log("token is " + this.state.linkToken);
@@ -16920,27 +17024,24 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
             link_session_id: metadata.link_session_id
           }).then(function (results) {
             console.log(results.data);
-
-            _this3.getTransactions();
-
             console.log("received access token from server");
+
+            _this4.getItems();
           })["catch"](function (error) {
-            console.log(error.response);
-            console.log(error.response.data);
-            var errorCode = error.response.data.code;
+            console.log(error);
 
             if (error.response.data.data != undefined) {
-              _this3.setState({
+              _this4.setState({
                 Message: error.response.data.data,
                 showModalError: true
               });
             } else if (error.response.data != undefined) {
-              _this3.setState({
+              _this4.setState({
                 Message: error.response.data,
                 showModalError: true
               });
             } else {
-              _this3.setState({
+              _this4.setState({
                 Message: ["Something went wrong", error],
                 showModalError: true
               });
@@ -16956,7 +17057,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
             // The user exited the Link flow without linking.
             console.log('stopping');
           } else {
-            _this3.setState({
+            _this4.setState({
               Message: ["Something went wrong", "Please refresh the page and check that you are logged in", err],
               showModalError: true
             });
@@ -16969,18 +17070,40 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getTransactions",
     value: function getTransactions() {
-      var _this4 = this;
+      var _this5 = this;
 
       console.log("getting transactions");
       axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/v1.0/plaid/getTransactions').then(function (results) {
+        $('.spinner').removeClass("d-flex");
+        $('.spinner').addClass("d-none");
+        $('table').removeClass("d-none");
         console.log(results.data);
         console.log("received transactions from server");
 
-        _this4.setState({
-          transactions: results.data
-        });
-      })["catch"](function (err) {
-        console.log(err);
+        if (results.data.length > 0) {
+          _this5.setState({
+            transactions: results.data
+          });
+        }
+      })["catch"](function (error) {
+        console.log(error);
+
+        if (error.response.data.data != undefined) {
+          _this5.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        } else if (error.response.data != undefined) {
+          _this5.setState({
+            Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this5.setState({
+            Message: ["Something went wrong", error],
+            showModalError: true
+          });
+        }
       });
     }
   }, {
@@ -16991,6 +17114,60 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         console.log("syncronized transactions in backend server");
       })["catch"](function (err) {
         console.log(err);
+      });
+    }
+  }, {
+    key: "handleUnlinkAccount",
+    value: function handleUnlinkAccount(accountId) {
+      var _this6 = this;
+
+      console.log("unlinking account");
+      console.log(accountId);
+      axios__WEBPACK_IMPORTED_MODULE_3___default().delete('/api/v1.0/plaid/unlinkAccount?itemId=' + accountId).then(function (results) {
+        console.log("unlinked account");
+        console.log(results.data); //remove account from state
+
+        var accounts = _toConsumableArray(_this6.state.accounts);
+
+        var index = accounts.findIndex(function (account) {
+          return account.itemId == accountId;
+        });
+        accounts.splice(index, 1); //remove account deleted from state.accounts
+
+        var transactions = _toConsumableArray(_this6.state.transactions);
+
+        for (var i in transactions) {
+          if (transactions[i].account_id == accountId) {
+            transactions.splice(i, 1);
+          }
+        } //remove transactions belonging to account deleted
+
+
+        _this6.setState({
+          accounts: accounts,
+          transactions: transactions
+        });
+      })["catch"](function (error) {
+        console.log(error.response);
+        console.log(error.response.data);
+        var errorCode = error.response.data.code;
+
+        if (error.response.data.data != undefined) {
+          _this6.setState({
+            Message: error.response.data.data,
+            showModalError: true
+          });
+        } else if (error.response.data != undefined) {
+          _this6.setState({
+            Message: error.response.data,
+            showModalError: true
+          });
+        } else {
+          _this6.setState({
+            Message: ["Something went wrong", error],
+            showModalError: true
+          });
+        }
       });
     }
   }, {
@@ -17018,6 +17195,8 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this7 = this;
+
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalSuccess__WEBPACK_IMPORTED_MODULE_1__.default, {
         handleClose: this.handleCloseSuccess,
@@ -17030,24 +17209,54 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         errorMessages: this.state.Message
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
         className: "col-12 col-sm-8 my-3 my-sm-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Transactions for current month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
-        className: "table table-responsive-sm"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.transactions && this.state.transactions.map(function (transaction) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
-          key: transaction.transaction_id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.category.map(function (category) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, category, ", ");
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.amount));
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, this.state.accounts.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "View transactions for current month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Click to expand"), this.state.accounts.map(function (account, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+          className: "btn btn-warning my-2 w-100",
+          "data-toggle": "collapse",
+          href: "#collapse".concat(index),
+          role: "button",
+          "aria-expanded": "false",
+          "aria-controls": "collapse".concat(index)
+        }, account.institutionName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          "class": "collapse",
+          id: "collapse".concat(index)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "card"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "spinner d-flex justify-content-center m-3"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "spinner-border ",
+          role: "status"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+          "class": " d-block sr-only"
+        }, "Loading..."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
+          className: "table table-responsive flex-fill d-none"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", {
+          className: "".concat(account.noOfTransactions > 0 ? "" : "d-none")
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, _this7.state.transactions && _this7.state.transactions.map(function (transaction) {
+          return transaction.account_id == account.itemId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
+            key: transaction.transaction_id
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.category.map(function (category) {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, category, ", ");
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, transaction.amount)) : null;
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "d-flex justify-content-center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          className: "btn m-2 btn-sm btn-danger w-25",
+          onClick: _this7.handleUnlinkAccount.bind(_this7, account.itemId)
+        }, "Unlink account")))));
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Link your bank account and quickly add your transactions to your finans account")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "d-flex justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
         id: "connect",
-        className: "btn d-none btn-success my-2",
+        className: "btn d-none btn-success my-2 flex-fill classButtons",
         onClick: this.getAccessToken
       }, "Connect an account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
-        className: "btn btn-primary my-2 ml-3",
+        className: "btn btn-primary my-2 ml-3 flex-fill classButtons",
         onClick: this.syncTransactions
-      }, "Sync transactions"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
+      }, "Sync transactions")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Navigate, {
         to: "/login"
       }));
     }
@@ -17344,15 +17553,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.isLoggedIn) {
         axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
-          console.log("before entering loop");
-
           var _iterator = _createForOfIteratorHelper(results.data),
               _step;
 
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var expense = _step.value;
-              console.log("entering loop");
               if (expense.type == null) console.log(expense);
             }
           } catch (err) {
@@ -17364,6 +17570,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
           _this2.setState({
             expenses: results.data.splice(0, _this2.state.position)
           });
+
+          $('.table-spinner').hide();
+          $('.table-cards').removeClass('mt-5 pt-5');
         })["catch"](function (error) {
           console.log(error);
           console.log(error.response);
@@ -18325,6 +18534,8 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
         _this2.setState({
           types: arrayOfTypes
         });
+
+        $('.table-spinner').hide();
       })["catch"](function (error) {
         console.log(error.response);
 
@@ -18568,7 +18779,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
         errorMessages: this.state.Message
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
         className: "table"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.types.map(function (type, index) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "table-spinner mt-1 spinner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "spinner-border ",
+        role: "status"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        "class": " d-block sr-only"
+      }, "Loading..."))), this.state.types.map(function (type, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
           key: index,
           className: type._id
@@ -19019,7 +19237,7 @@ var MyAccount = /*#__PURE__*/function (_React$Component) {
         className: "nav-link",
         to: "/myAccount/linkAccounts"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "fas fa-money-check"
+        className: "fas fa-university"
       }), " Link Accounts")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Outlet, null)));
     }
   }]);
@@ -19185,8 +19403,70 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 
+
 function Plans() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "This is the Plans page");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "dashboard mb-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    "class": "display-4"
+  }, "Pricing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    "class": "lead"
+  }, "Quickly build an effective pricing table for your potential customers with this Bootstrap example. It\u2019s built with default Bootstrap components and utilities with little customization.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-deck mb-3 text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card mb-4 shadow-sm"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+    "class": "my-0 font-weight-normal"
+  }, "Free")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    "class": "card-title pricing-card-title"
+  }, "$0 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("small", {
+    "class": "text-muted"
+  }, "/ mo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    "class": "list-unstyled mt-3 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "10 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "2 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "button",
+    "class": "btn btn-lg btn-block btn-outline-warning"
+  }, "Sign up for free"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card mb-4 shadow-sm"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+    "class": "my-0 font-weight-normal"
+  }, "Pro")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    "class": "card-title pricing-card-title"
+  }, "$15 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("small", {
+    "class": "text-muted"
+  }, "/ mo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    "class": "list-unstyled mt-3 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "20 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "10 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Priority email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "button",
+    "class": "btn btn-lg btn-block btn-warning"
+  }, "Get started"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card mb-4 shadow-sm"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+    "class": "my-0 font-weight-normal"
+  }, "Enterprise")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    "class": "card-title pricing-card-title"
+  }, "$29 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("small", {
+    "class": "text-muted"
+  }, "/ mo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    "class": "list-unstyled mt-3 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "30 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "15 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Phone and email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "button",
+    "class": "btn btn-lg btn-block btn-warning"
+  }, "Contact us")))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Plans);
@@ -19666,13 +19946,17 @@ grecaptcha.ready(function () {
   \********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__, module.id */
+/*! CommonJS bailout: exports is used directly at 3:0-7 */
+/*! CommonJS bailout: exports.push(...) prevents optimization as exports is passed as call context at 5:0-12 */
+/*! CommonJS bailout: exports is used directly at 7:17-24 */
+/*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n  display: block;\n}\n\n.hide {\n  display: none;\n}\n\n.testing {\n  color: blue\n}\n\ninput[readonly] {\n  background-color: white !important;\n}\n\n\n#expense-deleted-alert,\n#expense-created-alert,\n#expense-edited-alert {\n  position: fixed;\n  bottom: 10;\n  z-index: 1021;\n  left: 10;\n  right: 10;\n  border-radius: 8px;\n}\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n  width: 90%;\n  max-width: 900px;\n  margin: auto;\n}\n\n\n\n.grecaptcha-badge {\n  visibility: hidden;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n  width: 90%;\n  max-width: 650px;\n  padding: 5px;\n  margin: auto;\n}\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0;\n  /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text;\n  /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n  background: #ffc107;\n  color: white;\n}\n\n.caixa {\n  padding: 60px 0;\n  border-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n  margin: 5px 15px;\n}\n\nfooter .copyright {\n  font-size: 0.8em;\n}\n\n.badge {\n  font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n  font-size: .875rem;\n}\n\n.feather {\n  width: 16px;\n  height: 16px;\n  vertical-align: text-bottom;\n}\n\n/*\n   * Sidebar\n   */\n\n.sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 100;\n  /* Behind the navbar */\n  padding: 48px 0 0;\n  /* Height of navbar */\n  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n}\n\n.container {\n  max-width: 95%;\n\n}\n\n\n\n.sidebar-sticky {\n  position: relative;\n  top: 0;\n  height: calc(100vh - 48px);\n  padding-top: .5rem;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* Scrollable contents if viewport is shorter than content. */\n}\n\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n  .sidebar-sticky {\n    position: -webkit-sticky;\n    position: sticky;\n  }\n}\n\n.sidebar .nav-link {\n  font-weight: 500;\n  color: #333;\n}\n\n.sidebar .nav-link .feather {\n  margin-right: 4px;\n  color: #999;\n}\n\n.sidebar .nav-link.active {\n  color: #007bff;\n}\n\n.sidebar .nav-link:hover .feather,\n.sidebar .nav-link.active .feather {\n  color: inherit;\n}\n\n.sidebar-heading {\n  font-size: .75rem;\n  text-transform: uppercase;\n}\n\n/*\n   * Navbar\n   */\n\n.navbar-brand {\n  padding-top: .75rem;\n  padding-bottom: .75rem;\n  font-size: 1rem;\n}\n\n.navbar .navbar-toggler {\n  top: .25rem;\n  right: 1rem;\n}\n\n.navbar .form-control {\n  padding: .75rem 1rem;\n  border-width: 0;\n  border-radius: 0;\n}\n\n.form-control-dark {\n  color: #fff;\n  background-color: rgba(255, 255, 255, .1);\n  border-color: rgba(255, 255, 255, .1);\n}\n\n.form-control-dark:focus {\n  border-color: transparent;\n  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n}\n\ninput[type=date] {\n  width: 90%\n}\n\n\n\n\n@media (max-width: 544px) {\n  table {\n    font-size: 0.8rem;\n\n\n  }\n\n  table td,\n  table th {\n    padding: 5px !important;\n    margin: 5px\n  }\n\n  .d-flex-row {\n    flex-direction: column;\n  }\n}\n\n@media (min-width: 544px) {\n  table {\n    font-size: 0.9rem;\n  }\n  #expense-deleted-alert, #expense-created-alert, #expense-edited-alert {\n    width: 60%;\n    max-width: 900px;\n    margin: auto;\n    margin-bottom: 8px;\n  }\n}\n\n@media (min-width: 768px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 992px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 1200px) {\n  table {\n    font-size: 1.1rem;\n  }\n}", ""]);
+exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n  display: block;\n}\n\n.hide {\n  display: none;\n}\n\n.testing {\n  color: blue\n}\n\ninput[readonly] {\n  background-color: white !important;\n}\n\n\n#expense-deleted-alert,\n#expense-created-alert,\n#expense-edited-alert {\n  position: fixed;\n  bottom: 10;\n  z-index: 1021;\n  left: 10;\n  right: 10;\n  border-radius: 8px;\n}\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n  width: 90%;\n  max-width: 900px;\n  margin: auto;\n}\n\n\n\n.grecaptcha-badge {\n  visibility: hidden;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n  width: 90%;\n  max-width: 650px;\n  padding: 5px;\n  margin: auto;\n}\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0;\n  /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text;\n  /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n  background: #ffc107;\n  color: white;\n}\n\n.caixa {\n  padding: 60px 0;\n  border-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n  margin: 5px 15px;\n}\n\nfooter .copyright {\n  font-size: 0.8em;\n}\n\n.badge {\n  font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n  font-size: .875rem;\n}\n\n.feather {\n  width: 16px;\n  height: 16px;\n  vertical-align: text-bottom;\n}\n\n/*\n   * Sidebar\n   */\n\n.sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 100;\n  /* Behind the navbar */\n  padding: 48px 0 0;\n  /* Height of navbar */\n  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n}\n\n.container {\n  max-width: 95%;\n\n}\n\n\n\n.sidebar-sticky {\n  position: relative;\n  top: 0;\n  height: calc(100vh - 48px);\n  padding-top: .5rem;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* Scrollable contents if viewport is shorter than content. */\n}\n\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n  .sidebar-sticky {\n    position: -webkit-sticky;\n    position: sticky;\n  }\n}\n\n.sidebar .nav-link {\n  font-weight: 500;\n  color: #333;\n}\n\n.sidebar .nav-link .feather {\n  margin-right: 4px;\n  color: #999;\n}\n\n.sidebar .nav-link.active {\n  color: #007bff;\n}\n\n.sidebar .nav-link:hover .feather,\n.sidebar .nav-link.active .feather {\n  color: inherit;\n}\n\n.sidebar-heading {\n  font-size: .75rem;\n  text-transform: uppercase;\n}\n\n/*\n   * Navbar\n   */\n\n.navbar-brand {\n  padding-top: .75rem;\n  padding-bottom: .75rem;\n  font-size: 1rem;\n}\n\n.navbar .navbar-toggler {\n  top: .25rem;\n  right: 1rem;\n}\n\n.navbar .form-control {\n  padding: .75rem 1rem;\n  border-width: 0;\n  border-radius: 0;\n}\n\n.form-control-dark {\n  color: #fff;\n  background-color: rgba(255, 255, 255, .1);\n  border-color: rgba(255, 255, 255, .1);\n}\n\n.form-control-dark:focus {\n  border-color: transparent;\n  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n}\n\ninput[type=date] {\n  width: 90%\n}\n\n.classButtons {\n  max-width: 250px;\n}\n\n.table-spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -50px;\n  margin-left: -20px;\n  margin-bottom: 100px;\n  padding-bottom: 100px;\n  \n}\n\n\n\n\n@media (max-width: 544px) {\n  table {\n    font-size: 0.8rem;\n\n\n  }\n\n  table td,\n  table th {\n    padding: 5px !important;\n    margin: 5px\n  }\n\n  .d-flex-row {\n    flex-direction: column;\n  }\n}\n\n@media (min-width: 544px) {\n  table {\n    font-size: 0.9rem;\n  }\n  #expense-deleted-alert, #expense-created-alert, #expense-edited-alert {\n    width: 60%;\n    max-width: 900px;\n    margin: auto;\n    margin-bottom: 8px;\n  }\n}\n\n@media (min-width: 768px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 992px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 1200px) {\n  table {\n    font-size: 1.1rem;\n  }\n}", ""]);
 // Exports
 module.exports = exports;
 
