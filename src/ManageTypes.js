@@ -66,6 +66,7 @@ class ManageTypes extends React.Component {
                     let arrayOfTypes = results.data
 
                     this.setState({ types: arrayOfTypes });
+                    $('.table-spinner').hide()
 
                 })
                 .catch(error => {
@@ -302,6 +303,12 @@ class ManageTypes extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                <div className="table-spinner mt-1 spinner">
+                                    <div className="spinner-border " role="status">
+                                        <p class=" d-block sr-only">Loading...</p>
+                                    </div>
+                                </div>
 
                                 {this.state.types.map((type, index) =>
                                     <>

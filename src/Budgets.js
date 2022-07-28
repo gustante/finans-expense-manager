@@ -37,7 +37,7 @@ class Budgets extends React.Component {
                 let totalBudget = 0;
                 let totalInsideBudget = 0;
                 for (let type of results.data) {
-                    if(type.budget){
+                    if (type.budget) {
                         totalBudget += type.budget;
                         totalInsideBudget += type.sumOfExpenses;
                         totalSpent += type.sumOfExpenses;
@@ -53,20 +53,21 @@ class Budgets extends React.Component {
                     totalBudget: totalBudget,
                     totalInsideBudget: totalInsideBudget.toFixed(2)
                 });
+                $('.table-spinner').hide()
 
             })
             .catch(error => {
                 console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
                 }
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -88,7 +89,7 @@ class Budgets extends React.Component {
         if (option == 'next') {
             console.log('increase month')
             currentMonth++;
-            if(currentMonth == 13){
+            if (currentMonth == 13) {
                 currentMonth = 1; //resets if it goes past december
                 currentYear++
             }
@@ -99,7 +100,7 @@ class Budgets extends React.Component {
         } else if (option == 'prev') {
             console.log('decrease month')
             currentMonth--;
-            if(currentMonth == 0){
+            if (currentMonth == 0) {
                 currentMonth = 12 // resets if goes back before january
                 currentYear--
             }
@@ -124,7 +125,7 @@ class Budgets extends React.Component {
                 }
                 //adjust sumOfExpenses to selected month
                 for (let expense of arrayOfExpenses) {
-                    if(expense.type.budget){
+                    if (expense.type.budget) {
                         totalInsideBudget += expense.amount;
                         totalSpent += expense.amount
 
@@ -151,16 +152,16 @@ class Budgets extends React.Component {
             })
             .catch(error => {
                 console.log(error.response)
-                if(error.response.data.status == 401){
-                    this.setState({displayLoginButton: true});
+                if (error.response.data.status == 401) {
+                    this.setState({ displayLoginButton: true });
 
                 }
-                if(error.response.data.data != undefined){
+                if (error.response.data.data != undefined) {
                     this.setState({
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -180,13 +181,15 @@ class Budgets extends React.Component {
 
     //controls display of modals
     handleCloseSuccess() {
-        this.setState({ showModalSuccess: false,
-                        displayLoginButton: false
+        this.setState({
+            showModalSuccess: false,
+            displayLoginButton: false
         });
     }
     handleCloseError() {
-        this.setState({ showModalError: false,
-                    displayLoginButton: false
+        this.setState({
+            showModalError: false,
+            displayLoginButton: false
         });
     }
 
@@ -237,16 +240,21 @@ class Budgets extends React.Component {
                                         <th>Total in {monthString} {this.state.currentYear}</th>
                                     </tr>
                                 </thead>
+                                <div className="table-spinner pt-1 spinner">
+                                    <div className="spinner-border " role="status">
+                                        <p class=" d-block sr-only">Loading...</p>
+                                    </div>
+                                </div>
                                 <tbody>
                                     {this.state.types.map((type, index) =>
                                         <tr key={index}>
                                             <td>{type.name}
-                                            <div className="progress mt-1">
-                                                <div className={`progress-bar ${ Math.round((type.sumOfExpenses * 100) / type.budget) > 100 ? 'bg-danger' : 'bg-success' }`} role="progressbar" style={{width: `${Math.round((type.sumOfExpenses * 100) / type.budget) }%`}}  aria-valuenow={Math.round((type.sumOfExpenses * 100) / type.budget)} aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
+                                                <div className="progress mt-1">
+                                                    <div className={`progress-bar ${Math.round((type.sumOfExpenses * 100) / type.budget) > 100 ? 'bg-danger' : 'bg-success'}`} role="progressbar" style={{ width: `${Math.round((type.sumOfExpenses * 100) / type.budget)}%` }} aria-valuenow={Math.round((type.sumOfExpenses * 100) / type.budget)} aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
                                             </td>
                                             <td className="font-weight-bold">{`${type.budget ? type.budget : ' --'}`}</td>
-                                            {type.budget ? <td className={`${ type.sumOfExpenses > type.budget ? 'text-danger font-weight-bold' : 'text-dark' }`}>{type.sumOfExpenses.toFixed(2)}</td> : <td>{type.sumOfExpenses.toFixed(2)}</td>}
+                                            {type.budget ? <td className={`${type.sumOfExpenses > type.budget ? 'text-danger font-weight-bold' : 'text-dark'}`}>{type.sumOfExpenses.toFixed(2)}</td> : <td>{type.sumOfExpenses.toFixed(2)}</td>}
 
                                         </tr>)
                                     }

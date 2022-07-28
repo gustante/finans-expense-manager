@@ -255,7 +255,7 @@ class LinkAccounts extends React.Component {
 
                 //remove account from state
                 let accounts = [...this.state.accounts]
-                let index = accounts.findIndex(account => account.item_id == accountId)
+                let index = accounts.findIndex(account => account.itemId == accountId)
                 accounts.splice(index, 1)
 
                 //remove account deleted from state.accounts
@@ -272,7 +272,7 @@ class LinkAccounts extends React.Component {
                     transactions: transactions
                 })
 
-                $('table').addClass("d-none")
+                
 
             }
             )

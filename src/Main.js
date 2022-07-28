@@ -83,17 +83,18 @@ class Main extends React.Component {
         if (this.props.isLoggedIn) {
             axios.get("/api/v1.0/expense/all")
                 .then(results => {
-                    console.log("before entering loop")
-                    for(let expense of results.data){
-                        console.log("entering loop")
-                        if(expense.type == null)
+                    for (let expense of results.data) {
+                        if (expense.type == null)
                             console.log(expense)
-  
                     }
+
                     
+
                     this.setState({ expenses: results.data.splice(0, this.state.position) });
-                    
-                    
+                    $('.table-spinner').hide()
+                    $('.table-cards').removeClass('mt-5 pt-5')
+
+
 
                 })
                 .catch(error => {
@@ -108,7 +109,7 @@ class Main extends React.Component {
                             Message: error.response.data.data,
                             showModalError: true
                         });
-                    }else if(error.response.data != undefined) {
+                    } else if (error.response.data != undefined) {
                         this.setState({
                             Message: error.response.data,
                             showModalError: true
@@ -140,7 +141,7 @@ class Main extends React.Component {
                             Message: error.response.data.data,
                             showModalError: true
                         });
-                    } else if(error.response.data != undefined) {
+                    } else if (error.response.data != undefined) {
                         this.setState({
                             Message: error.response.data,
                             showModalError: true
@@ -207,10 +208,10 @@ class Main extends React.Component {
 
                         // Add item to it
                         arrayOfExpenses.unshift(results.data[0]);
-                        
+
                         //in case of recurring expense creation, add other repeated up until today's data which have been sent from backend
-                        if(results.data[0].recurring == true ){
-                            for(let i = 1; i < results.data.length; i++){
+                        if (results.data[0].recurring == true) {
+                            for (let i = 1; i < results.data.length; i++) {
                                 arrayOfExpenses.unshift(results.data[i]);
                             }
                         }
@@ -237,7 +238,7 @@ class Main extends React.Component {
                                 Message: error.response.data.data,
                                 showModalError: true
                             });
-                        } else if(error.response.data != undefined) {
+                        } else if (error.response.data != undefined) {
                             this.setState({
                                 Message: error.response.data,
                                 showModalError: true
@@ -304,7 +305,7 @@ class Main extends React.Component {
                                 Message: error.response.data.data,
                                 showModalError: true
                             });
-                        } else if(error.response.data != undefined) {
+                        } else if (error.response.data != undefined) {
                             this.setState({
                                 Message: error.response.data,
                                 showModalError: true
@@ -347,7 +348,7 @@ class Main extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -512,7 +513,7 @@ class Main extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -553,7 +554,7 @@ class Main extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -669,7 +670,7 @@ class Main extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -721,7 +722,7 @@ class Main extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -770,7 +771,7 @@ class Main extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true

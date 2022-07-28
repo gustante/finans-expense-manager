@@ -15420,6 +15420,8 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
           totalBudget: totalBudget,
           totalInsideBudget: totalInsideBudget.toFixed(2)
         });
+
+        $('.table-spinner').hide();
       })["catch"](function (error) {
         console.log(error.response);
 
@@ -15666,7 +15668,14 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
         className: "table "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", {
         className: ""
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Total in ", monthString, " ", this.state.currentYear))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.types.map(function (type, index) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Total in ", monthString, " ", this.state.currentYear))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "table-spinner pt-1 spinner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "spinner-border ",
+        role: "status"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        "class": " d-block sr-only"
+      }, "Loading..."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.types.map(function (type, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
           key: index
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, type.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15916,7 +15925,14 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
         className: "table table-responsive-sm"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
         className: ""
-      }, "Edit"))), this.props.expenses.map(function (expense, index) {
+      }, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "table-spinner spinner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "spinner-border ",
+        role: "status"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        "class": " d-block sr-only"
+      }, "Loading..."))), this.props.expenses.map(function (expense, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
           key: index,
           className: expense._id
@@ -15993,7 +16009,7 @@ var ExpenseTable = /*#__PURE__*/function (_React$Component) {
           className: "fas fa-edit"
         }))))));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "d-flex mb-2 flex-wrap justify-content-center"
+        className: "mt-5 pt-5 table-cards d-flex mb-2 flex-wrap justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "btn btn-warning mx-3"
       }, "Total: $", this.state.total)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -16903,7 +16919,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         var accounts = _toConsumableArray(_this6.state.accounts);
 
         var index = accounts.findIndex(function (account) {
-          return account.item_id == accountId;
+          return account.itemId == accountId;
         });
         accounts.splice(index, 1); //remove account deleted from state.accounts
 
@@ -16920,8 +16936,6 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
           accounts: accounts,
           transactions: transactions
         });
-
-        $('table').addClass("d-none");
       })["catch"](function (error) {
         console.log(error.response);
         console.log(error.response.data);
@@ -17328,15 +17342,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.isLoggedIn) {
         axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
-          console.log("before entering loop");
-
           var _iterator = _createForOfIteratorHelper(results.data),
               _step;
 
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var expense = _step.value;
-              console.log("entering loop");
               if (expense.type == null) console.log(expense);
             }
           } catch (err) {
@@ -17348,6 +17359,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
           _this2.setState({
             expenses: results.data.splice(0, _this2.state.position)
           });
+
+          $('.table-spinner').hide();
+          $('.table-cards').removeClass('mt-5 pt-5');
         })["catch"](function (error) {
           console.log(error);
           console.log(error.response);
@@ -18309,6 +18323,8 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
         _this2.setState({
           types: arrayOfTypes
         });
+
+        $('.table-spinner').hide();
       })["catch"](function (error) {
         console.log(error.response);
 
@@ -18552,7 +18568,14 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
         errorMessages: this.state.Message
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
         className: "table"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.state.types.map(function (type, index) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "table-spinner mt-1 spinner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "spinner-border ",
+        role: "status"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        "class": " d-block sr-only"
+      }, "Loading..."))), this.state.types.map(function (type, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
           key: index,
           className: type._id
@@ -19656,7 +19679,7 @@ grecaptcha.ready(function () {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n  display: block;\n}\n\n.hide {\n  display: none;\n}\n\n.testing {\n  color: blue\n}\n\ninput[readonly] {\n  background-color: white !important;\n}\n\n\n#expense-deleted-alert,\n#expense-created-alert,\n#expense-edited-alert {\n  position: fixed;\n  bottom: 10;\n  z-index: 1021;\n  left: 10;\n  right: 10;\n  border-radius: 8px;\n}\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n  width: 90%;\n  max-width: 900px;\n  margin: auto;\n}\n\n\n\n.grecaptcha-badge {\n  visibility: hidden;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n  width: 90%;\n  max-width: 650px;\n  padding: 5px;\n  margin: auto;\n}\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0;\n  /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text;\n  /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n  background: #ffc107;\n  color: white;\n}\n\n.caixa {\n  padding: 60px 0;\n  border-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n  margin: 5px 15px;\n}\n\nfooter .copyright {\n  font-size: 0.8em;\n}\n\n.badge {\n  font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n  font-size: .875rem;\n}\n\n.feather {\n  width: 16px;\n  height: 16px;\n  vertical-align: text-bottom;\n}\n\n/*\n   * Sidebar\n   */\n\n.sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 100;\n  /* Behind the navbar */\n  padding: 48px 0 0;\n  /* Height of navbar */\n  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n}\n\n.container {\n  max-width: 95%;\n\n}\n\n\n\n.sidebar-sticky {\n  position: relative;\n  top: 0;\n  height: calc(100vh - 48px);\n  padding-top: .5rem;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* Scrollable contents if viewport is shorter than content. */\n}\n\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n  .sidebar-sticky {\n    position: -webkit-sticky;\n    position: sticky;\n  }\n}\n\n.sidebar .nav-link {\n  font-weight: 500;\n  color: #333;\n}\n\n.sidebar .nav-link .feather {\n  margin-right: 4px;\n  color: #999;\n}\n\n.sidebar .nav-link.active {\n  color: #007bff;\n}\n\n.sidebar .nav-link:hover .feather,\n.sidebar .nav-link.active .feather {\n  color: inherit;\n}\n\n.sidebar-heading {\n  font-size: .75rem;\n  text-transform: uppercase;\n}\n\n/*\n   * Navbar\n   */\n\n.navbar-brand {\n  padding-top: .75rem;\n  padding-bottom: .75rem;\n  font-size: 1rem;\n}\n\n.navbar .navbar-toggler {\n  top: .25rem;\n  right: 1rem;\n}\n\n.navbar .form-control {\n  padding: .75rem 1rem;\n  border-width: 0;\n  border-radius: 0;\n}\n\n.form-control-dark {\n  color: #fff;\n  background-color: rgba(255, 255, 255, .1);\n  border-color: rgba(255, 255, 255, .1);\n}\n\n.form-control-dark:focus {\n  border-color: transparent;\n  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n}\n\ninput[type=date] {\n  width: 90%\n}\n\n.classButtons {\n  max-width: 250px;\n}\n\n\n\n\n@media (max-width: 544px) {\n  table {\n    font-size: 0.8rem;\n\n\n  }\n\n  table td,\n  table th {\n    padding: 5px !important;\n    margin: 5px\n  }\n\n  .d-flex-row {\n    flex-direction: column;\n  }\n}\n\n@media (min-width: 544px) {\n  table {\n    font-size: 0.9rem;\n  }\n  #expense-deleted-alert, #expense-created-alert, #expense-edited-alert {\n    width: 60%;\n    max-width: 900px;\n    margin: auto;\n    margin-bottom: 8px;\n  }\n}\n\n@media (min-width: 768px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 992px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 1200px) {\n  table {\n    font-size: 1.1rem;\n  }\n}", ""]);
+exports.push([module.id, "/* MODAL TOGGLE CLASSES  */\n.view {\n  display: block;\n}\n\n.hide {\n  display: none;\n}\n\n.testing {\n  color: blue\n}\n\ninput[readonly] {\n  background-color: white !important;\n}\n\n\n#expense-deleted-alert,\n#expense-created-alert,\n#expense-edited-alert {\n  position: fixed;\n  bottom: 10;\n  z-index: 1021;\n  left: 10;\n  right: 10;\n  border-radius: 8px;\n}\n\n/* DASHBORD(MAIN) PAGE  */\n\n.dashboard {\n  width: 90%;\n  max-width: 900px;\n  margin: auto;\n}\n\n\n\n.grecaptcha-badge {\n  visibility: hidden;\n}\n\n\n/* REGISTER PAGE  */\n.form-register {\n  width: 90%;\n  max-width: 650px;\n  padding: 5px;\n  margin: auto;\n}\n\n/* LOG IN PAGE  */\n\n\n.form-signin {\n  width: 100%;\n  max-width: 420px;\n  padding: 5px;\n  margin: auto;\n}\n\n\n\n\n.form-label-group {\n  position: relative;\n  margin-bottom: 1rem;\n}\n\n.form-label-group input,\n.form-label-group label {\n  height: 3.125rem;\n  padding: .75rem;\n}\n\n.form-label-group label {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: block;\n  width: 100%;\n  margin-bottom: 0;\n  /* Override default `<label>` margin */\n  line-height: 1.5;\n  color: #495057;\n  pointer-events: none;\n  cursor: text;\n  /* Match the input under the label */\n  border: 1px solid transparent;\n  border-radius: .25rem;\n  transition: all .1s ease-in-out;\n}\n\n.form-label-group input::-webkit-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-moz-placeholder {\n  color: transparent;\n}\n\n.form-label-group input:-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::-ms-input-placeholder {\n  color: transparent;\n}\n\n.form-label-group input::placeholder {\n  color: transparent;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-ms-input-placeholder) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:placeholder-shown) {\n  padding-top: 1.25rem;\n  padding-bottom: .25rem;\n}\n\n.form-label-group input:not(:-moz-placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:-ms-input-placeholder)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:not(:placeholder-shown)~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n.form-label-group input:-webkit-autofill~label {\n  padding-top: .25rem;\n  padding-bottom: .25rem;\n  font-size: 12px;\n  color: #777;\n}\n\n/* Fallback for Edge\n-------------------------------------------------- */\n@supports (-ms-ime-align: auto) {\n  .form-label-group {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column-reverse;\n    flex-direction: column-reverse;\n  }\n\n  .form-label-group label {\n    position: static;\n  }\n\n  .form-label-group input::-ms-input-placeholder {\n    color: #777;\n  }\n}\n\n/* OTHER CHANGES TO DEFAULT COMPLEMENT BOOTSTRAP   */\n#home {\n  background: #ffc107;\n  color: white;\n}\n\n.caixa {\n  padding: 60px 0;\n  border-bottom: 1px solid #e5e5e5;\n}\n\nfooter p a {\n  margin: 5px 15px;\n}\n\nfooter .copyright {\n  font-size: 0.8em;\n}\n\n.badge {\n  font-size: 0.9em;\n}\n\n\n\n/* User account page */\nbody {\n  font-size: .875rem;\n}\n\n.feather {\n  width: 16px;\n  height: 16px;\n  vertical-align: text-bottom;\n}\n\n/*\n   * Sidebar\n   */\n\n.sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 100;\n  /* Behind the navbar */\n  padding: 48px 0 0;\n  /* Height of navbar */\n  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n}\n\n.container {\n  max-width: 95%;\n\n}\n\n\n\n.sidebar-sticky {\n  position: relative;\n  top: 0;\n  height: calc(100vh - 48px);\n  padding-top: .5rem;\n  overflow-x: hidden;\n  overflow-y: auto;\n  /* Scrollable contents if viewport is shorter than content. */\n}\n\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n  .sidebar-sticky {\n    position: -webkit-sticky;\n    position: sticky;\n  }\n}\n\n.sidebar .nav-link {\n  font-weight: 500;\n  color: #333;\n}\n\n.sidebar .nav-link .feather {\n  margin-right: 4px;\n  color: #999;\n}\n\n.sidebar .nav-link.active {\n  color: #007bff;\n}\n\n.sidebar .nav-link:hover .feather,\n.sidebar .nav-link.active .feather {\n  color: inherit;\n}\n\n.sidebar-heading {\n  font-size: .75rem;\n  text-transform: uppercase;\n}\n\n/*\n   * Navbar\n   */\n\n.navbar-brand {\n  padding-top: .75rem;\n  padding-bottom: .75rem;\n  font-size: 1rem;\n}\n\n.navbar .navbar-toggler {\n  top: .25rem;\n  right: 1rem;\n}\n\n.navbar .form-control {\n  padding: .75rem 1rem;\n  border-width: 0;\n  border-radius: 0;\n}\n\n.form-control-dark {\n  color: #fff;\n  background-color: rgba(255, 255, 255, .1);\n  border-color: rgba(255, 255, 255, .1);\n}\n\n.form-control-dark:focus {\n  border-color: transparent;\n  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);\n}\n\ninput[type=date] {\n  width: 90%\n}\n\n.classButtons {\n  max-width: 250px;\n}\n\n.table-spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -50px;\n  margin-left: -20px;\n  margin-bottom: 100px;\n  padding-bottom: 100px;\n  \n}\n\n\n\n\n@media (max-width: 544px) {\n  table {\n    font-size: 0.8rem;\n\n\n  }\n\n  table td,\n  table th {\n    padding: 5px !important;\n    margin: 5px\n  }\n\n  .d-flex-row {\n    flex-direction: column;\n  }\n}\n\n@media (min-width: 544px) {\n  table {\n    font-size: 0.9rem;\n  }\n  #expense-deleted-alert, #expense-created-alert, #expense-edited-alert {\n    width: 60%;\n    max-width: 900px;\n    margin: auto;\n    margin-bottom: 8px;\n  }\n}\n\n@media (min-width: 768px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 992px) {\n  table {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 1200px) {\n  table {\n    font-size: 1.1rem;\n  }\n}", ""]);
 // Exports
 module.exports = exports;
 
