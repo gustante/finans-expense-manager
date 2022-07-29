@@ -7,7 +7,7 @@ function Plans() {
     return (
 
         <div className='dashboard mb-5'>
-            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <div class=" px-3 py-5 pt-md-5 pb-md-4 mx-auto text-center">
                 <h1 class="display-4">Pricing</h1>
                 <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
             </div>
@@ -25,7 +25,10 @@ function Plans() {
                             <li>Email support</li>
                             <li>Help center access</li>
                         </ul>
-                        <button type="button" class="btn btn-lg btn-block btn-outline-warning">Sign up for free</button>
+                        <Link className="text-decoration-none text-dark" to="/login">
+                            <button type="button" class="btn btn-lg btn-block btn-outline-warning">Sign up for free</button>
+                        </Link>
+
                     </div>
                 </div>
                 <div class="card mb-4 shadow-sm">
@@ -40,7 +43,10 @@ function Plans() {
                             <li>Priority email support</li>
                             <li>Help center access</li>
                         </ul>
-                        <button type="button" class="btn btn-lg btn-block btn-warning">Get started</button>
+                        <Link className="text-decoration-none text-dark" to="/login">
+                            <button type="button" class="btn btn-lg btn-block btn-warning">Get started</button>
+                        </Link>
+
                     </div>
                 </div>
                 <div class="card mb-4 shadow-sm">
@@ -55,11 +61,14 @@ function Plans() {
                             <li>Phone and email support</li>
                             <li>Help center access</li>
                         </ul>
-                        <button type="button" class="btn btn-lg btn-block btn-warning">Contact us</button>
+                        <Link className="text-decoration-none text-dark" to="/contactus">
+                            <button type="button" class="btn btn-lg btn-block btn-warning">Contact Us</button>
+                        </Link>
+
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
     )

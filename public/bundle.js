@@ -14421,7 +14421,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 
 
 
@@ -14431,17 +14430,17 @@ function About() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: " my-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
+    className: "px-3 py-5 pt-md-5 pb-md-4 mx-auto text-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
     className: "display-4"
   }, "About finans"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "lead"
   }, "Finans is a simple and easy-to-use application to keep your spendings in control. It creates a detailed record of expenses and provides several other tools to help you manage them. Get started with the steps below!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "row row-cols-1 row-cols-md-2"
+    className: "row row-cols-1 row-cols-md-2 row-cols-lg-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "col mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card h-100"
+    className: "card h-100 card border-light"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card-header"
   }, "Step 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14453,7 +14452,7 @@ function About() {
   }, "After register and logging in, you can start loading your expenses at the dashboard and create a table with the records. Fill all the fields with day, month, year, type, description and amount, then click the add button to register a new transaction, which will promptly be added to the end of the table."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If it's your first time, you might wanna go ahead and create your first type to organize your spendings!")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "col mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card h-100"
+    className: "card h-100 card border-light"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card-header"
   }, "Step 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14465,7 +14464,7 @@ function About() {
   }, "You can also dynamically filter expenses based on the information contained in the fields. As an example, click the button to clear all the fields and then select only type Groceries, then click the filter button. That will search the database and rebuild the table only with expenses in the Groceries category. You can also add more filters, like for example search Groceries expenses in the month of October, and so on... The sum of expenses displayed at the end will also be updated to reflect the results of the search."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "After that, you can click the gray button to search all expenses to go back to the original state without having to refresh it.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "col mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card h-100"
+    className: "card h-100 card border-light"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card-header"
   }, "Step 3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14477,7 +14476,7 @@ function About() {
   }, "Each expense in the table has a button at the end which toggles editable options where the you can modify any data, save or discard changes, as well as delete the entire row if you need to make adjustments."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "In \"Manage Types\" under the \"My Account\" menu, it is also possible to also edit types' names and budgets, or delete them if needed. When a type is deleted, all its expenses are automatically assigned to \"Other\", which is the default type.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "col mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card h-100"
+    className: "card h-100 card border-light"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card-header"
   }, "Step 4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14489,7 +14488,7 @@ function About() {
   }, "Every new account starts with an \"Other\" type, which cannot be deleted. However, you have the freedom to create and delete as many types of expenses as you wish, as well as assign specific budgets to it by clicking the yellow button in the form. If you choose to add a budget, an email alert will be sent if you reach 70% of your budget, and then you exceed it.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "col mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card h-100"
+    className: "card h-100 card border-light"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card-header"
   }, "Step 5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14501,7 +14500,7 @@ function About() {
   }, "The \"My Account\" link on the navbar takes you to your user menu with a few other features including the option to edit your account information as well as managing your types and budgets. From there, it is possible to analyze a detailed visual summary of all types and  budgets with progress bars and colors to help monitor your expenses. At the bottom of the \"Budgets\" page, there are also cards displaying the total budget, the amount for expenses inside your budgets, and finally the total amount spent, which includes extra expenses in types that do not have a budget set. You can also compare with previous months by selecting the navigation buttons at the very end for an easy comparison. It fetches the data from different months from the database and updates the diagram.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "col mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card h-100"
+    className: "card h-100 card border-light"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card-header"
   }, "Step 6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14510,15 +14509,7 @@ function About() {
     className: "card-title"
   }, "Automate"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "card-text"
-  }, "Finally, from the My Account menu, you also have the option to link your bank to automatically fetch transactions processed in your accounts and have them safely and securely added to Finans. New types will be created for transactions obtained according to the category received from your financial institution, but your have the option to change their types in your Dashboard, as well as any other field you wish."))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "d-flex justify-content-center my-5"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: "/login"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    type: "button",
-    "data-dismiss": "modal",
-    className: "btn btn-warning"
-  }, "Start using Finans today!")))));
+  }, "Finally, from the My Account menu, you also have the option to link your bank to automatically fetch transactions processed in your accounts and have them safely and securely added to Finans. New types will be created for transactions obtained according to the category received from your financial institution, but your have the option to change their types in your Dashboard, as well as any other field you wish.")))))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (About);
@@ -16325,10 +16316,115 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+
 
 
 function FAQ() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "This is the FAQ page");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "dashboard mb-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": " px-3 py-5 pt-md-5 pb-md-4 mx-auto text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    "class": "display-4"
+  }, "Frequently Asked Questions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    "class": "lead"
+  }, "Quickly build an effective pricing table for your potential customers with this Bootstrap example. It\u2019s built with default Bootstrap components and utilities with little customization.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "accordion",
+    id: "accordionExample"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card bg-light"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-header",
+    id: "headingOne"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+    className: "mb-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn btn-block text-left",
+    type: "button",
+    "data-toggle": "collapse",
+    "data-target": "#collapseOne",
+    "aria-expanded": "true",
+    "aria-controls": "collapseOne"
+  }, "Question 1"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "collapseOne",
+    className: "collapse show",
+    "aria-labelledby": "headingOne",
+    "data-parent": "#accordionExample"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-header",
+    id: "headingTwo"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+    className: "mb-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn text-dark btn-block text-left collapsed",
+    type: "button",
+    "data-toggle": "collapse",
+    "data-target": "#collapseTwo",
+    "aria-expanded": "false",
+    "aria-controls": "collapseTwo"
+  }, "Question 2"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "collapseTwo",
+    className: "collapse",
+    "aria-labelledby": "headingTwo",
+    "data-parent": "#accordionExample"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-header",
+    id: "headingThree"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+    className: "mb-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn text-dark btn-block text-left collapsed",
+    type: "button",
+    "data-toggle": "collapse",
+    "data-target": "#collapseThree",
+    "aria-expanded": "false",
+    "aria-controls": "collapseThree"
+  }, "Question 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "collapseThree",
+    className: "collapse",
+    "aria-labelledby": "headingThree",
+    "data-parent": "#accordionExample"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, "Varius vel pharetra vel turpis nunc eget. Eget velit aliquet sagittis id consectetur purus ut faucibus. Nibh nisl condimentum id venenatis a condimentum vitae. Sit amet nulla facilisi morbi tempus iaculis urna id volutpat. Orci nulla pellentesque dignissim enim. Suscipit adipiscing bibendum est ultricies integer quis. Rhoncus urna neque viverra justo. Laoreet sit amet cursus sit amet dictum. Auctor eu augue ut lectus arcu bibendum at varius vel. Ultrices vitae auctor eu augue ut lectus arcu. Nunc consequat interdum varius sit. Suscipit tellus mauris a diam maecenas sed enim ut sem. Eu lobortis elementum nibh tellus molestie."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-header",
+    id: "headingFour"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+    className: "mb-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn text-dark btn-block text-left collapsed",
+    type: "button",
+    "data-toggle": "collapse",
+    "data-target": "#collapseFour",
+    "aria-expanded": "false",
+    "aria-controls": "collapseFour"
+  }, "Question 4"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "collapseFour",
+    className: "collapse",
+    "aria-labelledby": "headingFour",
+    "data-parent": "#accordionExample"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, "Viverra aliquet eget sit amet tellus cras adipiscing. Proin nibh nisl condimentum id venenatis a. Scelerisque in dictum non consectetur a erat. Vulputate odio ut enim blandit volutpat. Id aliquet risus feugiat in ante metus dictum. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse. Fermentum et sollicitudin ac orci. Felis imperdiet proin fermentum leo vel.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "d-flex justify-content-center my-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/plans"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "button",
+    "data-dismiss": "modal",
+    className: "btn btn-warning"
+  }, "Start using Finans today!"))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FAQ);
@@ -16370,47 +16466,41 @@ function Footer() {
   }, "Contact us"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "d-none d-sm-inline"
   }, " |")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    className: "text-decoration-none text-dark mx-1",
-    href: ""
-  }, " Plans ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "text-decoration-none text-dark mx-1"
+  }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    className: "text-decoration-none text-dark",
+    to: "/plans"
+  }, "Plans"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "d-none d-sm-inline"
-  }, "|"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    className: "text-decoration-none text-dark mx-1",
-    href: ""
-  }, " About ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+  }, " |")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    className: "text-decoration-none text-dark mx-1"
+  }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    className: "text-decoration-none text-dark",
+    to: "/about"
+  }, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "d-none d-sm-inline"
-  }, "|"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    className: "text-decoration-none text-dark mx-1",
-    href: ""
-  }, " Partners ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+  }, " |")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    className: "text-decoration-none text-dark mx-1"
+  }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    className: "text-decoration-none text-dark",
+    to: "/faq"
+  }, "F.A.Q"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "d-none d-sm-inline"
-  }, "|"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    className: "text-decoration-none text-dark mx-1",
-    href: ""
-  }, " Resources ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-    className: "d-none d-sm-inline"
-  }, "|"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    className: "text-decoration-none text-dark mx-1",
-    href: ""
-  }, " Careers  "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, " |")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "row mx-md-5 mx-4 my-2 mx-2 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "",
     className: "btn btn-outline-dark"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "fab fa-facebook"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "",
     className: "btn btn-outline-dark ml-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "fab fa-twitter"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "",
     className: "btn btn-outline-dark ml-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "fab fa-instagram"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "",
     className: "btn btn-outline-dark ml-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "fab fa-youtube"
@@ -19475,6 +19565,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 
 
 
@@ -19482,7 +19573,7 @@ function Plans() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "dashboard mb-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    "class": "pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
+    "class": " px-3 py-5 pt-md-5 pb-md-4 mx-auto text-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
     "class": "display-4"
   }, "Pricing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
@@ -19503,10 +19594,13 @@ function Plans() {
     "class": "text-muted"
   }, "/ mo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     "class": "list-unstyled mt-3 mb-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "10 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "2 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "10 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "2 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    className: "text-decoration-none text-dark",
+    to: "/login"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     type: "button",
     "class": "btn btn-lg btn-block btn-outline-warning"
-  }, "Sign up for free"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "Sign up for free")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card mb-4 shadow-sm"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card-header"
@@ -19520,10 +19614,13 @@ function Plans() {
     "class": "text-muted"
   }, "/ mo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     "class": "list-unstyled mt-3 mb-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "20 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "10 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Priority email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "20 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "10 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Priority email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    className: "text-decoration-none text-dark",
+    to: "/login"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     type: "button",
     "class": "btn btn-lg btn-block btn-warning"
-  }, "Get started"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "Get started")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card mb-4 shadow-sm"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     "class": "card-header"
@@ -19537,10 +19634,13 @@ function Plans() {
     "class": "text-muted"
   }, "/ mo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     "class": "list-unstyled mt-3 mb-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "30 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "15 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Phone and email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "30 users included"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "15 GB of storage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Phone and email support"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Help center access")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    className: "text-decoration-none text-dark",
+    to: "/contactus"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     type: "button",
     "class": "btn btn-lg btn-block btn-warning"
-  }, "Contact us")))));
+  }, "Contact Us"))))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Plans);

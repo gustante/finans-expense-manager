@@ -9,14 +9,14 @@ function About() {
 
         <div className="dashboard mb-5">
             <div className=" my-2">
-                <div className="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                <div className="px-3 py-5 pt-md-5 pb-md-4 mx-auto text-center">
                     <h1 className="display-4">About finans</h1>
                     <p className="lead">Finans is a simple and easy-to-use application to keep your spendings in control. It creates a detailed record of expenses and provides several other tools to help you manage them. Get started with the steps below!</p>
                 </div>
 
-                <div className="row row-cols-1 row-cols-md-2">
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                     <div className="col mb-4">
-                        <div className="card h-100">
+                        <div className="card h-100 card border-light">
                             <div class="card-header">Step 1</div>
                             <div className="card-body">
                                 <h5 className="card-title">Record</h5>
@@ -26,7 +26,7 @@ function About() {
                         </div>
                     </div>
                     <div className="col mb-4">
-                        <div className="card h-100">
+                        <div className="card h-100 card border-light">
                         <div class="card-header">Step 2</div>
                             <div className="card-body">
                                 <h5 className="card-title">Filter</h5>
@@ -36,7 +36,7 @@ function About() {
                         </div>
                     </div>
                     <div className="col mb-4">
-                        <div className="card h-100">
+                        <div className="card h-100 card border-light">
                         <div class="card-header">Step 3</div>
                             <div className="card-body">
                                 <h5 className="card-title">Edit</h5>
@@ -46,7 +46,7 @@ function About() {
                         </div>
                     </div>
                     <div className="col mb-4">
-                        <div className="card h-100">
+                        <div className="card h-100 card border-light">
                         <div class="card-header">Step 4</div>
                             <div className="card-body">
                                 <h5 className="card-title">Categorize</h5>
@@ -55,7 +55,7 @@ function About() {
                         </div>
                     </div>
                     <div className="col mb-4">
-                        <div className="card h-100">
+                        <div className="card h-100 card border-light">
                         <div class="card-header">Step 5</div>
                             <div className="card-body">
                                 <h5 className="card-title">Analize</h5>
@@ -64,7 +64,7 @@ function About() {
                         </div>
                     </div>
                     <div className="col mb-4">
-                        <div className="card h-100">
+                        <div className="card h-100 card border-light">
                         <div class="card-header">Step 6</div>
                             <div className="card-body">
                                 <h5 className="card-title">Automate</h5>
@@ -74,14 +74,6 @@ function About() {
                     </div>
                 </div>
 
-
-
-                <div className="d-flex justify-content-center my-5">
-
-                    <Link to="/login">
-                        <button type="button" data-dismiss="modal" className="btn btn-warning">Start using Finans today!</button>
-                    </Link>
-                </div>
             </div>
         </div>
 
