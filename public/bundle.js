@@ -14509,7 +14509,7 @@ function About() {
     className: "card-title"
   }, "Automate"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "card-text"
-  }, "Finally, from the My Account menu, you also have the option to link your bank to automatically fetch transactions processed in your accounts and have them safely and securely added to Finans. New types will be created for transactions obtained according to the category received from your financial institution, but your have the option to change their types in your Dashboard, as well as any other field you wish.")))))));
+  }, "Finally, from the My Account menu, you also have the option to link your bank to automatically fetch transactions processed in your accounts and have them safely and securely added to Finans. New types will be created for transactions obtained according to the category received from your financial institution, but your have the option to change their types in your Dashboard, as well as any other field you wish."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "It may take a few hours for new transactions from your bank to appear in your finans dashboard.")))))));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (About);

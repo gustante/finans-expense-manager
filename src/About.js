@@ -69,6 +69,7 @@ function About() {
                             <div className="card-body">
                                 <h5 className="card-title">Automate</h5>
                                 <p className="card-text">Finally, from the My Account menu, you also have the option to link your bank to automatically fetch transactions processed in your accounts and have them safely and securely added to Finans. New types will be created for transactions obtained according to the category received from your financial institution, but your have the option to change their types in your Dashboard, as well as any other field you wish.</p>
+                                <p>It may take a few hours for new transactions from your bank to appear in your finans dashboard.</p>
                             </div>
                         </div>
                     </div>
