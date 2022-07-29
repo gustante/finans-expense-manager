@@ -14429,14 +14429,88 @@ function About() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "dashboard mb-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    "class": " my-2"
+    className: " my-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    "class": "px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
+    className: "px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    "class": "display-4"
+    className: "display-4"
   }, "About finans"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    "class": "lead"
-  }, "Finans is a simple and easy-to-use application to keep your spendings in control. It creates a detailed record of expenses and provides several other tools to help you manage them.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "After log ing and upon start, the app loads all existing expenses in the database at the dashboard and creates a table with the records. The user can then fill all the fields and click the add button to register a new transaction, which will promptly be added to the end of the table along with a success pop-up message with the transaction id.  If any field is missing or if incorrect information is passed, such as a year that contains a letter, an error message is displayed and the transaction is not added. Newest expenses are always displayed on top."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The user can also dynamically filter expenses based on the information contained in the fields. As an example, they can click the button to clear all the fields and then select only type Groceries, then click the filter button. That will search the database and rebuild the table only with expenses in the Groceries category. They can also add more filters, like for example search Groceries expenses in the month of October, and so on... The sum of expenses displayed at the end will also be updated to reflect the results of the search."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "A button to search all expenses was also added to go back to the original state without having to refresh it."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Each expense in the table has a button at the end which toggles editable options where the user can modify any data, save or discard changes, as well as delete the entire row if needed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Every new account starts with an \"Other\" type, which cannot be deleted. However, the user has the freedom to create and delete as many types of expenses as they wish, as well as assign specific budgets to it by clicking the yellow button in the form. If the user chooses to add a budget, an SMS notification will be sent to their phone alerting them when they reach half of their budget, when it is at 80%, and then they exceed it, as long as they have a phone number registered."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The \"My Account\" link on the navbar takes the user to a menu with a few other features including the option to edit their account information as well as manage their types and budgets. From there, it is possible to analyze a detailed visual summary of all types and their budgets with progress bars and colors to help monitor their expenses. At the bottom of the \"Budgets\" page, there are also cards displaying the total budget, the amount for expenses inside their budgets, and finally the total amount spent, which includes extra expenses in types that do not have a budget set. The user can also compare with previous months by selecting the navigation buttons at the very end for an easy comparison. It fetches the data from different months from the database and updates the diagram."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "In \"Manage Types\", it is possible to also edit types' names and budgets, or delete them if needed. When a type is deleted, all its expenses are automatically assigned to \"Other\", which is the default type."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Every action where user input is provided is protected by reCAPTCHA v3, as well as by extensive front-end and back-end validators and sanitizers which cover updating, creation or deletion of expenses, types and user accounts/personal information. "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "lead"
+  }, "Finans is a simple and easy-to-use application to keep your spendings in control. It creates a detailed record of expenses and provides several other tools to help you manage them. Get started with the steps below!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "row row-cols-1 row-cols-md-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "col mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, "Step 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "card-title"
+  }, "Record"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text"
+  }, "After register and logging in, you can start loading your expenses at the dashboard and create a table with the records. Fill all the fields with day, month, year, type, description and amount, then click the add button to register a new transaction, which will promptly be added to the end of the table."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If it's your first time, you might wanna go ahead and create your first type to organize your spendings!")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "col mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, "Step 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "card-title"
+  }, "Filter"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text"
+  }, "You can also dynamically filter expenses based on the information contained in the fields. As an example, click the button to clear all the fields and then select only type Groceries, then click the filter button. That will search the database and rebuild the table only with expenses in the Groceries category. You can also add more filters, like for example search Groceries expenses in the month of October, and so on... The sum of expenses displayed at the end will also be updated to reflect the results of the search."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "After that, you can click the gray button to search all expenses to go back to the original state without having to refresh it.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "col mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, "Step 3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "card-title"
+  }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text"
+  }, "Each expense in the table has a button at the end which toggles editable options where the you can modify any data, save or discard changes, as well as delete the entire row if you need to make adjustments."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "In \"Manage Types\" under the \"My Account\" menu, it is also possible to also edit types' names and budgets, or delete them if needed. When a type is deleted, all its expenses are automatically assigned to \"Other\", which is the default type.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "col mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, "Step 4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "card-title"
+  }, "Categorize"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text"
+  }, "Every new account starts with an \"Other\" type, which cannot be deleted. However, you have the freedom to create and delete as many types of expenses as you wish, as well as assign specific budgets to it by clicking the yellow button in the form. If you choose to add a budget, an email alert will be sent if you reach 70% of your budget, and then you exceed it.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "col mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, "Step 5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "card-title"
+  }, "Analize"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text"
+  }, "The \"My Account\" link on the navbar takes you to your user menu with a few other features including the option to edit your account information as well as managing your types and budgets. From there, it is possible to analyze a detailed visual summary of all types and  budgets with progress bars and colors to help monitor your expenses. At the bottom of the \"Budgets\" page, there are also cards displaying the total budget, the amount for expenses inside your budgets, and finally the total amount spent, which includes extra expenses in types that do not have a budget set. You can also compare with previous months by selecting the navigation buttons at the very end for an easy comparison. It fetches the data from different months from the database and updates the diagram.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "col mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    "class": "card-header"
+  }, "Step 6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "card-title"
+  }, "Automate"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "card-text"
+  }, "Finally, from the My Account menu, you also have the option to link your bank to automatically fetch transactions processed in your accounts and have them safely and securely added to Finans. New types will be created for transactions obtained according to the category received from your financial institution, but your have the option to change their types in your Dashboard, as well as any other field you wish."))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "d-flex justify-content-center my-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/login"
@@ -15752,7 +15826,7 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", {
         className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Budget"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "Total in ", monthString, " ", this.state.currentYear))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "table-spinner pt-1 spinner"
+        className: "table-spinner pt-2 spinner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "spinner-border ",
         role: "status"
@@ -19946,10 +20020,6 @@ grecaptcha.ready(function () {
   \********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__, module.id */
-/*! CommonJS bailout: exports is used directly at 3:0-7 */
-/*! CommonJS bailout: exports.push(...) prevents optimization as exports is passed as call context at 5:0-12 */
-/*! CommonJS bailout: exports is used directly at 7:17-24 */
-/*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports

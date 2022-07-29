@@ -240,7 +240,7 @@ class Budgets extends React.Component {
                                         <th>Total in {monthString} {this.state.currentYear}</th>
                                     </tr>
                                 </thead>
-                                <div className="table-spinner pt-1 spinner">
+                                <div className="table-spinner pt-2 spinner">
                                     <div className="spinner-border " role="status">
                                         <p class=" d-block sr-only">Loading...</p>
                                     </div>
