@@ -494,20 +494,23 @@ exports.updateExpense = (req, res) => {
                     if (targetExpense.type == null) {
                         console.log("received request to update expense with Null type")
                         let typeOther = user.types.find(type => type.name == "Other");
-                        console.log("expense is ")
-                        console.log(targetExpense)
-                        console.log("the new type will be ")
-                        console.log(typeOther)
                         targetExpense.type = typeOther //correct expense that needs to be updated
+
+                        //update sumOfExpenses for typeOther if updating expense in current month
+                        if (targetExpense.month == currentMonth) {
+                            typeOther.sumOfExpenses += targetExpense.amount; 
+                            typeOther.save()
+                        }
+                        
                         targetExpense.save()
                             .then(savedExpense => {
                                 //stop right here. We don't need to update anything else
                                 res.send(savedExpense)
                                 res.end()
-                                
+
                             })
 
-                            return
+                        return
                     }
 
 
