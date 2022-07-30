@@ -99,7 +99,6 @@ class Main extends React.Component {
                 })
                 .catch(error => {
                     console.log(error)
-                    console.log(error.response)
                     if (error.response.data.status == 401) {
                         this.setState({ displayLoginButton: true });
 
@@ -131,7 +130,7 @@ class Main extends React.Component {
 
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    console.log(error)
                     if (error.response.data.status == 401) {
                         this.setState({ displayLoginButton: true });
 
@@ -228,7 +227,7 @@ class Main extends React.Component {
 
                     })
                     .catch(error => {
-                        console.log(error.response)
+                        console.log(error)
                         if (error.response.data.status == 401) {
                             this.setState({ displayLoginButton: true });
 
@@ -295,7 +294,7 @@ class Main extends React.Component {
 
                     })
                     .catch(error => {
-                        console.log(error.response)
+                        console.log(error)
                         if (error.response.data.status == 401) {
                             this.setState({ displayLoginButton: true });
 
@@ -338,7 +337,7 @@ class Main extends React.Component {
                 });
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -503,7 +502,6 @@ class Main extends React.Component {
             })
             .catch(error => {
                 console.log(error)
-                console.log(error.response)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -544,7 +542,7 @@ class Main extends React.Component {
 
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -712,7 +710,7 @@ class Main extends React.Component {
 
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -761,7 +759,6 @@ class Main extends React.Component {
             })
             .catch(error => {
                 console.log(error)
-                console.log(error.response)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 

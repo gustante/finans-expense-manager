@@ -55,7 +55,6 @@ class LinkAccounts extends React.Component {
             )
             .catch(error => {
                 console.log(error)
-                console.log(error.response)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -99,7 +98,6 @@ class LinkAccounts extends React.Component {
             })
             .catch(error => {
                 console.log(error)
-                console.log(error.response)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -277,7 +275,7 @@ class LinkAccounts extends React.Component {
             }
             )
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 console.log(error.response.data);
                 let errorCode = error.response.data.code;
                 if (error.response.data.data != undefined) {

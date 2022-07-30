@@ -57,7 +57,7 @@ class Budgets extends React.Component {
 
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -151,7 +151,7 @@ class Budgets extends React.Component {
 
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 

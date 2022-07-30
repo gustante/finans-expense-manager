@@ -119,8 +119,7 @@ class App extends React.Component {
 
                     })
                     .catch(error => {
-                        console.log(error.response)
-                        console.log(error.response.data);
+                        console.log(error)
                         let errorCode = error.response.data.code;
 
                         if (errorCode == 11000) {//email already associated with an user
@@ -197,7 +196,7 @@ class App extends React.Component {
                     })
 
                     .catch(error => {
-                        console.log(error.response)
+                        console.log(error)
                         if (error.response.data.status == 401) {
                             this.setState({ displayLoginButton: true });
 
@@ -274,8 +273,6 @@ class App extends React.Component {
                             })
                             .catch(error => {
                                 console.log(error)
-                                console.log(error.response)
-                                console.log(error.response.data);
                                 let errorCode = error.response.data.code;
 
                                 if (error.response.data.data != undefined) {
@@ -302,7 +299,6 @@ class App extends React.Component {
             })
             .catch(error => {
                 console.log(error)
-                console.log(error.response)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -338,7 +334,7 @@ class App extends React.Component {
                     this.setState({ isLoggedIn: false });
                 })
                 .catch(error => {
-                    console.log(error.response)
+                    console.log(error)
                     if (error.response.data.status == 401) {
                         this.setState({ displayLoginButton: true });
 
@@ -372,7 +368,7 @@ class App extends React.Component {
                 console.log(results)
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -490,7 +486,7 @@ class App extends React.Component {
 
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -552,7 +548,7 @@ class App extends React.Component {
 
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
@@ -603,7 +599,6 @@ class App extends React.Component {
             )
             .catch(error => {
                 console.log(error)
-                console.log(error.response)
 
                 if (error.response.data.data != undefined) {
                     this.setState({

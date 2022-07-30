@@ -14720,8 +14720,7 @@ var App = /*#__PURE__*/function (_React$Component) {
           }); //success message sends expense id to success modal and displays it
 
         })["catch"](function (error) {
-          console.log(error.response);
-          console.log(error.response.data);
+          console.log(error);
           var errorCode = error.response.data.code;
 
           if (errorCode == 11000) {
@@ -14795,7 +14794,7 @@ var App = /*#__PURE__*/function (_React$Component) {
             googleUser: googleUser
           });
         })["catch"](function (error) {
-          console.log(error.response);
+          console.log(error);
 
           if (error.response.data.status == 401) {
             _this4.setState({
@@ -14874,8 +14873,6 @@ var App = /*#__PURE__*/function (_React$Component) {
               _this5.handleLogIn();
             })["catch"](function (error) {
               console.log(error);
-              console.log(error.response);
-              console.log(error.response.data);
               var errorCode = error.response.data.code;
 
               if (error.response.data.data != undefined) {
@@ -14902,7 +14899,6 @@ var App = /*#__PURE__*/function (_React$Component) {
         }
       })["catch"](function (error) {
         console.log(error);
-        console.log(error.response);
 
         if (error.response.data.status == 401) {
           _this5.setState({
@@ -14940,7 +14936,7 @@ var App = /*#__PURE__*/function (_React$Component) {
             isLoggedIn: false
           });
         })["catch"](function (error) {
-          console.log(error.response);
+          console.log(error);
 
           if (error.response.data.status == 401) {
             _this6.setState({
@@ -14975,7 +14971,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_19___default().get("/api/v1.0/oauth/google/logout").then(function (results) {
         console.log(results);
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this7.setState({
@@ -15092,7 +15088,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 
         _this8.handleStopEditingUser();
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this8.setState({
@@ -15159,7 +15155,7 @@ var App = /*#__PURE__*/function (_React$Component) {
           displayConfirmButton: true
         });
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this9.setState({
@@ -15212,7 +15208,6 @@ var App = /*#__PURE__*/function (_React$Component) {
         $('textarea').val('');
       })["catch"](function (error) {
         console.log(error);
-        console.log(error.response);
 
         if (error.response.data.data != undefined) {
           _this10.setState({
@@ -15571,7 +15566,7 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
 
         $('.table-spinner').hide();
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this2.setState({
@@ -15701,7 +15696,7 @@ var Budgets = /*#__PURE__*/function (_React$Component) {
           totalInsideBudget: totalInsideBudget.toFixed(2)
         });
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this3.setState({
@@ -17097,7 +17092,6 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         console.log(results.data);
       })["catch"](function (error) {
         console.log(error);
-        console.log(error.response);
 
         if (error.response.data.status == 401) {
           _this2.setState({
@@ -17145,7 +17139,6 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         }
       })["catch"](function (error) {
         console.log(error);
-        console.log(error.response);
 
         if (error.response.data.status == 401) {
           _this3.setState({
@@ -17312,7 +17305,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
           transactions: transactions
         });
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
         console.log(error.response.data);
         var errorCode = error.response.data.code;
 
@@ -17739,7 +17732,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
           $('.table-cards').removeClass('mt-5 pt-5');
         })["catch"](function (error) {
           console.log(error);
-          console.log(error.response);
 
           if (error.response.data.status == 401) {
             _this2.setState({
@@ -17771,7 +17763,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
             typeDropDown: arrayOfTypes
           });
         })["catch"](function (error) {
-          console.log(error.response);
+          console.log(error);
 
           if (error.response.data.status == 401) {
             _this2.setState({
@@ -17870,7 +17862,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
             action: "Created"
           });
         })["catch"](function (error) {
-          console.log(error.response);
+          console.log(error);
 
           if (error.response.data.status == 401) {
             _this3.setState({
@@ -17941,7 +17933,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
             action: "Created"
           });
         })["catch"](function (error) {
-          console.log(error.response);
+          console.log(error);
 
           if (error.response.data.status == 401) {
             _this4.setState({
@@ -17990,7 +17982,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           action: "Filter"
         });
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this5.setState({
@@ -18169,7 +18161,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
         });
       })["catch"](function (error) {
         console.log(error);
-        console.log(error.response);
 
         if (error.response.data.status == 401) {
           _this6.setState({
@@ -18209,7 +18200,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           expenses: arrayOfExpenses
         });
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this7.setState({
@@ -18389,7 +18380,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
           position: _this9.state.position + 15
         });
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this9.setState({
@@ -18445,7 +18436,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
       })["catch"](function (error) {
         console.log(error);
-        console.log(error.response);
 
         if (error.response.data.status == 401) {
           _this10.setState({
@@ -18667,7 +18657,7 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
 
         console.log(results.data);
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this2.setState({
@@ -18701,7 +18691,7 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
 
         $('.table-spinner').hide();
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this2.setState({
@@ -18787,7 +18777,7 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
 
         _this3.handleStopEditingType(typeId);
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this3.setState({
