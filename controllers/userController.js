@@ -349,9 +349,7 @@ exports.deleteUser = async (req, res) => {
             let deleteUser = await User.findByIdAndDelete(req.session.userId).exec()
             let deleteExpenses = await Expense.deleteMany({ user: req.session.userId }).exec()
             let deleteTypes = await Type.deleteMany({ user: req.session.userId }).exec()
-            console.log(deleteUser)
-            console.log(deleteExpenses)
-            console.log(deleteTypes)
+            let accessToken = await AccessToken.deleteMany({ userId: req.session.userId }).exec()
             req.session.destroy()
             res.send("ok")
 
