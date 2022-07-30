@@ -18847,7 +18847,7 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
 
             if (expense.type.name == typeName) {
               //update expense whose type got deleted. it will become Other
-              console.log("updating expense:");
+              console.log("type deleted, updating expense:");
               console.log(expense);
               axios__WEBPACK_IMPORTED_MODULE_1___default().put('/api/v1.0/expense', {
                 expenseId: expense._id,
@@ -18867,15 +18867,9 @@ var ManageTypes = /*#__PURE__*/function (_React$Component) {
           types: arrayOfTypes
         });
 
-        _this4.handleStopEditingType(typeId); //Records expense deletion event
-
-
-        ReactGA.event({
-          category: "Type",
-          action: "Deleted"
-        });
+        _this4.handleStopEditingType(typeId);
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
 
         if (error.response.data.status == 401) {
           _this4.setState({

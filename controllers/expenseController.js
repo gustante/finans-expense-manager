@@ -8,8 +8,6 @@ var twilio = require('twilio');
 const { smsAlert } = require('../twilioSMS.js');
 const { emailAlert } = require('../nodeMailer.js');
 const customError = require('../customError.js');
-const e = require('express');
-const { type } = require('os');
 require('dotenv').config();
 
 
@@ -30,8 +28,8 @@ exports.getAllExpenses = (req, res) => {
     //                 user.save()
     //             })
 
-    
-    
+
+
 
 
 
@@ -335,18 +333,18 @@ exports.postExpense = (req, res) => {
 
                                     res.status(201).send(arrayOfExpensesInSameMonth);//status 201
 
-                    
+
                                     let { budget, sumOfExpenses, name } = savedExpense.type;
-                                    //send SMS using twilio if close to exceeding budget
-                                    //dont send SMS if expense created is for a different month or there's no budget for type selected or if a phone number is not registered
-                                    if (budget != null && currentMonth == savedExpense.month && user.phoneNumber && user.phoneNumber != "") {
-                                        console.log("will send text to " + user.phoneNumber)
+                                    //send email
+
+                                    if (budget != null && currentMonth == savedExpense.month) {
+                                        console.log("will email to " + user.email)
                                         if (sumOfExpenses > budget)
                                             emailAlert("Budget Alert", `Dear user,  \n\nThis message is to let you know that you have exceeded your budget for \"${name}\" for this month, the total amount of expenses is currently $${sumOfExpenses.toFixed(2)}, your budget is $${budget} \n\n Sincerely,\n Team Finans`, user.email)
                                         else if (sumOfExpenses >= budget * 0.7)
                                             emailAlert("Budget Alert", `Hello there! \n\nThis message is to let you know that you are about to exceed your budget for \"${name}\" for this month, the total amount of expenses is currently $${sumOfExpenses.toFixed(2)}, your budget is $${budget} \n\n Sincerely,\n Team Finans`, user.email)
                                     } else {
-                                        console.log("will not send sms")
+                                        console.log("will not email")
                                     }
 
 
@@ -483,6 +481,7 @@ exports.updateExpense = (req, res) => {
                     path: 'expenses',
                     populate: { path: 'type' }
                 })
+                .populate('types')
                 .exec()
                 .then(user => {
                     let targetExpense = user.expenses.find(expense => expense._id == req.body.expenseId);
@@ -493,16 +492,22 @@ exports.updateExpense = (req, res) => {
 
                     //if expense to be updated has Null type it means we're dealing with a type that has been deleted. It's a special case. We are not updating from the ExpenseTable component. We need to change their type to "Other"
                     if (targetExpense.type == null) {
-                        let typeOther = user.expenses.find(expense => expense.type.name == "Other");
+                        console.log("received request to update expense with Null type")
+                        let typeOther = user.types.find(type => type.name == "Other");
+                        console.log("expense is ")
+                        console.log(targetExpense)
+                        console.log("the new type will be ")
+                        console.log(typeOther)
                         targetExpense.type = typeOther //correct expense that needs to be updated
-                        typeOther.save()
-                            .then(() => {
-                                targetExpense.save()
-                                    .then(savedExpense => {
-                                        //stop right here. We don't need to update anything else
-                                        res.send(savedExpense)
-                                    })
+                        targetExpense.save()
+                            .then(savedExpense => {
+                                //stop right here. We don't need to update anything else
+                                res.send(savedExpense)
+                                res.end()
+                                
                             })
+
+                            return
                     }
 
 

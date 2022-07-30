@@ -143,8 +143,8 @@ exports.deleteType = (req, res) => {
             .exec()
             .then(user => {
                 let targetType = user.types.find(type => type.name == req.query.type);//compare with id in query parameter
-                for (i in user.types) {
-                    if (user.types[i] == targetType) {
+                for (let i in user.types) {
+                    if (user.types[i] == targetType && targetType.name != 'Other') {
                         user.types.splice(i, 1)
                     }
                 }

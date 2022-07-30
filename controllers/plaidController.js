@@ -7,7 +7,7 @@ require('dotenv').config();
 const { Configuration, PlaidApi, PlaidEnvironments } = require('plaid');
 const moment = require('moment');
 const customError = require('../customError.js');
-
+const { emailAlert } = require('../nodeMailer.js');
 
 const APP_PORT = process.env.PORT || 8081
 const PLAID_CLIENT_ID = process.env.PLAID_CLIENT_ID;
@@ -208,11 +208,13 @@ exports.syncTransactions = async (req, res) => {
         if (accessTokens != null && accessTokens.length > 0) {
             //get todays day
             const today = moment().format('DD');
-            //get only transactions for current month up until today
-            const startDate = moment().subtract(today - 1, 'days').format('YYYY-MM-DD');
+            //get transactions for today
+            const startDate = moment().subtract(60, 'days').format('YYYY-MM-DD');
             const endDate = moment().format('YYYY-MM-DD');
 
+
             for (let accessToken of accessTokens) {
+                console.log("syncing institution: " + accessToken.institutionName)
                 const request = {
                     access_token: accessToken.token,
                     options: {
@@ -220,18 +222,16 @@ exports.syncTransactions = async (req, res) => {
                     },
                     start_date: startDate,
                     end_date: endDate,
-                };
+                }
                 const getTransactionsResponse = await client.transactionsGet(request);
                 let transactions = getTransactionsResponse.data.transactions;
-
-
 
                 for (let transaction of transactions) {
                     //check if transaction already exists
                     let transactionExists = false;
                     for (let i = user.expenses.length - 1; i >= 0; i--) {
                         if (user.expenses[i].plaidId == transaction.transaction_id) {
-                            console.log("transaction already exists, skipping")
+                            console.log("Transactions already exists, skipping")
                             transactionExists = true;
                             break;
                         }
@@ -245,13 +245,11 @@ exports.syncTransactions = async (req, res) => {
                         for (let type of user.types) {
                             if (type.name == transaction.category[0]) {
                                 chosenType = type;
-                                console.log("found type")
                                 break;
 
                             }
                         }
                         if (!chosenType) {
-                            console.log("did not find type")
                             chosenType = new Type({
                                 name: transaction.category[0],
                                 budget: "",
@@ -262,9 +260,6 @@ exports.syncTransactions = async (req, res) => {
                             user.types.push(chosenType);
 
                         }
-
-                        console.log("type chosen is:")
-                        console.log(chosenType)
 
                         //separate transaction.date into year, month, day
                         const date = moment(transaction.date);
@@ -293,9 +288,23 @@ exports.syncTransactions = async (req, res) => {
                         await user.save()
                         console.log("expense saved")
 
+                        //send email to user is budget is exceeded or closer to being exceeded
+                        let { budget, sumOfExpenses, name } = expense.type;
+
+                        if (budget != null && budget != "" ) {
+                            console.log("will send email to " + user.email)
+                            if (sumOfExpenses > budget)
+                                emailAlert("Budget Alert", `Dear user,  \n\nThis message is to let you know that you have exceeded your budget for \"${name}\" for this month, the total amount of expenses is currently $${sumOfExpenses.toFixed(2)}, your budget is $${budget} \n\n Sincerely,\n Team Finans`, user.email)
+                            else if (sumOfExpenses >= budget * 0.7)
+                                emailAlert("Budget Alert", `Hello there! \n\nThis message is to let you know that you are about to exceed your budget for \"${name}\" for this month, the total amount of expenses is currently $${sumOfExpenses.toFixed(2)}, your budget is $${budget} \n\n Sincerely,\n Team Finans`, user.email)
+                        } else {
+                            console.log("will not send sms")
+                        }
+
                     }
 
                 }
+                
             }
             console.log("user synced")
 

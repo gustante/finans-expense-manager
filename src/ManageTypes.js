@@ -210,7 +210,7 @@ class ManageTypes extends React.Component {
                 for (let expense of this.state.expenses) {
                     if (expense.type.name == typeName) {
                         //update expense whose type got deleted. it will become Other
-                        console.log("updating expense:")
+                        console.log("type deleted, updating expense:")
                         console.log(expense)
                         axios.put('/api/v1.0/expense', { expenseId: expense._id, newTypeId: typeOther })
                             .then(results => {
@@ -226,15 +226,10 @@ class ManageTypes extends React.Component {
 
                 this.handleStopEditingType(typeId)
 
-                //Records expense deletion event
-                ReactGA.event({
-                    category: "Type",
-                    action: "Deleted",
-                });
 
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
                 if(error.response.data.status == 401){
                     this.setState({displayLoginButton: true});
 
