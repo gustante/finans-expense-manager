@@ -209,7 +209,7 @@ exports.syncTransactions = async (req, res) => {
             //get todays day
             const today = moment().format('DD');
             //get transactions for today
-            const startDate = moment().subtract(60, 'days').format('YYYY-MM-DD');
+            const startDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
             const endDate = moment().format('YYYY-MM-DD');
 
 
