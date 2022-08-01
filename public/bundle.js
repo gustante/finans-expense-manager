@@ -17366,7 +17366,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         errorMessages: this.state.Message
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
         className: "col-12 col-sm-8 my-3 my-sm-4"
-      }, this.state.accounts.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "View transactions for current month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Click to expand"), this.state.accounts.map(function (account, index) {
+      }, this.state.accounts.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "View transactions in the past 30 days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Click on accounts bellow to expand"), this.state.accounts.map(function (account, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
           className: "btn btn-warning my-2 w-100",
           "data-toggle": "collapse",

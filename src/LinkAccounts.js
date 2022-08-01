@@ -337,8 +337,8 @@ class LinkAccounts extends React.Component {
                         <main className="col-12 col-sm-8 my-3 my-sm-4">
 
                             {this.state.accounts.length > 0 ? (<>
-                                <h4>View transactions for current month</h4>
-                                <p>Click to expand</p>
+                                <h4>View transactions in the past 30 days</h4>
+                                <p>Click on accounts bellow to expand</p>
                                 {this.state.accounts.map((account, index) => (<><a className="btn btn-warning my-2 w-100" data-toggle="collapse" href={`#collapse${index}`} role="button" aria-expanded="false" aria-controls={`collapse${index}`}>
                                     {account.institutionName}
                                 </a>

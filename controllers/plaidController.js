@@ -136,8 +136,8 @@ exports.getTransactions = async (req, res) => {
 
         //get todays day
         const today = moment().format('DD');
-        //get only transactions for current month up until today
-        const startDate = moment().subtract(today - 1, 'days').format('YYYY-MM-DD');
+        //get transactions for last 30 days
+        const startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
         const endDate = moment().format('YYYY-MM-DD');
 
         const arrayOfTransactions = [];
@@ -158,7 +158,10 @@ exports.getTransactions = async (req, res) => {
                 let transactions = getTransactionsResponse.data.transactions;
 
                 console.log("received transactions from plaid :")
+                console.log(transactions)
+                
                 for (let transaction of transactions) {
+                    console.log(transaction)
                     if (transaction.amount > 0) {
                         arrayOfTransactions.push({
                             _id: transaction.transaction_id,
@@ -209,7 +212,7 @@ exports.syncTransactions = async (req, res) => {
             //get todays day
             const today = moment().format('DD');
             //get transactions for today
-            const startDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
+            const startDate = moment().subtract(2, 'days').format('YYYY-MM-DD');
             const endDate = moment().format('YYYY-MM-DD');
 
 
