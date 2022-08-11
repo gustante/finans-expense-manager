@@ -1,16 +1,16 @@
 
 
-Finans expense tracker
+# Finans expense tracker
 
 
-Description:
+## Description:
 
 An easy-to-use application that serves as an expense tracker. It creates a detailed record of expenses and provides several other tools to help manage them.
 
 
 --
 
-Usage:
+## Usage:
 It is a very simple and straightforward app. The user can interact with the form fields to add, search, filter and delete transactions that are detailed with month, day, year, year, type, description and amount. There is also a field at the end of the table with the total amount of expenses displayed.
 
 After log in and upon start, the app loads all existing expenses in the database at the dashboard and creates a table with the records. The user can then fill all the fields and click the add button to register a new transaction, which will promptly be added to the end of the table along with a success pop-up message with the transaction id.  If any field is missing or if incorrect information is passed, such as a year that contains a letter, an error message is displayed and the transaction is not added. Newest expenses are always displayed on top.
@@ -35,12 +35,15 @@ Every action where user input is provided is protected by reCAPTCHA v3, as well 
 
 
 --
-Installation:
+
+
+
+## Installation:
 npm install
 
 --
 
-Run with:
+## Run with:
 npm start
 
 
@@ -49,7 +52,8 @@ Gustavo Franca Faria
 
 --
 
-Build with:
+
+## Build with:
 Bootstrap v4.6
 Node.js
 React.js
@@ -73,7 +77,50 @@ Plaid
 Nodemailer
 
 
+## Screenshots
+#### Home Page
 ![Home Page](./public/img/homepage.png)
+![Design](./public/img/design.png)
+
+#### Log In
+![Login](./public/img/login.png)
+
+#### Resgiter
+![Register](./public/img/register.png)
+
+#### Contact
+![Contact](./public/img/contact-us.png)
+
+#### Create Types
+![Create Types](./public/img/create-type.png)
+
+#### Edit Expenses
+![Edit Expenses](./public/img/expense-edit.png)
+
+#### Filter Expenses
+![Filter Expenses](./public/img/filter-expenses.png)
+
+#### Recurring Expenses
+![Recurring Expenses](./public/img/recurring-expenses.png)
+![Deleting Recurring Expenses](./public/img/recurring-expenses-2.png)
+
+#### User Info
+![User Info](./public/img/user-info.png)
+
+#### Edit User
+![Edit User](./public/img/edit-user-2.png)
+
+#### Budgets
+![Budgets](./public/img/budgets.png)
+
+#### Manage Types
+![Manage Types](./public/img/manage-types.png)
+
+#### Bank Transactions
+![Bank Transactions](./public/img/bank-transactions.png)
+
+
+
 
 
 
