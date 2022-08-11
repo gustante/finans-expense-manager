@@ -73,4 +73,7 @@ Plaid
 Nodemailer
 
 
+![Home Page](./public/img/homepage.png)
+
+
 
