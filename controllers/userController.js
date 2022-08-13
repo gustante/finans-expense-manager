@@ -2,6 +2,7 @@ const session = require('express-session');
 const User = require('../models/User.js');
 const Type = require('../models/Type.js');
 const Expense = require('../models/Expense.js');
+const AccessToken = require('../models/AccessToken.js');
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 const querystring = require('querystring');
