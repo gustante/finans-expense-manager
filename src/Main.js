@@ -83,12 +83,6 @@ class Main extends React.Component {
         if (this.props.isLoggedIn) {
             axios.get("/api/v1.0/expense/all")
                 .then(results => {
-                    for (let expense of results.data) {
-                        if (expense.type == null)
-                            console.log(expense)
-                    }
-
-                    
 
                     this.setState({ expenses: results.data.splice(0, this.state.position) });
                     $('.table-spinner').hide()
@@ -157,7 +151,6 @@ class Main extends React.Component {
             window.addEventListener("keydown", e => {
                 let target = $(this).parent();
                 if (e.which == 27) {
-                    console.log('closes modal');
                     this.setState({ showModalSuccess: false });
                     this.setState({ showModalError: false });
                 }
@@ -369,16 +362,23 @@ class Main extends React.Component {
     }
 
     handleCheckRecurring(e) {
-        this.setState({
-            recurring: e.target.checked,
-            frequency: "selectFrequency",
-        })
+        console.log(e.target.checked)
+        this.setState({frequency: "selectFrequency",})
+        
         $(".dropdown select").val("Select frequency")
 
         if (e.target.checked) {
+            this.setState({
+                recurring: e.target.checked,
+                frequency: "selectFrequency",
+            })
             $(".dropdown").removeClass("d-none")
             $(".dropdown").addClass("d-inline")
         } else if (!e.target.checked) {
+            this.setState({
+                recurring: e.target.checked,
+                frequency: "",
+            })
             $(".dropdown").removeClass("d-inline")
             $(".dropdown").addClass("d-none")
         }

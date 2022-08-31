@@ -133,7 +133,7 @@ class App extends React.Component {
                                     Message: error.response.data.data,
                                     showModalError: true
                                 });
-                            } else if(error.response.data != undefined) {
+                            } else if (error.response.data != undefined) {
                                 this.setState({
                                     Message: error.response.data,
                                     showModalError: true
@@ -153,11 +153,9 @@ class App extends React.Component {
 
 
 
-    handleLogIn() {
-        if (event)
-            event.preventDefault()
+    handleLogIn(e) {
+        e.preventDefault()
 
-        console.log("executed handleLogin")
         let captchaToken = ''
         //Executes captcha after form is submitted, generates token and store it in a variable
         grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', { action: 'submit' })
@@ -179,7 +177,6 @@ class App extends React.Component {
                 })
                     .then(results => {
                         const { _id, firstName, lastName, email, phoneNumber, googleUser } = results.data;
-                        console.log(results.data)
 
                         this.setState({
                             isLoggedIn: true,
@@ -206,7 +203,7 @@ class App extends React.Component {
                                 Message: error.response.data.data,
                                 showModalError: true
                             });
-                        } else if(error.response.data != undefined) {
+                        } else if (error.response.data != undefined) {
                             this.setState({
                                 Message: error.response.data,
                                 showModalError: true
@@ -225,13 +222,10 @@ class App extends React.Component {
     }
 
     handleGoogleLogIn() {
-        console.log("execited handleGoogleLogin")
         let captchaToken = ''
 
         axios.get("/api/v1.0/oauth/google/login")
             .then(results => {
-                console.log("user info receives from backend:")
-                console.log(results.data)
                 this.setState({
                     firstName: results.data.firstName,
                     lastName: results.data.lastName,
@@ -243,8 +237,6 @@ class App extends React.Component {
                 });
             })
             .then(() => {
-                console.log("this is what i have in state:")
-                console.log(this.state)
 
                 if (!this.state.exists) {//create new user if it doesn't exist
                     grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', { action: 'submit' })
@@ -254,7 +246,6 @@ class App extends React.Component {
                         })
                         .then(() => {
                             const current = new Date();
-                            console.log("attempts to create user")
                             axios.post("/api/v1.0/user/register", {
                                 firstName: this.state.firstName,
                                 lastName: this.state.lastName,
@@ -266,32 +257,30 @@ class App extends React.Component {
                                 currentYear: current.getFullYear(),
                                 googleUser: true
                             })
-                            .then(results => {
-                                console.log("user created:")
-                                console.log(results.data)
-                                this.handleLogIn()
-                            })
-                            .catch(error => {
-                                console.log(error)
-                                let errorCode = error.response.data.code;
+                                .then(results => {
+                                    this.handleLogIn()
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    let errorCode = error.response.data.code;
 
-                                if (error.response.data.data != undefined) {
-                                    this.setState({
-                                        Message: error.response.data.data,
-                                        showModalError: true
-                                    });
-                                } else if(error.response.data != undefined) {
-                                    this.setState({
-                                        Message: error.response.data,
-                                        showModalError: true
-                                    });
-                                } else {
-                                    this.setState({
-                                        Message: ["Something went wrong", error],
-                                        showModalError: true
-                                    });
-                                }
-                            });
+                                    if (error.response.data.data != undefined) {
+                                        this.setState({
+                                            Message: error.response.data.data,
+                                            showModalError: true
+                                        });
+                                    } else if (error.response.data != undefined) {
+                                        this.setState({
+                                            Message: error.response.data,
+                                            showModalError: true
+                                        });
+                                    } else {
+                                        this.setState({
+                                            Message: ["Something went wrong", error],
+                                            showModalError: true
+                                        });
+                                    }
+                                });
                         })
                 } else { //user user exists just log in
                     this.handleLogIn()
@@ -302,24 +291,24 @@ class App extends React.Component {
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
-                    }
-                    if(error.response.data.data != undefined){
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
-                    } else if(error.response.data != undefined) {
-                        this.setState({
-                            Message: error.response.data,
-                            showModalError: true
-                        });
-                    } else {
-                        this.setState({
-                            Message: ["Something went wrong", error],
-                            showModalError: true
-                        });
-                    }
-                });
+                }
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else if (error.response.data != undefined) {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
+                        showModalError: true
+                    });
+                }
+            });
 
 
     }
@@ -344,7 +333,7 @@ class App extends React.Component {
                             Message: error.response.data.data,
                             showModalError: true
                         });
-                    } else if(error.response.data != undefined) {
+                    } else if (error.response.data != undefined) {
                         this.setState({
                             Message: error.response.data,
                             showModalError: true
@@ -372,24 +361,24 @@ class App extends React.Component {
                 if (error.response.data.status == 401) {
                     this.setState({ displayLoginButton: true });
 
-                    }
-                    if(error.response.data.data != undefined){
-                        this.setState({
-                            Message: error.response.data.data,
-                            showModalError: true
-                        });
-                    } else if(error.response.data != undefined) {
-                        this.setState({
-                            Message: error.response.data,
-                            showModalError: true
-                        });
-                    } else {
-                        this.setState({
-                            Message: ["Something went wrong", error],
-                            showModalError: true
-                        });
-                    }
-                });
+                }
+                if (error.response.data.data != undefined) {
+                    this.setState({
+                        Message: error.response.data.data,
+                        showModalError: true
+                    });
+                } else if (error.response.data != undefined) {
+                    this.setState({
+                        Message: error.response.data,
+                        showModalError: true
+                    });
+                } else {
+                    this.setState({
+                        Message: ["Something went wrong", error],
+                        showModalError: true
+                    });
+                }
+            });
 
     }
 
@@ -437,7 +426,6 @@ class App extends React.Component {
     }
 
     handleStopEditingUser() {
-        console.log("stop editing")
 
         $('#user-info input').removeClass("view d-inline")
         $('#user-info input').addClass("hide")
@@ -461,9 +449,6 @@ class App extends React.Component {
 
     handleSaveEditingUser(e) {
         e.preventDefault()
-        console.log("save editing")
-        console.log("send to backend: ")
-        console.log(this.state)
         axios.put('/api/v1.0/user/updateUser', {
             firstName: this.state.newFirstName,
             lastName: this.state.newLastName,
@@ -475,7 +460,6 @@ class App extends React.Component {
         })
             .then(results => {
 
-                console.log(results.data)
                 this.setState({
                     firstName: results.data.firstName,
                     lastName: results.data.lastName,
@@ -496,7 +480,7 @@ class App extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -513,7 +497,6 @@ class App extends React.Component {
 
     confirmDeleteUser(e) {
         e.preventDefault()
-        console.log("confirm before delete user")
 
         this.setState({
             Message: ["Are you sure you want to delete your account and all your expenses?"],
@@ -533,16 +516,12 @@ class App extends React.Component {
 
     handleDeleteUser(e) {
         e.preventDefault()
-        console.log("deleting user")
         this.handleCloseError()
         axios.delete('/api/v1.0/user/deleteUser', {
             userId: this.state.userId,
             email: this.state.email
         })
             .then(results => {
-
-                console.log(results.data)
-                console.log('user was deleted on backend')
 
                 this.setState({ showModalSuccess: true, Message: ["Sorry to see you go :( ", "Thank you for using Finans :)"], displayConfirmButton: true });
 
@@ -558,7 +537,7 @@ class App extends React.Component {
                         Message: error.response.data.data,
                         showModalError: true
                     });
-                } else if(error.response.data != undefined) {
+                } else if (error.response.data != undefined) {
                     this.setState({
                         Message: error.response.data,
                         showModalError: true
@@ -575,8 +554,6 @@ class App extends React.Component {
 
     handleSubmitContactForm(e) {
         e.preventDefault()
-        console.log("submitting contact form")
-        console.log(this.state)
         axios.post('/api/v1.0/submitContactForm', {
             firstName: this.state.nameForContactUs,
             email: this.state.emailForContactUs,
@@ -584,7 +561,6 @@ class App extends React.Component {
         })
             .then(results => {
 
-                console.log(results.data)
                 this.setState({
                     showModalSuccess: true, Message: [`Thank you for your feedback, ${this.state.nameForContactUs}! \n We'll get back to you soon!`],
                     nameForContactUs: "",

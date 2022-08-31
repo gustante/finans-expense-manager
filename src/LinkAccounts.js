@@ -49,8 +49,6 @@ class LinkAccounts extends React.Component {
 
                 }
 
-                console.log(results.data)
-
             }
             )
             .catch(error => {
@@ -125,7 +123,7 @@ class LinkAccounts extends React.Component {
 
     getAccessToken() {
         console.log("step 2: exchange public token for access token")
-        console.log("token is " + this.state.linkToken)
+
         const handler = Plaid.create({
             token: this.state.linkToken,
             onSuccess: (token, metadata) => {
@@ -136,7 +134,7 @@ class LinkAccounts extends React.Component {
                     link_session_id: metadata.link_session_id,
 
                 }).then(results => {
-                    console.log(results.data)
+
                     console.log("received access token from server")
                     this.getItems()
 
@@ -177,7 +175,7 @@ class LinkAccounts extends React.Component {
                 }
                 else {
                     this.setState({
-                        Message: ["Something went wrong", "Please refresh the page and check that you are logged in", err],
+                        Message: ["Something went wrong", err],
                         showModalError: true
                     });
                 }
@@ -196,7 +194,6 @@ class LinkAccounts extends React.Component {
                 $('.spinner').addClass("d-none")
                 $('table').removeClass("d-none")
 
-                console.log(results.data)
                 console.log("received transactions from server")
                 if (results.data.length > 0) {
                     this.setState({
@@ -233,7 +230,7 @@ class LinkAccounts extends React.Component {
     syncTransactions() {
         axios.post('/api/v1.0/plaid/syncTransactions')
             .then(results => {
-                console.log(results.data)
+
                 console.log("syncronized transactions in backend server")
 
             }
@@ -245,11 +242,10 @@ class LinkAccounts extends React.Component {
 
     handleUnlinkAccount(accountId) {
         console.log("unlinking account")
-        console.log(accountId)
+
         axios.delete('/api/v1.0/plaid/unlinkAccount?itemId=' + accountId)
             .then(results => {
                 console.log("unlinked account")
-                console.log(results.data)
 
                 //remove account from state
                 let accounts = [...this.state.accounts]

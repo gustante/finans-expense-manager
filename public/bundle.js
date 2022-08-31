@@ -14752,11 +14752,10 @@ var App = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleLogIn",
-    value: function handleLogIn() {
+    value: function handleLogIn(e) {
       var _this4 = this;
 
-      if (event) event.preventDefault();
-      console.log("executed handleLogin");
+      e.preventDefault();
       var captchaToken = ''; //Executes captcha after form is submitted, generates token and store it in a variable
 
       grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', {
@@ -14781,7 +14780,6 @@ var App = /*#__PURE__*/function (_React$Component) {
               email = _results$data2.email,
               phoneNumber = _results$data2.phoneNumber,
               googleUser = _results$data2.googleUser;
-          console.log(results.data);
 
           _this4.setState({
             isLoggedIn: true,
@@ -14826,12 +14824,8 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function handleGoogleLogIn() {
       var _this5 = this;
 
-      console.log("execited handleGoogleLogin");
       var captchaToken = '';
       axios__WEBPACK_IMPORTED_MODULE_19___default().get("/api/v1.0/oauth/google/login").then(function (results) {
-        console.log("user info receives from backend:");
-        console.log(results.data);
-
         _this5.setState({
           firstName: results.data.firstName,
           lastName: results.data.lastName,
@@ -14842,9 +14836,6 @@ var App = /*#__PURE__*/function (_React$Component) {
           googleUser: results.data.googleUser
         });
       }).then(function () {
-        console.log("this is what i have in state:");
-        console.log(_this5.state);
-
         if (!_this5.state.exists) {
           //create new user if it doesn't exist
           grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', {
@@ -14854,7 +14845,6 @@ var App = /*#__PURE__*/function (_React$Component) {
             console.log("reCAPTCHA executed");
           }).then(function () {
             var current = new Date();
-            console.log("attempts to create user");
             axios__WEBPACK_IMPORTED_MODULE_19___default().post("/api/v1.0/user/register", {
               firstName: _this5.state.firstName,
               lastName: _this5.state.lastName,
@@ -14867,9 +14857,6 @@ var App = /*#__PURE__*/function (_React$Component) {
               currentYear: current.getFullYear(),
               googleUser: true
             }).then(function (results) {
-              console.log("user created:");
-              console.log(results.data);
-
               _this5.handleLogIn();
             })["catch"](function (error) {
               console.log(error);
@@ -15042,7 +15029,6 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleStopEditingUser",
     value: function handleStopEditingUser() {
-      console.log("stop editing");
       $('#user-info input').removeClass("view d-inline");
       $('#user-info input').addClass("hide");
       $('.userInfo').removeClass("hide");
@@ -15065,9 +15051,6 @@ var App = /*#__PURE__*/function (_React$Component) {
       var _this8 = this;
 
       e.preventDefault();
-      console.log("save editing");
-      console.log("send to backend: ");
-      console.log(this.state);
       axios__WEBPACK_IMPORTED_MODULE_19___default().put('/api/v1.0/user/updateUser', {
         firstName: this.state.newFirstName,
         lastName: this.state.newLastName,
@@ -15077,8 +15060,6 @@ var App = /*#__PURE__*/function (_React$Component) {
         newPassword: this.state.newPassword,
         repeatNewPassword: this.state.repeatNewPassword
       }).then(function (results) {
-        console.log(results.data);
-
         _this8.setState({
           firstName: results.data.firstName,
           lastName: results.data.lastName,
@@ -15118,7 +15099,6 @@ var App = /*#__PURE__*/function (_React$Component) {
     key: "confirmDeleteUser",
     value: function confirmDeleteUser(e) {
       e.preventDefault();
-      console.log("confirm before delete user");
       this.setState({
         Message: ["Are you sure you want to delete your account and all your expenses?"],
         showModalError: true,
@@ -15140,15 +15120,11 @@ var App = /*#__PURE__*/function (_React$Component) {
       var _this9 = this;
 
       e.preventDefault();
-      console.log("deleting user");
       this.handleCloseError();
       axios__WEBPACK_IMPORTED_MODULE_19___default().delete('/api/v1.0/user/deleteUser', {
         userId: this.state.userId,
         email: this.state.email
       }).then(function (results) {
-        console.log(results.data);
-        console.log('user was deleted on backend');
-
         _this9.setState({
           showModalSuccess: true,
           Message: ["Sorry to see you go :( ", "Thank you for using Finans :)"],
@@ -15187,15 +15163,11 @@ var App = /*#__PURE__*/function (_React$Component) {
       var _this10 = this;
 
       e.preventDefault();
-      console.log("submitting contact form");
-      console.log(this.state);
       axios__WEBPACK_IMPORTED_MODULE_19___default().post('/api/v1.0/submitContactForm', {
         firstName: this.state.nameForContactUs,
         email: this.state.emailForContactUs,
         contactUsTextarea: this.state.contactUsTextarea
       }).then(function (results) {
-        console.log(results.data);
-
         _this10.setState({
           showModalSuccess: true,
           Message: ["Thank you for your feedback, ".concat(_this10.state.nameForContactUs, "! \n We'll get back to you soon!")],
@@ -17088,8 +17060,6 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
 
           _this2.getTransactions();
         }
-
-        console.log(results.data);
       })["catch"](function (error) {
         console.log(error);
 
@@ -17170,7 +17140,6 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       console.log("step 2: exchange public token for access token");
-      console.log("token is " + this.state.linkToken);
       var handler = Plaid.create({
         token: this.state.linkToken,
         onSuccess: function onSuccess(token, metadata) {
@@ -17180,7 +17149,6 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
             institution: metadata.institution,
             link_session_id: metadata.link_session_id
           }).then(function (results) {
-            console.log(results.data);
             console.log("received access token from server");
 
             _this4.getItems();
@@ -17215,7 +17183,7 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
             console.log('stopping');
           } else {
             _this4.setState({
-              Message: ["Something went wrong", "Please refresh the page and check that you are logged in", err],
+              Message: ["Something went wrong", err],
               showModalError: true
             });
           }
@@ -17234,7 +17202,6 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
         $('.spinner').removeClass("d-flex");
         $('.spinner').addClass("d-none");
         $('table').removeClass("d-none");
-        console.log(results.data);
         console.log("received transactions from server");
 
         if (results.data.length > 0) {
@@ -17267,7 +17234,6 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
     key: "syncTransactions",
     value: function syncTransactions() {
       axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/v1.0/plaid/syncTransactions').then(function (results) {
-        console.log(results.data);
         console.log("syncronized transactions in backend server");
       })["catch"](function (err) {
         console.log(err);
@@ -17279,10 +17245,8 @@ var LinkAccounts = /*#__PURE__*/function (_React$Component) {
       var _this6 = this;
 
       console.log("unlinking account");
-      console.log(accountId);
       axios__WEBPACK_IMPORTED_MODULE_3___default().delete('/api/v1.0/plaid/unlinkAccount?itemId=' + accountId).then(function (results) {
-        console.log("unlinked account");
-        console.log(results.data); //remove account from state
+        console.log("unlinked account"); //remove account from state
 
         var accounts = _toConsumableArray(_this6.state.accounts);
 
@@ -17578,19 +17542,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -17710,20 +17674,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.isLoggedIn) {
         axios__WEBPACK_IMPORTED_MODULE_8___default().get("/api/v1.0/expense/all").then(function (results) {
-          var _iterator = _createForOfIteratorHelper(results.data),
-              _step;
-
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var expense = _step.value;
-              if (expense.type == null) console.log(expense);
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
-
           _this2.setState({
             expenses: results.data.splice(0, _this2.state.position)
           });
@@ -17792,8 +17742,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
           var target = $(_this2).parent();
 
           if (e.which == 27) {
-            console.log('closes modal');
-
             _this2.setState({
               showModalSuccess: false
             });
@@ -18017,16 +17965,24 @@ var Main = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleCheckRecurring",
     value: function handleCheckRecurring(e) {
+      console.log(e.target.checked);
       this.setState({
-        recurring: e.target.checked,
         frequency: "selectFrequency"
       });
       $(".dropdown select").val("Select frequency");
 
       if (e.target.checked) {
+        this.setState({
+          recurring: e.target.checked,
+          frequency: "selectFrequency"
+        });
         $(".dropdown").removeClass("d-none");
         $(".dropdown").addClass("d-inline");
       } else if (!e.target.checked) {
+        this.setState({
+          recurring: e.target.checked,
+          frequency: ""
+        });
         $(".dropdown").removeClass("d-inline");
         $(".dropdown").addClass("d-none");
       }
@@ -18117,12 +18073,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
           }); //filter out all future expenses that have the same description as recurringExpenseDeleted
 
 
-          var _iterator2 = _createForOfIteratorHelper(_this6.state.expenses),
-              _step2;
+          var _iterator = _createForOfIteratorHelper(_this6.state.expenses),
+              _step;
 
           try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var expense = _step2.value;
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var expense = _step.value;
 
               //only add expense to array if it is not a future expense linked to the deleted one
               if (expense.description != recurringExpenseDeleted.description || expense.description == recurringExpenseDeleted.description && expense.day < recurringExpenseDeleted.day && expense.month == recurringExpenseDeleted.month || expense.description == recurringExpenseDeleted.description && expense.month < recurringExpenseDeleted.month || expense.description == recurringExpenseDeleted.description && expense.year < recurringExpenseDeleted.year) {
@@ -18130,9 +18086,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
               }
             }
           } catch (err) {
-            _iterator2.e(err);
+            _iterator.e(err);
           } finally {
-            _iterator2.f();
+            _iterator.f();
           }
         } else {
           arrayOfExpenses = _toConsumableArray(_this6.state.expenses);
