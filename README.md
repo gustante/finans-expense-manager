@@ -54,27 +54,27 @@ Gustavo Franca Faria
 
 
 ## Build with:
-Bootstrap v4.6
-Node.js
-React.js
-React Router
-Express.js
-Express sessions
-Express validator
-MongoDB 
-Webpack
-Babel
-Axios
-Google reCAPTCHA v3
-Google oAuth 2.0
-Google analytics
-Google cloud run
-Passport
-Upstash Redis
-Twilio
-FontAwesome v5.15.1
-Plaid
-Nodemailer
+Bootstrap v4.6,
+Node.js,
+React.js,
+React Router,
+Express.js,
+Express sessions,
+Express validator,
+MongoDB,
+Webpack,
+Babel,
+Axios,
+Google reCAPTCHA v3,
+Google oAuth 2.0,
+Google analytics,
+Google cloud run,
+Passport,
+Upstash Redis,
+Twilio,
+FontAwesome v5.15.1,
+Plaid,
+Nodemailer.
 
 
 ## Screenshots
@@ -85,7 +85,7 @@ Nodemailer
 #### Log In
 ![Login](./public/img/login.png)
 
-#### Resgiter
+#### Register
 ![Register](./public/img/register.png)
 
 #### Contact
