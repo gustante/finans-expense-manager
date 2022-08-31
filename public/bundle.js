@@ -14755,7 +14755,10 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function handleLogIn(e) {
       var _this4 = this;
 
-      e.preventDefault();
+      if (e) {
+        e.preventDefault();
+      }
+
       var captchaToken = ''; //Executes captcha after form is submitted, generates token and store it in a variable
 
       grecaptcha.execute('6LdmmoYaAAAAAPGLcESwa6m41uyXfKf0gQCrOtwc', {
